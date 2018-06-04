@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,9 +84,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="(转)ext3&#x2F;ext4文件系统大分区支持">
 <meta property="og:url" content="http://yoursite.com/2011/08/15/ext3-ext4-file-system-large-partition-support/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。 ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.163.com/photo/sKMI40PlO7t27_CM0STucw==/5761792773267886366.jpg">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img229_ph_2141180147839541743.jpg">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img687_ph_2824882866269436195.png">
@@ -110,7 +110,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -130,7 +130,7 @@
 
 
 
-  <title>(转)ext3/ext4文件系统大分区支持 | Hexo</title>
+  <title>(转)ext3/ext4文件系统大分区支持 | haitian的博客</title>
   
 
 
@@ -142,7 +142,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -160,12 +160,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">haitian的博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">为了更好的生活而奋斗!</p>
       
   </div>
 
@@ -190,7 +190,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -240,13 +240,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2011/08/15/ext3-ext4-file-system-large-partition-support/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="haitian">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="haitian的博客">
     </span>
 
     
@@ -264,9 +264,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2011-08-15T16:51:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-08-15T16:51:04+08:00">
                 2011-08-15
               </time>
             
@@ -285,7 +285,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -507,7 +507,11 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <img class="site-author-image" itemprop="image"
+                src="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5"
+                alt="haitian" />
+            
+              <p class="site-author-name" itemprop="name">haitian</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -519,7 +523,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">277</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -530,7 +534,7 @@
               <div class="site-state-item site-state-categories">
                 
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">分类</span>
                 
               </div>
             
@@ -541,7 +545,7 @@
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">163</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">标签</span>
                 
               </div>
             
@@ -581,13 +585,13 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">haitian</span>
 
   
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -595,7 +599,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 

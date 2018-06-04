@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,9 +83,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能DNS(Bind DLZ MYSQL )实际部署案例">
 <meta property="og:url" content="http://yoursite.com/2010/11/02/the-actual-deployment-case-of-the-smart-dns-bind-dlz-mysql/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="XX网NS服务器为FreeBSD下的Bind master/slave ,起初因为访问量不太大，这个架构完全可以胜任，但是随着域名的增加，维护zone文件变得越来越复杂，一旦书写有误，会造成Bind无法解析域名。所以，特此部署了Bind DLZ Mysql，经过一个月的上线测试，发现其负载很小，每秒5qps。不存在mysql time out问题，因为mysql每时每刻都在查询.在这里感谢老曹的鼎">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://bbs.linuxtone.org/data/attachment/forum/201010/27/004210fdskdppmrcpwk4r4.jpg">
 <meta property="og:updated_time" content="2018-06-04T09:12:52.028Z">
 <meta name="twitter:card" content="summary">
@@ -107,7 +107,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -127,7 +127,7 @@
 
 
 
-  <title>智能DNS(Bind DLZ MYSQL )实际部署案例 | Hexo</title>
+  <title>智能DNS(Bind DLZ MYSQL )实际部署案例 | haitian的博客</title>
   
 
 
@@ -139,7 +139,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -157,12 +157,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">haitian的博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">为了更好的生活而奋斗!</p>
       
   </div>
 
@@ -187,7 +187,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -197,7 +197,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -237,13 +237,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/11/02/the-actual-deployment-case-of-the-smart-dns-bind-dlz-mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="haitian">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="haitian的博客">
     </span>
 
     
@@ -261,9 +261,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-11-02T09:22:57+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-11-02T09:22:57+08:00">
                 2010-11-02
               </time>
             
@@ -282,7 +282,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -571,7 +571,11 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <img class="site-author-image" itemprop="image"
+                src="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5"
+                alt="haitian" />
+            
+              <p class="site-author-name" itemprop="name">haitian</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -583,7 +587,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">277</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -594,7 +598,7 @@
               <div class="site-state-item site-state-categories">
                 
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">分类</span>
                 
               </div>
             
@@ -605,7 +609,7 @@
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">163</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">标签</span>
                 
               </div>
             
@@ -645,13 +649,13 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">haitian</span>
 
   
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -659,7 +663,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
