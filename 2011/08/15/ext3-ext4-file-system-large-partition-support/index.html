@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>(转)ext3/ext4文件系统大分区支持 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。 ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块">
+<meta name="keywords" content="ext3,ext4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(转)ext3&#x2F;ext4文件系统大分区支持">
+<meta property="og:url" content="http://yoursite.com/2011/08/15/ext3-ext4-file-system-large-partition-support/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。 ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.163.com/photo/sKMI40PlO7t27_CM0STucw==/5761792773267886366.jpg">
+<meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img229_ph_2141180147839541743.jpg">
+<meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img687_ph_2824882866269436195.png">
+<meta property="og:updated_time" content="2018-06-04T09:12:52.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(转)ext3&#x2F;ext4文件系统大分区支持">
+<meta name="twitter:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。 ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块">
+<meta name="twitter:image" content="http://img.blog.163.com/photo/sKMI40PlO7t27_CM0STucw==/5761792773267886366.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ext3-ext4-file-system-large-partition-support" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/08/15/ext3-ext4-file-system-large-partition-support/" class="article-date">
+  <time datetime="2011-08-15T08:51:04.000Z" itemprop="datePublished">2011-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      (转)ext3/ext4文件系统大分区支持
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。</p>
+<pre><code>ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块，二级间接块，三级间接块，跟下图一致：  
+</code></pre><p><img src="http://img.blog.163.com/photo/sKMI40PlO7t27_CM0STucw==/5761792773267886366.jpg" alt="ext3/ext4文件系统大分区支持 - zhuzhu - 五事九思" title="(转)ext3/ext4文件系统大分区支持 - suchalin - 态度决定高度"><br>其中point本来也是数据块，现在拿来做数据块的索引用，其中ext3的头文件定义为： __u32 i_block[EXT3_N_BLOCKS];/<em> Pointers to blocks </em>/，所以可以计算ext3文件系统的极限：<br>最大分区：<br>         因为定义的是无符号32位数，所以可能定位的block范围为2^32，也就是4G，如果一个block大小为4KB，所以为4G <em> 4KB = 16TB<br>最大文件：<br>         前面直接指向12个数据块，一级间接块最大为block size / 4，block size就是数据块的大小，因为一个索引是4个字节，所以除以4，这样计算下来，最大的文件可以使用的总块数为:12 + (block size/4) + (block size/4)^2 + (block size/4)^3，如果block size大小为4K，则为(12 + 2^10 + 2^20 + 2^30) </em> 2^12 约等于4T。</p>
+<pre><code>为了突破ext3这个大小限制，ext4使用了48位的数据块索引空间，同时使用了如下结构代替inode索引的方式：  
+</code></pre><p>struct ext3_extent {<br>__u32 ee_block; /<em> first logical block extent covers </em>/<br>__u16 ee_len;   /<em> number of blocks covered by extent </em>/<br>__u16 ee_start_hi; /<em> high 16 bits of physical block </em>/<br>__u32 ee_start; /<em> low 32 bigs of physical block </em>/<br>};<br>这样查找数据块的时候就不是每个块建立一个索引，而且使用连续的数据块，也就是分别指示起始位置，以及连续的块数，这样在大文件的时候，磁盘io效率以及查找数据块效率上都有很大的提高，所以ext4的文件系统也比ext3出色。因为使用了48位的索引空间，所以在4KB块大小的情况下，文件系统的极限是2^48 * 4KB = 1EB，不过，目前由于工具的限制，只能使用16TB的分区。</p>
+<p>不过是自己的理解，也欢迎朋友指正。</p>
+<p>硬盘驱动器上的空间划分（或者说分区）为多个分区。分区不能重叠，未分配给分区的空间称为剩余空间。分区名的形式类似于 /dev/hda1、/dev/hda2、/dev/hda3、/dev/sda1 等。在未使用 IDE 驱动器热插拔支持的系统上，IDE 驱动器最多支持 63 个分区。通过热插拔支持的 SCSI 驱动器、USB 驱动器和 IDE 驱动器最多可有 15 个分区。一个分区通常会分配为整数个柱面（柱面概念可能存在不准确之处）。</p>
+<p><a href="http://www.ibm.com/developerworks/cn/linux/l-lpic1-v3-102-1/?S_TACT=105AGX52&amp;S_CMP=tec-ccid" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/linux/l-lpic1-v3-102-1/?S_TACT=105AGX52&amp;S_CMP=tec-ccid</a></p>
+<p>EXT3与EXT4的主要区别  </p>
+<p>Linux kernel 自 2.6.28 开始正式支持新的文件系统 Ext4。 Ext4 是 Ext3 的改进版，修改了 Ext3 中部分重要的数据结构，而不仅仅像 Ext3 对 Ext2 那样，只是增加了一个日志功能而已。Ext4 可以提供更佳的性能和可靠性，还有更为丰富的功能：</p>
+<p>1. 与 Ext3 兼容。 执行若干条命令，就能从 Ext3 在线迁移到 Ext4，而无须重新格式化磁盘或重新安装系统。原有 Ext3 数据结构照样保留，Ext4 作用于新数据，当然，整个文件系统因此也就获得了 Ext4 所支持的更大容量。</p>
+<p>2. 更大的文件系统和更大的文件。 较之 Ext3 目前所支持的最大 16TB 文件系统和最大 2TB 文件，Ext4 分别支持 1EB（1,048,576TB， 1EB=1024PB， 1PB=1024TB）的文件系统，以及 16TB 的文件。<br>3. 无限数量的子目录。 Ext3 目前只支持 32,000 个子目录，而 Ext4 支持无限数量的子目录。</p>
+<p>4. Extents。 Ext3 采用间接块映射，当操作大文件时，效率极其低下。比如一个 100MB 大小的文件，在 Ext3 中要建立 25,600 个数据块（每个数据块大小为 4KB）的映射表。而 Ext4 引入了现代文件系统中流行的 extents 概念，每个 extent 为一组连续的数据块，上述文件则表示为“该文件数据保存在接下来的 25,600 个数据块中”，提高了不少效率。</p>
+<p>5. 多块分配。 当 写入数据到 Ext3 文件系统中时，Ext3 的数据块分配器每次只能分配一个 4KB 的块，写一个 100MB 文件就要调用 25,600 次数据块分配器，而 Ext4 的多块分配器“multiblock allocator”（mballoc） 支持一次调用分配多个数据块。</p>
+<p>6. 延迟分配。 Ext3 的数据块分配策略是尽快分配，而 Ext4 和其它现代文件操作系统的策略是尽可能地延迟分配，直到文件在 cache 中写完才开始分配数据块并写入磁盘，这样就能优化整个文件的数据块分配，与前两种特性搭配起来可以显著提升性能。</p>
+<p>7. 快速 fsck。 以前执行 fsck 第一步就会很慢，因为它要检查所有的 inode，现在 Ext4 给每个组的 inode 表中都添加了一份未使用 inode 的列表，今后 fsck Ext4 文件系统就可以跳过它们而只去检查那些在用的 inode 了。</p>
+<p>8. 日志校验。 日志是最常用的部分，也极易导致磁盘硬件故障，而从损坏的日志中恢复数据会导致更多的数据损坏。Ext4 的日志校验功能可以很方便地判断日志数据是否损坏，而且它将 Ext3 的两阶段日志机制合并成一个阶段，在增加安全性的同时提高了性能。</p>
+<p>9. “无日志”（No Journaling）模式。 日志总归有一些开销，Ext4 允许关闭日志，以便某些有特殊需求的用户可以借此提升性能。</p>
+<p>10. 在线碎片整理。 尽管延迟分配、多块分配和 extents 能有效减少文件系统碎片，但碎片还是不可避免会产生。Ext4 支持在线碎片整理，并将提供 e4defrag 工具进行个别文件或整个文件系统的碎片整理。</p>
+<p>11. inode 相关特性。 Ext4 支持更大的 inode，较之 Ext3 默认的 inode 大小 128 字节，Ext4 为了在 inode 中容纳更多的扩展属性（如纳秒时间戳或 inode 版本），默认 inode 大小为 256 字节。Ext4 还支持快速扩展属性（fast extended attributes）和 inode 保留（inodes reservation）。</p>
+<p>12. 持久预分配（Persistent preallocation）。 P2P 软件为了保证下载文件有足够的空间存放，常常会预先创建一个与所下载文件大小相同的空文件，以免未来的数小时或数天之内磁盘空间不足导致下载失败。 Ext4 在文件系统层面实现了持久预分配并提供相应的 API（libc 中的 posix_fallocate()），比应用软件自己实现更有效率。</p>
+<p>13. 默认启用 barrier。 磁 盘上配有内部缓存，以便重新调整批量数据的写操作顺序，优化写入性能，因此文件系统必须在日志数据写入磁盘之后才能写 commit 记录，若 commit 记录写入在先，而日志有可能损坏，那么就会影响数据完整性。Ext4 默认启用 barrier，只有当 barrier 之前的数据全部写入磁盘，才能写 barrier 之后的数据。（可通过 “mount -o barrier=0″ 命令禁用该特性。）</p>
+<p>Ext3 和 ext4 文件系统在线调整大小内幕<br><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-ext4resize/" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/linux/l-cn-ext4resize/</a></p>
+<p><a href="http://zauc.wordpress.com/2011/02/11/%E5%88%9D%E6%8E%A2ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" target="_blank" rel="noopener">http://zauc.wordpress.com/2011/02/11/%E5%88%9D%E6%8E%A2ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</a><br> <img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/img229_ph_2141180147839541743.jpg" alt="ext3/ext4文件系统大分区支持 - zhuzhu - 五事九思" title="(转)ext3/ext4文件系统大分区支持 - suchalin - 态度决定高度">  </p>
+<p>ext4-howto中文<br><a href="http://zauc.wordpress.com/2011/02/18/ext4-howto%E4%B8%AD%E6%96%87/" target="_blank" rel="noopener">http://zauc.wordpress.com/2011/02/18/ext4-howto%E4%B8%AD%E6%96%87/</a><br><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/img687_ph_2824882866269436195.png" alt="ext3/ext4文件系统大分区支持 - zhuzhu - 五事九思" title="(转)ext3/ext4文件系统大分区支持 - suchalin - 态度决定高度">  </p>
+<p>目前网络中充斥着各种Linux文件系统，用户很难在不了解这么多种文件系统的情况下从中做出一个好的并且适合自己选择，下面的内容转自<a href="http://www.linuxeden.com/" target="_blank" rel="noopener">LinuxEden</a>网站，由于年代久远，原文链接已丢失，并且我在其中加入了EXT4的介绍。熟悉文件系统特性并选择一个合适的文件系统有利于充分利用磁盘物理属性。</p>
+<p>1、ext</p>
+<p>ext 是第一个专门为 Linux 的文件系统类型,叫做扩展文件系统。它在 1992 年 4 月完成的。它为 Linux 的发展取得了重要作用。但是在性能和兼容性上存在许多缺陷。现在已经很少使用了。</p>
+<p>2、ext2</p>
+<p>ext2 是为解决 ext 文件系统的缺陷而设计的可扩展的高性能的文件系统。又被称为二级扩展文件系统。它是在 1993 年发布的,设计者是 Rey Card。ext2 是 Linux 文件系统类型中使用最多的格式。并且在速度和 CPU 利用率上较突出,是 GNU/Linux 系统中标准的文件系统,其特点为存取文件的性能极好,对于中小型的文件更显示出优势,这主要得利于其簇快取层的优良设计。2000 年以前几乎所有的 Linux 发行版都用 ext2 作为默认的文件系统。</p>
+<p>3、ext3</p>
+<p>ext3 是由开放资源社区开发的日志文件系统,主要开发人员是 Stephen tweedie。ext3被设计成是 ext2 的升级版本,尽可能地方便用户从 ext2fs 向 ext3fs 迁移。ext3 在 ext2的基础上加入了记录元数据的日志功能,努力保持向前和向后的兼容性。这个文件系统被称为 ext2 的下一个版本。也就是在保有目前 ext2 的格式之下再加上日志功能。ext3 是一种日志式文件系统。日志式文件系统的优越性在于:由于文件系统都有快取层参与运作,如不使用时必须将文件系统卸下,以便将快取层的资料写回磁盘中。因此每当系统要关机时,必须将其所有的文件系统全部卸下后才能进行关机。如果在文件系统尚未卸下前就关机 (如停电) 时,下次重开机后会造成文件系统的资料不一致,故这时必须做文件系统的重整工作,将不一致与错误的地方修复。</p>
+<p>4、ext4</p>
+<p>ext4 是一种针对 ext3 系统的扩展日志式文件系统,是 专 门为 Linux 开发的原始的扩展文件系统(ext 或 extfs)的第四版。它 具有更高的兼容性并且消 除了存储限制,从 ext3升级至 ext4 不需要格式化分区。它的子目录具有可伸缩性。ext4 使用了一个多块分配来在一次调用中分配很多块。替换掉每次分配一个块,减少系统开销。在延时分配和 extends 上十分有用。而延迟分配是一个性能特性(它不修改磁盘格式)。相对于传统文件系统(例如ext3、reiser3、etc)所做的立刻分配块提供了更好的性能。</p>
+<p>5、JFS</p>
+<p>jsf 提供了基于日志的字节级文件系统,该文件系统是为面向事务的高性能系统而开发的。jsf 的开发者包括 AIX 的 jsf 的主要开发者。在 AIX 上,jfs 已经经受住了考验。它是可靠、快速和容易使用的。2000 年 2 月,ibm 宣布在一个开放资源许可证下,移植 linux 版的 JSF 文件系统。 JSFs 也是一个有大量用户安装使用的企业级文件系统。它具有可伸缩性和健壮性,与非日志文件系统相比,它的优点是其快速重启能力:Jfs 能够在几秒或几分钟内就把文件系统恢复到一致状态。虽然 jsf 主要是为满足服务器的高吞吐量和可靠性需求而设计的,jsf 还可用于想得到高性能和可靠性的客户机配置因为在系统崩溃时,jsf 能提供快速文件系统重启时间,所以它是因特网文件服务器的关键技术。使用数据库日志处理技术,jsf 能在几秒或几分钟之内把文件系统恢复到一致状态。而在非日志文件系统中,文件恢复可能花费几小时或几天。</p>
+<p>6、ReiserFS</p>
+<p>ReiserFS 的第一次公开亮相是在 1997 年 7 月 23 日,Hans Reiser 把他的基于平衡树结构的 ReiserFS 文件系统在网上公布。ReiserFS 3.6.x 是由 Hans Reiser 和他的在 Namesys的开发组共同开发设计的。Reiserfs 被看作是一个更加激进和现代的文件系统。传统的UNIX 文件系统是按盘块来进行空间分配的,对于目录和文件等的查找使用了简单的线性查找。这些设计在当时是合适的,但随着磁盘容量的增大和应用需求的增加,传统文件系统在存储效率,速度和功能上已显落后。 ReiserFS 一个最受人批评的缺点是每升级一个版本,都将要将磁盘重新格式化一次。</p>
+<p>7、xfs</p>
+<p>xfs 是一种非常优秀的日志文件系统,它是 SGI 公司设计的。xfs 被称为业界最先进的、最具可升级性的文件系统技术。SGI 的 xfs 可为 linux 和开放资源社区带来的新特性有:可升级性:xfs 被设计成可升级,以面对大多数的存储容量和 i/o 存储需求,可处理大型文件和包含巨大数量文件的大型目录,满足二十一世纪快速增长的磁盘需求。xfs 有能力动态地为文件分配索引空间,使系统形成高效支持大数量文件的能力。优秀的 i/o 性能:典型的现代服务器使用大型的条带式磁盘阵列,以提供达数 gb/秒的总带宽。xfs 可以很好地满足 I/O 请求的大小和并发 I/O 请求的数量。xfs 可作为 root 文件系统,并被 lilo 支持.在 NFS 服务器上使用也没问题.支持软件磁盘阵列(RAID)和虚拟集群(LVM)。由于 xfs 比较复杂,实施起来有一些难度,所以目前 xfs 主要应用于 </p>
+<p>特性</p>
+<p>ext2</p>
+<p>ext3</p>
+<p>ReiserFS3.6（不受 Oracle 支持）</p>
+<p>最大分区大小</p>
+<p>4TB</p>
+<p>4TB</p>
+<p>16TB</p>
+<p>最大文件大小</p>
+<p>2GB-4GB</p>
+<p>2GB-4GB</p>
+<p>8TB</p>
+<p>块大小</p>
+<p>1KB-4KB</p>
+<p>1KB-4KB</p>
+<p>只有 4KB</p>
+<p>日志功能</p>
+<p>无</p>
+<p>是</p>
+<p>有</p>
+<p>崩溃后重新启动</p>
+<p>慢</p>
+<p>快</p>
+<p>非常快</p>
+<p>用于恢复清除文件的工具</p>
+<p>有</p>
+<p>有</p>
+<p>无</p>
+<p>崩溃后数据的状态</p>
+<p>良好</p>
+<p>非常好</p>
+<p>一般</p>
+<p>ACL 支持</p>
+<p>有</p>
+<p>有</p>
+<p>无</p>
+<p>稳定性</p>
+<p>优秀</p>
+<p>良好</p>
+<p>良好</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/08/15/ext3-ext4-file-system-large-partition-support/" data-id="cji00lkb2004rhnzsr8lojmnu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ext3/">ext3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ext4/">ext4</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/08/17/sharing-session-memcached-session-the-manager/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          共享session,memcached-session-manager
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/08/08/use-inode-to-delete-files-under-linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux下使用inode删除文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

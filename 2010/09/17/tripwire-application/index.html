@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Tripwire 应用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对unix管理员来说，主机系统的安全一直是个课题，一方面管理员通过更新patch，安装软硬件防火墙等手段努力使自己的系统可靠性增强，而另一方面unix操作系统的漏洞总是不断被发现并被公布出来，如BUGTRAQ这样的安全列表，从这个角度上可以很绝对的说，互联网上没有安全的主机。任何一台放在Internet上的主机被入侵的潜在可能性是不可逃脱的，而且，对入侵者而言，利用漏洞进入系统往往只是第一步，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tripwire 应用">
+<meta property="og:url" content="http://yoursite.com/2010/09/17/tripwire-application/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="对unix管理员来说，主机系统的安全一直是个课题，一方面管理员通过更新patch，安装软硬件防火墙等手段努力使自己的系统可靠性增强，而另一方面unix操作系统的漏洞总是不断被发现并被公布出来，如BUGTRAQ这样的安全列表，从这个角度上可以很绝对的说，互联网上没有安全的主机。任何一台放在Internet上的主机被入侵的潜在可能性是不可逃脱的，而且，对入侵者而言，利用漏洞进入系统往往只是第一步，如果">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-04T09:12:52.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tripwire 应用">
+<meta name="twitter:description" content="对unix管理员来说，主机系统的安全一直是个课题，一方面管理员通过更新patch，安装软硬件防火墙等手段努力使自己的系统可靠性增强，而另一方面unix操作系统的漏洞总是不断被发现并被公布出来，如BUGTRAQ这样的安全列表，从这个角度上可以很绝对的说，互联网上没有安全的主机。任何一台放在Internet上的主机被入侵的潜在可能性是不可逃脱的，而且，对入侵者而言，利用漏洞进入系统往往只是第一步，如果">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-tripwire-application" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/09/17/tripwire-application/" class="article-date">
+  <time datetime="2010-09-17T02:50:38.000Z" itemprop="datePublished">2010-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Tripwire 应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对unix管理员来说，主机系统的安全一直是个课题，一方面管理员通过更新patch，安装软硬件防火墙等手段努力使自己的系统可靠性增强，而另一方面unix操作系统的漏洞总是不断被发现并被公布出来，如BUGTRAQ这样的安全列表，从这个角度上可以很绝对的说，互联网上没有安全的主机。任何一台放在Internet上的主机被入侵的潜在可能性是不可逃脱的，而且，对入侵者而言，利用漏洞进入系统往往只是第一步，如果想得到更多的，如超级用户的密码，数据库的口令等，往往需要下点功夫，最便捷也是最有效的就是改动或特洛伊化受侵害的主机上的文件，如放置自己的监听程序，替代某些关键文件，修改编辑可信文件，设置suid文件等。  </p>
+<p>　　一些管理员通unix自带的命令来检查文件的安全性，如检查文件生成的时间戳，但这样的可靠性微乎其微，有经验的入侵者可以很轻松的修改文件生成时间，有兴趣的管理员可以试试以下操作：<br>　　# echo “+ +” &gt; /.rhosts<br>　　这一步生成一个.rhosts文件，看看它的时间。<br>　　# ls -l /.rhosts<br>　　-rw-r–r– 1 root other 4 Jul 2 16：45 /.rhosts<br>　　好，我们如下操作看看会怎么样?<br>　　# touch -r /bin/sh /.rhosts<br>　　#ls -l /.rhosts<br>　　-rw-r–r– 1 root other 4 Apr 5 16：32 /.rhosts  </p>
+<p>　　我们看到时间戳已经变了。变成了一个”老”文件，这样很可能就会逃脱管理员的视线。比如，入侵者替换掉了su文件，在正当用户每次试图su时，这个特洛伊化的su文件都会读取口令并将口令记载下来，然后才把控制权交给真正的su程序，口令通过这种途径泄密了，虽然这不是管理员所期望的，但毕竟unix太大太复杂，发现起来很困难。  </p>
+<p>　　Tripwire就是解决这一问题的经典工具，它是目前最为著名的unix下文件系统完整性检查的软件工具，这一软件采用的技术核心就是对每个要监控的文件产生一个数字签名，保留下来。当文件现在的数字签名与保留的数字签名不一致时，那么现在这个文件必定被改动过了。具体到监控项目，在Tripwire的配置文件中有如下相应说明：<br>　　access permissions and file mode settings， including effective execution settings inode number in the file system  </p>
+<p>　　number of links<br>　　user ID of the owner<br>　　group ID of the group of users to which access may be granted<br>　　size of the item<br>　　date and time the item was last accessed， the last modification made to the item， and the creation date and time associated with the items inode<br>　　由上，我们可以看到Tripwire对文件的管理面是很宽的。  </p>
+<p>　　<strong>2： Tripwire的工作原理</strong><br>　　当Tripwire运行在数据库生成模式时，会根据管理员设置的一个配置文件对指定要监控的文件进行读取，对每个文件生成相应数字签名，并将这些结果保存在自己的数据库中，在缺省状态下，MD5和SNCFRN(Xerox的安全哈希函数)加密手段被结合用来生成文件的数字签名。除此以外，管理员还可使用MD4，CRC32，SHA等哈希函数，但实际上，使用上述两种哈希函数的可靠性已相当高了，而且结合MD5和sncfrn两种算法(尤其是sncfrn)对系统资源的耗费已较大，所以在使用时可根据文件的重要性做取舍。当怀疑系统被入侵时，可由Tripwire根据先前生成的，数据库文件来做一次数字签名的对照，如果文件被替换，则与Tripwire数据库内相应数字签名不匹配， 这时Tripwire会报告相应文件被更动，管理员就明白系统不”干净”了。  </p>
+<p>　　有一点要注意，上述保障机制的重点在于数据库内的数字签名，如果数据库是不可靠的，则一切工作都丧失意义。所以在Tripwire生成数据库后，这个库文件的安全极为重要。比较常见的做法是将数据库文件， Tripwire二进制文件，配置文件单独保留到”可拿走并锁起来”的质上，如软盘，将上述文件复制到软盘后，关闭写保护口，锁到保险柜中。除软盘外， 一次性介质，如cd-r也是很好的选择，这样即使侵入者拿到盘也无计可施。除这种办法外，利用PGP等加密工具对上述关键文件进行数字签名也是一个很好的选择。  </p>
+<p>　　当然，当管理员自身对某些文件更动时， Tripwire的数据库必然是需要随之更新的， Tripwire考虑到了这一点，它有四种工作模式：数据库生成，完整性检查，数据库更新。交互更新。当管理员更动文件后，可运行数据库更新模式来产生新的数据库文件。  </p>
+<p>　　<strong>3：下载Tripwire，安装前的准备工作</strong><br>　　Tripwire支持绝大多数Unix操作系统，它的安装需要编译环境，如gcc，cc等，还需要gzip，gunzip等解压工具。这些工具管理员可从相应站点获取，这里不讨论。Tripwire可从<a href="http://www.tripwire.com获得，到它的主页download部分，可以看到当前可免费download的Tripwire1.3" target="_blank" rel="noopener">www.tripwire.com获得，到它的主页download部分，可以看到当前可免费download的Tripwire1.3</a> ASR版本，下载下来就是。  </p>
+<p>　　<strong>4：安装Tripwire</strong><br>　　Tripwire的tar包解开后，我们可以看到如下目录结构，建议先看看根下的README文件，对Tripwire有个整体的了解。随后，我们就可以一步步的安装这个软件了。  </p>
+<p>　　<strong>步骤1：匹配主机环境</strong>  </p>
+<p>　　在Tripwire的根下有Ported这个文件，它是对支持的系统及相关配置文件的描述，管理员第一步需要打开这个文件，找到符合自己系统的描述，本文的测试环境是solaris2.6，我们截取相关部分来看看，<br>　　vendor： Sun Microsystems， Inc.<br>　　os： SunOS<br>　　os version： 5.x (Solaris 2.x)<br>　　compiler： cc<br>　　cflags： -O<br>　　ldflags：<br>　　libs：<br>　　conf.h： conf-svr4.h<br>　　tw.config： tw.Conf.sunos5<br>　　notes：<br>　　在这一段描述中，要尤其注意的是conf.h 和tw.config对应的行，在下几步的配置中需要用到它们两个对应的文件。此处要注意的是：每种操作系统这两个地方所对应的文件是不同的。  </p>
+<p>　　<strong>步骤2：配置监控目标</strong>  </p>
+<p>　　进入include目录，编辑config.h文件，将第一步Ported中conf.h后对应的文件名和路径写入config.h开始#include部分，此例中即为<br>　　#include “../configs/conf-svr4.h”<br>同时注意的是，在configh文件中还有Tripwire配置文件，Tripwire数据库文件的放置路径及生成数据库的文件名等设置，管理员按照个人喜好设置即可编辑好config.h后，还要根据本机情况编辑修改位于configs目录下的Tripwire配置文件，也就是上面Ported 文件中tw.config对应的tw.conf.sunos5，我们知道，对文件，目录等的监控就是在这里设置的。我们一段段的选取一部分这个文件来看看：<br>　　#<br>　　# - ： ignore the following atributes<br>　　# + ： do not ignore the following attributes<br>　　#<br>　　# p ： permission and file mode bits a： access timestamp<br>　　# i ： inode number m： modification timestamp<br>　　# n ： number of links (ref count) c： inode creation timestamp<br>　　# u ： user id of owner 1： signature 1<br>　　# g ： group id of owner 2： signature 2<br>　　# s ： size of file<br>　　注意上述p，I，n，u，g，s，a，c，1，2等，它表示可以对文件，目录设置的监控项目，管理员可组合使用，最前面的-，+号表示选取或忽略这些属性。如下例：<br>　　/var +pinugsm12-a<br>　　它表示对目录/var下所 有文件检查，监控项目分别有文件属性，inode，链接数，属组，属主，修改时间，生成时间，数字签名等，但是，对这个目录下的文件的访问不加监控，如果访问也监控的话，正常的用户访问也会被Tripwire捕捉，这没有必要。<br>　　为了方便起见，Tripwire作者把常见组合做成了模板，如下，<br>　　#<br>　　# Templates： (default) R ： [R]ead-only (+pinugsm12-a)<br>　　# L ： [L]og file (+pinug-sam12)<br>　　# N ： ignore [N]othing (+pinusgsamc12)<br>　　# E ： ignore [E]verything (-pinusgsamc12)<br>　　#<br>　　tw.conf.sunos5这个文件再向下，就是管理员根据情况填写了，把需要监控的文件及目录加入列表，赋予相应属性即可。如下：<br>　　/ R<br>　　/.rhosts R # may not exist<br>　　/.profile R # may not exist<br>　　/etc/dfs/dfstab R<br>　　/etc/hosts.equiv R<br>　　/etc/inet/inetd.conf R<br>　　/etc/inet/protocols R<br>　　/etc/inet/services R<br>　　/etc/init.d R<br>　　/etc/motd L<br>　　#/etc/named.boot R # may not exist<br>　　/etc/opt R<br>　　/etc/passwd L<br>　　/etc/profile R  </p>
+<p>　　<strong>步骤3：编译</strong>  </p>
+<p>　　完成上两步后，就可以编译了，在Tripwire的根下，执行make，系统即会自动编译，编译成功后，可以再执行make test，Tripwire会自动检查编译情况及工作状态，它会一段一段的测试，我们选取一段如下：<br>　　=== test.Update.sh： DESCRIPTION<br>　　This shell script exercises all the Tripwire integrity checking<br>　　and database update functionalities。<br>　　=== test.update.sh： Setting up auxiliary scripts ===<br>　　=== test.update.sh： BEGIN ===<br>　　../src/tripwire -loosedir -c /tmp/twtest/tw.config -d /tmp/twtest/tw.db -i all<br>　　=== test.update.sh： testing GROWING (safe) files ===<br>　　=== test.update.sh： testing GROWING (unsafe) files ===<br>　　=== test.update.sh： testing ADDED files ===<br>　　=== test.update.sh： testing DELETED files ===<br>　　=== test.update.sh： testing CHANGED files ===<br>　　=== test.update.sh： testing input schemes ===<br>　　=== test.update.sh： tw.config from stdin<br>　　=== test.update.sh： database from stdin<br>　　=== test.update.sh： testing complex UPDATE cases<br>　　=== test.update.sh： changed ignore-mask (UPDATE file)<br>　　=== test.update.sh： changed ignore-mask (UPDATE entry)<br>　　=== test.update.sh： testing UPDATED files (7 cases)<br>　　=== test.update.sh： case 1： update： add new file ===<br>　　=== test.update.sh： case 2： update： delete file ===<br>　　=== test.update.sh： case 3： update： update file ===<br>　　=== test.update.sh： case 4： nonsense case (skipping) ===<br>　　=== test.update.sh： case 6： update： delete entry ===<br>　　=== test.update.sh： case 5： update： add entry ===<br>　　=== test.update.sh： case 7： update： update entry ===<br>　　=== test.update.sh： PASS ===<br>　　我们可以看到，Tripwire对update功能一项项的做检测，并在最后PASS了，当Tripwire所有的检测项目都PASS后，编译就OK了。  </p>
+<p>　　<strong>步骤4：生成数据库</strong>  </p>
+<p>　　成功编译Tripwire，我们准备开始对需要监控的文件进行扫描，以生成Tripwire数据库，在Tripwire 的src目录下：如下操作。/tripwire -init，则系统会根据tw.conf.sunos5文件内的设置，开始扫描并生成相应的数据库，上面提到，数据库文件的路径是在第二步configh中设置的，在本例中为/var/tripwire，我们得到了名为tw.db_secu.unix.com的数据库文件。建议此时将Tripwire可执行文件，数据库文件，配置文件COPY到软盘等地方，放到安全的地方。以后需要安全鉴别时直接在软盘上执行即可。  </p>
+<p>　　<strong>步骤5：测试  
+</strong><br>　　数据库生成了，我们来测试一下吧，首先我们在根下touch生成一个goadd文件，其次我们把根下的.cshrc文件做一下改动，在里面加入几个#注释号。然后我们来运行一下Tripwire看如何：<br>　　/ Tripwire -c ./tw.config.sunos5 -d ./tw.db_secu.unix.com<br>　　Tripwire(tm) ASR (Academic Source Release) 1.3.1<br>　　File Integrity Assessment Software<br>　　(c) 1992， Purdue Research Foundation， (c) 1997， 1999 Tripwire<br>　　Security Systems， Inc。 All Rights Reserved。 Use Restricted to<br>　　Authorized Licensees。<br>　　### Phase 1： Reading configuration file<br>　　### Phase 2： Generating file list<br>　　./tripwire： /.profile： No such file or directory<br>　　./tripwire： /kernel/unix： No such file or directory<br>　　### Phase 3： Creating file information database<br>　　### Phase 4： Searching for inconsistencies<br>　　###<br>　　### Total files scanned： 4437<br>　　### Files added： 1<br>　　### Files deleted： 0<br>　　### Files changed： 1<br>　　###<br>　　### Total file violations： 2<br>　　###<br>　　added： -rw-r–r– root 0 Jul 3 18：45：31 2000 /goadd<br>　　changed： -r–r–r– root 669 Jul 3 18：46：15 2000 /.cshrc<br>　　### Phase 5： Generating observed/expected pairs for changed files<br>　　###<br>　　### Attr Observed (what it is) Expected (what it should be)<br>　　### =========== ============================= =============================<br>　　/.cshrc<br>　　st_size： 669 668<br>　　st_mtime： Mon Jul 3 18：46：15 2000 Mon Jul 3 09：00：41 2000<br>　　st_ctime： Mon Jul 3 18：46：15 2000 Mon Jul 3 09：00：41 2000<br>　　md5 (sig1)： 3z9gKjlZGq5GbeWOxpYaF9 1Z7K0n3ZKAyuPpAZB1G8uq<br>　　snefru (sig2)： 1vCDeMR45lpRCChmDithiW 1oRYPpQ：oZA6hVx6Zi4.NG  </p>
+<p>　　可以看到，系统运行经过了5个步骤，首先读取配置文件，其次生成配置文件中设置为需要监控，但实际并不存在的文件列表。第三部生成文件信息库，第四步报告检查情况。我们看到共扫描了4437个文件，其中有一个文件是新增加的，有一个文件发生了改变。在下面它列出了这两个文件-正是我们做了手脚的文件!在最后一步Tripwire将发生了改变的文件现在字节数，生成时间，修改时间， md5， snefru签名及数据库中的记录对比列出，是不是很爽?  </p>
+<p>　　上面我们讲到的是Tripwire的主要功能，在命令行状态下敲入tripwire -h 就会有其它使用参数的介绍，有兴趣的管理员不妨一试。 　　The Tripwire Product Line<br>　　Tripwire HQ Connector Bundle The HQ Connector bundle is comprised of Tripwires award-winning file integrity software,Tripwire version 2.2.1, and a communications agent that allows the software engine to “talk” to the Tripwire HQ Manager. Tripwire provides support for multiple platforms, including Windows NT, Solaris, Linux, HP-UX, IBM-AIX and others. With the Tripwire HQ Connector bundle, you can unequivocally answer the question: is my data the same today as it was yesterday? This information will help you keep your system in optimal working order and manage any changes - malicious or inadvertent - giving you complete control over data integrity. Tripwire HQ Manager HQ Manager is a software console with a graphical user interface that allows you to control hundreds of installations of HQ Connector. Named HQ Managerbecause its designed to operate as your information integrity headquarters, this product provides you with the very best way to manage data integrity across an enterprise network from a single, centralized location. Tripwire 2.2.1 for Linux With all the same great features as Tripwire 2.2.1 for other operating systems, Tripwire for Linux is available as a free download (without the agent that communicates with HQ Manager). In support of the open source community, Tripwire plans to release an open source version of this product this fall. For more information and future announcements about the open source release, check out <a href="http://www.tripwire.org" target="_blank" rel="noopener">www.tripwire.org</a>. Tripwire Academic Source Release 1.3.1 With only slight changes, the Tripwire Academic Source Release (ASR) version 1.3.1 is the same as the original Tripwire software that was developed in 1992 by Dr. Eugene Spafford and Tripwire CTO Gene Kim. Tripwire offers this version as a free download, but does not provide product support for it.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/09/17/tripwire-application/" data-id="cji00lkre00iphnzs4okiy2vs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2010/09/17/speed-up-the-firefox-startup/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          加快FIREFOX启动速度
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/09/16/why-does-red-hat-enterprise-linux-system-does-not-respond-to-syn-requests-intermittently/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Why does Red Hat Enterprise Linux system does not respond to SYN requests intermittently ?</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

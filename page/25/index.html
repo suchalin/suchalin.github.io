@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/25/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-a-good-performance-monitoring-tool-dstat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/a-good-performance-monitoring-tool-dstat/" class="article-date">
+  <time datetime="2009-12-22T03:16:38.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/a-good-performance-monitoring-tool-dstat/">一个很好的性能监测工具dstat</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无意中发现一个很好的性能监测工具dstat,实在是太强大了，可以完成vmstat，iostat，netstat等等工具才能完成的任务，而且是彩色显示的，各种情况一目了然，更美妙的它可通过参数来指定显示哪些内容，如只显示CPU、内存等等，一切都可以定制，实在是方便，不过有些功能还是要用像iostat这样的工具来做，不过还是强列推荐dstat确实不错。  </p>
+<p>安装命令apt-get install dstat  </p>
+<p>参数真多啊，说一下常用的吧  </p>
+<p>Dstat options:<br>  -c, –cpu              显示CPU情况<br>     -C 0,3,total           include cpu0, cpu3 and total<br>  -d, –disk             显示磁盘情况<br>     -D total,hda           include hda and total<br>  -g, –page             enable page stats<br>  -i, –int              enable interrupt stats<br>     -I 5,eth2              include int5 and interrupt used by eth2<br>  -l, –load             enable load stats<br>  -m, –mem              显示内存情况<br>  -n, –net              显示网络情况<br>     -N eth1,total          可以指定网络接口<br>  -p, –proc             enable process stats<br>  -s, –swap             显示swap情况<br>     -S swap1,total         可以指定多个swap<br>  -t, –time             enable time counter<br>  -y, –sys              enable system stats<br>  –ipc                  报告IPC消息队列和信号量的使用情况<br>  –lock                 enable lock stats<br>  –raw                  enable raw stats<br>  –tcp                  enable tcp stats<br>  –udp                  enable udp stats<br>  –unix                 enable unix stats  </p>
+<p>  -M stat1,stat2         enable external stats<br>     –mods stat1,stat2  </p>
+<p>  -a, –all              使用-cdngy 缺省的就是这样显示<br>  -f, –full             使用 -C, -D, -I, -N and -S 显示<br>  -v, –vmstat           使用-pmgdsc -D 显示  </p>
+<p>  –integer              show integer values<br>  –nocolor              disable colors (implies –noupdate)<br>  –noheaders            只显示一次表头以后就不显示了,使用重定向写入文件时很有用<br>  –noupdate             disable intermediate updates<br>  –output file          写入到CVS文件中  </p>
+<p>上个运行结果：<br>jonsk:~# dstat<br>—-total-cpu-usage—- -dsk/total- -net/total- —paging– —system–<br>usr sys idl wai hiq siq|_read _writ|_recv _send|__in_ _out_|_int_ _csw_<br> 13  49  29   8   1   1| 424k   23k|   0     0 |   0     0 | 275   200<br>  0   1  95   3   0   1|8192B    0 | 297B   70B|   0     0 | 241    33<br>  0   1  99   0   0   0|   0     0 |  92B    0 |   0     0 | 243    14<br>  0   1  99   0   0   0|   0     0 | 395B    0 |   0     0 | 244    20  </p>
+<p>很 简单，一看就明白了，要说明的是如果当usr和sys的数值大于80时说明cpu的负载过重，这个软件和vmstat很像,不过和vmstat相比好像少 了io部份的显示dstat只能显示磁盘的吞吐量而不是显示负载情况，dstat和几乎所有监控软件一样，只能对整个系统进行监控而不能对某一个进程或某 一个程序进行深入分析。如果你知道如何设置，请通知我。  </p>
+<p>我常使用的参数是  </p>
+<p>dstat -cdlmnpsy  </p>
+<p>在1024×768的屏幕上正好全部显示出来，最好是将上面的命令设置成别名  </p>
+<p>alias dstat=’dstat -cdlmnpsy’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/a-good-performance-monitoring-tool-dstat/" data-id="cji00lk4d0008hnzsbnaw65sy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-vps-flow-view-monitoring-tool-vnstat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/linux-vps-flow-view-monitoring-tool-vnstat/" class="article-date">
+  <time datetime="2009-12-22T03:15:41.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/linux-vps-flow-view-monitoring-tool-vnstat/">Linux VPS流量查看/监测工具 — vnStat</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>各位<a href="http://www.vpser.net/" target="_blank" rel="noopener">VPSer</a>在使用Linux VPS的时候应该还是比较关注自己VPS的流量的，怕有盗链或者流量超标而被停等等。而且现在N多家VPS，都把<a href="http://www.vpser.net/vps-cp/hypervm-bug.html" target="_blank" rel="noopener">HyperVM面板关闭</a>了，根本看不到用了多少流量及各个时段的网站流量状况，所以我们急需一个流量监控工具。</p>
+<p><a href="http://humdi.net/vnstat/" target="_blank" rel="noopener">vnStat</a>是一个应用于Linux或BSD平台，对网卡流量做监控。 因为并非是基于网络包嗅探的方式而是基于/proc的分析。现在vnStat已经有出<a href="http://www.sqweek.com/sqweek/index.php?p=1" target="_blank" rel="noopener">vnstat PHP frontend</a> 扩展了，可以以PHP脚本的形式直接调用vnStat监测的数据，如下图：</p>
+<p><a href="http://www.vpser.net/uploads/2009/08/vnstat1.png" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_vpser_vnstat1-300x278.png" alt="vnstat1" title="vnstat1"></a></p>
+<p><a href="http://www.vpser.net/uploads/2009/08/vnstat2.png" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_vpser_vnstat2-300x278.png" alt="vnstat2" title="vnstat2"></a></p>
+<p>下面说一下具体的安装步骤：</p>
+<p>下载：<br>wget <a href="http://soft.vpser.net/status/vnstat-1.9.tar.gz" target="_blank" rel="noopener">http://soft.vpser.net/status/vnstat-1.9.tar.gz</a><br>解压：<br>tar xvzf vnstat-1.9.tar.gz<br>进入目录：<br>cd vnstat-1.9<br>编译安装：<br>make<br>make install<br>如果64位平台上编译的话用make 64bit命令</p>
+<p>这样vnstat 就安装好了。下面讲vnstat的工作运行配置。</p>
+<p>下载最新版vnstat PHP frontend，</p>
+<p>地址：<a href="http://soft.vpser.net/status/vnstat_php_frontend-1.4.1.tar.gz" target="_blank" rel="noopener">http://soft.vpser.net/status/vnstat_php_frontend-1.4.1.tar.gz</a></p>
+<p>解压文件夹改名为vnstat，然后上传到某个网站根目录下，这样就可以以<a href="http://www.mydomain.com/vnstat" target="_blank" rel="noopener">http://www.vpser.net/vnstat</a> 来访问到，就出来页面了，但此时没有数据，因为还要使系统生成数据。</p>
+<p>建立流量数据库:<br>ifconfig 指令查看需要监控的网卡,假设只有eth0<br>然后生成数据库:<br>/usr/bin/vnstat -u -i eth0<br>然后定时更新数据库,通过cron的方式：</p>
+<p>实际上在安装vnstat时，已经在系统里安装好了vnstat的cron，crontab内容在/etc/cron.d/vnstat，如果没有使用命令touch /etc/cron.d/vnstat 创建。<br>内容为:<br>0-55/5 <em>        </em> <em> </em>   root   vnstat -u -i eth0<br>0-55/5 <em>        </em> <em> </em>   root   vnstat –dumpdb -i eth0 &gt;/var/lib/vnstat/vnstat_dump_eth0</p>
+<p>第一行为安装时自动指定的.</p>
+<p>第二行是为了更新eth0的数据后，dump出来一个文件，给 php访问接口访问.</p>
+<p>这里dump出来的vnstat_dump_eth0 文件名是有规定的。</p>
+<h1 id="注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法"><a href="#注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法" class="headerlink" title="注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法"></a>注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法</h1><p>vim /var/lib/vnstat/dump.sh</p>
+<p>vnstat -u -i eth0<br>vnstat –dumpdb -i eth0 &gt;/var/lib/vnstat/vnstat_dump_eth0</p>
+<p>crontab -e</p>
+<p>加入执行命令</p>
+<p><em>/5 </em> <em> </em> * sh /var/lib/vnstat/dump.sh</p>
+<p>再删除vnstat原有的cron</p>
+<p>rm /etc/cron.d/vnstat</p>
+<p>#</p>
+<p>在vnstat_php_frontend-1.4.1.tar.gz 包里的config.php 里有说明。</p>
+<p>最后，编辑　vnstat/config.php 这个文件，将数据目录改为　/var/lib/vnstat/，如果不存在此目录，需要使用mkdir -p /var/lib/vnstat/ 创建此目录。<br>即：<br>$data_dir = ‘/var/lib/vnstat/;</p>
+<p>指定显示标题</p>
+<p>$iface_title[‘eth0’] = ‘VPSer-<a href="http://www.vpser.net/go/linode" target="_blank" rel="noopener">Linode</a>‘;</p>
+<p>下面设置以什么图片格式显示，可以是svg或png，一般选择png就可以，svg在IE下需要安装插件，Firefox不需要；如果用png在IE、Firefox下均能直接显示。</p>
+<p>$graph_format=’png’;</p>
+<p>指定vnstat的安装目录，如果是安装上述方法安装，直接按下面填写即可。</p>
+<p>$vnstat_bin = ‘/usr/bin/vnstat’;</p>
+<p>将要监控的网卡指定为１个：</p>
+<p>// list of network interfaces monitored by vnStat<br>    //$iface_list = array(’eth0′, ‘eth1′, ’sixxs’);<br>        $iface_list = array(’eth0′,);</p>
+<p>// will be displayed instead<br>    //<br>    $iface_title[‘eth0’] = ‘Internal’;<br>    //$iface_title[‘eth1’] = ‘Internet’;<br>    //$iface_title[‘sixxs’] = ‘SixXS IPv6′;</p>
+<p>这一切都搞好后，现在用　<a href="http://www.mydomain.com/vnstat/" target="_blank" rel="noopener">www.mydomain.com/vnstat/</a>访问，就会发现有流量统计了,统计的数据更新是５分钟刷新一次．</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/linux-vps-flow-view-monitoring-tool-vnstat/" data-id="cji00lkhb009xhnzspz3yrnc5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-darkstat-helps-you-quickly-analyze-network-communications-group-diagrams" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/darkstat-helps-you-quickly-analyze-network-communications-group-diagrams/" class="article-date">
+  <time datetime="2009-12-22T03:14:46.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/darkstat-helps-you-quickly-analyze-network-communications-group-diagrams/">Darkstat帮你快速分析网络通信(组图)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux系统的通信分析工具中，有的程序功能强大，特性也不少，如ntop 和vnstat等就得到了广泛使用。不过，有时，你只是需要一个能够给你快速分析通信量的工具，它可以提供进出网络主机的通信量基本信息。 Darkstat，是一个数据包嗅探器，它以一个后台过程的形式运行，并能完成上述任务。它收集关于网络利用情况的统计数据，并通过HTTP协议显示出 来。</p>
+<p>　　笔者在CentOS 5和 Fedora 7系统上测试了最新的版本(darkstat-3.0.707.tar.bz2)。你可以用tar-xvjf darkstat-3.0.707.tar.bz2解开新的内核源程序，然后安装之。要调用darkstat，请键入：</p>
+<p>以下是引用片段：<br>　　darkstat –i eth0</p>
+<p>　　这个程序会在选中的接口开始检查数据，并以后台形式运行，并将结果返回到外壳。这些行看起来是如下的样子：</p>
+<p>以下是引用片段：<br>　　darkstat 3.0.707 (built with libpcap 2.4)<br>　　darkstat (19646): starting up<br>　　darkstat (19646): daemonizing to run in the background!<br>　　darkstat (19647): I am the main process<br>　　darkstat (19647): DNS child has PID 19648<br>　　darkstat (19646): parent waiting<br>　　darkstat (19647): caplen is 54<br>　　darkstat (19648): set uid/gid to 99/99<br>　　darkstat (19647): capturing in promiscuous mode<br>　　darkstat (19647): listening on 0.0.0.0:667<br>　　darkstat (19647): loaded 129 protos<br>　　darkstat (19647): loaded 4594 tcp and 4549 udp servs, from total 9158<br>　　darkstat (19647): chrooted into: /var/empty<br>　　darkstat (19647): set uid/gid to 99/99<br>　　darkstat (19647): local_ip update(eth0) = 192.168.0.5<br>　　darkstat (19647): entering main loop<br>　　darkstat (19646): parent done reading, calling waitpid<br>　　darkstat (19646): waitpid ret 0, status is 3</p>
+<p>　　可以从第三行看出，darkstat作为一种服务运行，并自动成为一个后台进程。第四行指出了其PID。如果要终止这个程序可以用：</p>
+<p>以下是引用片段：<br>　　kill -9 19647</p>
+<p>　　或</p>
+<p>以下是引用片段：<br>　　killall darkstat</p>
+<p>　　但用户必须用一个浏览器(http:server:667)来显示由darkstat所收集的数据，其实用darkstat自身内置的Web服务器就可以实现。第十行指明了667是浏览器应当连接的端口。用户可以用-p选项将它改为另外一个端口。</p>
+<p>　　-l开关用“网络/掩码”的语法形式定义了一个本地网络，这个网络的所有通信(进入的或离开的)都以图形化的形式显示。-f选项允许用户过滤数据包：</p>
+<p>以下是引用片段：<br>　　darkstat –i eth0 –l 192.168.0.0/255.255.255.0 –f “port 22”</p>
+<p>　　在这个例子中，我们正在过滤运行在22号端口上的SSH协议的网络数据包，因此用户可以定义哪些机器正在使用这个协议。其过滤器语法基于tcpdump,用户可以参考其文档以了解更多的信息。</p>
+<p><a href="http://networking.ctocio.com.cn/TLimages/picview/?/imagelist/2007/348/5e85239855py.JPG" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/networking_ctocio_5e85239855pys.jpg" alt="Darkstat帮你快速分析网络通信" title="Darkstat帮你快速分析网络通信(组图) - suchalin - 为了更好的生活而奋斗！"></a></p>
+<p>　　图1</p>
+<p><a href="http://networking.ctocio.com.cn/TLimages/picview/?/imagelist/2007/348/4z2fs902r4kr.JPG" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/networking_ctocio_4z2fs902r4krs.jpg" alt="Darkstat帮你快速分析网络通信" title="Darkstat帮你快速分析网络通信(组图) - suchalin - 为了更好的生活而奋斗！"></a></p>
+<p>　　图2</p>
+<h5 id="Linux系统的通信分析工具中，有的程序功能强大，特性也不少，如ntop-和vnstat等就得到了广泛使用。不过，有时，你只是需要一个能够给你快速分析通信量的工具，它可以提供进出网络主机的通信量基本信息……"><a href="#Linux系统的通信分析工具中，有的程序功能强大，特性也不少，如ntop-和vnstat等就得到了广泛使用。不过，有时，你只是需要一个能够给你快速分析通信量的工具，它可以提供进出网络主机的通信量基本信息……" class="headerlink" title="　Linux系统的通信分析工具中，有的程序功能强大，特性也不少，如ntop 和vnstat等就得到了广泛使用。不过，有时，你只是需要一个能够给你快速分析通信量的工具，它可以提供进出网络主机的通信量基本信息……"></a>　Linux系统的通信分析工具中，有的程序功能强大，特性也不少，如ntop 和vnstat等就得到了广泛使用。不过，有时，你只是需要一个能够给你快速分析通信量的工具，它可以提供进出网络主机的通信量基本信息……</h5><p>“);</p>
+<p><a href="http://networking.ctocio.com.cn/TLimages/picview/?/imagelist/2007/348/528ijyze0dh4.JPG" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/networking_ctocio_528ijyze0dh4s.jpg" alt="Darkstat帮你快速分析网络通信" title="Darkstat帮你快速分析网络通信(组图) - suchalin - 为了更好的生活而奋斗！"></a></p>
+<p>　　图3</p>
+<p>　 　Darkstat很简单，因此不要期望它有什么特异功能。图1中的页面显示了四个图表和一些基本的信息。将鼠标放到柱形图的某个柱上就会以字节 数显示这个时点进入和输入的数据。图2显示了网络上每台主机的IP地址和MAC地址，以及进入、转出的数据包数量。在IP地址上单击，就会显示关于特定主 机的更多信息，如哪些端口是开放的，正使用哪些协议。用户可以按照降序对进入、转出和总共的流量进行排序。</p>
+<p>　　不过，darkstat显示在浏览器中的信息并不能自动加载，因此为了刷新内容，你必须重新加载页面。不过， dartstat数据能够以简单易懂的形式显示局域网中的基本通信信息，对一般的网络监视、管理已足矣。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/darkstat-helps-you-quickly-analyze-network-communications-group-diagrams/" data-id="cji00lka8003yhnzs32kh3i1c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-open-hard-disk-dma-under-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/open-hard-disk-dma-under-linux/" class="article-date">
+  <time datetime="2009-12-22T03:13:37.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/open-hard-disk-dma-under-linux/">在Linux下开启硬盘DMA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>注意：/sbin/hdparm命令不支持SATA硬盘。  </p>
+<pre><code>支持SATA硬盘的版本： sdparm  
+lai@ubuntu-lai:~$ sudo apt-get install sdparm  
+
+
+Linux下的32位I/O和DMA默认是关闭的。如果用的是16位I/O的话，就无法充分发挥电脑的性能。  
+</code></pre><p>　　如果要打开32位I/O和DMA，就需要以root身份进行设置。为了降低因出错而重启系统对文件系统的损害，最好以单用户模式进行。  </p>
+<p>首先，使用下面的命令检查硬盘驱动器的当前I/O情况：  </p>
+<p>[root@anima lwg]# /sbin/hdparm -t /dev/hda  </p>
+<p>/dev/hda:<br> Timing buffered disk reads:    8 MB in  3.31 seconds =   2.42 MB/sec<br>[root@anima lwg]#  </p>
+<p>　　如果要显示当前I/O、DMA设置，可以分别使用下面的命令：  </p>
+<p>[root@anima lwg]# /sbin/hdparm -c /dev/hda    （显示当前I/O设置）  </p>
+<p>/dev/hda:<br> IO_support   =  0 (default 16-bit)<br>[root@anima lwg]# /sbin/hdparm -d /dev/hda    （显示当前DMA设置）  </p>
+<p>/dev/hda:<br> using_dma    =  0 (off)<br>[root@anima lwg]#  </p>
+<p>　<br>　　通过上面的命令，已经知道现在32位I/O和DMA是关闭的，可以分别用下面的命令将其打开：  </p>
+<p>[root@anima lwg]# /sbin/hdparm -c 1 /dev/hda    （打开32位I/O）  </p>
+<p>/dev/hda:<br> setting 32-bit IO_support flag to 1<br> IO_support   =  1 (32-bit)<br>[root@anima lwg]# /sbin/hdparm -d 1 /dev/hda    （打开DMA）  </p>
+<p>/dev/hda:<br> setting using_dma to 1 (on)<br> using_dma    =  1 (on)<br>[root@anima lwg]#  </p>
+<p>　　然后使用下面的命令使设置生效：  </p>
+<p>[root@anima lwg]# /sbin/hdparm -k 1 /dev/hda  </p>
+<p>/dev/hda:<br> setting keep_settings to 1 (on)<br> keepsettings =  1 (on)<br>[root@anima lwg]#  </p>
+<p>好啦！现在再查看一下驱动器的I/O情况：  </p>
+<p>[root@anima lwg]# /sbin/hdparm -t /dev/hda  </p>
+<p>/dev/hda:<br> Timing buffered disk reads:  116 MB in  3.03 seconds =  38.34 MB/sec<br>[root@anima lwg]#  </p>
+<p>可以看到，现在系统的I/O性能提高了很多。  </p>
+<p>但是，上面的设置只是对当前的系统有效，当再次重启系统时，又得重新设置了。<br>如果要使每次系统启动时都打开DMA，可以在/etc/rc.d/rc.local文件中添加上面的命令来实现：  </p>
+<p>[root@anima lwg]# echo “/sbin/hdparm -c 1 -d 1 -k 1 /dev/hda” &gt;&gt; /etc/rc.d/rc.local<br>[root@anima lwg]#  </p>
+<p>-------------------------------------------------------------------------------------------------------------------------<br>对于SATA硬盘：<br>-------------------------------------------------------------------------------------------------------------------------  </p>
+<p>[root@anima lwg]# /sbin/hdparm -t /dev/sda  </p>
+<p>/dev/sda:<br> Timing buffered disk reads:  100 MB in  3.02 seconds =  33.11 MB/sec<br>[root@anima lwg]# /sbin/hdparm -c 1 -d 1 /dev/sda  </p>
+<p>/dev/sda:<br> setting 32-bit IO_support flag to 1<br> HDIO_SET_32BIT failed: Invalid argument<br> setting using_dma to 1 (on)<br> HDIO_SET_DMA failed: Inappropriate ioctl for device<br> IO_support   =  0 (default 16-bit)<br>[root@anima lwg]#  </p>
+<p>查看控制器：<br>---------------------------  </p>
+<p>[root@anima lwg]# /sbin/lspci -v | grep IDE<br>00:0f.0 IDE interface: VIA Technologies, Inc. VIA VT6420 SATA RAID Controller (rev 80) (prog-if 8f [Master SecP SecO PriP PriO])<br>00:0f.1 IDE interface: VIA Technologies, Inc. VT82C586A/B/VT82C686/A/B/VT823x/A/C PIPC Bus Master IDE (rev 06) (prog-if 8a [Master SecP PriP])<br>[root@anima lwg]#  </p>
+<p>如果不打开内核的SATA选项，则不能使用SATA的DMA模式，否则使用/sbin/hdparm命令时会出错。<br>查看内核配置：  </p>
+<p>[root@anima lwg]# cat /boot/config-2.6.9-42.0.10.EL | grep ATA<br># CONFIG_X86_MCE_NONFATAL is not set<br># ATA/ATAPI/MFM/RLL support<br># CONFIG_BLK_DEV_IDE_SATA is not set<br>CONFIG_SCSI_SATA=y<br>CONFIG_SCSI_SATA_AHCI=m<br>CONFIG_SCSI_SATA_SVW=m<br>CONFIG_SCSI_ATA_PIIX=m<br>CONFIG_SCSI_SATA_MV=m<br>CONFIG_SCSI_SATA_NV=m<br>CONFIG_SCSI_SATA_QSTOR=m<br>CONFIG_SCSI_SATA_PROMISE=m<br>CONFIG_SCSI_SATA_SX4=m<br>CONFIG_SCSI_SATA_SIL=m<br>CONFIG_SCSI_SATA_SIL24=m<br>CONFIG_SCSI_SATA_SIS=m<br>CONFIG_SCSI_SATA_ULI=m<br>CONFIG_SCSI_SATA_VIA=m<br>CONFIG_SCSI_SATA_VITESSE=m<br>CONFIG_SCSI_SATA_INTEL_COMBINED=y<br># CONFIG_SCSI_EATA is not set<br># CONFIG_SCSI_EATA_PIO is not set<br># CONFIG_ATALK is not set<br>CONFIG_USB_STORAGE_DATAFAB=y<br># CONFIG_INFINIBAND_IPOIB_DEBUG_DATA is not set<br># CONFIG_ATARI_PARTITION is not set<br>[root@anima lwg]#  </p>
+<p>需要打开内核的如下两个选项：<br>CONFIG_SCSI_SATA=y<br>CONFIG_SCSI_ATA_PIIX=y  </p>
+<p>重新编译内核。  </p>
+<p>如果你的SATA为启动盘的话，可能需要把原来/boot/grub/grub.conf 和 /etc/fstab 中的hda更改为sda，其他的驱动器名称也可能需要进行更改。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/open-hard-disk-dma-under-linux/" data-id="cji00lkjt00c2hnzsch9wre0d" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-keep-your-linux-based-ssh-constant" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/19/keep-your-linux-based-ssh-constant/" class="article-date">
+  <time datetime="2009-12-19T07:22:55.000Z" itemprop="datePublished">2009-12-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/19/keep-your-linux-based-ssh-constant/">保持linux下保持ssh不断线</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用ssh连接远程服务器的时候，在网络质量不太好的情况下，如果长时间没有键盘输入，ssh连接有可能中断。正在执行的程序和vim等缓冲区数据都会丢失。<br>在windows下使用SecureCRT可以设置session的noop属性来保持连接。<br>在linux下要保持连接，可以使用-o的一个参数ServerAliveInterval来设置一个防止超时的时间。<br>代码看起来象这样</p>
+<blockquote>
+<p>ssh -o ServerAliveInterval=60 x.x.x.x</p>
+</blockquote>
+<p>如果要让所有的ssh连接自动加上此属性，可以修改 ~/.ssh/config 文件添加</p>
+<blockquote>
+<p>Host *<br>Protocol 2<br>ServerAliveInterval 30</p>
+</blockquote>
+<p>当然，只这只能解决网络延时大和不稳定的情况，如果网络出现故障，数据还是容易丢失。因此，远程操作最好还是在screen中执行为好。</p>
+<p>最近工作时经常要同时维护 3 台 Ubuntu 的主机，但当 SSH Client 窗口在几分钟没有键盘操作的时候，会话就会超时断线，特别对于 SFTP 管理时会更加烦躁 :(</p>
+<p>找了一些关于 SSH Server 的资料，发现通过修改 sshd 的配置文件，能够让 SSH Server 发送“心跳”信号来维持持续连接，下面是设置的内容</p>
+<p>打开服务器 /etc/ssh/sshd_config，我在最后增加一行</p>
+<p>ClientAliveInterval 60</p>
+<p>ClientAliveCountMax 1</p>
+<p>这 样，SSH Server 每 60 秒就会自动发送一个信号给 Client，而等待 Client 回应，（注意：是服务器发心跳信号，不是客户端，这个有别于一些 FTP Client 发送的 KeepAlives 信号哦～～～），如果客户端没有回应，会记录下来直到记录数超过 ClientAliveCountMax 的值时，才会断开连接。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/19/keep-your-linux-based-ssh-constant/" data-id="cji00lker007phnzsiym0sgn7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ext3-format-what-is-the-largest-single-file" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/19/ext3-format-what-is-the-largest-single-file/" class="article-date">
+  <time datetime="2009-12-19T03:43:09.000Z" itemprop="datePublished">2009-12-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/19/ext3-format-what-is-the-largest-single-file/">ext3 格式，单文件最大是多少呢？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>根据inode的格式来看(12个直接块指针,1个间接块指针,1个二次间接块指针,1个三次间接块指针),假设磁盘块尺寸为n的话,单个文件尺寸应该是:</p>
+<p>12*n + (1/4)*n^2 + (1/16)*n^3 + (1/64)*n^4</p>
+<p>磁盘块为1K字节的话,文件最大16G</p>
+<p>计算方式：</p>
+<p>表 1. 各种数据块对应的文件寻址范围</p>
+<p>块大小</p>
+<p>直接寻址</p>
+<p>间接寻址</p>
+<p>二次间接寻址</p>
+<p>三次间接寻址</p>
+<p>1024</p>
+<p>12KB</p>
+<p>268KB</p>
+<p>64.26MB</p>
+<p>16.06GB</p>
+<p>2048</p>
+<p>24KB</p>
+<p>1.02MB</p>
+<p>513.02MB</p>
+<p>265.5GB</p>
+<p>4096</p>
+<p>48KB</p>
+<p>4.04MB</p>
+<p>4GB</p>
+<p>~ 4TB</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/19/ext3-format-what-is-the-largest-single-file/" data-id="cji00lkb4004vhnzs9x3vtobe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-let-you-sell-a-good-price" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/13/let-you-sell-a-good-price/" class="article-date">
+  <time datetime="2009-12-13T01:19:55.000Z" itemprop="datePublished">2009-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HR/">HR</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/13/let-you-sell-a-good-price/">5招让你“卖”个好价钱</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>是什么造成了这样的差异？问题的关键还在于他们中晋升较快的那个，能够主动并善于进行职业能力储备，增加职业生涯的本钱。在本期，资深的人资管理专家、104人力银行人资学院事业处副总经理陈志钰先生就“如何储备能量，增加职业生涯的本钱”与读者进行分享。</p>
+<p>什么是你的职涯“本钱”</p>
+<p>所谓职业生涯的本钱，简单来说，必须涵盖三个方面，一是充分的能力，包括专业技能、管理知识的储备等；二是态度，即工作态度及风格是否契合你所希望就职公司的文化，开阔的视野、兼容并包的心胸、善于学习及适应改变的能力，都会为你的职场加分，为未来的职业发展创造无限可能；三是诚信，GE前总裁杰克·韦尔奇曾表示“诚信，这是我们的最高价值，具有至高无上的重要性”，确立并保持诚信等为人处事的基本原则，是在职场立于不败之地的关键。</p>
+<p>当然，这一切的前提必须是能清晰的认识自我，了解自己希望及能够从事的职业方向。只有做到这些，才能时刻保持并提升自己的职场竞争力，使职业生涯呈现上升的态势。</p>
+<p>如何在职场做加法</p>
+<p>那么，如何在自己的职涯规划中不断做加法？如何让自己随着时间、经验的累积变得更有价值，更加抢手？陈先生认为，关键要做到以下5个方面：</p>
+<p>自我剖析———认识自己</p>
+<p>很多人都不能清醒的认识自己，了解自己的优势是什么，并据此思考下一步该往哪里走。例如在考大学时，很多人会根据目前社会上所谓的热门专业来报读，而不是想想做什么更符合自己的兴趣，结果在就业时就会发现自己面临许多棘手的问题。一旦盲从、缺少目标、随遇而安成为职业生涯中的常态，不断的自我加分必然会成为空谈。</p>
+<p>所以，正确的做法应该是评估自己的优势，并分析怎样的职业状态才能充分发挥自身的优势，降低劣势。自我认识及评估是一个不断延续的过程，可以通过参加网上提供的职业测评，或者经常与老师、朋友、家人、主管等进行讨论来完成。</p>
+<p>作时间的主人———善用时间</p>
+<p>上帝对每个人最公平的地方就是时间，每个人每天都拥有24小时。聪明的善用时间安排，让这24小时发挥出最大功效，就成为个人“与众不同”的关键。</p>
+<p>时间管理是一门很大的学问。首要的一点就是充分利用每一秒可利用的时间来自我增值。在日本的地铁上，常常能够看到的一幕就是人手一本书，或是专业书籍，或是管理类书籍，利用每段空闲进行学习已经成为他们的习惯。其次是合理安排，制定完善的、合理的工作计划。例如如果每天能够早起一会，提前到公司，就能够有更多的时间去思考和安排一天的事情，也不用担心因为完不成工作而总在加班。</p>
+<p>敢于承担责任———多做多问</p>
+<p>古话有云：吃亏就是占便宜。这句话同样适用于职场，多去承担责任，并在实际运用中充实自己，对于个人的职涯发展是很重要的。这里必须谈到很多人在认识上的一个误区———认为自我增值就是多参加培训，多拿证书。但事实是.</p>
+<p>陈先生表示，在他多年从事HR管理的工作中发现，很多人在简历中写得很漂亮，但当他用行为面谈法进行面试时，却发现这些求职者往往答非所问，缺少实际导入执行的经验，常常以为在讲座上听到或者在书上看到的就是自己的知识，事实上，这两者之间有很大的差距。</p>
+<p>可见，HR更青睐的是个人实务操作和运用的能力，即使通过培训而了解到某项技能，也只有通过在实际工作中的检验才能转化成自我能力。所以建议职场人士应该把握每一个学习的机会，敢于尝试，对于不懂的勇于询问，积累实务操作经验。</p>
+<p>做自己的假想敌———不要和别人比较</p>
+<p>世上没有绝对的公平，过多的和别人比较，常常会使得自己处于不平衡的心态中，而受到这种不愉快心情的影响，不仅感受不到工作的快乐，使自己缺少成就感，也会局限和阻碍个人的发展。</p>
+<p>所以，正确的做法应该是和自己比较：设定目标，然后评估自己有没有达到预先设定的目标或规划，看自己今天是否比昨天更进步，明天会不会比今天更进一步。</p>
+<p>直面挑战———拒绝频繁跳槽</p>
+<p>任何职业都需要一定量的积淀才能有一个质的飞跃，如果没有2－3年的积累，很难对一份工作有深入的理解和把握，频繁的跳槽不仅让你缺少职业储备，也会成为HR心中的“扣分”项。</p>
+<p>那该如何区分有益的和无益的跳槽呢？陈先生表示，关键还在于跳槽的动机———不是因为现在的工作不好、不顺心就决定跳槽，而是看有没有一份更好的机会在等待你。</p>
+<p>工作没有100％的如意，如果因为不好就换、就逃避，只会影响个人职业生涯的连续性和经验的沉淀。只有主动面对职业过程中遇到的挑战，学会适应环境，克服困难，才能最终做到待价而沽，积累跳槽的本钱。</p>
+<p>相关链接1：</p>
+<p>详解职场潜规则，顺势处理人际关系</p>
+<p>潜规则是企业文化中最为根深蒂固的一个组成，它构成了企业内部事务处理与人际关系的基本准则，但是这些准则的相关条款，却长期以来不为人知。</p>
+<p>自从吴思的著作《潜规则—中国历史中的真实游戏》面世以来，“潜规则”一词逐渐流行。“潜规则”是指就是“暗规则”，是一种区别于表面规则的规则，也是一种不成文的规则，在操作时至可意会，无需言传。有一种现象，现在是、以前是，并且此后相当长的时期内仍然是我们主要关注的重点，那就是企业内部秘而不宣的潜规则。</p>
+<p>潜规则是企业文化中最为根深蒂固的一个组成，它构成了企业内部事务处理与人际关系的基本准则，但是这些准则的相关条款，却长期以来不为人知。有一种态度，或者说是一种认知思想，从根本上不承认这种潜规则的存在价值，这种思想下的企业内部运行，无异于在一团漆黑的世界中阔步行进，其危险是可想而知的。</p>
+<p>在职场中运行的潜规则</p>
+<p>据调查，受访者普遍认为潜规则主要作用在企业的“内部管理”、“薪酬福利”和“人际关系”三方面。职场潜规则是企业内只可意会不可言传的运行规则，它引导甚至制约企业员工的言行和价值判断。</p>
+<p>调查发现，75.5%的人表示“企业不会允许夫妻在同一公司工作”，63.1%的人认为“销售是公司最强势的部门，销售的意见和要求最受到重视”。</p>
+<p>职场中，最主流的潜规则是“老板说了算”，97.3%的人表示“企业里个人的前途首先取决于老板的喜恶而不是业绩”。90.2%的受访者说“公司里只可暗斗，恩怨不能放在台面上”。88.3%的人说“企业里完全不存在人人平等，同等职位男性比女性收入高”，85.1%的人表示“企业里面有派系，站对队伍比做好事情重要得多”……</p>
+<p>近80%的人对潜规则不够了解</p>
+<p>在职场中，员工常常感到，有一种无形的力量在左右着自己的方向，却又触摸不着，琢磨不透。调查显示，没有人声称对企业潜规则百分之百地了解，游刃有余地运用，只有20%的人觉得自己比较了解企业的潜规则，能适应企业的潜规则，近80%的人认为自己对潜规则不够了解。其中，45.8%的人认为对潜规则一知半解，27.1%的人对企业潜规则知之甚少，无法猜透，7.6%的人对企业潜规则毫不了解，无从把握。</p>
+<p>职场潜规则不可回避</p>
+<p>职业顾问指出，潜规则的客观存在是不可回避的。一些潜规则因企业文化、领导人的不同而大相径庭。比如日韩企业相对偏重员工的合作和忍让，欧美企业鼓励个人能力的发挥和相互竞争。还有一些潜规则是职场中约定俗成的，比如越级汇报的下属在哪里都不会被容忍，员工加班后休假的安排必须以不影响工作任务为前提。</p>
+<p>潜规则的最大特性是不稳定，它主要伴随着企业高层管理者的管理特性而形成。如果老板对成本控制比较敏感，那么公司就会以“成本优先”作为管理和考核标准;如果老板喜欢独断，那么公司内部就比较崇尚遵从。所以对企业而言，需通过持续有效力的管理制度，使潜规则帮助完善现有的沉稳制度，使之逐步转变为显性规则，而作为员工，需深入了解企业文化及其背景下的潜规则，同时避免那些和社会法律伦理相悖的“灰色规则”，减少职业风险，学会善用潜规则，为自己职业发展创造良好环境。</p>
+<p>潜规则是企业内部的客观存在，是组织系统自身的固有规律，是系统推进机制的功能性损耗，是系统自然衍生并不断提高的熵值体现，无论它在不同时期的表现是何等的不同，也无论在不同的企业中潜规则的内容有何区别，但，它的客观性不会改变。</p>
+<p>唯一能够改变的，只是我们的思想背景，做为企业这个社会性组织系统内部成员的不同思想，所看到的潜规则是不同的。而事实上，潜规则就是潜规则，它从来没有发生过变化。处理好了，它就成了你奋然前行和升华的平台，处理的糟糕就成了你马失前蹄的泥潭!</p>
+<p>**职场风格决定你的作为  </p>
+<p>**小张某民营企业工作已经2年了，每天兢兢业业，任劳任怨。工作时间把领导安排的事情尽量按时按质完成，下了班就象个隐居的贤人，一头扎进自己的魔幻的游戏世界。平时他也很少和上司沟通，也很少提意见，既不攻击谁，也不争斗什么，安然世外的超然一度让他活的很是自在。当一天公司人力资源部交给他一份辞退交接通知时，他一时间懵了：简直不敢相信这是真的?“我没犯什么错误啊，凭什么开除我?”，他失控的大喊道!  </p>
+<p>至于小张为何为形成这样的个性，是性格造成的还是遇到过职场的挫折变动愚钝起来我们暂时不去探讨。单单就他这种性格为何会失败我们分析一下，我相信象小张这样生活的年轻人一定为数不少。人在职场不管你的情商和智商如何，都应该有个做事的原则和方法，这个方法可以有自己的风格和特色，但要以适应现代企业发展的一般规律为前提，否则只有不断的失败和碰壁。所以说你的职场风格不能空白，你应该积极的搭建自己的风格，找到自己的成功之路。  </p>
+<p>谭一平先生曾经写过一本书《狐狸信条和穿山甲法则》，曾经在职场引起极大的轰动，笔者也是热衷的读者之一，其很多观点值得借鉴和反思。  </p>
+<p>谭先生的观点很有见地：一个人如果象穿山甲只知道埋头打洞，外面世界很少管的话，那就注定他会一事无成。如果只知道埋头苦干，既不动脑子想问题，也不会想问题，没有一点灵气，领导肯定会不喜欢，甚至也可以认为是愚钝和不敬业，这样的员工即使不被炒鱿鱼，也只能担当一个无足轻重的配角而已。无论是被领导认为是没有方法、没有思路还是没有激情都是致命的空挡，只有失败一条路可走。可能他和刺猬相比会有些优势，因为刺猬更是无所作为，只知道用那种悲观的方式负隅顽抗的保护自己，甚至下山都是不争气的滚着走。  </p>
+<p>相反如果人在职场学的是狐狸似的生存哲学，那和穿山甲走向失败的结局应该是殊途同归的。整天不踏踏实实工作，只是挖空心思苦心钻营，总是妄图找到一个肥缺和捷径，结果是做事浮夸善于走形式，也难以在企业立足，所以说这条路也是走不通的。  </p>
+<p>职场专家建议我们，人在职场既要学会穿山甲的踏实肯干、善于积累、立足现实的精神;也要反应敏捷、洞察全局、善于思考的良好习惯。所以我建议学习雄鹰的风格，兼容高空翱翔和低空捕物的本领。既有高屋建瓴的视野和一览众山小的技能，同时更具有低空甚至陆地厮杀捕物的绝招，所以使得他成了除了蜗牛唯一能上金字塔顶端的英雄，其气概让我们为止折服，所以形容人窝囊和猥琐的没有用雄鹰做比喻的，让我们学习雄鹰，看的更高，做的更好!  </p>
+<p>**相关链接2：  </p>
+<p>职业生涯12个致命想法**  </p>
+<p>这种人虽然聪明、有历练，但是一旦被提拔，反而毫无自信，觉得自己不胜任。此外，他没有往上爬的野心，总觉得自己的职位已经太高，或许低一两级可能还比较适合。  </p>
+<p><strong>1、总觉得自己不够好</strong>  </p>
+<p>这种人虽然聪明、有历练，但是一旦被提拔，反而毫无自信，觉得自己不胜任。此外，他没有往上爬的野心，总觉得自己的职位已经太高，或许低一两级可能还比较适合。  </p>
+<p>这种自我破坏与自我限制的行为，有时候是无意识的。但是，身为企业中、高级主管，这种无意识的行为却会让企业付出很大的代价。  </p>
+<p><strong>2、非黑即白看世界</strong>  </p>
+<p>这种人眼中的世界非黑即白。他们相信，一切事物都应该像有标准答案的考试一样，客观地评定优劣。他们总是觉得自己在捍卫信念、坚持原则。但是，这些原则，别人可能完全不以为意。结果，这种人总是孤军奋战，常打败仗。  </p>
+<p><strong>3、无止境地追求卓越</strong>  </p>
+<p>这种人要求自己是英雄，也严格要求别人达到他的水准。在工作上，他们要求自己与部属“更多、更快、更好”。结果，部属被拖得精疲力竭，纷纷“跳船求生”，留下来的人则更累。结果离职率节节升高，造成企业的负担。  </p>
+<p>这种人适合独立工作，如果当主管，必须雇用一位专门人员，当他对部属要求太多时，大胆不讳地提醒他。  </p>
+<p><strong>4、无条件地回避冲突</strong>  </p>
+<p>这种人一般会不惜一切代价，避免冲突。其实，不同意见与冲突，反而可以激发活力与创造力。一位本来应当为部属据理力争的主管，为了回避冲突，可能被部属或其他部门看扁。为了维持和平，他们压抑感情，结果，他们严重缺乏面对冲突、解决冲突的能力。到最后，这种解决冲突的无能，蔓延到婚姻、亲子、手足与友谊关系。  </p>
+<p><strong>5、强横压制反对者</strong>  </p>
+<p>他们言行强硬，毫不留情，就像一部推土机，凡阻挡去路者，一律铲平，因为横冲直撞，攻击性过强，不懂得绕道的技巧，结果可能伤害到自己的事业生涯。  </p>
+<p><strong>6、天生喜欢引人侧目</strong>  </p>
+<p>这种人为了某种理想，奋斗不懈。在稳定的社会或企业中，他们总是很快表明立场，觉得妥协就是屈辱，如果没有人注意他，他们会变本加厉，直到有人注意为止。  </p>
+<p><strong>7、过度自信，急于成功</strong>  </p>
+<p>这种人过度自信，急于成功。他们不切实际，找工作时，不是龙头企业则免谈，否则就自立门户。进入大企业工作，他们大多自告奋勇，要求负责超过自己能力的工作。结果任务未达成，仍不会停止挥棒，反而想用更高的功绩来弥补之前的承诺，结果成了常败将军。  </p>
+<p>这种人大多是心理上缺乏肯定，必须找出心理根源，才能停止不断想挥棒的行为。除此之外，也必须强制自己“不作为，不行动”。  </p>
+<p><strong>8、被困难“绳捆索绑”</strong>  </p>
+<p>他们是典型的悲观论者，喜欢杞人忧天。采取行动之前，他会想像一切负面的结果，感到焦虑不安。这种人担任主管，会遇事拖延，按兵不动。因为太在意羞愧感，甚至担心部属会出状况，让他难堪。  </p>
+<p>这种人必须训练自己，在考虑任何事情时，必须控制心中的恐惧，让自己变得更有行动力。职场中最有效地生存法!  </p>
+<p><strong>9、疏于换位思考</strong>  </p>
+<p>这种人完全不了解人性，很难了解恐惧、爱、愤怒、贪婪及怜悯等情绪。他们在通电话时，通常连招呼都不打，直接切入正题，缺乏将心比心的能力，他们想把情绪因素排除在决策过程之外。  </p>
+<p>这种人必须为自己做一次“情绪稽查”，了解自己对哪些感觉较敏感;问朋友或同事，是否发现你忽略别人的感受，搜集自己行为模式的实际案例，重新演练整个情境，改变行为。  </p>
+<p><strong>10、不懂装懂</strong>  </p>
+<p>工作中那种不懂装懂的人，喜欢说：“这些工作真无聊。”但他们内心的真正感觉是：“我做不好任何工作。”他们希望年纪轻轻就功成名就，但是他们又不喜欢学习、求助或征询意见，因为这样会被人以为他们“不胜任”，所以他们只好装懂。而且，他们要求完美却又严重拖延，导致工作严重瘫痪。  </p>
+<p><strong>11、管不住嘴巴</strong>  </p>
+<p>有的人往往不知道，有些话题可以公开交谈，而有些内容 是只能私下说。这些人通常都是好人，没有心机，但在讲究组织层级的企业，这种管不住嘴巴的人，只会断送事业生涯。  </p>
+<p>他们必须随时为自己竖立警告标示，提醒自己什么可以说，什么不能说。什么样的MM最好找工作….  </p>
+<p>12.我的路到底对不对?  </p>
+<p>这种人总是觉得自己失去了职业生涯的方向。“我走的路到底对不对?”他们总是这样怀疑。他们觉得自己的角色可有可无，跟不上别人，也没有归属感。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/13/let-you-sell-a-good-price/" data-id="cji00lkf4007yhnzshun76hov" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-a-man-must-see-a-classic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/13/a-man-must-see-a-classic/" class="article-date">
+  <time datetime="2009-12-13T01:17:47.000Z" itemprop="datePublished">2009-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络美文/">网络美文</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/13/a-man-must-see-a-classic/">男人必看的领悟,很经典</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>男人必看的领悟        关于健康类的领悟:健康是男人的头等大事情,因此我就先讨论这个问题。</p>
+<p>1、能不抽烟最好不抽,它或许可以帮助你吸引一些女生,但不抽绝不会招来厌烦,表现男子气概的途径有很多,没必要拿健康做赌注,都戒了吧弟弟哥哥们!</p>
+<p>2、尽量少看黄片,每周也控制自己和GF的MLOVE次数,别以为自己是战神。正常的男人即使是单身,也不会成天迷恋黄片。而每次你SY后都会有大量锌元素流失,此元素与你大脑活动有密切联系。</p>
+<p>3、坚持做运动,去不了健身中心也没关系,在家也可以嘛!俯卧撑可以锻炼你的胸肌和腹肌,请记住游泳圈是成功人事或者你单位领导才有资格拥有的奢侈品。</p>
+<p>4、每天早上一杯水,预防胆结石头。睡前一小时不要喝水,否则会过早出现眼袋。(书上都这么说,大家照做啦)</p>
+<p>5、不要以为你是个男人,就不需要保养。至少饮食方面不能太随便,多吃番茄,海产品,韭菜,香蕉,都是对男健康有益处的食物。</p>
+<p>6、学会微笑,以后在很多场合都用得上它。如何让微笑好看,首先你得拥有健康的牙齿。如何保证牙齿健康,一,早晚,饭后刷牙;二,每年去探望一次牙科医生;三,少管闲事。</p>
+<p>关于事业的领悟: </p>
+<pre><code>事业是一个男人存在这个社会的身份象征哦,因此我们每个哥哥弟弟都要奋发起来,别等到了后悔的那天!大家继续仔细看领悟,一定要好好看。
+</code></pre><p>1、男人一定要给自己定目标,一年,两年,五年,也许你出生不如别人好,通过努力,往往可以改变命运。破罐子破摔只能和懦弱做朋友。</p>
+<p>2、少玩游戏,这不是韩国,你打不出房子车子还有女人。进了大学,就进了社会,进了社会,就进了黑暗,这是场马拉松。现在一个砖头抛上去,砸下来7,8个都玩过传奇,现在的你是否该有点打算。</p>
+<p>3、拿出极限,为工作尽力而为。你要想的是成功,而不是失败。所以面对困难首先就是拿出信心。除了你心爱女人的鼓励,这应该是最有用的东西。</p>
+<p>4、每天知道自己要干什么,公司的座谈会的确可以帮你磨嘴皮子,夜深人静,问问自己,将来的打算,并朝着那个方向去实现。</p>
+<p>5、空闲时间不要全拿去上网、喝酒吃饭,读点文学作品,学习一些经营流程,管理规范,国际时事,法律常识。这能保证你在任何<strong> </strong>都有谈资。</p>
+<p>6、学会察言观色,不要意气用事,否则会有许多不必要的麻烦。要做一件事,成功之前,没必要告诉其他人,成功之后,和他们分享快乐。公司的东西不要带回家,即使有小便宜,也别参与,在你成为领导前,也别指责,这是你管不到的。</p>
+<p>7、打牌和麻将可有可无,那不是年轻人该干的,除非工作需要,否则不要培养这种兴趣。当你看见GF坐在赌桌面前聚精会神的呐喊着某张牌时,你是什么感觉?</p>
+<p>8、力求上进的人,不要总想着靠谁谁,人都是自私的,自己才是最靠得住的人。如果考公务员,要有十足的心理准备。早点开始托关系吧,还不见得一定就有收效。</p>
+<p>关于爱情的领悟:</p>
+<pre><code>爱情这个话题我想一定要严肃对待才能完全感觉真正意义上的神圣
+</code></pre><p>1、找女朋友外表是第一关,但要了解她的品行之后再做打算也不迟。</p>
+<p>2、别把两个人的生活绞在一起,空间才是爱情的长寿药。不要经常吃醋,谁都有异性朋友,该吃的时候才吃,并且让她知道。善待她的朋友,即使她讨厌的人,你也没资格说坏话,你要做的,就是静静的听她倾诉。适当给她安慰。</p>
+<p>3、珍惜身边人,不要见异思迁,大家都需要安定。即使对方比你GF漂亮10倍,还主动靠近你,给你暗号,请严肃的告诉她,你有女朋友!这点请诸位一定要监守住哦,假如有被攻陷阵地的请买块豆腐撞死!!</p>
+<p>4、她开始管你的生活,你的钱,对你唠叨,频繁发消息询问你的位置。别担心,她只是把自己交给了你,害怕失去你。发生口角后,别关机,也别在街上和其他异性闲逛,那只能使矛盾激化。</p>
+<p>5、别总是让她打电话来,她也需要被重视的感觉。别偷看她的隐私,不要去猜测,在一起是缘分,离开也是缘分。把她介绍给你最好的朋友,包括异性朋友。</p>
+<p>6、有男友的女人不要碰,即便你想onenightstand也要做好心理准备。后果同上,严重时会出现体肤之痛。朋友的女人不要碰,无论是现在的还是曾经的,后果同上。要知道,男人经营自己就像经营一个公司,要树立品牌文化。想问为什么的朋友请先做个你是受害者的假设。</p>
+<p>7、博爱的女人不要碰,往往这种女人连自己要什么都不知道,我想没人愿意和若干成年男性分享自己的爱。天作孽,犹可活,自作孽,不可活。没主见,不上进,懒惰的女人不要碰。就算你有钱,你有的是钱,最终你也会厌烦其中。何况不见得她们个个都是花瓶,何况你还有审美疲劳。</p>
+<p>8、欺负她时,请带上套子,如不习惯,请自行解决,直到无法忍受为止,除非自己能很好的控制体外排精,否则就泼自己一身冷水。流产很痛苦,大家都不是女人,体会不到的那种痛苦的!</p>
+<p>9、如果GF要跟你吵,尽量克制,不能避免时,跟她吵,吵架是最好的交流方式。你们互相可以得到心里渴望已久的答案。但别带脏字,别把对方的亲戚带出来,最后尽量妥协,有些事,只能暂时妥协。不要把问题留过夜。有时候遭受到暴力袭击后,也一定要忍,就当作防暴演习了,相信她打不坏你的。</p>
+<p>10、当她不再爱你的时候,无论你有多想她也别打电话告诉她,因为有些人会记住第一个,而有些人只会记住上一个。</p>
+<p>关于朋友间的领悟:</p>
+<pre><code>朋友认识了很多,自己也感受到了许多!
+</code></pre><p>1、好朋友里面,一定要培养出一个知己,不要以为你有多么八面玲珑,到处是朋友,最后真心对你的,只有一个,相信我。</p>
+<p>2、你的朋友最好以你自己为中心发散,允许少数支点连接,千万不要把朋友圈变成密不透风的多边型,你要为自己留底牌。</p>
+<p>3、朋友圈里的你,平时都很忍让,请注意适当拿出你的主见。反之,不要太计较。不喜欢的人少接触,但别在背后说坏话,说是非之人,必定是是非之人,谨记,祸从口出。</p>
+<p>4、大家都年轻,没什么钱,不用太在意谁谁又穿AD,NIKE,尊重每一个人,包括为你擦鞋的,卖报的,环卫工人…等等。</p>
+<p>5、朋友之间不要合作做生意,或者办公司。麻烦会接踵而来。你要减轻负担,减小风险,可以,找陌生人。</p>
+<p>6、朋友之间发生争执,不要次次都是忍让,每个人都有坚持自己的权利,让他们知道你的想法,你所坚持的。没关系,不出两天,你们又是好朋友。说该说的,不说不该说的。对朋友,也应当有所保留。</p>
+<p>7、交朋友要有耐心和毅力,就好象我在整理这篇博文一样,真不知道有几个人能耐心的看完。这些感悟真的是值得男人分享的哦!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/13/a-man-must-see-a-classic/" data-id="cji00lk4r000ghnzsdmut2lex" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-five-years-experience-in-hr-recruitment-and-interview" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/13/five-years-experience-in-hr-recruitment-and-interview/" class="article-date">
+  <time datetime="2009-12-13T01:17:07.000Z" itemprop="datePublished">2009-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HR/">HR</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/13/five-years-experience-in-hr-recruitment-and-interview/">五年HR招聘与面试的体会</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做HR专职招聘也有好几年了，最近感觉这个话题越来越热，因此也开一帖，从HR的角度谈些有关招聘面试的问题，也尽自己的能力给有这方面需要的版友们些建议，回答大家的问题，抛砖引玉，与大家交流。</p>
+<p>第一个问题，面试中你的角色　</p>
+<p>　　招聘方和应聘方始终是一对矛盾，这毫无疑问，但这两者又何尝不是合作关系呢？试想有哪个做招聘的不希望又快又准得给自己的公司找到合适的人选，又有哪个应聘者不希望能尽快通过面试获得工作机会完成自己职业生涯的又一次跃进呢？所以，作为应聘者的我们千万不要从一开始就觉得HR是站在你的对立面的，如果你站错了队伍，你的面试基本上也就结束了。因为你将竭尽所能得去回避自身存在的、你认为可能会对工作有所影响的问题，而不是将自己的能力展现出来，所以在面试中最重要的工作是表现，而不是回避（To Show not to cover!）</p>
+<p>　　绝大多数应聘者在面试之前会做准备，看很多面试经验，我也看（HR也不傻，当然琢磨对方会怎么对付面试，呵呵）。这些所谓面经中有一条很重要的就是要你去弥补自己的短处，其实这是一个很大的误区。举例来说，我面试的很多应届毕业生跟我大谈自己的工作经验，甚至在哪家打字复印店打过字都说得像个项目管理工程；反过来，那些大专中专毕业，工作两三年，面试始终喜欢说自己自考本科在读，夜大在上，很快就要拿到<strong>大学</strong>文凭……实际上，这些基本上都是无用功，想想吧，公司为什么让你来面试？如果我需要一个有工作经验的，看了你应届毕业生的简历，我要你来面试干什么？我要找个学历高的，这年头，本科生硕士生满天飞，我约你来面试那肯定是我时间多的没地方打发了！</p>
+<p>　　所以，面试中最重要的就是表现你的优势，而不是弥补你的弱点，因为公司用人，只用人的长处，不是找三好学生，不是样样都优秀才算<a href="http://www.21itjob.com/job/default.aspx" target="_blank" rel="noopener">人才</a>！</p>
+<p>第二个问题，展现什么样的能力</p>
+<p>　　今天说在招聘面试时最需要展现什么样的能力，HR专业的说法非常复杂，什么能力模型、素质结构、职业倾向……同行之间讨论一下没问题，真拿到实际工作中，别说应聘者头晕脑涨，有时候连招人若渴的部门经理们都觉得不耐烦。</p>
+<p>　　1、展现你不可被培训的能力</p>
+<p>　　道理很简单，能力、素质分两种，可以培训的和难以培训的，你自己就完全可以判断。　　</p>
+<p>　　<a href="http://softtest.chinaitlab.com/" target="_blank" rel="noopener">测试</a>：英语口语、能吃苦耐劳、诚实、善良、沟通能力，了解公司产品知识，公司所在行业熟悉程度、计算机能力、财务知识、工作主动性、协调能力、分析能力……试试看，区分一下，是不是很容易？　</p>
+<p>　你是用人单位，你会把注意力主要放在哪儿呢？当然是不容易培训的能力！</p>
+<p>　　公司有培训部门，要做的事情就是针对员工有所欠缺的地方进行雕琢，所以，不要怕自己在可以培训的方面有缺点（比如对公司产品知识不了解等）。而更多的是要抓住自己所应聘职位所需要的难以被培训的能力。　　</p>
+<p>　　2、展现你不可被替代的能力</p>
+<p>　　作为招聘者，我每天都在做选择题，在众多应聘者之间筛选出符合甚或是超出我们期望的那一个，而我每天看到的绝大多数简历都可以说是千人一面。最典型的是毕业生，英语四级（六级）、计算机二级（三级）、成绩优良（排名3/50）、连续n年获得奖学金、参加<strong>学生组织、在</strong>公司做过几个月的实习工作。这样的简历要多少有多少，换句话说，只要公司想招，随时有长龙排在门口，你成功的机会微乎其微。</p>
+<p>　　换个角度看着问题，为什么基层员工好找，部门经理、技术专家难招呢？原因在于替代性，你越容易被替代，你的价值也就越低，这就是法则。所以无论是简历还是面试，你得把自己独特的不可替代的能力表现出来，别告诉我没有，这不可能，不然你凭什么来应聘？</p>
+<p>第三个问题，面试成功的要诀，你的预期=我的表现</p>
+<p>　　面试，英文叫做Interview，我认为含义完全不同。面试，当面进行考试，根据你的成绩客观给出评定，考出多少分是多少分，其目的是择优而用；interview翻译过来应该是面谈，会面，是一个沟通的过程，interviewer向应聘者就公司的业务状况，所能提供的职位详情进行传达，而candidates向对方介绍自己的履历、能力、经验等各方面信息，从而让对方认识自己，进而了解自己。其目的是双方的契合，不是择高分而用，而是提供一个机会，让双方都能找到最适合自己的合作伙伴。　</p>
+<p>　　具体来说，interview之前，企业一定会对自己想招一个什么样的人来做这个职位分析，也就是HR理论中的所谓岗位分析（Job Description）。这个分析来源很广泛，由部门经理对这个职位的需求，有前任工作者给公司就这个职位留下的主观映像，甚至有客户对该职位人员的客观评价等不一而足。　　</p>
+<p>　　所以，interview的结果没有所谓优秀、一般、差，只有suit or not suit。希望大家知道企业方的面试官（我们姑且沿用面试这一通行说法吧，不然有人该埋怨我说话夹杂英文了），在面试之前是带着期望来的！什么样的期望呢？简而言之，比前任更适合！如果前任做得不好，希望招到一个更好的，如果前任做得很好跳槽了，则希望招到一个更适合（稳定）的。　</p>
+<p>　　那么怎么才能做到让自己更适合公司的期望呢？</p>
+<p>　　1、研究对方的招聘广告，一般对方会在广告中写出职位的工作内容，任职要求。对比一下自己，如果对方写了大专以上学历，你是个硕士，就别去瞎起哄，耽误大家时间嘛这不是？如果对方写了三年以上工作经验，对方当然就不会想去从大学毕业生开始培养一个新手，基本条件都不合适，让你去面试，不是对方闲得实在无聊就是对方HR是个新来的菜鸟。</p>
+<p>　　2、面试中注意把握对方的心态，说俗点儿，听话听音，对方一国企，做财务，问你英语水平怎么样，就得多个心眼儿，工作用不着啊，就别天花乱坠的吹一通，没准儿你的前任就是英语好跳槽去了外企！这样上当的不能说不多，反正我常碰到。</p>
+<p>　　3、突出重点，我常碰到这样的应聘者，通常毕业一两年，会议室坐下，二话不说，从包里翻出一大堆本本，有多大桌他就能给你铺满了，英语的、会计的、贸易的、报关的、计算机的、营销的、管理的、公关的……看得我眼花，只有你想不到，没有他拿不出，介绍完了，我弱弱的问一句您应聘什么职位？答曰：”我觉得你们公司很好，外企，大品牌，心向往之不是一两年了，只要能进来，什么职位我还真不在乎！”我看他做我们总经理挺合适的……</p>
+<p>第四个问题、面试中HR们的心态和对策</p>
+<p>　　我们不妨从HR招聘者的职责描述说起，简而言之，为企业寻找合适的<a href="http://www.21itjob.com/job/default.aspx" target="_blank" rel="noopener">人才</a>。当然有许多限制：</p>
+<p>　　1、时间，招聘周期按照职位高低从两周到三个月不等，平均为一个月</p>
+<p>　　2、成本，招聘过程会发生很多成本支出，只要不是糊涂到花多少钱不在乎的地步企业一定非常关心自己招人花费几何</p>
+<p>　　3、招聘效果，也是最重要的，你找来的人是否能够在公司里做得好，做得久，公司个人各得其所，双赢为赢嘛　</p>
+<p>　　而这些限制本质上是矛盾的，又想招到最合适的人，又要快，又要省钱，压力当然巨大。所以，其实HR在看似怡然自得坐在面试桌另一边的时候，一般心里都处在这样的矛盾挣扎之中，一方面，心中期望自己对面坐的就是那个最佳人选，另一方面，又担心由于自己一时不慎，没看破对方小小的应试伎俩，被人结结实实的忽悠一把。</p>
+<p>　　这就是HR面试中的心态，针对这种状况的应对措施似乎我不该多谈，表现要不要好？当然要，而且在专业领域内要在众多面试者中首屈一指，但是面试经验我劝各位还是少看些比较好，你想，如果你碰到一个经验不十分丰富的HR，他所准备的问题你都有了比他还精准的答案，HR会得出什么样的结论呢？</p>
+<p>　　1、这人面试经验丰富，时刻准备跳槽，稳定性值得怀疑</p>
+<p>　　2、这人性格特点看不透，有待进一步观察，看看有没有更合适的人选吧　</p>
+<p>　　所以，回到最初的地方，面试的过程是展示，而不是去掩饰，你遮盖了一些东西，HR就会认为你有更多东西没有表现出来，进而对你整个表现的可信性产生怀疑，得不偿失啊！再说句到底的话，凭借面试经验是有可能糊弄一些半路出家的HR，可是你找到了工作事情就结束了吗？做起来发现这工作不适合你怎么办？发现工作对你的要求超出或明显地与你的能力不协调怎么办呢？最终结果还是要放弃，不如在面试时真诚沟通，让HR看透你点儿其实对你有帮助！</p>
+<p>  第五个问题，做一块过硬的敲门砖—-简历</p>
+<p>　　制作简历，这一步看似简单，其实也是有些窍门的　</p>
+<p>　　三不写二多写一少写　</p>
+<p>　　大家猜一下，HR简历筛选时，阅读你的简历会用多长时间呢？十分钟？那是我一共就这一份简历，五分钟？一般候选人在面试前他的简历会被这样研究。一分钟？那是这封简历写得挺逗。正确答案，不会超过三十秒！这是我的自身经验，同行们的意见可能更少！　</p>
+<p>　　这么短的时间能阅读多大篇幅呢？注意我没说阅读多少字，最多两页A4。学校教育害死人呐，学生们的简历毫无例外的第一页是”求职信”。内容基本雷同，大体是大学生涯、母校光辉……除了校友和菜鸟，其他人是不会看的。你怎么才能让HR被你的简历吸引呢？切记，三不写二多写一少写！　</p>
+<p>　　不写未成年经历，做简历不是写生平，公司选人不是政府选国家干部。一般我们对你小时候的事情兴趣不大，小学、中学就读学校之类，没人会看。很多人觉得好像写了也无关痛痒，其实不然，这样的经历一般都出现在简历开头部分，看了一段这个，会严重影响HR看下去的意志力，那就亏大了！</p>
+<p>　　与工作本身不紧密相关的工作、学习经历不写，运气好，HR视而不见，运气不好，他们就会考虑，这个人能力挺杂啊，放我这儿不能人尽其才，来了也会跑！　</p>
+<p>　　不写自我评价和真正意义上的兴趣爱好，自己都评价完了，HR还评价什么呢？菜鸟会觉得你傲气，有经验的则不看，写了只有坏处没好处。如果你写的是与工作相关的兴趣爱好，（比如应聘采购地说喜欢逛街购物，应聘财务的说自己酷爱数钱之类，开玩笑啊，学生朋友可别当真），那没问题，如果你写的是我爱唱卡拉OK、泡吧跳舞、打球打牌，我看算了吧。</p>
+<p>　　直接相关的工作经历要多写，你最能吸引公司的关键能力就是这条，能不多写吗？我看得很多简历都有很好的，甚至是我公司直接竞争对手公司工作经验，但非常可惜，就一句话”从<strong><strong>到</strong></strong>在<strong><strong>公司任职</strong></strong>，证明人***”，你自己都认为你在这公司这几年的工作经验毫无亮点可说，怎么吸引别人呢？</p>
+<p>　　成功案例数据要多写，记住一句话，事实永远比空谈有说服力，什么样的事实呢？成功案例。其实根本不用你从头到尾地把整个案例背景、困难、压力、你的措施、执行、结果都写出来，你只要提纲携领地把事件描述一下就可以了。如果能多写出两三个成功案例，你这个人的能力还不跃然纸上？尤为重要的是数据，这是最有说服力的，比如，我要应聘一家公司的招聘经理我一定会列出数据，我多少年专职招聘经验，阅读<strong>简历，组织过</strong>次面试，招聘到经理级员工<strong>，主管级</strong>，其中<strong>是通过</strong>途径招到的，等等这样的数字，很快就会让你的描述可信度大幅上升。什么？你记不得了？Faint! 你不会根据自己的情况估算一下？唉</p>
+<p>　　参加的项目要少写，我看过不少这样的简历，作了<strong>年销售，经验丰富，业绩优良，参加广交会，做成</strong>项目，为企业创利几百万元……人才啊！赶紧回头看看薪资要求，RMB2500/month! 这人不是忽悠我吧，就算百分之一的奖金也有好几万呐！于是菜鸟说，骗人，扔！其实我知道，他确实是去参加了广交会，也正经八百的坐在了他们企业的摊位前面（旁边坐着项目负责人），生意谈下来了，说不定他还为了这笔生意拼了一回酒，闹了个现场直播呢！于是这也就成了他的经验，堂而皇之的写在了简历上。多大的误会！实在想写，您就提一句得了，记得说清楚了是参加　　</p>
+<p>第六个问题，投递简历，电话初识，你的第一印象　</p>
+<p>　　好了，现在我们有了一份合格吸引人的简历了，很多朋友开始满世界搜寻招聘信息，然后只要是符合自己专业或兴趣的二话不说就给他来一份，这样的简历投递方式有效吗？</p>
+<p>　　答案是否定的！投简历的过程非常容易被忽略，认为这其实是非常细小的问题。其实不然，这是整个应聘过程中你给公司的第一印象！心理学知识告诉我们，初见简历就像我们在生活中认识一个人，第一次见面留下的印象很大程度上决定着你是否愿意跟他交谈，而你投简历最直接的目的就是希望获得面试机会，你说这是不是重要？</p>
+<p>　　我在工作中平均每周收到几百封简历，真可谓无奇不有，说几个常见的例子吧。　</p>
+<p>　　有不少简历居然是cc给我的！什么意思呢？我给别人投简历，应聘任家单位的职位，听说你这儿也要招人？你也看看吧，如果那家公司我谈不拢，我们可以再聊聊。还能有比这更糟糕的第一印象吗？反正我注意到很多HR都是直接click delete……就想考大学第二志愿没人要一样，找工作，一般人家也不喜欢第二志愿的！所以，一封邮件只发一封简历ok?</p>
+<p>　　比cc好一点儿，有很多简历一眼看过去就知道不是给我一家公司的，e-mail内容整个儿一瓶红花油，哪儿都能抹。可能大家从网上找来这样的格式一看，不错，新鲜，找工作的信是这样写的啊！用了！可是，可怜可怜我们HR吧，你看了是新鲜，我们看了都要吐了，04年的时候，我记得网上出了个挺有名的求职信，你就看吧，应聘简历里面千篇一律，使用率高达33.33%，05年毕业生流行写诗，一时之间，学生诗歌蜂拥而至，有些还真是文采颇佳，读之怡情也就算了；有些打油诗，逗个乐子，还能忍受；狗皮不通的顺口溜也来凑热闹！晕啊，这又是什么样的第一印象呢？</p>
+<p>　　所以你的简历不能是应聘大军里的一个小兵，没人会注意大海里的一滴水的！要针对对方的招聘信息适当修改简历再寄出去。内容方面前文写过了，毋庸赘述，e-mail里面至少写上，短短两句话，如：近日通过<strong>渠道，了解到贵公司正在招聘</strong>职位，窃以为本人工作经历、专业特长颇为相合，特冒昧应聘**职位云云……别看这两句话简单，立刻你就甩掉了一大批人，那些只知道重复点发送键的人，你是认真考虑了公司职位要求和自身条件才投简历的！</p>
+<p>另一种第一印象是电话约见，一般会由HR的人来做，内容大体上就是我们看了你的简历，认为你的基本条件是符合我们职位要求的，希望你能在某日来公司参加面试……看似简单，但其实应聘者的表现也还是有高低参差之别的。　</p>
+<p>　　接电话的技巧，不好的印象类型有三种：前倨后恭、不知所云、太过依赖。　</p>
+<p>　　前倨后恭，中华礼仪之邦，向来是以理为先的，可是偏偏倒了现代，似乎崇礼之风日下，表现在电话这个看不见对方的场合里尤为过分。英文接电话用hello也就是你好，跟日常朋友见面打招呼的言语一样；再看我们，居然创造性的发明了个”喂”，这其实非常不礼貌，你想，谁在路上跟别人打招呼直接喊声”喂”的啊？更有甚者，这一声”喂”的语气有多种含义表达（感谢祖先发明的四声），可以表示应答、疑问，这还说得过去，还可以表示质问、挑衅、不耐烦，这给人的第一印象就不能再坏了！有点啰嗦，实际情况是这样的</p>
+<pre><code>&quot;喂！&quot;
+</code></pre><p>　　我：”你好，是***吗？”</p>
+<p>　　答：”是啊，你谁啊？”</p>
+<p>　　我：”我是**公司的，你是不是给我们公司投了简历？我们觉得你条件不错想请你来面试。”</p>
+<p>　　答：”噢，是的是的，不好意思，不好意思，在开会（上课，吃饭，车上，等等借口不计其数）。”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/13/five-years-experience-in-hr-recruitment-and-interview/" data-id="cji00lkbk0059hnzsbea39uyt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-it-career-planning-and-self-reflection-of-life-value" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/13/it-career-planning-and-self-reflection-of-life-value/" class="article-date">
+  <time datetime="2009-12-13T01:15:31.000Z" itemprop="datePublished">2009-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HR/">HR</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/13/it-career-planning-and-self-reflection-of-life-value/">IT职业规划和人生价值的自我反思</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>规划不仅是对近期工作的计划安排更主要的是对自己职业发展的一种谋略，和大多数人一样，以前我也不太明白给自己人生的发展定个 3 年、 5 年或 10 年计划有什么意义，社会变化快，信息变化快，人的心情变化也快，人的成长阅历思维方式都可能发生变化！ 3 、 5 年后我该从事现在的职业还是转行或者在目前的工作环境中究竟有多大发展都不得而知，那做这种长期的规划真的有意吗？    据科学但不完全分析， 20% 的人在 30 岁以前能明确给自己定位并找好发展方向，而这 20% 的人又仅有 20% 能在任何环境中坚持发展自己； 10% 的人在 35 岁之前能明确给自己定位并找好发展方向，而这 10% 的人又仅有 10% 能在任何环境中坚持发展自己； 5% 的人在 40 岁之前能明确给自己定位并找好发展方向，而这 5% 的人又仅有 50% 能在任何环境中坚持发展自己；若 40 岁还不知道自己该做什么，怎么做？这种人基本上属于随遇而安，得过且过之人，——而这大部分人的确在他们的一生中都不知道自己的优势在那里，自己的天赋在哪里，或者因为性格或环境原因根本不知道怎么发挥自己的优势。这不仅是个人的悲哀也是民族劣根性的悲哀。<br>    随着社会的进步和各行各业竞争的激烈现实，人若在青年时期仅仅为了生存而盲目度日，只会随着年龄的增长倍感生存的艰难，消极者更会怨天尤人、自我堕落甚至铤而走险。因此，在经历多种职业后回头反思自己的人生，我也一声叹息——人为什么总要在自己失败后才知道经验的可贵！而当现成的经验摆在面前又偏偏无动于衷。莫非就象贾平凹所言：人是永远长不大的动物，当他真的长大了，一辈子也就完了。<br>    我做过教师、化妆品销售、直销员、企业管理。不管为别人做还是为自己做，别人都觉得我是一个不错的合作者——有责任心、稳重、有创意、肯吃苦，一定会成功。而实际上我既然能从事这么多行业就表明我是很失败的，——因为我没有定位，没有明确的发展方向，只是简单的满足着自己的生存基础和所谓的存在价值而短期努力着，好象什么都可以，实际上什么都不可以；结果在一种毫无意义的满足中浪费青春。这种状况实际比表面看来毫无优势的人的发展状况可能更惨。因为这种人正是因为优势的存在认为选择的机会更大，而往往更容易错失良机。<br>    而西游记中表面最无庸的唐僧，按逻辑分析是绝对无法去西天取到真经的，但仅仅因为他的执着——对取真经这一目标的明确和坚持！才有了师徒四人的共同努力。其实，他这样就是对他职业的一个长期规划。所以我也明白，人的成功就是两点：一是正确选定目标；二是坚持实现目标。换句话说就是，做好自己的职业规划，并努力通过各种途径投资自己，让自己在实现目标中成长起来。<br>    我是在 33 岁开始对人生顿悟的，我痛恨自己年轻时的浪费，当很多朋友在比我艰难得多的情况下努力时，我还暗自庆幸；但当他们逐步获得一些成就时，我才感到自己幼稚和荒唐。 33 岁，我是在一家企业做管理时才明白自己的真正优势和天赋，现在还不晚，但我知道，我的职业规划就等于我的人生规划了，我要明确的告诉自己，明年的今天我将是什么状态； 3 年后的今天我又将如何。<br>    也奉劝那些想通过正道发展自己的人，今天就计划吧，不管你现在是如何的窘迫和艰难，只要你明白自己的优势，确定自己的发展目标，一切皆有可能。<br>    个的商业奇迹，在这些耀眼的巨星光芒中，有无数的智慧在闪烁，而这些闪烁着的智慧，折射着那些懂得如何用技术工具完成业务模式革命的“影子战士”的积累和行动。技术只是业务变革的推进动力和实现工具，能在技术层面支持用户的需求只能说“称值”，而如果能在业务层面引领用户行业进行业务变革和流程改进，那才是技术人员的“至尊境界”。当一名技术人员通过多年的业务积累，达到“一览众山小”的境界时，可能就会发现，职业和事业的发展视野，都可以打开“山外青山”的局面。职业方面可能承接对你高度认可的客户方抛来的橄榄枝，成为实至名归的行业专家，又或者拥有更大的抱负，想要以厚积而勃发的积累开创自己的事业，相信，你会感激和回味你我都曾无怨无悔地走过的IT路。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/13/it-career-planning-and-self-reflection-of-life-value/" data-id="cji00lkem007mhnzsgcyzzw9d" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/24/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/26/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-unix-sock-dump-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/" class="article-date">
+  <time datetime="2018-04-19T03:43:44.000Z" itemprop="datePublished">2018-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#!/bin/bash</p>
+<p># Parameters<br>socket=”/run/foo.sock”<br>dump=”/tmp/capture.pcap”</p>
+<p># Extract repetition<br>port=9876<br>source_socket=”$(dirname “${socket}”)/$(basename “${socket}”).orig”</p>
+<p># Move socket files<br>mv “${socket}” “${source_socket}”<br>trap “{ rm ‘${socket}’; mv ‘${source_socket}’ ‘${socket}’; }” EXIT</p>
+<p># Setup pipe over TCP that we can tap into<br>socat -t100 “TCP-LISTEN:${port},reuseaddr,fork” “UNIX-CONNECT:${source_socket}” &amp;<br>socat -t100 “UNIX-LISTEN:${socket},mode=777,reuseaddr,fork” “TCP:localhost:${port}” &amp;</p>
+<p># Record traffic<br>tshark -i lo -w “${dump}” -F pcapng “dst port ${port} or src port ${port}”</p>
+<p>如php-fpm的抓包可参考 <a href="https://forum.ivorde.com/freebsd-how-to-sniff-a-unix-socket-using-socat-utility-t15931.html" target="_blank" rel="noopener">https://forum.ivorde.com/freebsd-how-to-sniff-a-unix-socket-using-socat-utility-t15931.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/" data-id="cji00lksf00jkhnzsycdd3mz8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/" class="article-date">
+  <time datetime="2018-04-16T03:55:51.000Z" itemprop="datePublished">2018-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="step1-安装相应软件"><a href="#step1-安装相应软件" class="headerlink" title="step1:安装相应软件"></a>step1:安装相应软件</h2><p>apt-get update<br>apt-get install -y curl apt-transport-https<br>curl -s <a href="https://packages.cloud.google.com/apt/doc/apt-key.gpg" target="_blank" rel="noopener">https://packages.cloud.google.com/apt/doc/apt-key.gpg</a> | apt-key add -</p>
+<p>cat &lt;<eof>/etc/apt/sources.list.d/kubernetes.list<br>deb <a href="http://apt.kubernetes.io/" target="_blank" rel="noopener">http://apt.kubernetes.io/</a> kubernetes-xenial main<br>EOF</eof></p>
+<p>apt-get update</p>
+<p>#如果没有安装docker的需要先安装docker，我用官网最新版本的docker遇到版本不匹配的情况，所以还是按照官方教程做比较好<br>apt-get install -y docker.io</p>
+<p>apt-get install -y kubelet kubeadm kubectl kubernetes-cni</p>
+<h2 id="step2：使用kubeadm-初始化-kubernetes-集群"><a href="#step2：使用kubeadm-初始化-kubernetes-集群" class="headerlink" title="step2：使用kubeadm 初始化 kubernetes 集群"></a>step2：使用kubeadm 初始化 kubernetes 集群</h2><p>kubeadm init  –pod-network-cidr=10.244.0.0/16</p>
+<p>这个时候，kubeadm会初始化各种环境配置，包括部署证书（private ca）和密钥，然后调用docker pull相应的镜像 以下是log输出</p>
+<p>[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.<br>[init] Using Kubernetes version: v1.6.6<br>[init] Using Authorization modes: [RBAC]<br>[preflight] Running pre-flight checks<br>[certificates] Generated CA certificate and key.<br>[certificates] Generated API server certificate and key.<br>[certificates] API Server serving cert is signed for DNS names [c-pc kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.217.135]<br>[certificates] Generated API server kubelet client certificate and key.<br>[certificates] Generated service account token signing key and public key.<br>[certificates] Generated front-proxy CA certificate and key.<br>[certificates] Generated front-proxy client certificate and key.<br>[certificates] Valid certificates and keys now exist in “/etc/kubernetes/pki”<br>[kubeconfig] Wrote KubeConfig file to disk: “/etc/kubernetes/admin.conf”<br>[kubeconfig] Wrote KubeConfig file to disk: “/etc/kubernetes/kubelet.conf”<br>[kubeconfig] Wrote KubeConfig file to disk: “/etc/kubernetes/controller-manager.conf”<br>[kubeconfig] Wrote KubeConfig file to disk: “/etc/kubernetes/scheduler.conf”<br>[apiclient] Created API client, waiting for the control plane to become ready<br>[apiclient] All control plane components are healthy after 710.502147 seconds<br>[token] Using token: c64554.15b62d72ae89cbb3<br>[apiconfig] Created RBAC rules<br>[addons] Applied essential addon: kube-proxy<br>[addons] Applied essential addon: kube-dns</p>
+<p>Your Kubernetes master has initialized successfully!</p>
+<p>To start using your cluster, you need to run (as a regular user):</p>
+<p>  mkdir -p $HOME/.kube<br>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>  sudo chown $(id -u):$(id -g) $HOME/.kube/config</p>
+<p>You should now deploy a pod network to the cluster.<br>Run “kubectl apply -f [podnetwork].yaml” with one of the options listed at:<br>  <a href="http://kubernetes.io/docs/admin/addons/" target="_blank" rel="noopener">http://kubernetes.io/docs/admin/addons/</a></p>
+<p>You can now join any number of machines by running the following on each node<br>as root:</p>
+<p>  kubeadm join –token c64554.15b62d72ae89cbb3 192.168.217.135:6443</p>
+<p>提示：在log看到这句输出的时候，docker就开始pull对应的镜像，比较耗时，耗时取决于你的网速 [apiclient] Created API client, waiting for the control plane to become ready pull完镜像后，可以看到</p>
+<p>root@c-pc:~# docker images<br>REPOSITORY                                               TAG                 IMAGE ID            CREATED             SIZE<br>gcr.io/google_containers/kube-proxy-amd64                v1.6.6              b01133efa4f0        2 weeks ago         109 MB<br>gcr.io/google_containers/kube-controller-manager-amd64   v1.6.6              a1b8bfeff845        2 weeks ago         132.9 MB<br>gcr.io/google_containers/kube-apiserver-amd64            v1.6.6              eaedf2552acd        2 weeks ago         150.7 MB<br>gcr.io/google_containers/kube-scheduler-amd64            v1.6.6              b662c4a72c62        2 weeks ago         76.75 MB<br>gcr.io/google_containers/etcd-amd64                      3.0.17              243830dae7dd        4 months ago        168.9 MB<br>gcr.io/google_containers/pause-amd64                     3.0                 99e59f495ffa        14 months ago       746.9 kB</p>
+<p>kubectl查看node和pod的状态 根据log提示，需要配置kubectl的配置， 初始化kubectl配置</p>
+<p>  mkdir -p $HOME/.kube<br>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>  sudo chown $(id -u):$(id -g) $HOME/.kube/config</p>
+<p>需要先执行以上操作，否则会遇到以下错误提示</p>
+<p>root@c-pc:~# kubectl get nodes<br>The connection to the server localhost:8080 was refused - did you specify the right host or port?</p>
+<p>最新的kubectl链接api server不是通过8080端口连接的，而是通过6443端口，可以在admin.conf查看</p>
+<p>…<br>server: <a href="https://192.168.217.135:6443" target="_blank" rel="noopener">https://192.168.217.135:6443</a><br>…</p>
+<p>初始化kubectl配置之后</p>
+<p>root@c-pc:~# kubectl get nodes<br>The connection to the server localhost:8080 was refused - did you specify the right host or port?<br>root@c-pc:~# mkdir -p $HOME/.kube<br>root@c-pc:~# cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>root@c-pc:~# chown $(id -u):$(id -g) $HOME/.kube/config<br>root@c-pc:~# kubectl get nodes<br>NAME      STATUS     AGE       VERSION<br>c-pc      NotReady   3h        v1.7.0</p>
+<p>居然是NotReady状态！！ 查看以下pods的状态，发现kube-dns 还在挂起，怪不得docker images的时候没有发现kube-dns镜像</p>
+<p>root@c-pc:~# kubectl get pods –all-namespaces<br>NAMESPACE     NAME                           READY     STATUS    RESTARTS   AGE<br>kube-system   etcd-c-pc                      1/1       Running   0          3h<br>kube-system   kube-apiserver-c-pc            1/1       Running   0          3h<br>kube-system   kube-controller-manager-c-pc   1/1       Running   0          3h<br>kube-system   kube-dns-2838158301-v0srq      0/3       Pending   0          3h<br>kube-system   kube-proxy-ql2g0               1/1       Running   0          3h<br>kube-system   kube-scheduler-c-pc            1/1       Running   0          3h</p>
+<p>按照官网教程，需要配置pod的网络，这里使用了flannel网络，依次执行</p>
+<p>kubectl create -f <a href="https://github.com/coreos/flannel/raw/master/Documentation/k8s-manifests/kube-flannel-rbac.yml" target="_blank" rel="noopener">https://github.com/coreos/flannel/raw/master/Documentation/k8s-manifests/kube-flannel-rbac.yml</a></p>
+<p>kubectl create -f  <a href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml" target="_blank" rel="noopener">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a></p>
+<p>查看以下pods的状态</p>
+<p>root@c-pc:~# kubectl get pods –all-namespaces<br>NAMESPACE     NAME                           READY     STATUS              RESTARTS   AGE<br>kube-system   etcd-c-pc                      1/1       Running             0          3h<br>kube-system   kube-apiserver-c-pc            1/1       Running             0          3h<br>kube-system   kube-controller-manager-c-pc   1/1       Running             0          3h<br>kube-system   kube-dns-2838158301-v0srq      0/3       Pending             0          3h<br>kube-system   kube-flannel-ds-vp7mt          0/2       ContainerCreating   0          12s<br>kube-system   kube-proxy-ql2g0               1/1       Running             0          3h<br>kube-system   kube-scheduler-c-pc            1/1       Running             0          3h</p>
+<p>这个时候开始创建pull flannel的image了，稍等一下，</p>
+<pre><code>root@c-pc:~# kubectl get nodes
+NAME      STATUS    AGE       VERSION
+c-pc      Ready     3h        v1.7.0
+root@c-pc:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                           READY     STATUS    RESTARTS   AGE
+kube-system   etcd-c-pc                      1/1       Running   0          3h
+kube-system   kube-apiserver-c-pc            1/1       Running   0          3h
+kube-system   kube-controller-manager-c-pc   1/1       Running   0          3h
+kube-system   kube-dns-2838158301-v0srq      3/3       Running   0          3h
+kube-system   kube-flannel-ds-vp7mt          2/2       Running   0          6m
+kube-system   kube-proxy-ql2g0               1/1       Running   0          3h
+kube-system   kube-scheduler-c-pc            1/1       Running   0          3h
+</code></pre><p>node的状态变成ready，good！ 在另外一台机器上 kubeadm join –token c64554.15b62d72ae89cbb3 192.168.217.135:6443 在master主机上可以看到</p>
+<pre><code>root@c-pc:~# kubectl get nodes
+NAME      STATUS    AGE       VERSION
+c-pc      Ready     4h        v1.7.0
+c-pc2     Ready     27s       v1.7.0
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/" data-id="cji00lks000j7hnzs7z7jarxb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-docker-e6-9b-b4-e6-8d-a2-e6-ba-90" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/" class="article-date">
+  <time datetime="2018-04-16T03:51:35.000Z" itemprop="datePublished">2018-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过 Docker 官方镜像加速，中国区用户能够快速访问最流行的 Docker 镜像。该镜像托管于中国大陆，本地用户现在将会享受到更快的下载速度和更强的稳定性，从而能够更敏捷地开发和交付 Docker 化应用。 Docker 中国官方镜像加速可通过 registry.docker-cn.com 访问。该镜像库只包含流行的公有镜像。私有镜像仍需要从美国镜像库中拉取。 您可以使用以下命令直接从该镜像加速地址进行拉取：</p>
+<pre><code>$ docker pull registry.docker-cn.com/myname/myrepo:mytag
+</code></pre><p>例如:</p>
+<pre><code>$ docker pull registry.docker-cn.com/library/ubuntu:16.04
+</code></pre><blockquote>
+<p><strong>注</strong>: 除非您修改了 Docker 守护进程的 <code>`--registry-mirror`</code> 参数 (见下文), 否则您将需要完整地指定官方镜像的名称。例如，library/ubuntu、library/redis、library/nginx。</p>
+</blockquote>
+<h4 id="使用-–registry-mirror-配置-Docker-守护进程"><a href="#使用-–registry-mirror-配置-Docker-守护进程" class="headerlink" title="使用 –registry-mirror 配置 Docker 守护进程"></a>使用 –registry-mirror 配置 Docker 守护进程</h4><p>您可以配置 Docker 守护进程默认使用 Docker 官方镜像加速。这样您可以默认通过官方镜像加速拉取镜像，而无需在每次拉取时指定 registry.docker-cn.com。 您可以在 Docker 守护进程启动时传入 <code>--registry-mirror</code> 参数：</p>
+<pre><code>$ docker --registry-mirror=https://registry.docker-cn.com daemon
+</code></pre><p>为了永久性保留更改，您可以修改 <code>/etc/docker/daemon.json</code> 文件并添加上 registry-mirrors 键值。</p>
+<pre><code>{
+  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+}
+</code></pre><p>修改保存后重启 Docker 以使配置生效。</p>
+<blockquote>
+<p><strong>注</strong>: 您也可以使用适用于 Mac 的 Docker 和适用于 Windows 的 Docker 来进行设置。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/" data-id="cji00lkal004bhnzs5lo818xg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/" class="article-date">
+  <time datetime="2018-04-02T07:08:45.000Z" itemprop="datePublished">2018-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>基本环境是CentOS7.3 kernel version：3.10.0-514.el7.x86_64 <strong>docker info</strong>: Containers: 10 Running: 10 Paused: 0 Stopped: 0 Images: 31 Server Version: 17.12.0-ce Storage Driver: overlay2 Backing Filesystem: xfs Supports d_type: true Native Overlay Diff: false Logging Driver: json-file Cgroup Driver: cgroupfs Plugins: Volume: local Network: bridge host macvlan null overlay Log: awslogs fluentd gcplogs gelf journald json-file logentries splunk syslog Swarm: inactive Runtimes: runc Default Runtime: runc Init Binary: docker-init containerd version: 89623f28b87a6004d4b785663257362d1658a729 runc version: b2567b37d7b75eb4cf325b77297b140ea686ce8f init version: 949e6fa Security Options: seccomp Profile: default Kernel Version: 3.10.0-514.el7.x86_64 Operating System: CentOS Linux 7 (Core) OSType: linux Architecture: x86_64 CPUs: 40 Total Memory: 31.15GiB Name: web-130.fof.lczq.com ID: JBM5:LNHC:TWFW:XJHW:P7SA:6KCE:HT23:HAFE:EWC3:TWBJ:XOZK:PNG5 Docker Root Dir: /data1/docker Debug Mode (client): false Debug Mode (server): false Registry: <a href="https://index.docker.io/v1/" target="_blank" rel="noopener">https://index.docker.io/v1/</a> Labels: Experimental: false Insecure Registries: 127.0.0.0/8 Registry Mirrors: <a href="https://wmsl2uyx.mirror.aliyuncs.com/" target="_blank" rel="noopener">https://wmsl2uyx.mirror.aliyuncs.com/</a> Live Restore Enabled: false 服务器因为电源问题自动关机，重启以后发现有的container不能被删除。</p>
+<p>docker-compose down</p>
+<p>报错：<br>Error response from daemon: driver “overlay” failed to remove root filesystem for <some-id>:<br>remove /data1/docker/overlay/<some-id>/merged: device or resource busy</some-id></some-id></p>
+<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>经过排查发现是:/data1/docker/overlay//merged 是空的，但是无法删除。手动rm也会报”device or resouce busy” 尝试过重启docker，但是问题依旧。即使将docker stop，也无法删除目录。 查看mount信息，也没有发现任何挂载信息。 在docker的service里增加了</p>
+<p>[Service]<br># MountFlags “slave” helps to prevent “device busy” errors on RHEL/CentOS 7.3 kernels<br>MountFlags=slave</p>
+<p>也没有解决</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过fuser和lsof都找不到正在使用这一个文件的进程. 最后通过搜索，发现可以通过查看进程的mountinfo来查找占用目录的进程。</p>
+<p>grep <some-id> /proc/*/mountinfo</some-id></p>
+<p>一般通过查找可以找到PID。 根据这个PID发现是一个/usr/libexec/colord的程序在使用。 查了一下程序的信息，发现确实是将之前删除不了的目录写在了mountinfo中。 找到进程就好办了。直接将这个进程kill掉。 重新执行docker-compose down，提示删除成功。 参考： <a href="https://github.com/moby/moby/issues/22260" target="_blank" rel="noopener">https://github.com/moby/moby/issues/22260</a> <a href="http://blog.51cto.com/nosmoking/1958730" target="_blank" rel="noopener">http://blog.51cto.com/nosmoking/1958730</a> <a href="http://blog.terminus.io/docker-device-is-busy/" target="_blank" rel="noopener">http://blog.terminus.io/docker-device-is-busy/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/" data-id="cji00lkav004ihnzsyam5j9x7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/" class="article-date">
+  <time datetime="2018-03-29T07:35:45.000Z" itemprop="datePublished">2018-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>阿里的四叶草安全感洞检测出有任意邮箱伪造漏洞，处理如下： 首先，如何验证邮件伪造？ ​ 解决对邮件伪造的疑惑，这里有一个在线的测试网站：<a href="https://emkei.cz/" target="_blank" rel="noopener">https://emkei.cz/</a> 。可以尝试使用这个网站测试发送一封邮件给自己。例如：检测说a.com存在邮件伪造漏洞。那么我们可以尝试使用<a href="mailto:admin@a.com" target="_blank" rel="noopener">admin@a.com</a>作为发件人，给一个自己的邮箱，例如我的treeoph(at)gmail(dot)com发送一封测试邮件。内容随意填写，不到一分钟你应该就能收到邮件了，也有可能会在垃圾邮件里。注意，请勿用于非法用途。 第二，有什么危害？ ​ 可以想见如果有一个a.com的用户，在收到<a href="mailto:admin@a.com" target="_blank" rel="noopener">admin@a.com</a> 的邮件后，用户很可能就相信这就是管理员（admin）发来的邮件。因此，用户很可能会毫不犹豫地点开邮件中的链接、下载并打开其中的附件。这个时候，作为一个a.com的用户，就很可能被攻击控制了。如果用户是管理员，那么可能服务器权限也会沦落他人之手。 ​ 另外一种危害方式，一个垃圾邮件生产者可以伪造海量的a.com域名的邮件来散播木马、病毒、钓鱼页面，色情、暴力、恐怖的信息，等等。其危害是不可预测的。 第三，如何防止邮件伪造？ ​ 答案是：Sender PolicyFramework (SPF) 发信者策略 1. SPF是什么呢？ ​ 简单来说就是人们设计的一套可以杜绝邮件伪造的机制，只要遵照他们设计的方法来配置自己域名的DNS解析，就可以杜绝邮件伪造。 ​ 关于SPF的一切，你可以在这个网站（英文）上获得：<a href="http://www.openspf.org" target="_blank" rel="noopener">http://www.openspf.org</a> ​ SPF 的原理是这样的，伪造这虽然能伪造你的域名，但是却不能控制你的域名的DNS解析记录。因为只有拥有域名账户权限，才能更改解析记录。你的域名解析到的ip是1.1.1.1，而伪造者的ip是2.2.2.2。如果能做一个声明，告诉邮件接收者，我的域名发的邮件ip都是1.1.1.1，其他的都是假的，可以抛弃掉，那么就可以杜绝邮件伪造了。SPF就是这样的一个协议，你可以按照SPF的格式发出声明，邮件服务器按照SPF解读你的声明。这样的一次沟通，就可以解决邮件伪造问题了。 2. 如何使用SPF？ ​ 首先，登录你的域名提供商的管理页面，这个页面就是通常是用来设置域名解析ip地址的地方。例如上述例子，可以这样声明，在域名的解析记录里添加一条txt记录， 二级域名：空或@ txt记录值为：v=spf1 ip4:1.1.1.1 -all 这样，就设置了你的邮件只能是从1.1.1.1这个ip发出的。其中txt记录的意义： v=spf1 #版本号声明； ip4:x.x.x.x #指定ip地址； -all #对其余的标记为无效(FAIL) 当然这样设置有些问题就是你的域名可能需要变化的ip地址，或扩增多个ip，这时候就可以用其他方式，更改中间的部分（ip4对应位置）: 二级域名：空或@ txt记录值为：v=spf1 include:spf1.a.com include:spf2.a.com -all 再设置一个spf1.a.com的txt解析记录，内容为： 二级域名：spf1 txt记录值为：v=spf1 ip4:1.1.1.0/24 ip4:1.2.3.4 -all 其中include的意思是使用其后的地址的SPF记录。而ip4:1.1.1.0/24则是使用一个段。设置spf2.a.com与此类似。这样就可以使用更多的地址作为合法地址。也可以include多层，但常见的一般最多三层已经够用，最后一层要指定到具体的ip或域名。 其他如：v=spf1 a mx ip4:x.x.x.x -all 使用a记录，mx解析记录和指定的ip作为合法地址。 3.更多 关于剩余检查项all前面的“-”符号，参见下表： “+” Pass（通过） “-“ Fail（拒绝） “~” Soft Fail（软拒绝） “?” Neutral（中立） 建议使用“-all”来拒绝陌生地址的邮件。当使用“~all”时，一般会将邮件标记为垃圾邮件。但是由于有时人们还是会翻查垃圾邮件（甚至有时官方都会建议去检查垃圾邮件），因此这样处理并不安全。所以如无特殊需求，建议使用“-all”来拒绝。 禁用所有邮件服务： v=spf1 -all 详细语法说明（英文）： <a href="http://www.openspf.org/SPF\_Record\_Syntax" target="_blank" rel="noopener">http://www.openspf.org/SPF\_Record\_Syntax</a> 中文可参考：<a href="http://www.renfei.org/blog/introduction-to-spf.html" target="_blank" rel="noopener">http://www.renfei.org/blog/introduction-to-spf.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/" data-id="cji00lkap004ehnzs2j9cmpow" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac-e7-9a-84terminal-e4-b8-adtitle-e6-9b-b4-e6-96-b0-e9-97-ae-e9-a2-98" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/31/mac-e7-9a-84terminal-e4-b8-adtitle-e6-9b-b4-e6-96-b0-e9-97-ae-e9-a2-98/" class="article-date">
+  <time datetime="2018-01-31T03:51:57.000Z" itemprop="datePublished">2018-01-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MAC/">MAC</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/31/mac-e7-9a-84terminal-e4-b8-adtitle-e6-9b-b4-e6-96-b0-e9-97-ae-e9-a2-98/">mac的terminal中title更新问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加PROMPT_COMMAND=’printf “\033]0;%s@%s:%s\007” “${USER}” “${HOSTNAME%%.*}” “${PWD/#$HOME/~}”‘</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/31/mac-e7-9a-84terminal-e4-b8-adtitle-e6-9b-b4-e6-96-b0-e9-97-ae-e9-a2-98/" data-id="cji00lkhp00a9hnzs28a8escd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-wget-station-download" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/29/wget-station-download/" class="article-date">
+  <time datetime="2012-08-29T10:04:27.000Z" itemprop="datePublished">2012-08-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/29/wget-station-download/">wget整站下载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p <a href="http://www.xianren.org/pub/path/" target="_blank" rel="noopener">www.xianren.org/pub/path/</a> 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r –span-hosts <a href="http://www.xianren.org/pub/path/" target="_blank" rel="noopener">www.xianren.org/pub/path/</a> -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd 递归下载时不创建一层一层的目录，把所有的文件下载到当前目录 -np 递归下载时不搜索上层目录，如wget -c -r <a href="http://www.xianren.org/pub/path/" target="_blank" rel="noopener">www.xianren.org/pub/path/</a> 没有加参数-np，就会同时下载path的上一级目录pub下的其它文件 -k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数 -L 递归时不进入其它主机，如wget -c -r <a href="http://www.xianren.org/" target="_blank" rel="noopener">www.xianren.org/</a> wget下载中文乱码问题，请加下如下参数 –restrict-file-names=nocontrol</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/08/29/wget-station-download/" data-id="cji00lkuc00kzhnzstzwomr3k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/乱码/">乱码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-path-in-the-chinese-ubuntu-user-directory-is-changed-to-english" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/26/the-path-in-the-chinese-ubuntu-user-directory-is-changed-to-english/" class="article-date">
+  <time datetime="2012-08-26T00:30:26.000Z" itemprop="datePublished">2012-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/26/the-path-in-the-chinese-ubuntu-user-directory-is-changed-to-english/">中文ubuntu里用户目录里的路径改成英文</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了使用起来方便，装了ubuntu中文版，自然在home文件里用户目录的“桌面”、“图片”、“视频”、“音乐”……都是中文的。</p>
+<p>   很多时候都喜欢在桌面上放一些要操作的文件，linux里命令行操作又多，难免会用命令行操作桌面上的东西，那么就要 “cd  桌面”，打“桌面”的时候要输入法切换，麻烦……所以就想办法把用户目录下的路径改成英文，而其他的中文不变，方法如下：</p>
+<p>打开终端，在终端中输入命令:  </p>
+<pre><code>export LANG=en_US
+
+xdg-user-dirs-gtk-update
+</code></pre><p>跳出对话框询问是否将目录转化为英文路径,同意并关闭.<br>在终端中输入命令:</p>
+<pre><code>export LANG=zh_CN
+</code></pre><p>关闭终端,并重起.下次进入系统,系统会提示是否把转化好的目录改回中文.选择不再提示,并取消修改.主目录的中文转英文就完成了~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/08/26/the-path-in-the-chinese-ubuntu-user-directory-is-changed-to-english/" data-id="cji00lkp800gvhnzscycu52ay" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/主目录/">主目录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/修改/">修改</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/英语/">英语</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-on-sl410k-ubuntu12-04-creates-wifi-hotspots-and-the-client-cannot-get-ip-address" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/26/on-sl410k-ubuntu12-04-creates-wifi-hotspots-and-the-client-cannot-get-ip-address/" class="article-date">
+  <time datetime="2012-08-26T00:21:19.000Z" itemprop="datePublished">2012-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/26/on-sl410k-ubuntu12-04-creates-wifi-hotspots-and-the-client-cannot-get-ip-address/">sl410k上ubuntu12.04创建wifi热点，客户端无法获取ip地址的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sl410k上ubuntu12.04创建wifi热点，客户端无法获取ip地址的问题<br>创建一个adhoc的网络就可以。<br>tar zxvf 92ce_se_de_linux_mac80211_0005.1230.2011.tar.gz<br>cd rtl_92ce_92se_92de_linux_mac80211_0005.1230.2011/<br>cp /lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko /tmp/<br>cp /lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/rtl8192se/rtl8192se.ko /tmp<br>sudo cp rtl8192se.ko /lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/rtl8192se/<br>sudo cp rtlwifi.ko /lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/<br>sudo modprobe rtl8192se rtlwifi<br>FATAL: Error inserting rtl8192se (/lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/rtl8192se/rtl8192se.ko): Unknown symbol in module, or unknown parameter (see dmesg)<br>sudo modinfo rtl8192se<br>filename:       /lib/modules/3.2.0-29-generic-pae/kernel/drivers/net/wireless/rtlwifi/rtl8192se/rtl8192se.ko<br>firmware:       rtlwifi/rtl8192sefw.bin<br>description:    Realtek 8192S/8191S 802.11n PCI wireless<br>license:        GPL<br>author:         Realtek WlanFAE    <a href="mailto:&#x77;&#x6c;&#x61;&#x6e;&#x66;&#x61;&#x65;&#x40;&#x72;&#x65;&#97;&#x6c;&#116;&#x65;&#107;&#46;&#99;&#x6f;&#x6d;" target="_blank" rel="noopener">&#x77;&#x6c;&#x61;&#x6e;&#x66;&#x61;&#x65;&#x40;&#x72;&#x65;&#97;&#x6c;&#116;&#x65;&#107;&#46;&#99;&#x6f;&#x6d;</a><br>author:         lizhaoming    <a href="mailto:&#x63;&#104;&#97;&#111;&#x6d;&#x69;&#x6e;&#x67;&#x5f;&#108;&#x69;&#64;&#x72;&#101;&#x61;&#108;&#x73;&#105;&#x6c;&#x2e;&#99;&#111;&#109;&#46;&#x63;&#x6e;" target="_blank" rel="noopener">&#x63;&#104;&#97;&#111;&#x6d;&#x69;&#x6e;&#x67;&#x5f;&#108;&#x69;&#64;&#x72;&#101;&#x61;&#108;&#x73;&#105;&#x6c;&#x2e;&#99;&#111;&#109;&#46;&#x63;&#x6e;</a><br>srcversion:     B5184945312BE0F016AC596<br>alias:          pci:v000010ECd00008174sv*sd*bc*sc*i<em><br>alias:          pci:v000010ECd00008173sv\</em>sd*bc*sc*i<em><br>alias:          pci:v000010ECd00008172sv\</em>sd*bc*sc*i<em><br>alias:          pci:v000010ECd00008171sv\</em>sd*bc*sc*i<em><br>alias:          pci:v000010ECd00008192sv\</em>sd*bc*sc*i*<br>depends:        rtlwifi,mac80211<br>vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686<br>parm:           fwlps:bool<br>parm:           swenc:using hardware crypto (default 0 [hardware])<br> (bool)<br>parm:           ips:using no link power save (default 1 is open)<br> (bool)<br>parm:           swlps:using linked sw control power save (default 1 is open)<br> (bool)<br>cd rtl_92ce_92se_92de_linux_mac80211_0005.1230.2011/<br>cd firmware/rtlwifi/<br>cp /lib/firmware/rtlwifi/rtl8192sefw.bin /tmp/<br>sudo cp rtlwifi/rtl8192sefw.bin /lib/firmware/rtlwifi/<br>sudo modprobe rtl8192se<br>sudo modprobe rtlwifi<br>ifconfig<br>再重新测试wifi，已经一切正常，看来是12.04的通用驱动程序的问题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/08/26/on-sl410k-ubuntu12-04-creates-wifi-hotspots-and-the-client-cannot-get-ip-address/" data-id="cji00lkjr00bzhnzs5vj9dvn4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/12-04/">12.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wifi/">wifi</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-sendmail-formail-garbled" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/07/23/the-sendmail-formail-garbled/" class="article-date">
+  <time datetime="2012-07-23T08:06:03.000Z" itemprop="datePublished">2012-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/07/23/the-sendmail-formail-garbled/">sendmail+formail乱码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：<br>cat /home/striven/tmp/applist.log |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” |/usr/sbin/sendmail -toi $mailuser<br>这样邮件的正文就正常了，但主题如果有中文会乱码，而且看不到收件人有哪些，这是因为formail里没有定义To:给sendmail,改进如下：<br>cat /home/striven/tmp/applist.log |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” -I “To:$mailuser” |/usr/sbin/sendmail -toi<br>这样收件人就看得到了，而不会再是  </p>
+<p>Undisclosed recipients。<br>对于主题或者收发邮件人中文乱码的问题，通过计算中文以后的base64，再给sendmail，<br>echo “中国人我是” |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8”<br>-I “Subject:=?UTF-8?B?`echo ‘sendmail发邮件为什么主题会中文乱码?’|base64`?=” -I “To:<a href="mailto:Talen.Hao@sky-mobi.com" target="_blank" rel="noopener">Talen.Hao@sky-mobi.com</a>“|<br>/usr/sbin/sendmail -toi<br>这样就可以。<br>听说也可以使用mutt来解决</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/07/23/the-sendmail-formail-garbled/" data-id="cji00lkpf00h2hnzszbhpoxxv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

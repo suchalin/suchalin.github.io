@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/22/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-use-backtrack-to-check-linux-security-vulnerabilities" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/25/use-backtrack-to-check-linux-security-vulnerabilities/" class="article-date">
+  <time datetime="2009-12-25T02:35:37.000Z" itemprop="datePublished">2009-12-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/25/use-backtrack-to-check-linux-security-vulnerabilities/">使用BackTrack检查Linux安全漏洞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无论你是否用过<a href="http://searchenterpriselinux.techtarget.com/tip/0,289483,sid39_gci1373555,00.html" target="_blank" rel="noopener">Bastille UNIX工具</a>，以便手动加固你的Linux系统，或者只是想对目前系统的状态进行快照，你需要使用<a href="http://www.remote-exploit.org/backtrack.html" target="_blank" rel="noopener">BackTrack</a>。这是款基于Slackware Linux的版本，通过启动CD或虚拟机镜像（VMI）运行。在官方的第三个版本（如果你计算<a href="http://www.remote-exploit.org/backtrack_download.html" target="_blank" rel="noopener">最新发布的就是第四版</a>），BackTrack含有方便的安全工具，用于检测Linux系统里的漏洞。本着“黑客入侵”的精神，BackTrack集成这种通常的安全测试方法：</p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/ttcma_techtarget_2009-11-27-09-57-25.jpg" alt="使用BackTrack检查Linux安全漏洞 - suchalin - 为了更好的生活而奋斗！" title="使用BackTrack检查Linux安全漏洞 - suchalin - 为了更好的生活而奋斗！"></p>
+<p>图1：BackTrack的安全测试方法</p>
+<p>　　BackTrack包含利基安全工具，很难下载、编译和安装。无论你是Linux技术专家或新手，很难下载完整版本的Linux与安全测试工具。BackTrack的主要接口如下图所示：</p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/ttcma_techtarget_2009-11-27-09-57-45.jpg" alt="使用BackTrack检查Linux安全漏洞 - suchalin - 为了更好的生活而奋斗！" title="使用BackTrack检查Linux安全漏洞 - suchalin - 为了更好的生活而奋斗！"></p>
+<p>图2：BackTrack桌面和安全工具目录</p>
+<p>　　使用BackTrack测试内部Linux系统的常用安全评估情景如下：</p>
+<ol>
+<li>使用fping识别活动主机</li>
+<li>使用nmap识别操作系统和检测打开的端口</li>
+<li>使用amap识别正在运行的应用</li>
+<li>使用SAINT查找操作系统里的漏洞</li>
+<li>使用Metasploit开发操作系统和应用漏洞</li>
+</ol>
+<p>　　Linux的集中可能性是无穷的。此外，BackTrack包括广泛的数据库、Web和无缝工具的设置，用于查找和挖掘Linux宣称之外的系统缺陷。它甚至包含内置的HTTP、TFTP、SSH和VNC设备，在漏洞验证和分析期间使用。并且，如果你有这样的需求，BackTrack也能集成数字取证工具。事实上，使用Autopsy和Sleuthkit这样的工具对于“倒回”黑客技术，进一步坚强的你安全技能是很好的。</p>
+<p>　　我一直是使用好的商业安全测试工具的支持者，不过你可能不再使用付费工具。实际上，BackTrack工具不止是够好，她其实非常不错，尤其是精心的报道和正在遭遇漏洞的管理不是你首要考虑的。我将继续在安全评估方面使用商业工具。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/25/use-backtrack-to-check-linux-security-vulnerabilities/" data-id="cji00lksp00johnzsmdha4np1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos-5-2-configures-the-pptp-client" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/24/centos-5-2-configures-the-pptp-client/" class="article-date">
+  <time datetime="2009-12-24T11:15:10.000Z" itemprop="datePublished">2009-12-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/24/centos-5-2-configures-the-pptp-client/">centos 5.2 配置pptp客户端</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1. 下载源码包</p>
+<p># wget <a href="http://nchc.dl.sourceforge.net/sourceforge/pptpclient/pptp-1.7.2.tar.gz" target="_blank" rel="noopener">http://nchc.dl.sourceforge.net/sourceforge/pptpclient/pptp-1.7.2.tar.gz</a></p>
+<p>2. 编译</p>
+<p># make</p>
+<p>3. 安装</p>
+<p># make install</p>
+<p>4. 配置</p>
+<p># pptpsetup –create tunnelname –server xxx.xxx.xxx.xxx –username somebody –password sercet</p>
+<p>5. 连接</p>
+<p># pppd call tunnelname</p>
+<p>6. 断开</p>
+<p># killall pppd</p>
+<p>注意事项：</p>
+<p>在处理路由的时候采用client to lan方式，需要增加对方lan的路由或者目标网络的路由.</p>
+<p># route add -net 192.168.2.0 netmask 255.255.255.0 dev ppp0</p>
+<p>ppp0是pptp连接的名字， 如果不确定 可以使用ifconfig命令查看</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/24/centos-5-2-configures-the-pptp-client/" data-id="cji00lk8p002hhnzss8tjykiz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-awstats-installed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/24/awstats-installed/" class="article-date">
+  <time datetime="2009-12-24T08:12:06.000Z" itemprop="datePublished">2009-12-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/24/awstats-installed/">awstats的安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>奇码科技的美国空间是带有详细的统计流量工具awstats，AWStats是一套免费基于Perl的网站日志分析工具。这个工具界面较为友好，执行速度快，扩展功能众多，在国外空间使用apache服务 器的，AWStats是当之无愧的首选。</p>
+<p>[root@webserver ~]# rpm -ivh awstats-6.9-1.noarch.rpm</p>
+<p>error: Failed dependencies:</p>
+<pre><code>perl(LWP::UserAgent) is needed by awstats-6.9-1.noarch
+</code></pre><p>包依赖关系，需要先安装下面的包</p>
+<p>[root@webserver src]# yum -y install perl-libwww-perl</p>
+<p>Loading “security” plugin</p>
+<p>Loading “rhnplugin” plugin</p>
+<p>This system is not registered with RHN.</p>
+<p>RHN support will be disabled.</p>
+<p>rhel5-local               100% |=========================| 1.3 kB    00:00     </p>
+<p>Setting up Install Process</p>
+<p>Parsing package install arguments</p>
+<p>Resolving Dependencies</p>
+<p>–> Running transaction check</p>
+<p>—> Package perl-libwww-perl.noarch 0:5.805-1.1.1 set to be updated</p>
+<p>–> Processing Dependency: perl(URI::URL) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl(URI) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl(HTML::Entities) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl(Compress::Zlib) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl(URI::Heuristic) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl(URI::Escape) for package: perl-libwww-perl</p>
+<p>–> Processing Dependency: perl-HTML-Parser &gt;= 3.33 for package: perl-libwww-perl</p>
+<p>–> Running transaction check</p>
+<p>—> Package perl-Compress-Zlib.i386 0:1.42-1.fc6 set to be updated</p>
+<p>—> Package perl-URI.noarch 0:1.35-3 set to be updated</p>
+<p>—> Package perl-HTML-Parser.i386 0:3.55-1.fc6 set to be updated</p>
+<p>–> Processing Dependency: perl-HTML-Tagset &gt;= 3.03 for package: perl-HTML-Parser</p>
+<p>–> Processing Dependency: perl(HTML::Tagset) for package: perl-HTML-Parser</p>
+<p>–> Running transaction check</p>
+<p>—> Package perl-HTML-Tagset.noarch 0:3.10-2.1.1 set to be updated</p>
+<p>–> Finished Dependency Resolution</p>
+<p>Dependencies Resolved</p>
+<p>=============================================================================</p>
+<p> Package                 Arch       Version          Repository        Size </p>
+<p>=============================================================================</p>
+<p>Installing:</p>
+<p> perl-libwww-perl        noarch     5.805-1.1.1      rhel5-local       376 k</p>
+<p>Installing for dependencies:</p>
+<p> perl-Compress-Zlib      i386       1.42-1.fc6       rhel5-local        52 k</p>
+<p> perl-HTML-Parser        i386       3.55-1.fc6       rhel5-local        92 k</p>
+<p> perl-HTML-Tagset        noarch     3.10-2.1.1       rhel5-local        14 k</p>
+<p> perl-URI                noarch     1.35-3           rhel5-local       116 k</p>
+<p>Transaction Summary</p>
+<p>=============================================================================</p>
+<p>Install      5 Package(s)         </p>
+<p>Update       0 Package(s)         </p>
+<p>Remove       0 Package(s)         </p>
+<p>Total download size: 651 k</p>
+<p>Downloading Packages:</p>
+<p>Running rpm_check_debug</p>
+<p>Running Transaction Test</p>
+<p>Finished Transaction Test</p>
+<p>Transaction Test Succeeded</p>
+<p>Running Transaction</p>
+<p>  Installing: perl-HTML-Tagset             ######################### [1/5] </p>
+<p>  Installing: perl-HTML-Parser             ######################### [2/5] </p>
+<p>  Installing: perl-URI                     ######################### [3/5] </p>
+<p>  Installing: perl-Compress-Zlib           ######################### [4/5] </p>
+<p>  Installing: perl-libwww-perl             ######################### [5/5] </p>
+<p>Installed: perl-libwww-perl.noarch 0:5.805-1.1.1</p>
+<p>Dependency Installed: perl-Compress-Zlib.i386 0:1.42-1.fc6 perl-HTML-Parser.i386 0:3.55-1.fc6 perl-HTML-Tagset.noarch 0:3.10-2.1.1 perl-URI.noarch 0:1.35-3</p>
+<p>Complete!</p>
+<p>[root@webserver src]# rpm -ivh awstats-6.9-1.noarch.rpm </p>
+<p>Preparing…                ########################################### [100%]</p>
+<p>   1:awstats                ########################################### [100%]</p>
+<p>----- AWStats 6.9 - Laurent Destailleur —–</p>
+<p>AWStats files have been installed in /usr/local/awstats</p>
+<p>If first install, follow instructions in documentation</p>
+<p>(/usr/local/awstats/docs/index.html) to setup AWStats in 3 steps:</p>
+<p>Step 1 : Install and Setup with awstats_configure.pl (or manually)</p>
+<p>Step 2 : Build/Update Statistics with awstats.pl</p>
+<p>Step 3 : Read Statistics</p>
+<p>[root@webserver src]# cd /usr/local/awstats/tools/</p>
+<p>[root@webserver tools]# ./awstats_configure.pl </p>
+<p>----- AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
+<p>This tool will help you to configure AWStats to analyze statistics for</p>
+<p>one web server. You can try to use it to let it do all that is possible</p>
+<p>in AWStats setup, however following the step by step manual setup</p>
+<p>documentation (docs/index.html) is often a better idea. Above all if:</p>
+<p>- You are not an administrator user,</p>
+<p>- You want to analyze downloaded log files without web server,</p>
+<p>- You want to analyze mail or ftp log files instead of web log files,</p>
+<p>- You need to analyze load balanced servers log files,</p>
+<p>- You want to ‘understand’ all possible ways to use AWStats…</p>
+<p>Read the AWStats documentation (docs/index.html).</p>
+<p>—–> Running OS detected: Linux, BSD or Unix</p>
+<p>—–> Check for web server install</p>
+<p>Enter full config file path of your Web server.</p>
+<p>Example: /etc/httpd/httpd.conf</p>
+<p>Example: /usr/local/apache2/conf/httpd.conf</p>
+<p>Example: c:\Program files\apache group\apache\conf\httpd.conf</p>
+<p>Config file path (‘none’ to skip web server setup):</p>
+<p>> /usr/local/httpd/conf/httpd.conf</p>
+<p>—–> Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
+<p>Warning: You Apache config file contains directives to write ‘common’ log files</p>
+<p>This means that some features can’t work (os, browsers and keywords detection).</p>
+<p>Do you want me to setup Apache to write ‘combined’ log files [y/N] ? y</p>
+<p>  Add ‘Alias /awstatsclasses “/usr/local/awstats/wwwroot/classes/“‘</p>
+<p>  Add ‘Alias /awstatscss “/usr/local/awstats/wwwroot/css/“‘</p>
+<p>  Add ‘Alias /awstatsicons “/usr/local/awstats/wwwroot/icon/“‘</p>
+<p>  Add ‘ScriptAlias /awstats/ “/usr/local/awstats/wwwroot/cgi-bin/“‘</p>
+<p>  Add ‘<directory>‘ directive</directory></p>
+<p>  AWStats directives added to Apache config file.</p>
+<p>—–> Need to create a new config file ?</p>
+<p>Do you want me to build a new AWStats config/profile</p>
+<p>file (required if first install) [y/N] ? y</p>
+<p>—–> Define config file name to create</p>
+<p>What is the name of your web site or profile analysis ?</p>
+<p>Example: <a href="http://www.mysite.com" target="_blank" rel="noopener">www.mysite.com</a></p>
+<p>Example: demo</p>
+<p>Your web site, virtual server or profile name:</p>
+<p>> <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>—–> Define config file path</p>
+<p>In which directory do you plan to store your config file(s) ?</p>
+<p>Default: /etc/awstats</p>
+<p>Directory path to store config file(s) (Enter for default):</p>
+<blockquote>
+</blockquote>
+<p>—–> Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
+<p>Error: Failed to open ‘/usr/local/awstats/wwwroot/cgi-bin/awstats.model.conf’ for read.</p>
+<p>/etc/awstats下没有awstats.model.conf文件造成的错误</p>
+<p>[root@webserver tools]# cp /usr/etc/awstats/awstats.model.conf /etc/awstats/</p>
+<p>[root@webserver tools]# ./awstats_configure.pl </p>
+<p>----- AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
+<p>This tool will help you to configure AWStats to analyze statistics for</p>
+<p>one web server. You can try to use it to let it do all that is possible</p>
+<p>in AWStats setup, however following the step by step manual setup</p>
+<p>documentation (docs/index.html) is often a better idea. Above all if:</p>
+<p>- You are not an administrator user,</p>
+<p>- You want to analyze downloaded log files without web server,</p>
+<p>- You want to analyze mail or ftp log files instead of web log files,</p>
+<p>- You need to analyze load balanced servers log files,</p>
+<p>- You want to ‘understand’ all possible ways to use AWStats…</p>
+<p>Read the AWStats documentation (docs/index.html).</p>
+<p>—–> Running OS detected: Linux, BSD or Unix</p>
+<p>—–> Check for web server install</p>
+<p>Enter full config file path of your Web server.</p>
+<p>Example: /etc/httpd/httpd.conf</p>
+<p>Example: /usr/local/apache2/conf/httpd.conf</p>
+<p>Example: c:\Program files\apache group\apache\conf\httpd.conf</p>
+<p>Config file path (‘none’ to skip web server setup):</p>
+<p>> /usr/local/httpd/conf/httpd.conf</p>
+<p>—–> Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
+<p>  All AWStats directives are already present.</p>
+<p>—–> Update model config file ‘/etc/awstats/awstats.model.conf’</p>
+<p>  File awstats.model.conf updated.</p>
+<p>—–> Need to create a new config file ?</p>
+<p>Do you want me to build a new AWStats config/profile</p>
+<p>file (required if first install) [y/N] ? y</p>
+<p>—–> Define config file name to create</p>
+<p>What is the name of your web site or profile analysis ?</p>
+<p>Example: <a href="http://www.mysite.com" target="_blank" rel="noopener">www.mysite.com</a></p>
+<p>Example: demo</p>
+<p>Your web site, virtual server or profile name:</p>
+<p>> <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>—–> Define config file path</p>
+<p>In which directory do you plan to store your config file(s) ?</p>
+<p>Default: /etc/awstats</p>
+<p>Directory path to store config file(s) (Enter for default):</p>
+<blockquote>
+</blockquote>
+<p>—–> Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
+<p> Config file /etc/awstats/awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a> created.</p>
+<p>—–> Add update process inside a scheduler</p>
+<p>Sorry, configure.pl does not support automatic add to cron yet.</p>
+<p>You can do it manually by adding the following command to your cron:</p>
+<p>/usr/local/awstats/wwwroot/cgi-bin/awstats.pl -update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>Or if you have several config files and prefer having only one command:</p>
+<p>/usr/local/awstats/tools/awstats_updateall.pl now</p>
+<p>Press ENTER to continue… </p>
+<p>A SIMPLE config file has been created: /etc/awstats/awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a></p>
+<p>You should have a look inside to check and change manually main parameters.</p>
+<p>You can then manually update your statistics for ‘<a href="http://www.test.com&#39;" target="_blank" rel="noopener">www.test.com&#39;</a> with command:</p>
+<p>> perl awstats.pl -update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>You can also read your statistics for ‘<a href="http://www.test.com&#39;" target="_blank" rel="noopener">www.test.com&#39;</a> with URL:</p>
+<p>> <a href="http://localhost/awstats/awstats.pl?config=www.test.com" target="_blank" rel="noopener">http://localhost/awstats/awstats.pl?config=www.test.com</a></p>
+<p>Press ENTER to finish…</p>
+<p>[root@webserver tools]# /usr/local/awstats/wwwroot/cgi-bin/awstats.pl –update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>Error: AWStats database directory defined in config file by ‘DirData’ parameter (/var/lib/awstats) does not exist or is not writable.</p>
+<p>Setup (‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a> file, web server or permissions) may be wrong.</p>
+<p>Check config file, permissions and AWStats documentation (in ‘docs’ directory).</p>
+<p>对于/var/lib/awstats目录没有写入权限造成的</p>
+<p>[root@webserver tools]# chmod 777 /var/lib/awstats</p>
+<p>chmod: cannot access `/var/lib/awstats’: No such file or directory</p>
+<p>[root@webserver tools]# mkdir /var/lib/awstats</p>
+<p>[root@webserver tools]# chmod 777 /var/lib/awstats</p>
+<p>[root@webserver tools]# /usr/local/awstats/wwwroot/cgi-bin/awstats.pl –update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>Create/Update database for config “/etc/awstats/awstats.<a href="http://www.test.com.conf&quot;" target="_blank" rel="noopener">www.test.com.conf&quot;</a> by AWStats version 6.9 (build 1.925)</p>
+<p>From data in log file “/var/log/httpd/mylog.log”…</p>
+<p>Error: Couldn’t open server log file “/var/log/httpd/mylog.log” : No such file or directory</p>
+<p>Setup (‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a> file, web server or permissions) may be wrong.</p>
+<p>Check config file, permissions and AWStats documentation (in ‘docs’ directory).</p>
+<p>日志路径错位造成的</p>
+<p>[root@webserver tools]# vi /etc/awstats/awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a></p>
+<p>LogFile=”/usr/local/httpd/logs/access_log”</p>
+<p>[root@webserver tools]# /usr/local/awstats/wwwroot/cgi-bin/awstats.pl –update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>Create/Update database for config “/etc/awstats/awstats.<a href="http://www.test.com.conf&quot;" target="_blank" rel="noopener">www.test.com.conf&quot;</a> by AWStats version 6.9 (build 1.925)</p>
+<p>From data in log file “/usr/local/httpd/logs/access_log”…</p>
+<p>Phase 1 : First bypass old records, searching new record…</p>
+<p>Searching new records from beginning of log file…</p>
+<p>Jumped lines in file: 0</p>
+<p>Parsed lines in file: 30</p>
+<p> Found 0 dropped records,</p>
+<p> Found 30 corrupted records,</p>
+<p> Found 0 old records,</p>
+<p> Found 0 new qualified records.</p>
+<p>从新启动apache</p>
+<p>[root@webserver tools]# /usr/local/httpd/bin/apachectl stop</p>
+<p>[root@webserver tools]# /usr/local/httpd/bin/apachectl start</p>
+<p>添加定时分析指令</p>
+<p>[root@webserver logs]# crontab -e</p>
+<p>20      1       <em>       </em>       *       /usr/local/awstats/wwwroot/cgi-bin/awstats.pl –update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/24/awstats-installed/" data-id="cji00lk7p001uhnzsolr2oq7c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-use-awstats-to-analyze-the-access-logs-of-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/24/use-awstats-to-analyze-the-access-logs-of-nginx/" class="article-date">
+  <time datetime="2009-12-24T08:11:03.000Z" itemprop="datePublished">2009-12-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/24/use-awstats-to-analyze-the-access-logs-of-nginx/">使用awstats 分析 Nginx 的访问日志</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先安装awstats,安装过程在<a href="http://blog.chinaunix.net/u2/71666/showart.php?id=1988397" target="_blank" rel="noopener">http://blog.chinaunix.net/u2/71666/showart.php?id=1988397</a></p>
+<p>完成向导，接下来修改 <a href="http://www.test.cn" target="_blank" rel="noopener">www.test.cn</a> 的统计配置</p>
+<p>[root@test awstats]# pwd</p>
+<p>/etc/awstats</p>
+<p>[root@test awstats]# vi awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a></p>
+<p>找到统计的日志文件的路径</p>
+<p>LogFile=”/var/log/httpd/mylog.log”</p>
+<p>改为</p>
+<p>LogFile=”/usr/local/nginx/logs/test.access_%YYYY-24%MM-24%DD-24.log”</p>
+<p>LogFormat=1</p>
+<p>改为</p>
+<p>LogFormat = “%host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot %otherquot”</p>
+<p>[root@test awstats]# cp awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a> awstats.<a href="http://www.good.cn.conf" target="_blank" rel="noopener">www.good.cn.conf</a></p>
+<p>[root@test awstats]# vi awstats.<a href="http://www.good.cn.conf" target="_blank" rel="noopener">www.good.cn.conf</a></p>
+<p>需要注意一下几行</p>
+<p>awstats.<a href="http://www.good.com.conf" target="_blank" rel="noopener">www.good.com.conf</a></p>
+<p>LogFile=”/usr/local/nginx/logs/good.access_%YYYY-24%MM-24%DD-24.log”</p>
+<p>LogFormat = “%host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot %otherquot”</p>
+<p>SiteDomain=”<a href="http://www.good.com&quot;" target="_blank" rel="noopener">www.good.com&quot;</a></p>
+<p>HostAliases=”good.com <a href="http://www.good.com" target="_blank" rel="noopener">www.good.com</a> 127.0.0.1 localhost”</p>
+<p>默认编译安装的nginx对cgi的支持并不好(所以在编译的时候一般都没打开这个功能)</p>
+<p>google了一把。大家都用fastcgi来支持。就照搬吧</p>
+<p>[root@test html]# pwd</p>
+<p>/usr/local/nginx/html</p>
+<p>[root@test html]# mkdir cgi-bin</p>
+<p>[root@test html]# cd cgi-bin/</p>
+<p>[root@test cgi-bin]# vi fcgi_perl</p>
+<p>#!/usr/bin/perl -w</p>
+<p>use FCGI;</p>
+<p>use Socket;</p>
+<p>use FCGI::ProcManager;</p>
+<p>sub shutdown { FCGI::CloseSocket($socket); exit; }</p>
+<p>sub restart { FCGI::CloseSocket($socket); &main; }</p>
+<p>use sigtrap ‘handler’, \&amp;shutdown, ‘normal-signals’;</p>
+<p>use sigtrap ‘handler’, \&amp;restart, ‘HUP’;</p>
+<p>require ‘syscall.ph’;</p>
+<p>use POSIX qw(setsid);</p>
+<p>#&daemonize; we don’t daemonize when running under runsv</p>
+<p>#this keeps the program alive or something after exec’ing perl scripts</p>
+<p>END() { }</p>
+<p>BEGIN() { }</p>
+<p>{</p>
+<p>no warnings;</p>
+<p>*CORE::GLOBAL::exit = sub { die “fakeexit\nrc=” . shift() . “\n”; };</p>
+<p>};</p>
+<p>eval q{exit};</p>
+<p>if ($@) {</p>
+<p>exit unless $@ =~ /^fakeexit/;</p>
+<p>}</p>
+<p>&main;</p>
+<p>sub daemonize() {</p>
+<p>chdir ‘/‘ or die “Can’t chdir to /: $!”;</p>
+<p>defined( my $pid = fork ) or die “Can’t fork: $!”;</p>
+<p>exit if $pid;</p>
+<p>setsid() or die “Can’t start a new session: $!”;</p>
+<p>umask 0;</p>
+<p>}</p>
+<p>sub main {</p>
+<p>#如果使用 IP sockets</p>
+<p>#$socket = FCGI::OpenSocket( “127.0.0.1:8999”, 10 );</p>
+<p>#如果使用 UNIX sockets</p>
+<p>#$socket = FCGI::OpenSocket( “/var/run/perl_cgi-dispatch.sock”, 10 );</p>
+<p>#foreach $item (keys %ENV) { delete $ENV{$item}; }</p>
+<p>#设置fastcgi进程数，默认四个</p>
+<p>my $n_processes = $ENV{FCGI_NPROCESSES} || 4;</p>
+<p>$proc_manager = FCGI::ProcManager-&gt;new( {n_processes =&gt; $n_processes} );</p>
+<p>#使用unix socket</p>
+<p>$socket = FCGI::OpenSocket( “$ENV{FCGI_SOCKET_PATH}”, 10 );</p>
+<p>#设置Socket权限</p>
+<p>chmod 0777, $ENV{FCGI_SOCKET_PATH};</p>
+<p>; #use UNIX sockets - user running this script must have w access to the ‘nginx’ folder!!</p>
+<p>$request =</p>
+<p>FCGI::Request( \*STDIN, \*STDOUT, \*STDERR, \%req_params, $socket,</p>
+<p>&amp;FCGI::FAIL_ACCEPT_ON_INTR );</p>
+<p>$proc_manager-&gt;pm_manage();</p>
+<p>if ($request) { request_loop() }</p>
+<p>FCGI::CloseSocket($socket);</p>
+<p>}</p>
+<p>sub request_loop {</p>
+<p>while ( $request-&gt;Accept() &gt;= 0 ) {</p>
+<p>$proc_manager-&gt;pm_pre_dispatch();</p>
+<p>#processing any STDIN input from WebServer (for CGI-POST actions)</p>
+<p>$stdin_passthrough = ‘’;</p>
+<p>{ no warnings; $req_len = 0 + $req_params{‘CONTENT_LENGTH’}; };</p>
+<p>if ( ( $req_params{‘REQUEST_METHOD’} eq ‘POST’ ) &amp;&amp; ( $req_len != 0 ) )</p>
+<p>{</p>
+<p>my $bytes_read = 0;</p>
+<p>while ( $bytes_read &lt; $req_len ) {</p>
+<p>my $data = ‘’;</p>
+<p>my $bytes = read( STDIN, $data, ( $req_len - $bytes_read ) );</p>
+<p>last if ( $bytes == 0 || !defined($bytes) );</p>
+<p>$stdin_passthrough .= $data;</p>
+<p>$bytes_read += $bytes;</p>
+<p>}</p>
+<p>}</p>
+<p>#running the cgi app</p>
+<p>if (</p>
+<p>( -x $req_params{SCRIPT_FILENAME} ) &amp;&amp; #can I execute this?</p>
+<p>( -s $req_params{SCRIPT_FILENAME} ) &amp;&amp; #Is this file empty?</p>
+<p>( -r $req_params{SCRIPT_FILENAME} ) #can I read this file?</p>
+<p>)</p>
+<p>{</p>
+<p>pipe( CHILD_RD, PARENT_WR );</p>
+<p>pipe( PARENT_ERR, CHILD_ERR );</p>
+<p>my $pid = open( CHILD_O, “-|” );</p>
+<p>unless ( defined($pid) ) {</p>
+<p>print(“Content-type: text/plain\r\n\r\n”);</p>
+<p>print</p>
+<p>“Error: CGI app returned no output - Executing $req_params{SCRIPT_FILENAME} failed !\n”;</p>
+<p>next;</p>
+<p>}</p>
+<p>$oldfh = select(PARENT_ERR);</p>
+<p>$| = 1;</p>
+<p>select(CHILD_O);</p>
+<p>$| = 1;</p>
+<p>select($oldfh);</p>
+<p>if ( $pid &gt; 0 ) {</p>
+<p>close(CHILD_RD);</p>
+<p>close(CHILD_ERR);</p>
+<p>print PARENT_WR $stdin_passthrough;</p>
+<p>close(PARENT_WR);</p>
+<p>$rin = $rout = $ein = $eout = ‘’;</p>
+<p>vec( $rin, fileno(CHILD_O), 1 ) = 1;</p>
+<p>vec( $rin, fileno(PARENT_ERR), 1 ) = 1;</p>
+<p>$ein = $rin;</p>
+<p>$nfound = 0;</p>
+<p>while ( $nfound =</p>
+<p>select( $rout = $rin, undef, $ein = $eout, 10 ) )</p>
+<p>{</p>
+<p>die “$!” unless $nfound != -1;</p>
+<p>$r1 = vec( $rout, fileno(PARENT_ERR), 1 ) == 1;</p>
+<p>$r2 = vec( $rout, fileno(CHILD_O), 1 ) == 1;</p>
+<p>$e1 = vec( $eout, fileno(PARENT_ERR), 1 ) == 1;</p>
+<p>$e2 = vec( $eout, fileno(CHILD_O), 1 ) == 1;</p>
+<p>if ($r1) {</p>
+<p>while ( $bytes = read( PARENT_ERR, $errbytes, 4096 ) ) {</p>
+<p>print STDERR $errbytes;</p>
+<p>}</p>
+<p>if ($!) {</p>
+<p>$err = $!;</p>
+<p>die $!;</p>
+<p>vec( $rin, fileno(PARENT_ERR), 1 ) = 0</p>
+<p>unless ( $err == EINTR or $err == EAGAIN );</p>
+<p>}</p>
+<p>}</p>
+<p>if ($r2) {</p>
+<p>while ( $bytes = read( CHILD_O, $s, 4096 ) ) {</p>
+<p>print $s;</p>
+<p>}</p>
+<p>if ( !defined($bytes) ) {</p>
+<p>$err = $!;</p>
+<p>die $!;</p>
+<p>vec( $rin, fileno(CHILD_O), 1 ) = 0</p>
+<p>unless ( $err == EINTR or $err == EAGAIN );</p>
+<p>}</p>
+<p>}</p>
+<p>last if ( $e1 || $e2 );</p>
+<p>}</p>
+<p>close CHILD_RD;</p>
+<p>close PARENT_ERR;</p>
+<p>waitpid( $pid, 0 );</p>
+<p>} else {</p>
+<p>foreach $key ( keys %req_params ) {</p>
+<p>$ENV{$key} = $req_params{$key};</p>
+<p>}</p>
+<p># cd to the script’s local directory</p>
+<p>if ( $req_params{SCRIPT_FILENAME} =~ /^(.*)\/[^\/]+$/ ) {</p>
+<p>chdir $1;</p>
+<p>}</p>
+<p>close(PARENT_WR);</p>
+<p>#close(PARENT_ERR);</p>
+<p>close(STDIN);</p>
+<p>close(STDERR);</p>
+<p>#fcntl(CHILD_RD, F_DUPFD, 0);</p>
+<p>syscall( &amp;SYS_dup2, fileno(CHILD_RD), 0 );</p>
+<p>syscall( &amp;SYS_dup2, fileno(CHILD_ERR), 2 );</p>
+<p>#open(STDIN, “&lt;&amp;CHILD_RD”);</p>
+<p>exec( $req_params{SCRIPT_FILENAME} );</p>
+<p>die(“exec failed”);</p>
+<p>}</p>
+<p>} else {</p>
+<p>print(“Content-type: text/plain\r\n\r\n”);</p>
+<p>print</p>
+<p>“Error: No such CGI app - $req_params{SCRIPT_FILENAME} may not exist or is not executable by this process.\n”;</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>再设置启动的脚本</p>
+<p>[root@test cgi-bin]# vi startfcgiperl</p>
+<p>export FCGI_SOCKET_PATH=”/tmp/perl_fcgi.socket”</p>
+<p>export FCGI_NPROCESSES=4</p>
+<p>./fcgi_perl &amp;</p>
+<p>然后加上执行权限</p>
+<p>[root@test cgi-bin]# chmod +x fcgi_perl startfcgiperl </p>
+<p>[root@test cgi-bin]# perl -MCPAN -e shell       </p>
+<p>cpan&gt; install FCGI</p>
+<p>cpan&gt; install FCGI::ProcManager</p>
+<p>[root@test cgi-bin]# ./startfcgiperl &amp;</p>
+<p>为nginx添加fastCGI的perl支持</p>
+<p>[root@test conf]# pwd</p>
+<p>/usr/local/nginx/conf</p>
+<p>[root@test conf]# vi gzip.conf</p>
+<p>#!nginx (-)</p>
+<p># gzip.conf</p>
+<p>gzip on;</p>
+<p>gzip_min_length 1100;</p>
+<p>gzip_buffers 4 8k;</p>
+<p>gzip_types text/plain;</p>
+<p>output_buffers 1 32k;</p>
+<p>postpone_output 1460;</p>
+<p>[root@test conf]# vi proxy.conf</p>
+<p>#!nginx (-)</p>
+<p># proxy.conf</p>
+<p>proxy_redirect off;</p>
+<p>proxy_set_header Host $http_host;</p>
+<p>proxy_set_header X-Real-IP $remote_addr;</p>
+<p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
+<p>client_max_body_size 10m;</p>
+<p>client_body_buffer_size 128k;</p>
+<p>proxy_connect_timeout 90;</p>
+<p>proxy_send_timeout 90;</p>
+<p>proxy_read_timeout 90;</p>
+<p>proxy_buffers 32 4k;</p>
+<p>[root@test conf]# vi awstats.conf</p>
+<p>fastcgi_pass unix:/tmp/perl_fcgi.socket;</p>
+<p>fastcgi_index awstats.pl;</p>
+<p>fastcgi_param SCRIPT_FILENAME /usr/local/awstats/wwwroot/cgi-bin/awstats.pl;</p>
+<p>fastcgi_param QUERY_STRING $query_string;</p>
+<p>fastcgi_param REQUEST_METHOD $request_method;</p>
+<p>fastcgi_param CONTENT_TYPE $content_type;</p>
+<p>fastcgi_param CONTENT_LENGTH $content_length;</p>
+<p>fastcgi_param GATEWAY_INTERFACE CGI/1.1;</p>
+<p>fastcgi_param SERVER_SOFTWARE nginx;</p>
+<p>fastcgi_param SCRIPT_NAME $fastcgi_script_name;</p>
+<p>fastcgi_param REQUEST_URI $request_uri;</p>
+<p>fastcgi_param DOCUMENT_URI $document_uri;</p>
+<p>fastcgi_param DOCUMENT_ROOT $document_root;</p>
+<p>fastcgi_param SERVER_PROTOCOL $server_protocol;</p>
+<p>fastcgi_param REMOTE_ADDR $remote_addr;</p>
+<p>fastcgi_param REMOTE_PORT $remote_port;</p>
+<p>fastcgi_param SERVER_ADDR $server_addr;</p>
+<p>fastcgi_param SERVER_PORT $server_port;</p>
+<p>fastcgi_param SERVER_NAME $server_name;</p>
+<p>fastcgi_read_timeout 60;</p>
+<p>[root@test conf]# vi nginx.conf</p>
+<p>user nobody;</p>
+<p>worker_processes 2;</p>
+<p>events {</p>
+<pre><code>use epoll;
+
+worker_connections 2048;
+</code></pre><p>}</p>
+<p>http {</p>
+<pre><code>include mime.types;
+
+default_type application/octet-stream;
+
+access_log logs/access.log;
+
+sendfile on;
+
+tcp_nodelay on;
+
+keepalive_timeout 65;
+
+include      gzip.conf;
+
+log\_format test    &apos;$remote\_addr - $remote\_user \[$time\_local\] &quot;$request&quot; &apos;
+
+                  &apos;$status $body\_bytes\_sent &quot;$http_referer&quot; &apos;
+
+                  &apos;&quot;$http\_user\_agent&quot; &quot;$http\_x\_forwarded_for&quot;&apos;;
+
+log\_format good    &apos;$remote\_addr - $remote\_user \[$time\_local\] &quot;$request&quot; &apos;
+
+                  &apos;$status $body\_bytes\_sent &quot;$http_referer&quot; &apos;
+
+                  &apos;&quot;$http\_user\_agent&quot; &quot;$http\_x\_forwarded_for&quot;&apos;;
+</code></pre><p>server</p>
+<pre><code>{
+
+    listen 80;
+
+    server_name www.test.com test.com;
+
+access_log logs/test.access.log test;
+
+location ~ ^/NginxStatus/ {
+
+stub_status on;
+
+access_log off;
+
+ }
+
+ location ~ ^/(WEB-INF)/ {
+
+ deny all;
+
+ }
+
+location ~ \\.(htm|html|gif|jpg|jpeg|png|bmp|ico|rar|css|js|zip|java|jar|txt|flv|swf|mid|doc|ppt|xls|pdf|txt|mp3|wma)$ {
+
+        root /projects/test;
+
+ expires 24h;
+
+    }    
+
+location ~* .*\\.pl$
+
+{
+
+include awstats.conf;
+
+}
+
+location /awstatsicon/
+
+{
+
+   alias /usr/local/awstats/wwwroot/icon/;
+
+}
+
+location /{
+
+proxy_pass http://localhost:8080;
+
+include proxy.conf;
+
+}
+
+    error_page 404 /html/404.html;
+
+error_page 502 503 /html/502.html;
+
+    error_page 500 504 /50x.html;
+
+    location = /50x.html {
+
+        root html;
+
+}
+
+}
+</code></pre><p>server</p>
+<pre><code>{
+
+listen 80;
+
+    server_name www.good.cn good,cn www.good.net good.net;
+
+access_log logs/good.access.log good;
+
+     location ~ ^/(WEB-INF)/ {
+
+        deny all;
+
+     }
+
+    location ~ \\.(htm|html|gif|jpg|jpeg|png|bmp|ico|rar|css|js|zip|java|jar|txt|flv|swf|mid|doc|ppt|xls|pdf|txt|mp3|wma)$ {
+
+        root /projects/good;
+
+         expires 24h;
+
+    }
+
+    location ~* .*\\.pl$
+
+    {
+
+    include awstats.conf;
+
+    }
+
+    location /awstatsicon/
+
+    {
+
+    alias /usr/local/awstats/wwwroot/icon/;
+
+    }
+
+    location /{
+
+    proxy_pass http://localhost:8080;
+
+    include proxy.conf;
+
+    }
+
+    error_page 404 /html/404.html;
+
+    error_page 502 503 /html/502.html;
+
+    error_page 500 504 /50x.html;
+
+    location = /50x.html {
+
+        root html;
+
+    }
+
+}
+</code></pre><p>}</p>
+<p>配置Nginx自动切割日志</p>
+<p>跟 Apache HTTP Server（以下称 Apache）不同的是，Apache 可以将日志输出通过管道的方式进行重新定向，依此来进行自动的日志切割。Nginx 在现今版本上还没能跟 Apache 一样，通过%YY等参数按日期分批创建日志，但是通过给 nginx 进程发送一个特定的信号，可以使 nginx 重新生成日志文件。我们可以定期执行一个 Shell 脚本来切换日志，重新命名或转移，具体的脚本如下：</p>
+<p>[root@test sbin]# pwd</p>
+<p>/usr/local/nginx/sbin</p>
+<p>[root@test sbin]# more logcron.sh</p>
+<p>mv /usr/local/nginx/logs/test.access.log /usr/local/nginx/logs/test.access_`date +%Y%m%d`.log</p>
+<p>mv /usr/local/nginx/logs/good.access.log /usr/local/nginx/logs/good.access_`date +%Y%m%d`.log</p>
+<p>killall –s USR1 nginx</p>
+<p>[root@test sbin]# crontab -e</p>
+<p>59    23    <em>    </em>    *    /usr/local/nginx/sbin/logcron.sh</p>
+<p>20    2    <em>    </em>    *    /usr/local/awstats/tools/awstats_updateall.pl now -awstatsprog=/usr/local/awstats/wwwroot/cgi-bin/awstats.pl</p>
+<p>然后可以通过<a href="http://www.test.com/awstats.pl" target="_blank" rel="noopener">http://www.test.com/awstats.pl</a></p>
+<p><a href="http://www.good.com/awstats.pl来查看那些人访问了你的网站。。。。" target="_blank" rel="noopener">http://www.good.com/awstats.pl来查看那些人访问了你的网站。。。。</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/24/use-awstats-to-analyze-the-access-logs-of-nginx/" data-id="cji00lksi00jmhnzs5z7502g1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell-comprehensive-level-testing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/shell-comprehensive-level-testing/" class="article-date">
+  <time datetime="2009-12-22T03:42:27.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/shell-comprehensive-level-testing/">SHELL 综合水平测试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>按：SHELL 水平测试系列并非覆盖 SHELL 的所有方面，而是挑选一些题目以引发思考，<br>以管中窥豹的方式达到检验水平的目的．  </p>
+<p>希望回答问题时不是简单地 Yes or No. 而是写出解决方案。<br>很多问题在不同的 shell 或 工具之间表现不同， 请列出不同之处  </p>
+<p>[ SHELL 水平测试 ][ OVERVIEW 篇 ]  </p>
+<p>1. 有很多种 shell, 你熟悉几种？ 各个 shell 的 home page 在那里？  </p>
+<p>2. 为什么说 zsh 是目前为止功能最为强大的 shell.  </p>
+<p>3. 为什么说 pdksh 功能较弱？  </p>
+<p>4. ksh88 与 ksh93 有何区别？  </p>
+<p>5. 为什么 shell 编程最好用 ksh?  </p>
+<p>6. 你的系统都有哪些 shell? 版本是多少？  </p>
+<p>7. 你知道 POSIX 吗？最新版本是多少？和你的 shell 有什么关系？  </p>
+<p>8. /sbin/sh 和 /bin/sh 有何区别？  </p>
+<p>9. 你分析过 1000　行以上的 shell 程序吗？  </p>
+<p>10. 各种 shell 的变量名长度有何限制？  </p>
+<p>11. 各种 shell 的 array size 有何限制？  </p>
+<p>12. FIFO 比 co-process　有什么优点？  </p>
+<p>13. (..)　产生的 subshell 与调用另一个脚本产生的 subshell 有何不同？  </p>
+<p>14. shell 中的函数可以递归吗？设计时要注意什么？  </p>
+<p>15. 如何用 subshell 产生的多个值改变多个 shell 中的变量？  </p>
+<p>16. File pattern 与 regular expression 有什么不同？  </p>
+<p>17. shell 中含有大量文档．不想在每行之前用 # 注释．　有那两种方法可以实现？  </p>
+<p>18. 用 shell 程序安装配置一个二进制可执行软件．希望将被安装软件含在 shell 程序中形成一个<br>　　安装文件，　可以吗？  </p>
+<p>19. 可以在一个shell 程序里包含 ksh 及 perl　两种代码吗？  </p>
+<p>20. 如何保证 shell 程序只有单一 instance 运行？　(有难度, 绝非一个 ps 命令可以搞定）  </p>
+<p>21. 当有同名的 alias, function, builtin command, external command 时，如何知道并控制其运行顺序？  </p>
+<p>22. 如何在自定义 function　中调用同名的　builtin command ?  </p>
+<p>23. 怎样运行各种 shell 时具有 login shell 的行为?  </p>
+<p>24. 为何 ksh, rksh, pfksh 都是同一个 hard link? 功能却不同？  </p>
+<p>25. 当 while read .. 这样的语句用于 pipe　右侧时，需注意什么？  </p>
+<p>26. 对于多个相连的 pipe，最后的返回码是 pipe 中那个命令的？　如何取得所有命令的返回码？  </p>
+<p>27. cmd  &gt;a  2&gt;a 和 cmd  &gt;a  2&gt;&amp;1　为什么不同？  </p>
+<p>28. Stdin, Stderr 可以关闭吗? 有什么结果?  </p>
+<p>29. GNU tools 与其他 Unix 上的相比有什么特点？　为什么说不能过分依赖 GNU　扩展？  </p>
+<p>30. VI　及 VIM 对行长度及 file size 有什么限制？  </p>
+<p>31. 请写出对 field 1　(数字)，　field 3 (数字倒序)，　field 3 (ascii) 进行排序的完整语句．  </p>
+<p>32. 如何用 diff　及其他工具写一个版本控制系统？（要有　check　in, check　out, file lock ..　等功能）  </p>
+<p>[ SHELL 水平测试 ][ SED 篇 ]  </p>
+<p>1. 你能看懂　sed one-lines 中的每一条语句吗？  </p>
+<p>2. /regex/! command 与 /regex/ !command 有什么区别？  </p>
+<p>3. 你能熟练使用 N,n, P,p,D,d,H,h,G,g,x,:,b,t 吗？  </p>
+<p>4. 什么是 sed 高级编程中的 lookup table 技术  </p>
+<p>5. sed debuger 的原理是什么？  </p>
+<p>6. 为什么 sed 的 guru 和 fans 比 awk 的多．(请看 yahoo groups)  </p>
+<p>下面几题根据使用的技术，难度不同．（难度 最小:１,最大:５)  </p>
+<p>7. 将数据文件中的每个词的第一个字母变成大写．　(难度: 2 - 4)  </p>
+<p>8. 在 sed 中实现记数器．可加　1 或减　1. (难度: 3 - 4)  </p>
+<p>9. 提取 html 文件中 table 中每个单员的内容(table 可嵌套）．(难度: 4 - 5)  </p>
+<p>每一个 cell　做为一个单员输出：  </p>
+<p>Table #１, Row #1, Column #1  </p>
+<p>Contents …….  </p>
+<p>Table #１, Row #1, Column #2  </p>
+<p>Contents …….  </p>
+<p>10. 一般的 sed 的 regex 的匹配都是 greedy 的。如何用 sed 实现 lazy 匹配?  </p>
+<p>[ SHELL 水平测试 ][ AWK 篇 ]  </p>
+<p>注: 很多题目在不同的 awk 中实现不同, 请注明每一种 awk 的方法.  </p>
+<p>1. awk, oawk, nawk, gawk, mawk 有什么区别？  </p>
+<p>2. 在一个 awk 文件中,  第一行可以如下吗?  </p>
+<p>#! /bin/awk -F: -f  </p>
+<p>3. awk -F”” 与 awk -F “” 有区别吗?  </p>
+<p>4. 可以这样设置 FS 吗?    </p>
+<p>   FS = “[     ]+|[     ]+”  </p>
+<p>5. gawk 有一个扩展表达式与其他 GNU 工具不同, 是哪个, 为什么?  </p>
+<p>6. 那两种方法可以实现大小写无关匹配?  </p>
+<p>7. 下列两句有何区别?  </p>
+<p>awk ‘$0 ~ “[      ]“‘<br>awk ‘$0 ~ /[      ]/‘  </p>
+<p>8. FS=” “ 和 FS=” +” 有何区别?  </p>
+<p>9. 如何将每一个字符作为一个 field ?  </p>
+<p>10. 如何将整个文件作为一个 field ?  </p>
+<p>11. RS=”” 与 RS=” +” 有何区别?  </p>
+<p>12. NR 和 FNR 有何区别?  </p>
+<p>13. getline &lt; “file” 改变那些 builtin 变量?  </p>
+<p>14. 如何不打印最后一个 field? (不用循环）  </p>
+<p>15. $1 ~ /aaa/ 与 /aaa/ ~ $1 有何区别?  </p>
+<p>16. a = /a/ 是什么意思?  </p>
+<p>17. awk 中的 array 可以排序吗?  </p>
+<p>18. 如何将 awk 中得到的值赋给 shell 变量.  </p>
+<p>19. 如何模拟二维数组？  </p>
+<p>20. 你的 awk 数组最多可能的单元是多少？有限制没有？  </p>
+<p>21. 你的 awk 中 field number, record length 及　file size 有何限制？  </p>
+<p>22. awk 中如何删除 array 及 关闭管道？  </p>
+<p>23. 如何完成 rev 功能？  </p>
+<p>24. 如何在 awk 中使用 coprocess？  </p>
+<p>25. 你写过 100 行以上的 awk 程序吗？　  </p>
+<p>[ SHELL 水平测试 ][ REGEX 篇 ]  </p>
+<p>1. 传统 regex, POSIX regex, GNU regex, PCRE 都有什么特点及异同之处？  </p>
+<p>2. ERE 是 BRE 的 super set 吗？  </p>
+<p>3. ERE看起来强大，但使用 ERE 有一点最不爽, 是什么？  </p>
+<p>4. 依赖 GNU 扩展的危害是什么？  </p>
+<p>5. Back reference 可以嵌套吗？  </p>
+<p>6. DFA 和 NFA 有什么特点及区别？  </p>
+<p>7. 常用的 [e]grep, [ng]awk, [g]sed, perl 哪些是 DFA？　哪些是 NFA?　因此这些程序具有哪些相应的特点？  </p>
+<p>8. Greedy regex　和 lazy regex　有何区别？　哪些工具是　lazy regex．  </p>
+<p>9. 猜一猜一个符合 RFC 标准的 email adderss　大概需要多长的 regex 来匹配？  </p>
+<p>10. 你是否有这样的经历： 某个使用过的 regex， 用在另个软件中却不行。<br>也就是说你无法确定某个 regex 在同一系统的不同软件中或在不同系统的相同软件中肯定能用?  </p>
+<p>附加题  </p>
+<p>1. 为什么说 CU 的整体较为业余, 但 shell 版的水平相对较高?  </p>
+<p>2. 为什么 shell 版中的大部分高手都是玩 Linux 的, 而低手往往是 Sco unix, HP-UX 等其他平台的?  </p>
+<p>3. 为什么当低手怯怯地抛出一个问题, 高手快速地给出了漂亮的解答, 却往往最后并没有解决低手的问题?</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/shell-comprehensive-level-testing/" data-id="cji00lklm00dshnzshzc2o5o6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-i-am-familiar-with-load-balancing-technology" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/i-am-familiar-with-load-balancing-technology/" class="article-date">
+  <time datetime="2009-12-22T03:39:17.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/i-am-familiar-with-load-balancing-technology/">我所熟悉的网站负载均衡技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>DNS轮循</strong><br>　 　DNS轮循是指将相同的域名解释到不同的IP，随机使用其中某台主机的技术。但其具有明显的缺点：一旦某个服务器出现故障，即使及时修改了DNS设置， 还是要等待足够的时间（刷新时间）才能发挥作用，在此期间，保存了故障服务器地址的客户计算机将不能正常访问服务器。DNS负载均衡采用的是简单的轮循负 载算法，不能区分服务器的差异，不能反映服务器的当前运行状态，不能做到为性能较好的服务器多分配请求，甚至会出现客户请求集中在某一台服务器上的情况。  </p>
+<p>　　<strong>F5 BIG-IP</strong><br><a href="http://blog.atop.fun/wp-content/uploads/netease/other_site/blog_s135_f5-big-ip.jpg" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/blog_s135_f5-big-ip.jpg" alt="点击在新窗口中浏览此图片" title="点击在新窗口中浏览此图片"></a>　　简介：F5 Networks 公司的著名硬件负载均衡交换机。支持硬件四层、七层交换。不同的型号性能不同，BIG-IP 6400可以支持800万条并发连接，低一点型号的可以支持400万条以上的并发连接。性能极高，但价格也不菲。<br>　　价格：BIG-IP 6400的价格在16万元人民币左右。<br>　　网址：<a href="http://www.f5.com.cn/" target="_blank" rel="noopener">http://www.f5.com.cn/</a>（中国） <a href="http://www.f5.com/" target="_blank" rel="noopener">http://www.f5.com/</a>（全球）  </p>
+<p>　　<strong>LVS（Linux Virtual Server）</strong><br>　　简介：软件四层交换。LVS是在Linux内核中作四层交换，只花128个字节记录一个连接信息，不涉及到文件句柄操作，故没有65535最大文件句柄数的限制。LVS性能很高，可以支持100～400万条并发连接。<br>　　价格：免费、开源<br>　　网址：<a href="http://zh.linuxvirtualserver.org/" target="_blank" rel="noopener">http://zh.linuxvirtualserver.org/</a>  </p>
+<p>　　<strong>L7SW（Layer7 switching）</strong><br>　 　简介：软件七层交换。这是一款类似LVS的新负载均衡软件，我没有实际应用过，性能未知，因此不作评价。这是它的英文介绍：Layer7 switching is driving a low-level engine using networking design to speed-up forwarding of data stream. Implementation in this project is split into a userspace daemon and a low-level kernelspace forwarding engine. Userspace daemon is responsible for scheduling and switching decisions. Kernelspace forwarding engine is responsible for forwarding stream and using TCP-Splicing scheme. TCP-Splicing is the postponement of the connection between the client and the server in order to obtain sufficient information to make a routing decision. This project is close to Linux Virtual Server project since lot of discusions on this topics have been made online and offline LVS project.<br>　　价格：免费、开源<br>　　网址：<a href="http://www.linux-l7sw.org/" target="_blank" rel="noopener">http://www.linux-l7sw.org/</a>  </p>
+<p>　　<strong>HAProxy</strong><br>　 　简介：软件七层交换，反向代理服务器。目前还不支持虚拟主机，但其配置简单，拥有非常不错的服务器健康检查功能，当其代理的后端服务器出现故 障，HAProxy会自动将该服务器摘除，故障恢复后再自动将该服务器加入。另外，HAProxy还支持双机热备。我曾经用过一段时间，能支持2～3万条 并发连接。现在我用它做普通的小并发负载均衡，主要用到的是它的服务器健康检查功能。<br>　　价格：免费、开源<br>　　网址：<a href="http://haproxy.1wt.eu/" target="_blank" rel="noopener">http://haproxy.1wt.eu/</a>  </p>
+<p>　　<strong>Nginx</strong><br>　　简介：软件七层交换，反向代理服务器。能够很好地支持虚拟主机，可配置性很强，可以按URL做负载均衡。我目前一直在用，大约能支持3～5万条并发连接。<br>　　价格：免费、开源<br>　　网址：<a href="http://wiki.codemongers.com/NginxChs" target="_blank" rel="noopener">http://wiki.codemongers.com/NginxChs</a>（中文维基）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/i-am-familiar-with-load-balancing-technology/" data-id="cji00lkdh006qhnzsubasc4ry" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-actually-it-s-easier-to-use-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/actually-it-s-easier-to-use-linux/" class="article-date">
+  <time datetime="2009-12-22T03:37:21.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/actually-it-s-easier-to-use-linux/">其实Linux这样用更简单些</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现公司的小孩儿们都开始学Linux了，可惜学的都是那些超级麻烦的命令，唉。 其实Linux这样用更简单些……</p>
+<p>改IP，可以用 netconfig，可惜每次都得输入完整的IP、掩码、网关和DNS。 不如直接 vi /etc/sysconfig/network-scripts/ifcfg-eth0 再 /etc/init.d/network restart 来得快。</p>
+<p>改DNS，最快的就是 vi /etc/resolv.conf，不用重启。</p>
+<p>重启httpd，/etc/init.d/httpd restart 要比 service httpd restart快，因为前者可以补齐而后者不能。</p>
+<p>修改系统服务，用chkconfig要比setup方便。</p>
+<p>看最新的log，用 tail -f /var/log/xxx.log 比 vi /var/log/xxx.log 方便。 看不清的话就先 clear 再 tail -n 0 -f /var/log/xxx.log。</p>
+<p>用好<a href="http://tech.idv2.com/2007/03/27/bash-history-summary/" target="_blank" rel="noopener">bash的历史记录</a>。</p>
+<p>压缩解压缩别动不动就tar czvf/tar xzvf，要养成不用v的好习惯。文件多了要快上好几倍。</p>
+<p>两台机器传文件，scp 要比samba方便。windows的话就装个cygwin，或者用PuTTY自带的pscp.exe也行。</p>
+<p>测试网络连接，nc 192.168.1.10 80 要比 telnet 192.168.1.10 80 好用。</p>
+<p>修改samba配置，直接修改 /etc/samba/smb.conf 要比图形界面方便。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/actually-it-s-easier-to-use-linux/" data-id="cji00lk5u000zhnzsq38ui2ab" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-top-command-details" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/top-command-details/" class="article-date">
+  <time datetime="2009-12-22T03:36:46.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/top-command-details/">top命令详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。 下面详细介绍它的使用方法。  </p>
+<h2 id="认识top的显示结果"><a href="#认识top的显示结果" class="headerlink" title="认识top的显示结果"></a>认识top的显示结果</h2><p>top命令的显示结果如下所示：</p>
+<p>top - 01:06:48 up  1:22,  1 user,  load average: 0.06, 0.60, 0.48<br>Tasks:  29 total,   1 running,  28 sleeping,   0 stopped,   0 zombie<br>Cpu(s):  0.3% us,  1.0% sy,  0.0% ni, 98.7% id,  0.0% wa,  0.0% hi,  0.0% si<br>Mem:    191272k total,   173656k used,    17616k free,    22052k buffers<br>Swap:   192772k total,        0k used,   192772k free,   123988k cached  </p>
+<p>  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND<br> 1379 root      16   0  7976 2456 1980 S  0.7  1.3   0:11.03 sshd<br>14704 root      16   0  2128  980  796 R  0.7  0.5   0:02.72 top<br>    1 root      16   0  1992  632  544 S  0.0  0.3   0:00.90 init<br>    2 root      34  19     0    0    0 S  0.0  0.0   0:00.00 ksoftirqd/0<br>    3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 watchdog/0</p>
+<h3 id="统计信息区"><a href="#统计信息区" class="headerlink" title="统计信息区"></a>统计信息区</h3><p>前五行是系统整体的统计信息。第一行是任务队列信息，同 uptime 命令的执行结果。其内容如下：</p>
+<p>01:06:48</p>
+<p>当前时间</p>
+<p>up 1:22</p>
+<p>系统运行时间，格式为时:分</p>
+<p>1 user</p>
+<p>当前登录用户数</p>
+<p>load average: 0.06, 0.60, 0.48</p>
+<p>系统负载，即任务队列的平均长度。<br>三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。</p>
+<p>第二、三行为进程和CPU的信息。当有多个CPU时，这些内容可能会超过两行。内容如下：</p>
+<p>Tasks: 29 total</p>
+<p>进程总数</p>
+<p>1 running</p>
+<p>正在运行的进程数</p>
+<p>28 sleeping</p>
+<p>睡眠的进程数</p>
+<p>0 stopped</p>
+<p>停止的进程数</p>
+<p>0 zombie</p>
+<p>僵尸进程数</p>
+<p>Cpu(s): 0.3% us</p>
+<p>用户空间占用CPU百分比</p>
+<p>1.0% sy</p>
+<p>内核空间占用CPU百分比</p>
+<p>0.0% ni</p>
+<p>用户进程空间内改变过优先级的进程占用CPU百分比</p>
+<p>98.7% id</p>
+<p>空闲CPU百分比</p>
+<p>0.0% wa</p>
+<p>等待输入输出的CPU时间百分比</p>
+<p>0.0% hi</p>
+<p>0.0% si</p>
+<p>最后两行为内存信息。内容如下：</p>
+<p>Mem: 191272k total</p>
+<p>物理内存总量</p>
+<p>173656k used</p>
+<p>使用的物理内存总量</p>
+<p>17616k free</p>
+<p>空闲内存总量</p>
+<p>22052k buffers</p>
+<p>用作内核缓存的内存量</p>
+<p>Swap: 192772k total</p>
+<p>交换区总量</p>
+<p>0k used</p>
+<p>使用的交换区总量</p>
+<p>192772k free</p>
+<p>空闲交换区总量</p>
+<p>123988k cached</p>
+<p>缓冲的交换区总量。<br>内存中的内容被换出到交换区，而后又被换入到内存，但使用过的交换区尚未被覆盖，<br>该数值即为这些<strong>内容已存在于内存中</strong>的交换区的大小。<br>相应的内存再次被换出时可不必再对交换区写入。</p>
+<h3 id="进程信息区"><a href="#进程信息区" class="headerlink" title="进程信息区"></a>进程信息区</h3><p>统计信息区域的下方显示了各个进程的详细信息。首先来认识一下各列的含义。</p>
+<p>序号</p>
+<p>列名</p>
+<p>含义</p>
+<p>a</p>
+<p>PID</p>
+<p>进程id</p>
+<p>b</p>
+<p>PPID</p>
+<p>父进程id</p>
+<p>c</p>
+<p>RUSER</p>
+<p>Real user name</p>
+<p>d</p>
+<p>UID</p>
+<p>进程所有者的用户id</p>
+<p>e</p>
+<p>USER</p>
+<p>进程所有者的用户名</p>
+<p>f</p>
+<p>GROUP</p>
+<p>进程所有者的组名</p>
+<p>g</p>
+<p>TTY</p>
+<p>启动进程的终端名。不是从终端启动的进程则显示为 ?</p>
+<p>h</p>
+<p>PR</p>
+<p>优先级</p>
+<p>i</p>
+<p>NI</p>
+<p>nice值。负值表示高优先级，正值表示低优先级</p>
+<p>j</p>
+<p>P</p>
+<p>最后使用的CPU，仅在多CPU环境下有意义</p>
+<p>k</p>
+<p>%CPU</p>
+<p>上次更新到现在的CPU时间占用百分比</p>
+<p>l</p>
+<p>TIME</p>
+<p>进程使用的CPU时间总计，单位秒</p>
+<p>m</p>
+<p>TIME+</p>
+<p>进程使用的CPU时间总计，单位1/100秒</p>
+<p>n</p>
+<p>%MEM</p>
+<p>进程使用的<strong>物理内存</strong>百分比</p>
+<p>o</p>
+<p>VIRT</p>
+<p>进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES</p>
+<p>p</p>
+<p>SWAP</p>
+<p>进程使用的虚拟内存中，被换出的大小，单位kb。</p>
+<p>q</p>
+<p>RES</p>
+<p>进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA</p>
+<p>r</p>
+<p>CODE</p>
+<p>可执行代码占用的<strong>物理</strong>内存大小，单位kb</p>
+<p>s</p>
+<p>DATA</p>
+<p>可执行代码以外的部分(数据段+栈)占用的<strong>物理</strong>内存大小，单位kb</p>
+<p>t</p>
+<p>SHR</p>
+<p>共享内存大小，单位kb</p>
+<p>u</p>
+<p>nFLT</p>
+<p>页面错误次数</p>
+<p>v</p>
+<p>nDRT</p>
+<p>最后一次写入到现在，被修改过的页面数。</p>
+<p>w</p>
+<p>S</p>
+<p>进程状态。<br><strong>D</strong>=不可中断的睡眠状态<br><strong>R</strong>=运行<br><strong>S</strong>=睡眠<br><strong>T</strong>=跟踪/停止<br><strong>Z</strong>=僵尸进程</p>
+<p>x</p>
+<p>COMMAND</p>
+<p>命令名/命令行</p>
+<p>y</p>
+<p>WCHAN</p>
+<p>若该进程在睡眠，则显示睡眠中的系统函数名</p>
+<p>z</p>
+<p>Flags</p>
+<p>任务标志，参考 sched.h</p>
+<p>默认情况下仅显示比较重要的 PID、USER、PR、NI、VIRT、RES、SHR、S、%CPU、%MEM、TIME+、COMMAND 列。可以通过下面的快捷键来更改显示内容。</p>
+<h2 id="更改显示内容"><a href="#更改显示内容" class="headerlink" title="更改显示内容"></a>更改显示内容</h2><p>通过 <strong>f</strong> 键可以选择显示的内容。按 f 键之后会显示列的列表，按 a-z 即可显示或隐藏对应的列，最后按回车键确定。</p>
+<p>按 <strong>o</strong> 键可以改变列的显示顺序。按小写的 a-z 可以将相应的列向右移动，而大写的 A-Z 可以将相应的列向左移动。最后按回车键确定。</p>
+<p>按大写的 <strong>F</strong> 或 <strong>O</strong> 键，然后按 a-z 可以将进程按照相应的列进行排序。而大写的 <strong>R</strong> 键可以将当前的排序倒转。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/top-command-details/" data-id="cji00lkr700ikhnzs15gj87cb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bash-completion-enhanced-tab-completion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/bash-completion-enhanced-tab-completion/" class="article-date">
+  <time datetime="2009-12-22T03:35:58.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/bash-completion-enhanced-tab-completion/">bash-completion增强tab补全</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>默 认情况下,在bash中按 TAB 可以自动补齐，但仅能自动补齐命令名和文件名。bash-2.05及以后的版本提供了自动补齐的编程接口，通过安装 bash-completion 来使用 TAB 键自动补齐几乎任何内容，包括参数、文件、目录甚至包名称等等。例如：（<tab>表示按TAB键）</tab></p>
+<p>$ rpm -<tab>    (自动补齐参数)<br>-F  -U  -V  -b  -e  -i  -q  -t<br>$ man cat<tab>    (自动补齐manpage)<br>cat       catan     catanf    catanh    catanhf   catanhl   catanl    catch     catclose  catdic    catgets   catopen<br>$ tar xjvf <tab>   (补齐时仅显示tar.bz2文件)<br>gimp-2.2.13.tar.bz2  glib-2.12.3.tar.bz2</tab></tab></tab></p>
+<p>最近的发行版一般都自带bash-completion包，如果你的bash没有这个功能，可以从<a href="http://freshmeat.net/projects/bashcompletion/" target="_blank" rel="noopener">这里</a>下载bash-completion包并安装。安装方法很简单，下载到的包中包含一个 bas-completion 文件，将其放在 /etc 下，然后编辑 /etc/bashrc，在 if [ “$PS1” ]; then 的判断中加入以下内容：</p>
+<p>if [ “$PS1” ]; then<br>  …其他内容省略，加入以下内容  </p>
+<h1 id="Run-bash-completion-code"><a href="#Run-bash-completion-code" class="headerlink" title="Run bash completion code"></a>Run bash completion code</h1><p>  if [ -r /etc/bash_completion ]; then  </p>
+<h1 id="Source-completion-code"><a href="#Source-completion-code" class="headerlink" title="Source completion code."></a>Source completion code.</h1><pre><code>. /etc/bash_completion  
+</code></pre><p>  fi<br>fi</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/bash-completion-enhanced-tab-completion/" data-id="cji00lk7y0020hnzswg8hdwu2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redhat-linux-command-large" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/redhat-linux-command-large/" class="article-date">
+  <time datetime="2009-12-22T03:35:18.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/redhat-linux-command-large/">redhat linux命令大全</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>一. 启动,关机,登入,登出相关命令</strong>  </p>
+<p><login> 登录  </login></p>
+<p><logout> 登出  </logout></p>
+<p><exit> 登出  </exit></p>
+<p><shutdown> 停止系统  </shutdown></p>
+<p><halt> 停止系统  </halt></p>
+<p><reboot> 重启动  </reboot></p>
+<p><poweroff> 切断电源  </poweroff></p>
+<p><sync> 把内存里的内容写入磁盘  </sync></p>
+<p><lilo> 安装lilo启动管理程序  </lilo></p>
+<p><grub> 安装lilo启动管理程序</grub></p>
+<p><strong>二. Shell相关命令</strong>  </p>
+<p><chsh> 切换Shell  </chsh></p>
+<p><history> 显示命令履历  </history></p>
+<p><alias> 设置命令别名  </alias></p>
+<p><unalias> 取消命令别名  </unalias></p>
+<p><which> 显示命令所在位置  </which></p>
+<p><type> 查询命令种类  </type></p>
+<p><echo> 显示字符串或者变量内容  </echo></p>
+<p><set> 设置/显示Shell变量  </set></p>
+<p><printenv> 显示环境变量  </printenv></p>
+<p><export> 设置环境变量  </export></p>
+<p><env> 设置临时环境变量  </env></p>
+<p><unset> 释放环境变量  </unset></p>
+<p><setenv> 设置环境变量  </setenv></p>
+<p><unsetenv> 释放环境变量  </unsetenv></p>
+<p><source> 执行文件当中的命令  </p>
+<p><man> 查询命令手册  </man></p>
+<p><info> 查询超文本命令手册  </info></p>
+<p><whatis> 显示命令简介  </whatis></p>
+<p><apropos> 通过关键字查询手册</apropos></p>
+<p><strong>三. 用户管理相关命令</strong>  </p>
+<p><su> 切换到其他用户  </su></p>
+<p><useradd> 追加用户  </useradd></p>
+<p><adduser> 追加用户  </adduser></p>
+<p><userdel> 删除用户  </userdel></p>
+<p><usermod> 修改用户设置  </usermod></p>
+<p><chfn> 修改用户私人信息  </chfn></p>
+<p><groupadd> 追加组  </groupadd></p>
+<p><groupdel> 删除组  </groupdel></p>
+<p><groupmod> 修改组设置  </groupmod></p>
+<p><passwd> 更改密码  </passwd></p>
+<p><whoami> 显示用户名  </whoami></p>
+<p><logname> 显示登录用户帐号  </logname></p>
+<p><users> 显示所有登录用户信息  </users></p>
+<p><who> 查询登录用户信息  </who></p>
+<p><w> 查询登录用户信息  </w></p>
+<p><id> 显示指定用户的ID信息  </id></p>
+<p><groups> 显示指定用户的所属组  </groups></p>
+<p><finger> 显示指定用户的个人信息  </finger></p>
+<p><mesg> 开关与他人收发消息  </mesg></p>
+<p><write> 给其他用户发消息  </write></p>
+<p><wall> 给所有用户发消息  </wall></p>
+<p><talk> 和其他用户聊天</talk></p>
+<p><strong>四. 系统消息相关命令</strong>  </p>
+<p><date> 显示/设置当前时间  </date></p>
+<p><uptime> 显示系统运行时间  </uptime></p>
+<p><arch> 显示机器的核心构架（如i386）  </arch></p>
+<p><uname> 显示操作系统信息  </uname></p>
+<p><tty> 显示终端名  </tty></p>
+<p><last> 显示登录/登出在履历  </last></p>
+<p><lastb> 显示非法登录信息  </lastb></p>
+<p><dumpkeys> 显示当前键盘配置  </dumpkeys></p>
+<p><loadkeys> 变更键盘配置  </loadkeys></p>
+<p><df> 查询磁盘使用信息  </df></p>
+<p><du> 查询磁盘使用信息  </du></p>
+<p><dmesg> 显示系统启动消息  </dmesg></p>
+<p><script> 保存输入输出到文件</p>
+<p><strong>五. 文件操作相关命令</strong>  </p>
+<p><ls> 显示文件列表  </p>
+<p><tree> 显示目录树  </p>
+<p><pwd> 显示当前路径  </p>
+<p><cd> 更改当前路径  </p>
+<p><pushd> 追加路径到目录堆栈  </p>
+<p><popd> 从目录堆栈删除路径  </p>
+<p><dirs> 显示目录堆栈的内容  </p>
+<p><mkdir> 创建路径  </p>
+<p><rmdir> 删除路径  </p>
+<p><cp> 复制文件/目录  </p>
+<p><rm> 删除文件/目录  </p>
+<p><mv> 移动文件/目录，修改文件名  </p>
+<p><chown> 更改文件/目录的所有者  </p>
+<p><chgrp> 修改文件/目录的所有组  </p>
+<p><chmod> 修改文件/目录的权限  </p>
+<p><touch> 更改文件时间  </p>
+<p><ln> 建立文件/目录链接  </p>
+<p><find> 查找文件  </p>
+<p><whereis> 显示文件存在的路径名  </p>
+<p><file> 查询文件种类  </p>
+<p><size> 查询文件大小</p>
+<p><strong>六. 文件编辑相关命令</strong>  </p>
+<p><cat> 显示文件内容  </p>
+<p><tee> 输出到文件和屏幕  </p>
+<p><more> 分屏显示文件内容  </p>
+<p><less> 分屏显示文件内容  </p>
+<p><head> 显示文件头部内容  </p>
+<p><tail> 显示文件尾部内容  </p>
+<p><fold> 折叠显示长行  </p>
+<p><sort> 排列文件的行  </p>
+<p><cmp> 比较文件内容  </p>
+<p><diff> 显示文件差异  </p>
+<p><nkf> 更改日语文件编码  </p>
+<p><dd> 变更文件之后复制  </p>
+<p><wc> 统计文本单词数，文件大小等  </p>
+<p><split> 分割文件  </p>
+<p><paste> 以行连接文件  </p>
+<p><join> 以字段连接文件  </p>
+<p><grep> 查询文字  </p>
+<p><uniq> 过滤重复部分显示文件内容  </p>
+<p><tr> 替换文字  </p>
+<p><sed> 替换文字</p>
+<p><strong>七. 压缩/解压缩相关命令</strong>  </p>
+<p><ar> 压缩/解压缩文件  </p>
+<p><tar> 压缩/解压缩文件  </p>
+<p><compress> 压缩/解压缩文件  </p>
+<p><uncompress> 解压缩  </p>
+<p><gzip> 压缩/解压缩文件  </p>
+<p><gunzip> 解压缩  </p>
+<p><zcat> 显示压缩文件的内容  </p>
+<p><lha> 压缩/解压缩文件  </p>
+<p><uuencode> 把二进制文件编码为文本文件  </p>
+<p><uudecode> 把经过编码的文本文件还原为二进制文件</p>
+<p><strong>八. MS-DOS工具集[mtools]命令</strong>  </p>
+<p><mdir> 显示文件列表  </p>
+<p><mcd> 改变当前目录  </p>
+<p><mmd> 新建目录  </p>
+<p><mrd> 删除目录  </p>
+<p><mdeltree> 删除目录树  </p>
+<p><mcopy> 复制文件  </p>
+<p><mdel> 删除文件  </p>
+<p><mmove> 移动文件  </p>
+<p><mren> 更改文件或目录名  </p>
+<p><mattrib> 修改文件属性  </p>
+<p><mtype> 显示文件内容  </p>
+<p><mdu> 查询文件或目录大小  </p>
+<p><minfo> 显示磁盘信息  </p>
+<p><mformat> 以MS-DOS方式格式化磁盘  </p>
+<p><mlabel> 设置磁盘标签</p>
+<p><strong>九. 控制外部设备相关命令</strong>  </p>
+<p><mount> mount上设备  </p>
+<p><umount> 解除已经mount上的设备  </p>
+<p><eject> 弹出（CD/DVD等）  </p>
+<p><fdformat> 格式化软盘  </p>
+<p><fdisk> 配置/显示硬盘分区  </p>
+<p><mkfs> 格式化磁盘分区  </p>
+<p><fsck> 检查/修复磁盘错误  </p>
+<p><lpr> 打印到打印机  </p>
+<p><lprm> 中断打印任务  </p>
+<p><lpq> 显示打印任务的状态  </p>
+<p><lpc> 管理/控制打印任务  </p>
+<p><ifconfig> 显示/设定NIC配置</p>
+<p><strong>十. 进程及任务管理相关命令</strong>  </p>
+<p><ps> 显示正在运行的进程  </p>
+<p><jobs> 显示后台运行任务  </p>
+<p><fg> 把任务切换到前台  </p>
+<p><bg> 把任务切换到后台  </p>
+<p><kill> 中止进程或任务  </p>
+<p><killall> 中止进程或任务  </p>
+<p><wait> 等待进程或任务的结束  </p>
+<p><at> 设置定时执行任务  </p>
+<p><atq> 显示尚未执行的任务  </p>
+<p><atrm> 删除定时执行任务  </p>
+<p><batch> 在系统负荷减轻的时候执行任务  </p>
+<p><nice> 改变优先度并执行任务  </p>
+<p><nohup> 在后台执行任务，Logout之后也不退出  </p>
+<p><sleep> 休眠一定的时间</p>
+<p><strong>十一. 网络管理相关命令</strong>  </p>
+<p><netstat> 显示当前网络连接状况  </p>
+<p><route> 显示/设置路由  </p>
+<p><host> 显示网络主机情况  </p>
+<p><hostname> 显示/设置当前主机的名字  </p>
+<p><ping> 确认和远程机器的连接情况  </p>
+<p><traceroute> 显示路由信息  </p>
+<p><rwho> 查询网上机器的登陆用户  </p>
+<p><ruptime> 查询网上机器的系统运行时间  </p>
+<p><rlogin> 登陆到远程机器  </p>
+<p><telnet> 用telnet登陆到远程机器  </p>
+<p><rsh> 给远程机器发送命令  </p>
+<p><rcp> 在远程机器之间复制文件  </p>
+<p><mail> 收取邮件  </p>
+<p><sendmail> 发送邮件  </p>
+<p><mailq> 确认邮件队列  </p>
+<p><ftp> 用ftp传输文件</p>
+<p><strong>十二. 其他命令</strong>  </p>
+<p><cal> 显示日历  </p>
+<p><clear> 清屏  </p>
+<p><gcc> 编译C语言代码  </p>
+<p><as> 汇编  </p>
+<p><bc> 计算  </p>
+<p><rpm> Redhat的包管理  </p>
+<p><dpkg> Debian的包管理  </p>
+<p><installpkg> Slackware的包安装（删除命令则是removepkg）  </p>
+<p>&lt;XF86Setup,turboxfg,Xconfigurator&gt; 配置 X 服务器  </p>
+<p><startx> 启动 X-Window 系统</p>
+<p>附：组合命令<br>重定向，如<br>$ ls -l /bin &gt; ls-output<br>$ more ls-output</p>
+<p>管道命令，如<br>$ cat file1 file2 | sort | uniq</p>
+<p>经常被用于管道的命令<br>awk, fold, grep, head, nnkf, pr, sed, sort, tail, tee, tr, uniq, wc</p>
+</script></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/redhat-linux-command-large/" data-id="cji00lkkl00cshnzsdelqndg6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/21/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/23/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

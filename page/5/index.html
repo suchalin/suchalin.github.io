@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spacewalk-installation-instructions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/07/14/spacewalk-installation-instructions/" class="article-date">
+  <time datetime="2011-07-14T01:34:28.000Z" itemprop="datePublished">2011-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/07/14/spacewalk-installation-instructions/">Spacewalk Installation Instructions</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、准备工作  </p>
+<hr>
+<h2 id="1-Setting-up-Spacewalk-repo"><a href="#1-Setting-up-Spacewalk-repo" class="headerlink" title="1.Setting up Spacewalk repo"></a>1.Setting up Spacewalk repo</h2><p>rpm -Uvh <a href="http://spacewalk.redhat.com/yum/1.4/RHEL/5/x86_64/spacewalk-repo-1.4-1.el5.noarch.rpm" target="_blank" rel="noopener">http://spacewalk.redhat.com/yum/1.4/RHEL/5/x86_64/spacewalk-repo-1.4-1.el5.noarch.rpm</a></p>
+<h2 id="2-Additional-repos-amp-packages"><a href="#2-Additional-repos-amp-packages" class="headerlink" title="2.Additional repos &amp; packages"></a>2.Additional repos &amp; packages</h2><p>rpm -Uvh <a href="http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm" target="_blank" rel="noopener">http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a>  </p>
+<p>3.Follow the instructions to use <strong>EPEL5</strong> with the additions: </p>
+<ul>
+<li><p>Necessary packages rhn-client-tools and rhnlib were removed from CentOS, they can be found in spacewalk-client repo. Setup it by installing spacewalk-client-repo package.</p>
+<p>rpm -ihv <a href="http://spacewalk.redhat.com/yum/1.4-client/RHEL/5/x86_64/spacewalk-client-repo-1.4-1.el5.noarch.rpm" target="_blank" rel="noopener">http://spacewalk.redhat.com/yum/1.4-client/RHEL/5/x86_64/spacewalk-client-repo-1.4-1.el5.noarch.rpm</a> </p>
+</li>
+<li><p>Import Redhat’s RPM GPG key:</p>
+<p># wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release <a href="http://www.redhat.com/security/37017186.txt" target="_blank" rel="noopener">http://www.redhat.com/security/37017186.txt</a> # rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</p>
+</li>
+</ul>
+<p>二、数据库安装Oracle Pre-Requisites  </p>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download "></a>Download </h2><h2 id="server-oracle-xe-univ-10-2-0-1-1-0-i386-rpm"><a href="#server-oracle-xe-univ-10-2-0-1-1-0-i386-rpm" class="headerlink" title="server: oracle-xe-univ-10.2.0.1-1.0.i386.rpm"></a>server: oracle-xe-univ-10.2.0.1-1.0.i386.rpm</h2><p>client:  </p>
+<ul>
+<li>oracle-instantclient11.2-basic-11.2.0.2.0.ARCH.rpm</li>
+<li>oracle-instantclient11.2-sqlplus-11.2.0.2.0.ARCH.rpm</li>
+</ul>
+<p># /usr/sbin/groupadd -r dba # /usr/sbin/useradd -r -M -g dba -d /usr/lib/oracle/xe -s /bin/bash oracle  </p>
+<p>and check swap size &gt; 1G<br>yum -y install bc libc.so.6 libaio.so.1<br> yum -y localinstall –nogpgcheck oracle-xe-univ-10.2.0.1-1.0.i386.rpm<br>yum -y localinstall –nogpgcheck oracle-instantclient11.2-basic<em>.rpm oracle-instantclient11.2-sqlplus</em>.rpm<br>yum -y install oracle-lib-compat<br>yum -y install oracle-xe-selinux oracle-instantclient-selinux oracle-instantclient-sqlplus-selinux<br>配置 /etc/init.d/oracle-xe configure<br>HTTP port for Oracle Application Express: 9055只修改端口，其他的默认<br>测试：sqlplus ‘sys/<password>@//localhost/XE as sysdba’  </password></p>
+<h2 id="Create-the-spacewalk-database-user"><a href="#Create-the-spacewalk-database-user" class="headerlink" title="Create the spacewalk database user"></a>Create the spacewalk database user</h2><p>SQL&gt; create user spacewalk identified by spacewalk default tablespace users; SQL&gt; grant dba to spacewalk; SQL&gt; quit<br>测试sqlplus spacewalk/spacewalk@//localhost/XE  </p>
+<h2 id="Additional-Oracle-configuration"><a href="#Additional-Oracle-configuration" class="headerlink" title="Additional Oracle configuration"></a>Additional Oracle configuration</h2><p># sqlplus spacewalk/spacewalk@//localhost/XE SQL&gt; alter system set processes = 400 scope=spfile;  SQL&gt; alter system set “_optimizer_filter_pred_pullup”=false scope=spfile;  SQL&gt; alter system set “_optimizer_cost_based_transformation”=off scope=spfile;  SQL&gt; quit   # /sbin/service oracle-xe restart </p>
+<p>三、安装<br>yum remove cobbler-web<br>yum install spacewalk-oracle   </p>
+<h2 id="Configuring-the-firewall"><a href="#Configuring-the-firewall" class="headerlink" title="Configuring the firewall"></a>Configuring the firewall</h2><p>iptables -D RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited iptables -A RH-Firewall-1-INPUT -p tcp -m tcp –dport 443 -j ACCEPT iptables -A RH-Firewall-1-INPUT -p tcp -m tcp –dport 80 -j ACCEPT iptables -A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited service iptables save service iptables restart  </p>
+<h2 id="Configuring-Spacewalk"><a href="#Configuring-Spacewalk" class="headerlink" title="Configuring Spacewalk"></a>Configuring Spacewalk</h2><p>spacewalk-setup –disconnected<br>Database service name (SID)? XE<br>其他的默认，创建CA证书和cobbler  </p>
+<p>可以使用<a href="http://hostname.localdomain.com去访问了。" target="_blank" rel="noopener">http://hostname.localdomain.com去访问了。</a><br> 要查看日志在/var/log/tomcat5/catalina.out 如果使用tomcat6，要<br>chmod g+w /var/log/tomcat6</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/07/14/spacewalk-installation-instructions/" data-id="cji00lkma00edhnzsfjld3j4l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vsftpd-time-zone-problem-solving" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/07/06/vsftpd-time-zone-problem-solving/" class="article-date">
+  <time datetime="2011-07-06T01:33:55.000Z" itemprop="datePublished">2011-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/07/06/vsftpd-time-zone-problem-solving/">vsftpd时区问题的解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天上面让开个ftp的服务<br>就找一台linux的服务器安装了vsftp<br>后来看到外边的客户来下载资料的时候发现日志里面的时间和本地相差8小时<br>立即感觉是vsftp的时区问题<br>找vsftpd的配置帮助文件<br>发现下面的一个参数<br>设置为yes后日志里面的时间就正确了<br>在次小记一下<br>use_localtime<br>If enabled, vsftpd will display directory listings with the time in your local time zone. The default is to display GMT. The times returned by the MDTM FTP command are also affected by this option.<br>Default: NO</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/07/06/vsftpd-time-zone-problem-solving/" data-id="cji00lktu00kihnzstyr1vx4k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-use-of-rpm-command-parameters-in-the-linux-operating-system-is-detailed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/06/30/the-use-of-rpm-command-parameters-in-the-linux-operating-system-is-detailed/" class="article-date">
+  <time datetime="2011-06-30T04:04:18.000Z" itemprop="datePublished">2011-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/06/30/the-use-of-rpm-command-parameters-in-the-linux-operating-system-is-detailed/">Linux操作系统中RPM命令参数的使用详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<strong>Linux</strong>操作系统中，有一个系统<strong>软件</strong>包，它的功能类似于Windows里面的“添加/删除程序”，但是功能又比“添加/删除程序”强很多，它就是Red Hat Package Manager(简称<strong>RPM</strong>)。此工具包最先是由Red Hat公司推出的，后来被其他Linux开发商所借用。由于它为Linux使用者省去了很多时间，所以被广泛<strong>应用</strong>于在Linux下安装、删除软件。下面就给大家介绍一下它的具体<strong>使用</strong>方法。</p>
+<p>[root@ford /root] # rpm -qa | more</p>
+<p>◆1.我们得到一个新软件，在安装之前，一般都要先查看一下这个软件包里有什么内容，假设这个文件是：Linux-1.4-6.i368.rpm，我们可以用这条<strong>命令</strong>查看：</p>
+<p>rpm -qpi Linux-1.4-6.i368.rpm</p>
+<p>系统将会列出这个软件包的详细资料，包括含有多少个文件、各文件名称、文件大小、创建时间、编译日期等信息。</p>
+<p>◆2.上面列出的所有文件在安装时不一定全部安装，就像Windows下程序的安装方式分为典型、完全、自定义一样，Linux也会让你选择安装方式，此时我们可以用下面这条命令查看软件包将会在系统里安装哪些部分，以方便我们的选择：</p>
+<p>rpm -qpl Linux-1.4-6.i368.rpm</p>
+<p>◆3.选择安装方式后，开始安装。我们可以用rpm -ivh Linux-1.4-6.i368.rpm命令安装此软件。在安装过程中，若系统提示此软件已安装过或因其他原因无法继续安装，但若我们确实想执行安装命令，可以在 -ivh后加一<strong>参数</strong>“-replacepkgs”：</p>
+<p>rpm -ivh -replacepkgs Linux-1.4-6.i368.rpm</p>
+<p>◆4.有时我们卸载某个安装过的软件，只需执行</p>
+<p>rpm -e ＜文件名＞  命令即可。</p>
+<p>◆5.对低版本软件进行升级是提高其功能的好办法，这样可以省去我们卸载后再安装新软件的麻烦，要升级某个软件，只须执行如下命令：rpm -uvh ＜文件名＞，注意：此时的文件名必须是要升级软件的升级补丁</p>
+<p>◆6. 另外一个安装软件的方法可谓是Linux的独到之处，同时也是RMP强大功能的一个表现：通过FTP站点直接在线安装软件。当找到含有你所需软件的站点并 与此网站连接后，执行下面的命令即可实现在线安装，譬如在线安装Linux-1.4-6.i368.rpm，可以用命令：</p>
+<p>rpm -i<a href="ftp://ftp.pht.com/pub/linux/redhat/...-1.4-6.i368.rpm" target="_blank" rel="noopener">ftp://ftp.pht.com/pub/linux/redhat/…-1.4-6.i368.rpm</a></p>
+<p>◆7. 在我们使用电脑过程中，难免会有误操作，若我们误删了几个文件而影响了系统的性能时，怎样查找到底少了哪些文件呢?RPM软件包提供了一个查找损坏文件的 功能，执行此命令：rpm -Va 即可，Linux将为你列出所有损坏的文件。你可以通过Linux的安装光盘进行修复。</p>
+<p>◆8.Linux系统中文件繁多，在使用过程中，难免会碰到我们不认识的文件，在Windows下我们可以用“开始/查找”菜单快速判断某个文件属于哪个文件夹，在Linux中，下面这条命令行可以帮助我们快速判定某个文件属于哪个软件包：</p>
+<p>rpm -qf ＜文件名＞</p>
+<p>◆9.当每个软件包安装在Linux系统后，安装文件都会到RPM数据库中“报到”，所以，我们要查询某个已安装软件的属性时，只需到此数据库中查找即可。注意：此时的查询命令不同于1和8介绍的查询，这种方法只适用于已安装过的软件包！命令格式：</p>
+<p><strong>一、安装</strong></p>
+<p>命令格式：</p>
+<p>rpm -i ( or –install) options file1.rpm … fileN.rpm</p>
+<p>参数：</p>
+<p>file1.rpm … fileN.rpm 将要安装的RPM包的文件名</p>
+<p>详细选项：</p>
+<p>-h (or –hash) 安装时输出hash记号 (<code></code>#’’)</p>
+<p>–test 只对安装进行测试，并不实际安装。</p>
+<p>–percent 以百分比的形式输出安装的进度。</p>
+<p>–excludedocs 不安装软件包中的文档文件</p>
+<p>–includedocs 安装文档</p>
+<p>–replacepkgs 强制重新安装已经安装的软件包</p>
+<p>–replacefiles 替换属于其它软件包的文件</p>
+<p>–force 忽略软件包及文件的冲突</p>
+<p>–noscripts 不运行预安装和后安装脚本</p>
+<p>–prefix ＜path＞ 将软件包安装到由 ＜path＞ 指定的路径下</p>
+<p>–ignorearch 不校验软件包的结构</p>
+<p>–ignoreos 不检查软件包运行的<strong>操作系统</strong></p>
+<p>–nodeps 不检查依赖性关系</p>
+<p>–ftpproxy ＜host＞ 用 ＜host＞ 作为 FTP代理</p>
+<p>–ftpport ＜port＞ 指定FTP的端口号为 ＜port＞</p>
+<p>通用选项</p>
+<p>-v 显示附加信息</p>
+<p>-vv 显示调试信息</p>
+<p>–root ＜path＞ 让RPM将＜path＞指定的路径做为”根目录”，这样预安装程序和后安</p>
+<p>装程序都会安装到这个目录下</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p>–dbpath ＜path＞ 设置RPM 资料库存所在的路径为 ＜path＞</p>
+<p><strong>二、删除</strong></p>
+<p>命令格式：</p>
+<p>rpm -e ( or –erase) options pkg1 … pkgN</p>
+<p>参数</p>
+<p>pkg1 … pkgN ：要删除的软件包</p>
+<p>详细选项</p>
+<p>–test 只执行删除的测试</p>
+<p>–noscripts 不运行预安装和后安装脚本程序</p>
+<p>–nodeps 不检查依赖性</p>
+<p>通用选项</p>
+<p>-vv 显示调试信息</p>
+<p>–root ＜path＞ 让RPM将＜path＞指定的路径做为”根目录”，这样预安装程序和后安装</p>
+<p>程序都会安装到这个目录下</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p>–dbpath ＜path＞ 设置RPM 资料库存所在的路径为 ＜path＞</p>
+<p><strong>三、升级</strong></p>
+<p>命令格式</p>
+<p>rpm -U ( or –upgrade) options file1.rpm … fileN.rpm</p>
+<p>参数</p>
+<p>file1.rpm … fileN.rpm 软件包的名字</p>
+<p>详细选项</p>
+<p>-h (or –hash) 安装时输出hash记号 (<code></code>#’’)</p>
+<p>–oldpackage 允许”升级”到一个老版本</p>
+<p>–test 只进行升级测试</p>
+<p>–excludedocs 不安装软件包中的文档文件</p>
+<p>–includedocs 安装文档</p>
+<p>–replacepkgs 强制重新安装已经安装的软件包</p>
+<p>–replacefiles 替换属于其它软件包的文件</p>
+<p>–force 忽略软件包及文件的冲突</p>
+<p>–percent 以百分比的形式输出安装的进度。</p>
+<p>–noscripts 不运行预安装和后安装脚本</p>
+<p>–prefix ＜path＞ 将软件包安装到由 ＜path＞ 指定的路径下</p>
+<p>–ignorearch 不校验软件包的结构</p>
+<p>–ignoreos 不检查软件包运行的操作系统</p>
+<p>–nodeps 不检查依赖性关系</p>
+<p>–ftpproxy ＜host＞ 用 ＜host＞ 作为 FTP代理</p>
+<p>–ftpport ＜port＞ 指定FTP的端口号为 ＜port＞</p>
+<p>通用选项</p>
+<p>-v 显示附加信息</p>
+<p>-vv 显示调试信息</p>
+<p>–root ＜path＞ 让RPM将＜path＞指定的路径做为”根目录”，这样预安装程序和后安装程序都会安装到这个目录下</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p>–dbpath ＜path＞ 设置RPM 资料库存所在的路径为 ＜path＞</p>
+<p><strong>四、查询</strong></p>
+<p>命令格式：</p>
+<p>rpm -q ( or –query) options</p>
+<p>参数：</p>
+<p>pkg1 … pkgN ：查询已安装的软件包</p>
+<p>详细选项</p>
+<p>-p ＜file＞(or <code></code>-‘’) 查询软件包的文件</p>
+<p>-f ＜file＞ 查询＜file＞属于哪个软件包</p>
+<p>-a 查询所有安装的软件包</p>
+<p>–whatprovides ＜x＞ 查询提供了 ＜x＞功能的软件包</p>
+<p>-g ＜group＞ 查询属于＜group＞ 组的软件包</p>
+<p>–whatrequires ＜x＞ 查询所有需要 ＜x＞ 功能的软件包</p>
+<p>信息选项</p>
+<p>＜null＞ 显示软件包的全部标识</p>
+<p>-i 显示软件包的概要信息</p>
+<p>-l 显示软件包中的文件列表</p>
+<p>-c 显示配置文件列表</p>
+<p>-d 显示文档文件列表</p>
+<p>-s 显示软件包中文件列表并显示每个文件的状态</p>
+<p>–scripts 显示安装、卸载、校验脚本</p>
+<p>–queryformat (or –qf) 以用户指定的方式显示查询信息</p>
+<p>–dump 显示每个文件的所有已校验信息</p>
+<p>–provides 显示软件包提供的功能</p>
+<p>–requires (or -R) 显示软件包所需的功能</p>
+<p>通用选项</p>
+<p>-v 显示附加信息</p>
+<p>-vv 显示调试信息</p>
+<p>–root ＜path＞ 让RPM将＜path＞指定的路径做为”根目录”，这样预安装程序和后安装程序都会安装到这个目录下</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p>–dbpath ＜path＞ 设置RPM 资料库存所在的路径为 ＜path＞</p>
+<p><strong>五、校验已安装的软件包</strong></p>
+<p>命令格式：</p>
+<p>rpm -V ( or –verify, or -y) options</p>
+<p>参数</p>
+<p>pkg1 … pkgN 将要校验的软件包名</p>
+<p>软件包选项</p>
+<p>-p ＜file＞ Verify against package file ＜file＞</p>
+<p>-f ＜file＞ 校验＜file＞所属的软件包</p>
+<p>-a Verify 校验所有的软件包</p>
+<p>-g ＜group＞ 校验所有属于组 ＜group＞ 的软件包</p>
+<p>详细选项</p>
+<p>–noscripts 不运行校验脚本</p>
+<p>–nodeps 不校验依赖性</p>
+<p>–nofiles 不校验文件属性</p>
+<p>通用选项</p>
+<p>-v 显示附加信息</p>
+<p>-vv 显示调试信息</p>
+<p>–root ＜path＞ 让RPM将＜path＞指定的路径做为”根目录”，这样预安装程序和后安装程序都会安装到这个目录下</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p>–dbpath ＜path＞ 设置RPM 资料库存所在的路径为 ＜path＞</p>
+<p><strong>六、校验软件包中的文件</strong></p>
+<p>语法：</p>
+<p>rpm -K ( or –checksig) options file1.rpm … fileN.rpm</p>
+<p>参数：</p>
+<p>file1.rpm … fileN.rpm 软件包的文件名</p>
+<p>Checksig–详细选项</p>
+<p>–nopgp 不校验PGP签名</p>
+<p>通用选项</p>
+<p>-v 显示附加信息</p>
+<p>-vv 显示调试信息</p>
+<p>–rcfile ＜rcfile＞ 设置rpmrc文件为 ＜rcfile＞</p>
+<p><strong>七、其它RPM选项</strong></p>
+<p>–rebuilddb 重建RPM资料库</p>
+<p>–initdb 创建一个新的RPM资料库</p>
+<p>–quiet 尽可能的减少输出</p>
+<p>–help 显示帮助文件</p>
+<p>–version 显示RPM的当前版本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/06/30/the-use-of-rpm-command-parameters-in-the-linux-operating-system-is-detailed/" data-id="cji00lkqe00hshnzszcbcxiyk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rpm/">rpm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-df-h-cannot-be-displayed-as-a-one-line-problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/06/23/the-df-h-cannot-be-displayed-as-a-one-line-problem/" class="article-date">
+  <time datetime="2011-06-23T02:56:53.000Z" itemprop="datePublished">2011-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/06/23/the-df-h-cannot-be-displayed-as-a-one-line-problem/">df -h不能显示为一行的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> df -h<br>Filesystem            Size  Used Avail Use% Mounted on<br>/dev/cciss/c0d0p1      20G  1.9G   17G  10% /<br>tmpfs                  12G     0   12G   0% /dev/shm<br>/dev/mapper/skylvm-app<br>                      121G   97G   17G  86% /app<br>/dev/mapper/skylvm-app1<br>                      121G   62G   53G  55% /app1<br>/dev/mapper/skylvm-app2<br>                      121G  197M  114G   1% /app2</p>
+<p>当Filesystem 太长时，无法显示为一行，这样给脚本的批量执行带来很大的问题，</p>
+<p>经过看帮忙和多方资料尝试，可以这样解决</p>
+<p>其实加上-P参数就可以，</p>
+<p>df -hP<br>Filesystem            Size  Used Avail Use% Mounted on<br>/dev/cciss/c0d0p1      20G  1.9G   17G  10% /<br>tmpfs                  12G     0   12G   0% /dev/shm<br>/dev/mapper/skylvm-app  121G   97G   17G  86% /app<br>/dev/mapper/skylvm-app1  121G   62G   53G  55% /app1<br>/dev/mapper/skylvm-app2  121G  197M  114G   1% /app2</p>
+<p> -P, –portability<br>              use the POSIX output format</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/06/23/the-df-h-cannot-be-displayed-as-a-one-line-problem/" data-id="cji00lknj00fihnzs0b64l3rr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-broadcom-5709-network-card-abnormal-down-analysis-and-resolution" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/05/23/broadcom-5709-network-card-abnormal-down-analysis-and-resolution/" class="article-date">
+  <time datetime="2011-05-23T04:06:17.000Z" itemprop="datePublished">2011-05-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/05/23/broadcom-5709-network-card-abnormal-down-analysis-and-resolution/">BROADCOM 5709网卡异常down分析与解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现网上dell和hp都相继的出现网卡异常down，导致服务器中断的问题，现综合各方面信息和对网卡异常的跟踪做分析和处理建议。</p>
+<p>一、      问题分析和总结  </p>
+<p>DELL PE610 是BROADCOM 5709C 的网卡, 对于LINUX 系统下网络I/O大的时候导致的网络不稳定情况,请参考一下REDHAT 公司KB文档 : <a href="https://access.redhat.com/kb/docs/DOC-26837" target="_blank" rel="noopener">https://access.redhat.com/kb/docs/DOC-26837</a> (具体见附件)  [目前需要用户和密码才能访问REDHAT文档资料].</p>
+<p>其中注明了此网卡的bug修复文档<a href="https://rhn.redhat.com/errata/RHSA-2010-0398.html" target="_blank" rel="noopener">https://rhn.redhat.com/errata/RHSA-2010-0398.html</a>。</p>
+<ol>
+<li>网卡的各种中断方式和区别，以及操作系统对中断的选择</li>
+</ol>
+<p>1)         网卡中断方式的发展，INTx,MSI,MSI-X</p>
+<p>操作系统目前可识别三种类型的中断：</p>
+<p>l  传统中断(INTx)－传统或固定中断是指使用早期总线技术的中断。使用这些技术，可通过一个或多个“带外”（即，独立于总线的主线）连线的外部管脚来发送中断信号。较新的总线技术（如 PCI Express）通过带内机制模拟传统中断来维持软件兼容性。主机 OS 将这些模仿中断视为传统中断。</p>
+<p>l  消息告知中断－消息告知中断 (message-signalled interrupt, MSI) 使用带内消息而不是使用管脚，可在主桥 (host bridge) 中确定中断的地址。（有关主桥 (host bridge) 的更多信息，请参见<a href="http://download.oracle.com/docs/cd/E19253-01/819-7057/hwovr-22/index.html" target="_blank" rel="noopener">PCI 局部总线</a>。）MSI 可以将数据与中断消息一起发送。每个 MSI 都不是共享的，这样可以保证指定给某一设备的 MSI 在系统中是唯一的。一个 PCI 函数最多可以请求 32 条 MSI 消息。</p>
+<p>l  扩展消息告知中断－扩展消息告知中断 (Extended message-signalled interrupt, MSI-X) 是 MSI 的增强版本。MSI-X 中断具有以下新增的优点：</p>
+<p>?  支持 2048 条而不是 32 条消息</p>
+<p>?  针对每条消息支持独立的消息地址和消息数据</p>
+<p>?  支持按消息屏蔽</p>
+<p>?  软件分配的向量少于硬件请求的向量时可具有更大灵活性。软件可以在多个 MSI-X 插槽中重用相同的 MSI-X 地址和数据。</p>
+<p>2)         MSI中断方式和MSI-X中断方式的区别</p>
+<p>看Broadcom的网卡手册看到这样一句：</p>
+<p>MSI Version. This is the Message Signaled Interrupts (MSI) version being used. The option MSI corresponds to the PCI 2.2 specification that supports 32 messages and a single MSI address value. The option MSI-X corresponds to the PCI 3.0 specification that supports 2,048 messages and an independent message address for each message.</p>
+<p>总算明白了，实际应用场景中，MSI方式的中断对多核cpu的利用情况不佳，网卡中断全部落在某一个cpu上，即使设置cpu affinity也没有作用，而MSI-X中断方式可以自动在多个cpu上分担中断。</p>
+<p>3)         Linux中对网卡中断方式的选择</p>
+<p>By default, the driver enables MSI if it is supported by the kernel. It runs an interrupt test during initialization to determine if MSI is working. If the test passes, the driver enables MSI. Otherwise, it uses legacy INTx mode.</p>
+<p>可以看出，linux中只要网卡支持MSI中断方式，默认都会开启,开机时会探测是否支持MSI，支持就启用，不支持才会使用INTx模式</p>
+<p>4)         如何查看系统中网卡工作的中断方式</p>
+<p>cat /proc/interrupts有类似如下信息，就可以看出网卡的中断方式</p>
+<p>11265195     211176       PCI-MSI-X  eth0-0</p>
+<p>54549       7408668       PCI-MSI-X  eth0-1</p>
+<p>5)         如何查看网卡的驱动版本信息</p>
+<p>ethtool -i eth0</p>
+<p>driver: bnx2</p>
+<p>version: 1.9.3</p>
+<p>firmware-version: 5.2.2 NCSI 2.0.6</p>
+<p>bus-info: 0000:10:00.0</p>
+<pre><code>modinfo bnx2
+</code></pre><p>filename:       /lib/modules/2.6.18-164.el5PAE/kernel/drivers/net/bnx2.ko</p>
+<p>version:        1.9.3</p>
+<p>license:        GPL</p>
+<p>description:    Broadcom NetXtreme II BCM5706/5708/5709/5716 Driver</p>
+<p>author:         Michael Chan <a href="mailto:&#109;&#99;&#x68;&#x61;&#110;&#x40;&#x62;&#x72;&#x6f;&#97;&#x64;&#x63;&#111;&#x6d;&#46;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#109;&#99;&#x68;&#x61;&#110;&#x40;&#x62;&#x72;&#x6f;&#97;&#x64;&#x63;&#111;&#x6d;&#46;&#x63;&#x6f;&#109;</a></p>
+<p>srcversion:     D151EAED8C1037CA480DE9A</p>
+<ol start="2">
+<li>根据bug文档，网卡中断问题其实于2010-05-06就已经通过升级kernel(升级到kernel-2.6.18-194.3.1以上版本)完成修复了。并且还修复了一个除MSI-X以外的另一个问题。</li>
+</ol>
+<p>看一下修得的日志，以下引用redhat修复bug文档(部分)。</p>
+<p>Important: kernel security and bug fix update</p>
+<p>Advisory:</p>
+<p>RHSA-2010:0398-1</p>
+<p>Type:</p>
+<p>Security Advisory</p>
+<p>Severity:</p>
+<p>Important</p>
+<p>Issued on:</p>
+<p>2010-05-06</p>
+<p>Last updated on:</p>
+<p>2010-05-06</p>
+<p>Affected Products:</p>
+<p>Red Hat Enterprise Linux (v. 5 server)</p>
+<p>Red Hat Enterprise Linux Desktop (v. 5 client)</p>
+<p>OVAL:</p>
+<p>com.redhat.rhsa-20100398.xml</p>
+<p>CVEs (cve.mitre.org):</p>
+<p>CVE-2010-0307</p>
+<p>CVE-2010-0410</p>
+<p>CVE-2010-0730</p>
+<p>CVE-2010-1085</p>
+<p>CVE-2010-1086</p>
+<p>Details</p>
+<p>Updated kernel packages that fix multiple security issues and several bugs</p>
+<p>are now available for Red Hat Enterprise Linux 5.</p>
+<p>The Red Hat Security Response Team has rated this update as having</p>
+<p>important security impact. Common Vulnerability Scoring System (CVSS) base</p>
+<p>scores, which give detailed severity ratings, are available for each</p>
+<p>vulnerability from the CVE links in the References section.</p>
+<p>The kernel packages contain the Linux kernel, the core of any Linux</p>
+<p>operating system.</p>
+<p>。。。。</p>
+<p>This update fixes the following security issues:</p>
+<p>* in certain circumstances, under heavy load, certain network interface</p>
+<p>cards using the bnx2 driver and configured to use MSI-X, could stop</p>
+<p>processing interrupts and then network connectivity would cease.</p>
+<p>(BZ#587799)</p>
+<p>* cnic parts resets could cause a deadlock when the bnx2 device was</p>
+<p>enslaved in a bonding device and that device had an associated VLAN.</p>
+<p>(BZ#581148)</p>
+<p>。。。。。。</p>
+<p>Users should upgrade to these updated packages, which contain backported</p>
+<p>patches to correct these issues. The system must be rebooted for this</p>
+<p>update to take effect.</p>
+<ol start="3">
+<li>以下引用Broadcom Corporation NetXtreme II BCM5709 Gigabit Ethernet网卡驱动程序作者于2010-04-27的修复补丁文档来查看具体修改了驱动中的哪一部分。</li>
+</ol>
+<p>bnx2: Fix lost MSI-X problem on 5709 NICs</p>
+<p>Submitter</p>
+<p>Michael Chan（此网卡驱动的作者，modinfo bnx2中可以看得到）</p>
+<p>Date</p>
+<p>2010-04-27 21:28:09</p>
+<p>Message ID</p>
+<p><a href="mailto:&#49;&#x32;&#x37;&#50;&#x34;&#x30;&#51;&#54;&#57;&#49;&#x2d;&#50;&#x39;&#x33;&#52;&#x2d;&#49;&#x2d;&#x67;&#x69;&#x74;&#45;&#115;&#x65;&#x6e;&#x64;&#x2d;&#101;&#x6d;&#97;&#x69;&#x6c;&#x2d;&#109;&#99;&#x68;&#97;&#110;&#64;&#x62;&#x72;&#111;&#x61;&#100;&#99;&#111;&#x6d;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#49;&#x32;&#x37;&#50;&#x34;&#x30;&#51;&#54;&#57;&#49;&#x2d;&#50;&#x39;&#x33;&#52;&#x2d;&#49;&#x2d;&#x67;&#x69;&#x74;&#45;&#115;&#x65;&#x6e;&#x64;&#x2d;&#101;&#x6d;&#97;&#x69;&#x6c;&#x2d;&#109;&#99;&#x68;&#97;&#110;&#64;&#x62;&#x72;&#111;&#x61;&#100;&#99;&#111;&#x6d;&#x2e;&#x63;&#111;&#x6d;</a></p>
+<p>Comments</p>
+<p>Michael Chan - 2010-04-27 21:28:09</p>
+<p>It has been reported that under certain heavy traffic conditions in MSI-X</p>
+<p>mode, the driver can lose an MSI-X vector causing all packets in the</p>
+<p>associated rx/tx ring pair to be dropped.  The problem is caused by</p>
+<p>the chip dropping the write to unmask the MSI-X vector by the kernel</p>
+<p>(when migrating the IRQ for example).</p>
+<p>This can be prevented by increasing the GRC timeout value for these</p>
+<p>register read and write operations.</p>
+<p>Thanks to Dell for helping us debug this problem.</p>
+<p>Signed-off-by: Michael Chan <a href="mailto:&#x6d;&#x63;&#104;&#x61;&#x6e;&#x40;&#98;&#114;&#111;&#97;&#100;&#99;&#x6f;&#x6d;&#46;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#x6d;&#x63;&#104;&#x61;&#x6e;&#x40;&#98;&#114;&#111;&#97;&#100;&#99;&#x6f;&#x6d;&#46;&#x63;&#x6f;&#109;</a></p>
+<p>---</p>
+<p> drivers/net/bnx2.c |    6 +++++-</p>
+<p> 1 files changed, 5 insertions(+), 1 deletions(-)</p>
+<p>David Miller - 2010-04-27 21:38:25</p>
+<p>From: “Michael Chan” <a href="mailto:&#109;&#99;&#104;&#97;&#x6e;&#x40;&#x62;&#114;&#x6f;&#97;&#100;&#x63;&#x6f;&#x6d;&#x2e;&#99;&#111;&#109;" target="_blank" rel="noopener">&#109;&#99;&#104;&#97;&#x6e;&#x40;&#x62;&#114;&#x6f;&#97;&#100;&#x63;&#x6f;&#x6d;&#x2e;&#99;&#111;&#109;</a></p>
+<p>Date: Tue, 27 Apr 2010 14:28:09 -0700</p>
+<p>> It has been reported that under certain heavy traffic conditions in MSI-X</p>
+<p>> mode, the driver can lose an MSI-X vector causing all packets in the</p>
+<p>> associated rx/tx ring pair to be dropped.  The problem is caused by</p>
+<p>> the chip dropping the write to unmask the MSI-X vector by the kernel</p>
+<p>> (when migrating the IRQ for example).</p>
+<blockquote>
+</blockquote>
+<p>> This can be prevented by increasing the GRC timeout value for these</p>
+<p>> register read and write operations.</p>
+<blockquote>
+</blockquote>
+<p>> Thanks to Dell for helping us debug this problem.</p>
+<blockquote>
+</blockquote>
+<p>> Signed-off-by: Michael Chan <a href="mailto:&#x6d;&#99;&#104;&#97;&#x6e;&#x40;&#x62;&#114;&#111;&#x61;&#x64;&#x63;&#x6f;&#109;&#46;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#x6d;&#99;&#104;&#97;&#x6e;&#x40;&#x62;&#114;&#111;&#x61;&#x64;&#x63;&#x6f;&#109;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<p>Applied to net-2.6</p>
+<p>–</p>
+<p>To unsubscribe from this list: send the line “unsubscribe netdev” in</p>
+<p>the body of a message to <a href="mailto:majordomo@vger.kernel.org" target="_blank" rel="noopener">majordomo@vger.kernel.org</a></p>
+<p>More majordomo info at  <a href="http://vger.kernel.org/majordomo-info.html" target="_blank" rel="noopener">http://vger.kernel.org/majordomo-info.html</a></p>
+<p>Patch</p>
+<p>diff –git a/drivers/net/bnx2.c b/drivers/net/bnx2.c</p>
+<p>index a257bab..4c1e51e 100644</p>
+<p>--- a/drivers/net/bnx2.c</p>
+<p>+++ b/drivers/net/bnx2.c</p>
+<p>@@ -4759,8 +4759,12 @@  bnx2_reset_chip(struct bnx2 *bp, u32 reset_code)</p>
+<pre><code>        rc = bnx2\_alloc\_bad_rbuf(bp);
+
+}
+</code></pre><ul>
+<li>if (bp-&gt;flags &amp; BNX2_FLAG_USING_MSIX)</li>
+</ul>
+<ul>
+<li><p>if (bp-&gt;flags &amp; BNX2_FLAG_USING_MSIX) {</p>
+<pre><code>bnx2\_setup\_msix_tbl(bp);
+</code></pre></li>
+</ul>
+<p>+                /* Prevent MSIX table reads and write from timing out */</p>
+<ul>
+<li><p>REG_WR(bp, BNX2_MISC_ECO_HW_CTL,</p>
+</li>
+<li><p>BNX2_MISC_ECO_HW_CTL_LARGE_GRC_TMOUT_EN);</p>
+</li>
+<li><p>}</p>
+<p> return rc;</p>
+<p>}</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>经过对redhat5.4的kernel中的网卡驱动部分源码进行确认，确实没有打上此补丁。</p>
+</li>
+<li><p>现网上之前采用升级到2.0.18c的网卡驱动中，确认驱动源码中也没有打上些补丁，所以现网上把网卡升级到2.0.18c也是无效的。</p>
+</li>
+<li><p>现redhat对rhel5系列发布的最新修复bug后的kernel为kernel-PAE-2.6.18-194.32.1.el5.i686.rpm，对此kernel的源码进行确认，确认已经打上了补丁。</p>
+</li>
+<li><p>网卡Broadcom官网上对BCM5709系列网卡的驱动已经更新到bnx2-2.0.23b，通过源码确认，Broadcom官网也已经把此补丁更新到发布的驱动中。</p>
+</li>
+</ol>
+<p>二、      现网处理建议  </p>
+<ol>
+<li><p>不建议通过关闭msi中断方式解决，原因请看第一部分中的网卡中断方式的区别，即关闭后，网卡中断全部落在某一个cpu上。如果真想关闭msi中断方式，在加载模块时加上disable_msi=1的参数，并加进系统配置文件。</p>
+</li>
+<li><p>如果条件请允许(因为升级kernel要重启机器才能生效)，建议只升级kernel来解决网卡异常问题，因为升级kernel在解决网卡异常问题时，同时也解决了其中很多的系统bug。而且因为只升级kernel，所以对现网的环境如java,python,gcc等都不会发生改变，请不要直接使用centos源，把系统完全升级，那样的话，系统中python等环境会全部改变，可能会对现网的业务产生冲击。建议使用运维提供的yum升级源(特为此次升级kernel做的内网升级源)进行升级。</p>
+</li>
+<li><p>如果不具备升级kernel的条件，可以使用编译网卡Broadcom官网发布的最新的驱动将网卡的驱动更新到bnx2-2.0.23b。</p>
+</li>
+</ol>
+<p>三、      现网处理具体步骤  </p>
+<ol>
+<li><p>关闭msi中断方式，具体参数配置请参考文档中的附件DOC-26837，但不建议关闭。</p>
+</li>
+<li><p>使用yum升级kernel</p>
+</li>
+</ol>
+<p>1)         运维会提供现网上主要使用的几个操作系统版本的yum源，把运维提供的repo源文件放到/etc/yum.repos.d/下。</p>
+<p>如cp rhel-server-5.4-i386.repo /etc/yum.repos.d/</p>
+<p>2)         建议把原来/etc/yum.repos.d/下的其中文件备份并移除。</p>
+<p>3)         Yum clean all</p>
+<p>yum update kernel</p>
+<p>Loaded plugins: fastestmirror</p>
+<p>Determining fastest mirrors</p>
+<p>Cluster                                       | 1.1 kB     00:00    </p>
+<p>ClusterStorage                                 | 1.1 kB     00:00    </p>
+<p>Server                                        | 1.1 kB     00:00    </p>
+<p>Server/primary                                 | 818 kB     00:00    </p>
+<p>Server                                                 2293/2293</p>
+<p>VT                                            | 1.1 kB     00:00    </p>
+<p>Setting up Update Process</p>
+<p>Resolving Dependencies</p>
+<p>–> Running transaction check</p>
+<p>—> Package kernel-PAE.i686 0:2.6.18-194.32.1.el5 set to be installed</p>
+<p>–> Finished Dependency Resolution</p>
+<p>Dependencies Resolved</p>
+<p>===========================================================================</p>
+<p> Package        Arch      Version          Repository          Size</p>
+<p>===========================================================================</p>
+<p>Installing:</p>
+<p> kernel-PAE     i686      2.6.18-194.32.1.el5       Server             17 M</p>
+<p>Transaction Summary</p>
+<p>===========================================================================</p>
+<p>Install      1 Package(s)        </p>
+<p>Update       0 Package(s)        </p>
+<p>Remove       0 Package(s)        </p>
+<p>Total download size: 17 M</p>
+<p>Is this ok [y/N]: y</p>
+<p>Downloading Packages:</p>
+<p>kernel-PAE-2.6.18-194.32.1.el5.i686.rpm                   |  17 MB     00:00    </p>
+<p>Running rpm_check_debug</p>
+<p>Running Transaction Test</p>
+<p>Finished Transaction Test</p>
+<p>Transaction Test Succeeded</p>
+<p>Running Transaction</p>
+<p>  Installing     : kernel-PAE                           1/1</p>
+<p>Installed:</p>
+<p>  kernel-PAE.i686 0:2.6.18-194.32.1.el5                                                                                            </p>
+<p>Complete!</p>
+<p>4)         cat /boot/grub/grub.conf</p>
+<p>default=0</p>
+<p>timeout=5</p>
+<p>splashimage=(hd0,0)/boot/grub/splash.xpm.gz</p>
+<p>hiddenmenu</p>
+<p>title CentOS (2.6.18-194.32.1.el5PAE)</p>
+<pre><code>root (hd0,0)
+
+kernel /boot/vmlinuz-2.6.18-194.32.1.el5PAE ro root=LABEL=/1 rhgb quiet
+
+initrd /boot/initrd-2.6.18-194.32.1.el5PAE.img
+</code></pre><p>title CentOS (2.6.18-164.el5PAE)</p>
+<pre><code>root (hd0,0)
+
+kernel /boot/vmlinuz-2.6.18-164.el5PAE ro root=LABEL=/1 rhgb quiet
+
+initrd /boot/initrd-2.6.18-164.el5PAE.img
+</code></pre><p>注意查看default是否是配置成最新内核的titile</p>
+<ol start="3">
+<li>请下载Broadcom官网发布的最新的驱动</li>
+</ol>
+<p>1)         Wget –c <a href="http://zh-cn.broadcom.com/docs/driver_download/NXII/linux-6.2.23.zip" target="_blank" rel="noopener">http://zh-cn.broadcom.com/docs/driver_download/NXII/linux-6.2.23.zip</a></p>
+<p>2)         编译安装</p>
+<p>A.        建议使用src包安装</p>
+<p>解压并找到linux-6.2.23.zip\Server\Linux\Driver\netxtreme2-6.2.23-1.src.rpm</p>
+<p>rpm -ivh netxtreme2-<version>.src.rpm</version></p>
+<p>cd /usr/src/redhat</p>
+<pre><code>rpmbuild -bb SPECS/netxtreme2.spec
+
+  编译好的RPM包就在RPMS/&lt;arch&gt;/netxtreme2-&lt;version&gt;.&lt;arch&gt;.rpm
+
+   找到自己的版本进行安装如
+</code></pre><p>rpm -ivh RPMS/i386/netxtreme2-<version>.i386.rpm</version></p>
+<p>B.        使用tar.gz包进行编译安装</p>
+<p>tar xvzf netxtreme2-<version>.tar.gz</version></p>
+<p>make</p>
+<p>make install</p>
+<p>3)         重装加载网卡模块</p>
+<p>rmmod bnx2;modprobe bnx2</p>
+<p>注意执行模块重载会中断几秒钟，正常的话，所有的连接都不会中断。</p>
+<p>注意事项：</p>
+<ol>
+<li><p>建议使用升级kernel方式解决。</p>
+</li>
+<li><p>不建议关闭msi中断方式。</p>
+</li>
+<li><p>如果没有使用官网最新的驱动程序进行编译，只能使用源码编译的方式，而且在编译前要先给bnx2.c打path后，再进行编译安装。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/05/23/broadcom-5709-network-card-abnormal-down-analysis-and-resolution/" data-id="cji00lk840022hnzsnylc2cvr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/broadcom/">broadcom</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-difference-between-dpi-and-ppi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/04/02/the-difference-between-dpi-and-ppi/" class="article-date">
+  <time datetime="2011-04-02T08:35:52.000Z" itemprop="datePublished">2011-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/04/02/the-difference-between-dpi-and-ppi/">dpi和ppi的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有些人弄混了ppi和dpi的概念！<br>ppi才是是图像分辨率的单位，即pixels per inch，图像ppi值越高，画面的细节就越丰富，因为单位面积的像素数量更多，数码相机出来的图片都是72ppi的分辨率，默认出来就是这么多，拿到Photoshop里面改成300ppi，我认为没有什么实际意义，而且增大了图像的体积，除非你用的是tiff格式，不在乎。<br>dpi是针对于输出设备而言的，指输出分辨率，dots per inch，一般的激光打印机的输出分辨率是300dpi-600dpi，印刷的照排机达到1200dpi-2400dpi。  </p>
+<p>ppi和dpi确实是两个概念，但是有些事情是约定成俗的，图片的ppi无法反映这张图片能在冲印店得到的冲印质量，不如你去店里试试看，你问问操作员你的图片是72ppi会得到什么样的冲印质量，多数操作员会一头雾水。<br>在冲印店里我们只用dpi，因为我们拿去的图片必定是为了输出成照片，对于操作人员，他要知道的就是你的图片像素和你所需要印制的尺寸，这两个要素构成了dpi，所以尽管不规范，对于需要冲印的图片我们只有用dpi的大小来沟通。<br>“拿到Photoshop里面改成300ppi，我认为没有什么实际意义，而且增大了图像的体积”这样的改法是固定图像大小（尺寸）下对ppi的修改，它导致了图片像素不真实的扩大，因此导致图片体积的扩大而且图像质量并无改善（多出来的像素都是差值计算出来的），正确的办法是，先按照你所需要扩印的尺寸的比例裁切你的图片，然后固定图片的像素（把“重定义图片的像素”前面的勾去掉）和比例，在“文档大小”里把宽度和高度调整到你所想要的扩印尺寸一致，这时候出来的ppi就是你的图片在这个冲印尺寸下可以得到的dpi，若低于120说明印出来的效果会比较差，120~200说明效果还可以，300是最好的效果，若大于300，先把“重定义图片的像素”前面勾上再修改ppi到300或更低。<br>（注：300dpi是冲印机的极限，大于300ppi的图片将对照片清晰度无任何改善，实际上250就够了，就算你输入大于300ppi的图片文件到冲印机，冲印机也会先把图片计算成300ppi的再进行扩印，另外别小看冲印机的300dpi，冲印机300dpi的照片素质是任何打印设备所无法逾越的）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/04/02/the-difference-between-dpi-and-ppi/" data-id="cji00lknn00fkhnzsyejwyprh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx-has-a-413-request-entity-too-large-error-solution" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/25/nginx-has-a-413-request-entity-too-large-error-solution/" class="article-date">
+  <time datetime="2011-03-25T05:49:55.000Z" itemprop="datePublished">2011-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/25/nginx-has-a-413-request-entity-too-large-error-solution/">Nginx出现“413 Request Entity Too Large”错误解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天使用Wordpress的flash版文件上传功能的时候，总是提示接口错误，很是郁闷。换小文件发现没有问题，所以问题肯定出现在文件大小上，找了半天没有发现wordpress有限制上传文件大小的地方。</p>
+<p>切换到传统文件上传界面，重新上传一个大文件，这回出来错误提示了，413 Request Entity Too Large，google了一下，发现是Nginx的错误提示。</p>
+<p>解决方法：打开nginx主配置文件nginx.conf，找到http{}段，添加<br>client_max_body_size 20m;<br>Centos下 vi /usr/local/nginx/conf/nginx.conf</p>
+<p>重启NGINX<br>kill -HUP `cat /usr/local/nginx/nginx.pid `<br>恢复正常</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/25/nginx-has-a-413-request-entity-too-large-error-solution/" data-id="cji00lkiw00bahnzsdeu080z1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/413/">413</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/entity/">entity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/large/">large</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/request/">request</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/too/">too</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-how-to-view-the-update-log-of-rpm-package-changelog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/25/how-to-view-the-update-log-of-rpm-package-changelog/" class="article-date">
+  <time datetime="2011-03-25T01:49:38.000Z" itemprop="datePublished">2011-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/25/how-to-view-the-update-log-of-rpm-package-changelog/">如何查看RPM包的更新日志Changelog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RPM安装包必须存在，才能执行以下命令。<br>命令： rpm -qpi &lt;rpm包名&gt;  –changelog |more<br># rpm -qi kernel-PAE-2.6.18-194.32.1.el5 –changelog |more<br>Name        : kernel-PAE                   Relocations: (not relocatable)<br>Version     : 2.6.18                            Vendor: CentOS<br>Release     : 194.32.1.el5                  Build Date: Thu 06 Jan 2011 10:41:36 AM CST<br>Install Date: Thu 24 Mar 2011 04:57:37 PM CST      Build Host: builder10.centos.org<br>Group       : System Environment/Kernel     Source RPM: kernel-2.6.18-194.32.1.el5.src.rpm<br>Size        : 46645007                         License: GPLv2<br>Signature   : DSA/SHA1, Thu 06 Jan 2011 08:16:00 PM CST, Key ID a8a447dce8562897<br>URL         : <a href="http://www.kernel.org/" target="_blank" rel="noopener">http://www.kernel.org/</a><br>Summary     : The Linux kernel compiled for PAE capable machines.<br>Description :<br>This package includes a version of the Linux kernel with support for up to<br>64GB of high memory. It requires a CPU with Physical Address Extensions (PAE).<br>The non-PAE kernel can only address up to 4GB of memory.<br>Install the kernel-PAE package if your machine has more than 4GB of memory.<br>* Wed Jan 05 2011 Karanbir Singh &lt;<a href="mailto:kbsingh@centos.org" target="_blank" rel="noopener">kbsingh@centos.org</a>> [2.6.18-194.32.1.el5.centos]<br>* Roll in CentOS Branding</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/25/how-to-view-the-update-log-of-rpm-package-changelog/" data-id="cji00lkde006mhnzsxhc6t7fo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-comodo-and-cisco-vpn-blue-screen-resolution-rotation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/17/comodo-and-cisco-vpn-blue-screen-resolution-rotation/" class="article-date">
+  <time datetime="2011-03-17T05:44:22.000Z" itemprop="datePublished">2011-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/windows/">windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/17/comodo-and-cisco-vpn-blue-screen-resolution-rotation/">comodo与cisco vpn蓝屏解决记（转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转<a href="http://hi.baidu.com/zylyly/blog/item/20f814603dcde7d78cb10d53.html" target="_blank" rel="noopener">http://hi.baidu.com/zylyly/blog/item/20f814603dcde7d78cb10d53.html</a></p>
+<p>在家通过VPN连单位网络，是经常的事情，可因种种未知原来，使得每次VPN连接都非常痛苦。从今天开始，终于可告别此痛苦了，为避免更多的朋友经历同样的痛苦，在下面附上解决方案及一些”废话“。<br>-----------------------------------------------<br>很久以前，发现VPN连不上，于是折腾了系统中的各种软件，最后发现与卡巴斯基有关，于是弃卡巴不用。转用“小红伞”。<br>再次很久以前，发觉有必要安装防火墙了，经多次试用，最后选择了“风云”，平时一切使用均正常。可多次出现了蓝屏。。。经多次的蓝屏，发觉都是在使用完cisco vpn后，再连接互联网时发生蓝屏。于是归因于“风云”的不兼容，准备弃之不用，但经试用多种不同的防火墙软件，发觉还是“风云”好用，于是重新装回它，忍受每次vpn后蓝屏的痛苦。  </p>
+<p>前几个月前，装 风云2009后，发觉CISCO vpn可连上，但不能访问单位的任何资源，卸载风云2009后，vpn又可正常使用，且vpn后不会蓝屏。于是又归因于”风云“。。。  </p>
+<p>昨晚（终于步入正题），需连接vpn，但不能连上，很火，于是下定决心找到”风云“的替代者，昨晚反复试用了”op“”comodo“”风云“到凌晨3点，测试结果是：”comodo、风云“均出现蓝屏，op与vpn可正常使用，但op的英文界面的确有点难受。。。  </p>
+<p>今早起床后，继续折腾防火墙，经昨晚试用，发现comodo杀毒挺强的，杀毒与防火墙一体化，觉定用它暂代替”风云+小红伞“。准备忍受与vpn的蓝屏。。。  </p>
+<p>可刚才一想，不对呀，那么多防火墙均与cisco vpn出现蓝屏，怎么可能问题都是防火墙的呢？为什么不是cisco vpn呢？是呀，于是又google一下，”根据WinDbg的调试，是由于Cisco VPN安装时自带的ZA的防火墙与XP系统防火墙冲突，导致显卡驱动停止响应。Google后发现的解决方案时从系统目录下删除vsdatant.sys和vsdata.dll两个文件“。赶忙删除vsdatant.sys和vsdata.dll，一试vpn，可正常访问单位资源，断开vpn后，浏览器上网，没有出现”风云“似蓝屏。耶！终于解决了vpn与防火墙的的痛苦。感谢万能的google、感谢万能的网友。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/17/comodo-and-cisco-vpn-blue-screen-resolution-rotation/" data-id="cji00lk9h0036hnzsw29pxzjg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-limitation-of-memcache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/17/the-limitation-of-memcache/" class="article-date">
+  <time datetime="2011-03-17T03:14:42.000Z" itemprop="datePublished">2011-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/17/the-limitation-of-memcache/">memcache的限制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>memcache单个缓存值限制为1M(1000000bytes)，超过这个限制的时候会出如下错误。</p>
+<blockquote>
+<p>ValueError: Values may not be more than 1000000 bytes in length; received 2000000 bytes</p>
+</blockquote>
+<p>memcache的keys限制为250 bytes，超过这个长度会报错。</p>
+<blockquote>
+<p>ValueError: Keys may not be more than 250 bytes in length, received 14670 bytes</p>
+</blockquote>
+<p>memcache的时间设置没限制，但服务器会自动清理缓存，官方好像说过最长为1个月时间(3600*24*30)。</p>
+<p>  memcached的简单限制就是键（key）和item的限制。最大键长为250个字符。可以接受的储存数据不能超过1MB，因为这是典型slab 的最大值。这里我们可以突破对key长度的限制。<br>问题解决：<br>修改memcached源文件。在memcached.h中定义key的长度，其代码为：  </p>
+<p>#define KEY_MAX_LENGTH 250<br>更换为所需要的长度，比如：1024  </p>
+<p>#define KEY_MAX_LENGTH 1024  </p>
+<p>但不建议增大key，key大 value小，效率就低了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/17/the-limitation-of-memcache/" data-id="cji00lkog00g7hnzs9le1iwk3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

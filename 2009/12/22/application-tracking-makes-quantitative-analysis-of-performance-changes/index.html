@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>应用程序跟踪对性能改变进行量化分析 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用 Apache Web 服务器作为示例，以了解如何分析公共配置的性能含义。使用应用程序跟踪来观察应用程序运行过程中进行的系统调用。通过统计调用的次数和发生的时间，您可以轻松地了解性能改变的影响。 您 可以对应用程序进行跟踪，以找出它们暂停或不运行的原因。并且可以使用同样的方法，了解更多关于应用程序的信息并理解某些配置的性能含义。因为 Apache 非常流行并且大多数读者对它都比较熟悉，所以本文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用程序跟踪对性能改变进行量化分析">
+<meta property="og:url" content="http://yoursite.com/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用 Apache Web 服务器作为示例，以了解如何分析公共配置的性能含义。使用应用程序跟踪来观察应用程序运行过程中进行的系统调用。通过统计调用的次数和发生的时间，您可以轻松地了解性能改变的影响。 您 可以对应用程序进行跟踪，以找出它们暂停或不运行的原因。并且可以使用同样的方法，了解更多关于应用程序的信息并理解某些配置的性能含义。因为 Apache 非常流行并且大多数读者对它都比较熟悉，所以本文">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-04T09:12:52.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="应用程序跟踪对性能改变进行量化分析">
+<meta name="twitter:description" content="使用 Apache Web 服务器作为示例，以了解如何分析公共配置的性能含义。使用应用程序跟踪来观察应用程序运行过程中进行的系统调用。通过统计调用的次数和发生的时间，您可以轻松地了解性能改变的影响。 您 可以对应用程序进行跟踪，以找出它们暂停或不运行的原因。并且可以使用同样的方法，了解更多关于应用程序的信息并理解某些配置的性能含义。因为 Apache 非常流行并且大多数读者对它都比较熟悉，所以本文">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-application-tracking-makes-quantitative-analysis-of-performance-changes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/" class="article-date">
+  <time datetime="2009-12-22T03:18:11.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      应用程序跟踪对性能改变进行量化分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用 Apache Web 服务器作为示例，以了解如何分析公共配置的性能含义。使用应用程序跟踪来观察应用程序运行过程中进行的系统调用。通过统计调用的次数和发生的时间，您可以轻松地了解性能改变的影响。</p>
+<p>您 可以对应用程序进行跟踪，以找出它们暂停或不运行的原因。并且可以使用同样的方法，了解更多关于应用程序的信息并理解某些配置的性能含义。因为 Apache 非常流行并且大多数读者对它都比较熟悉，所以本文使用 Apache 作为示例。Apache 所进行的每次系统调用都会对 Web 页面的提供带来延迟，通过跟踪不同配置下的 Web 服务器，您可以确定具体配置的影响。</p>
+<p>应用程序跟踪概述</p>
+<p>在应用程序的执行 过程中，当需要打开文件、发送数据包或者使用系统资源时，它会对基础操作系统进行相应的系统调用。跟踪应用程序意味着可以 在调用发生时观察到这些系统调用，这将使得您能够深入地了解该应用程序的行为。在 Solaris 和 IBM AIX? 操作系统 (AIX) 中，使用 truss 命令完成这项任务，而在 Linux? 中则使用 strace。清单 1 显示了对 pwd 命令进行跟踪的示例。</p>
+<p>清单 1. 跟踪 pwd 命令</p>
+<p>-bash-3.00$ truss pwd … getcwd(“/export/home/sean”, 1025) = 0 /export/home/sean write(1, “ / e x p o r t / h o m e”.., 18) = 18 _exit(0)</p>
+<p>在删除开始处与加载该应用程序相关的输出内容后，您可以看到所进行的三次系统调用：</p>
+<p>getcwd 返回当前工作目录。输出内容中显示了字符串“/export/home/sean”返回到缓冲区。</p>
+<p>write 可以显示给定的字符串。因为在其执行之后才显示这个系统调用，所以先输出了它的执行结果。还可以注意到，write 系统调用的结果是写入字符的个数数目，在这个示例中为 17 加上一个回车。</p>
+<p>_exit 使用错误代码 0 退出该程序，这个错误代码通常表示成功结束。</p>
+<p>尽管这是一个很简单的示例，但它演示了通过应用程序跟踪可以观察程序内部机制的程度。有关跟踪方面更深入的信息，请参见参考资料部分。</p>
+<p>Apache 配置的简要介绍</p>
+<p>可以通过一个名为 httpd.conf 的文件对 Apache Web 服务器进行配置。清单 2 显示了一个简单配置中的部分内容。</p>
+<p>清单 2. 示例 httpd.conf</p>
+<p>DocumentRoot “/var/apache/htdocs” Options FollowSymLinks AllowOverride None Options Indexes FollowSymLinks MultiViews</p>
+<p>第一行定义了在何处可以找到 HTML 文件。将所有的请求都映射到这个目录。如果请求 /project/charter.html，将使用 /var/apache/htdocs/project/charter.html 提供该页面。httpd.conf 中剩余的部分由两个 Directory 节组成。 和 之间的任何内容都将应用于指定目录及其所有的子目录。在本例中，第一节将两项设置应用于根目录，而第二节则指向 /var/apache/htdocs。</p>
+<p>如果多个节应用于单个请求，那么将会对这些命令进行组合，并且最适合的目录具有高优先级。例如，将 使用 /var/apache/htdocs/project/charter.html 提供 /project/charter.html 请求的页面。/var/apache/htdocs 是 / 的子目录，所以 Options Indexes FollowSymLinks MultiViews 来自第二节，AllowOverride None 来自第一节。</p>
+<p>可以对许多内容进行配置，并且每项内容都具有其性能含义。本文余下的内容重点关注于如何对这些改变的影响进行量化分析。</p>
+<p>建立基准</p>
+<p>在您进行任何调整之前，务必要了解系统当前的运行方式。使用 -X 参数启动 Apache，这个参数将强制 Apache 进入单进程调试模式。这样做可以确保将请求发送到正在进行跟踪的进程，并且消除常规进程间通信所带来的开销。</p>
+<p>在 守护进程启动之后，通过运行 ps -ef 找到相应的进程 ID，并查找 httpd 守护进程。在找到该进程之后，使用 truss -c -p PID 附加到该进程。-c 选项表示对系统调用进行计数，而不是逐个显示它们，而 -p 则表示将跟踪器附加于一个正在运行的进程。</p>
+<p>使用 Web 浏览器请求文档。在页面加载之后，回到 truss 应用程序，然后按 Ctrl-C 以结束计数。对于静态 HTML 页面，您应该看到如清单 3 所示的内容（为使这些数字变得更有趣，本示例进行了 100 次相同的请求）。</p>
+<p>清单 3. 系统调用基准</p>
+<p>sunbox# truss -c -p 15026 (make the Web request 100 times) ^C syscall seconds calls errors read .009 200 write .020 200 close .020 200 time .004 300 alarm .018 1100 fcntl .009 300 sigaction .007 400 munmap .007 100 llseek .001 100 pollsys .005 100 mmap64 .008 100 stat64 .007 100 open64 .006 100 accept .019 100 getsockname .002 100 setsockopt .002 100 ——– —— —- sys totals: .149 3600 0 usr time: .120 elapsed: 8.960</p>
+<p>truss 返回系统调用的列表、执行调用耗费的总时间、调用的次数和任何发现的问题。在这个报表的结尾处，返回了这些系统调用耗费的总时间，以及执行应用程序所耗费 的时间。对于这些目的来说，所耗时间是没有意义的，因为它指的是从启动 truss 开始到其结束的时间，而与 Web 请求没有任何关系。</p>
+<p>清 单 3 显示了最简单的情况。在来自 Web 浏览器的连接请求到达后，accept 系统调用完成该连接。Web 服务器使用 read 调用获得请求的内容，将请求的内容映射到磁盘上的文件。Web 服务器首先使用 stat64 验证该文件是否存在，使用 open64 打开该文件以便进行读取，然后使用 mmap64 将该文件的内容映射到内存中。然后使用 write 将这个文件发送回客户端，使用另一个 write 生成日志文件，并且服务器执行来自浏览器的最后一个 read。该列表中其余的调用都是系统开销，并且当配置发生改变时，不会有显著的变化。</p>
+<p>解释这些数值</p>
+<p>100 次请求总共耗费 0.269 秒 (0.149 + 0.120)，这样的性能相当不错，并且该服务器每秒钟应该可以提供大约 370 个页面 (100/0.269)。但是不能完全相信这些数值，因为它们仅表示进程耗费在 CPU 上的时间，而不是其真正的执行时间（也称为时钟时间）。还有更多的因素需要考虑，如磁盘和网络的速度、计算机上正运行的其他内容、该守护进程运行于调试模 式的事实。您还需要考虑系统调用跟踪本身的开销。</p>
+<p>本文中使用的方法重点关注这些操作的相对计时和使用应用程序跟踪消除浪费掉的操作。如果您需要了解 Web 服务器每秒可以提供的页面数目，参考资料部分中有相应的软件链接，它可以帮助您确定该数值。</p>
+<p>跟踪 AllowOverride 范围</p>
+<p>Apache 允许管理员通过 .htaccess 机制将配置权委托给个别的用户。.htaccess 是一个包含附加配置指令的文件，如果在 httpd.conf 中通过 AllowOverride 配置了请求的目录，那么 Web 服务器将搜索这个文件。清单 4 显示了前面的配置了 AllowOverride Limit 的配置信息，它允许用户获取访问 Web 页面的用户名和密码。</p>
+<p>清单 4. 配置了 AllowOverride 的示例 httpd.conf</p>
+<p>DocumentRoot “/var/apache/htdocs” Options FollowSymLinks AllowOverride Limit Options Indexes FollowSymLinks MultiViews</p>
+<p>重新启动 httpd 守护进程并再次运行这些测试，其结果如清单 5 所示。</p>
+<p>清单 5. 开启了 AllowOverride Limit 的 100 次请求的结果</p>
+<p>sunbox# truss -c -t write,read,open64,stat64,mmap64 -p 21136 ^C syscall seconds calls errors read .012 200 write .021 200 mmap64 .007 100 stat64 .007 100 open64 .022 500 400 ——– —— —- sys totals: .072 1100 400 usr time: .141 elapsed: 16.660</p>
+<p>初看起来，系统调用耗费的时间下降了，但这是因为使用了 -t 选项将跟踪任务限制于一些有意义的系统调用。大多数系统调用并没有发生变化，但现在有 500 次 open64 调用，其中有 400 次返回了错误。执行 open64 的时间增加了（从 0.006 秒增加到 0.22 秒），同时用户空间部分的时间也增加了（从 0.12 秒增加到 0.141 秒）。</p>
+<p>时间增加是因为 Apache 现在必须完成附加的工作以处理该请求，即使没有配置重写。单独的 AllowOverride Limit 配置明显地增加了开销。问题依然存在，即什么导致了这些错误？ 要回答这个问题，可以跟踪单个 Web 请求，如清单 6 所示。</p>
+<p>清单 6. 确定 open64 调用失败的原因</p>
+<p>sunbox# truss -t open64 -p 21136 open64(“/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/htdocs/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/htdocs/test.html”, O_RDONLY) = 5</p>
+<p>清单 6 显示了当请求进入时，Apache 对每个指向 /var/apache/htdocs 的目录进行检查并尝试打开 .htaccess 文件，但是因为 AllowOverride 配置为根目录，所以这个文件并不存在。Apache 必须在每个子目录中查找 .htaccess 文件的重写信息，并对它们进行处理。这样一来，由于额外的系统调用、更多的用户空间开销和额外的磁盘活动，从而进一步增加了延迟。对于 100 次请求来说，增加零点几秒的时间看起来并不是很明显，但是对于一台繁忙的服务器，就会增加更长的延迟。</p>
+<p>既然您了解了重写的范围，那么理想的 解决方案是不允许重写，并且强制在 httpd.conf 中对所有的内容进行配置。如果失败，可以将配置的范围限制于需要它的目录。在这个研究示例中，把 AllowOverride Limit 放到第二个 Directory 节中，这将仅添加一个额外的 open64 调用，以便在 /var/apache/htdocs 中查找 .htaccess。对所有的父目录进行搜索是浪费时间，因为在这个配置中，不会使用其中的任何文件来提供页面。</p>
+<p>研究主机名查找</p>
+<p>当 Web 服务器接收到一个请求时，它所知道的关于客户端的信息只有其 IP 地址，如 129.42.42.212 对应于 IBM.com。然而，Web 服务器并不知道这个地址来自于 IBM.com，因此，它必须进行反向 DNS 查找。这样做需要耗费一定的时间，如果在发送请求之前需要这个名称，那么将会延迟对客户端的响应。过去，Apache 在缺省情况下会执行这些反向查找，但现在这种行为已经有了改变。</p>
+<p>还有另一种情况，其中必须进行反向 DNS 搜索。当基于主机名（而不是 IP 地址）配置访问限制时，Apache 必须首先将 IP 地址反向解析为相应的主机名，然后再次将主机名解析为 IP 地址，以确保它们正确匹配。因为反向域名搜索可以由地址块所有者确定，所以要防止 IP 欺骗的发生，必须进行第二次查找。可以通过应用程序跟踪来确定 DNS 解析的影响吗？</p>
+<p>要对其进行测试，可以从前面的示例中删除 AllowOverride Limit，然后添加 Allow from ibm.com 代替缺省的 Allow from all。然后，对 DNS 服务器进行更改以便向您的工作站返回 something.ibm.com，确保初始反向检查能够成功并且随后的正向查找必须通过 Internet 完成。在示例运行过程中，对保护的 Web 服务器的请求耗费了 15 秒的时间。相反，使用 IP 地址代替 ibm.com 所耗费的时间小于半秒钟。清单 7 显示了在使用 DNS 确保安全时，对一些系统调用进行统计。</p>
+<p>清单 7. 通过主机名进行限制的 Web 请求的 truss 输出</p>
+<p>bash-3.00# truss -c -p 26089 ^C syscall seconds calls errors read .000 5 write .000 3 open .000 2 close .001 10 time .000 3 stat .000 5 alarm .000 8 fcntl .000 7 2 sigaction .000 3 sysconfig .000 5 pollsys .001 5 door_info .000 2 stat64 .000 1 open64 .000 2 so_socket .001 5 accept .000 1 connect .002 5 recvfrom .000 2 send .001 5 getsockname .000 1 setsockopt .000 1 ——– —— —- sys totals: .011 81 2 usr time: .004</p>
+<p>truss 报告了该进程所耗费的时间远远小于客户端感觉到的时间（0.015 秒与 15 秒）。这是因为大多数套接字操作都是异步地 进行的，其中套接字进行轮询以检查数据是否出现，而不是使得应用程序处于阻塞（等待）状态以等待响应。如此一来，应用程序在等待结果的时候不会消耗 CPU 时间。这就解释了 truss 报告的时间和客户端感觉到的时间之间出现差异的原因。</p>
+<p>truss 并没有忘记所做的更改，0.015 秒比本文中研究的第一个简单示例要高一个数量级。从系统调用计数中可以看出，有一些以前没有出现过的调用，包括 read、write、close 和 stat。以及还有 send、connect、so_socket 和 pollsys，这些系统调用用于进行名称请求。因为名称解析可以来自于不同的来源，包括本地文件系统和名称缓存守护进程，所以必须对这几个位置进行检 查。在随后的调用中，请求时间小于 1 秒，这是因为对 DNS 信息进行了缓存。</p>
+<p>最后，大部分的延迟来自于远程名称服务器和正向解析。这 个事实进一步强调了，如果您希望依赖于名称查找，那么就需要使用 DNS 缓存和快速 DNS 服务器。然而，最佳的解决方案是使用一种可选的方法来处理这个问题。一种比较简单的解决方案是指定 IP 地址块（如 Allow from 10.0.0.0/8），这种方法比 DNS 查找要快得多。因为反向和正向查找必须匹配，所以对名称进行的操作，很可能可以用于网段。另外，Apache 可以集成各种身份验证系统，所以基于用户的身份验证是另一种可选方法。</p>
+<p>系统调用与库调用</p>
+<p>如果熟悉套接字编程，那么您可能会寻 找 gethostbyname 和其他类似的调用，这些调用都可以用来执行主机查找功能。有一些库调用，由 /usr/lib 中的系统库 libc 和 libsocket 提供。库调用封装了一个或多个系统调用，以及额外的逻辑。您可以将它们作为程序员友好的接口来进行系统调用。例如，gethostbyname 库调用将执行许多步骤，以便根据服务器的配置查找相应的名称，如检查 /etc/hosts 或搜索网络信息系统 (NIS) 或 DNS。这些步骤包含了内核所提供的更小的构件，即系统调用。在大多数这样的这种情况下，两者之间的差别通常很小。truss 还可以跟踪库调用，但是无法提供像系统调用那样详细的信息。</p>
+<p>结束语</p>
+<p>监视和统计系统调用的功能不仅有助于进行故障排除，还有助 于理解应用程序配置如何对性能产生影响。与系统的其他部分之间的每个交互操作都会 调用一个或多个系统调用，并且每次调用都会增加系统开销。这并不是说系统调用非常糟糕，如果程序员不与其他的部分进行交互，那将是很乏味的。相反，在改变 应用程序时，您可以监视系统调用的使用，以便更好地了解这些改变对总体性能的影响。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/" data-id="cji00lk6s001hhnzsp21nrxcg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2009/12/22/a-solution-to-track-unix-applications/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          跟踪 UNIX 应用程序的解决方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2009/12/22/program-analysis-tool-gprof/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">程序分析工具gprof介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

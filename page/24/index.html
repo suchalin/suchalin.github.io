@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/24/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-use-smartmontools-to-monitor-the-health-of-your-disks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/use-smartmontools-to-monitor-the-health-of-your-disks/" class="article-date">
+  <time datetime="2009-12-22T03:26:46.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/use-smartmontools-to-monitor-the-health-of-your-disks/">使用smartmontools监控磁盘的健康状态</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/use-smartmontools-to-monitor-the-health-of-your-disks/" data-id="cji00lkta00k6hnzsho3n0usm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-watch-monitor-command-run-results" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/watch-monitor-command-run-results/" class="article-date">
+  <time datetime="2009-12-22T03:26:08.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/watch-monitor-command-run-results/">watch -- 监测命令的运行结果</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>watch 是一个非常实用的命令，基本所有的 Linux 发行版都带有这个小工具，如同名字一样，watch 可以帮你监测一个命令的运行结果，省得你一遍遍的手动运行。</p>
+<p>举 例来说，Linux 系统有一个基础命令 w，可以显示当前的 uptime、负载还有登录的用户，非常方便，但是如果我想监测这些数据，看看有没有新用户登入，看看某段的时间的负载是不是太大之类的，就得手动一遍遍 的运行这个命令，然后查看结果，虽然命令只有一个字母，但是还是很郁闷……</p>
+<p>watch 就是干这个用的，直接在 watch 后面接你想运行的命令，watch 就会帮你重复运行，并把每次的结果都更新在屏幕上～</p>
+<p>要想监测 w 命令的运行结果，只要 watch w 就可以了：</p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_linuxeden_1533080.png" alt="" title="watch -- 监测命令的运行结果 - suchalin - 为了更好的生活而奋斗！"></p>
+<p>默认 watch 会以 2s 的间隔重复运行命令，你也可以用 -n 参数指定时间间隔～</p>
+<p>还有一个实用的参数是 -d，这样 watch 会帮你高亮显示变化的区域，这样更加一目了然了～ <img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_linuxeden_1533081.gif" alt="" title="watch -- 监测命令的运行结果 - suchalin - 为了更好的生活而奋斗！"></p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_linuxeden_1533082.png" alt="" title="watch -- 监测命令的运行结果 - suchalin - 为了更好的生活而奋斗！"></p>
+<p>Ctrl+c 就可以退出～</p>
+<p>你可以拿他来监测你想要的一切命令的结果变化，比如 tail 一个 log 文件，ls 监测某个文件的大小变化，看你的想象力了～ <img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_linuxeden_1533083.gif" alt="" title="watch -- 监测命令的运行结果 - suchalin - 为了更好的生活而奋斗！"></p>
+<p>如果你的发行版中不幸没有这个命令，可以到<a href="http://procps.sourceforge.net/" target="_blank" rel="noopener">这里</a>下载安装，watch 属于 procps 这个软件包。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/watch-monitor-command-run-results/" data-id="cji00lku400kshnzspj84abs8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-ps-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/linux-ps-command/" class="article-date">
+  <time datetime="2009-12-22T03:25:30.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/linux-ps-command/">linux的ps命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>linux的ps命令和top都是用来监视系统进程和资源使用情况的有用命令, ps命令更为常用, 所以掌握ps命令是很有必要的</p>
+<p>ps命令如果有任何疑问,请在终端下输入 :# man ps</p>
+<p>名称：ps<br>使用权限：所有使用者<br>使用方式：ps [options] [–help]<br>说明：显示瞬间行程 (process) 的动态<br>参数：<br>ps 的参数非常多, 在此仅列出几个常用的参数并大略介绍含义<br>-A 列出所有的行程<br>-w 显示加宽可以显示较多的资讯<br>-au 显示较详细的资讯<br>-aux 显示所有包含其他使用者的行程</p>
+<p>au(x) 输出格式 :</p>
+<p>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND<br>USER: 行程拥有者<br>PID: pid<br>%CPU: 占用的 CPU 使用率<br>%MEM: 占用的记忆体使用率<br>VSZ: 占用的虚拟记忆体大小<br>RSS: 占用的记忆体大小<br>TTY: 终端的次要装置号码 (minor device number of tty)<br>STAT: 该行程的状态:<br>D: 不可中断的静止 (通悸□□缜b进行 I/O 动作)<br>R: 正在执行中<br>S: 静止状态<br>T: 暂停执行<br>Z: 不存在但暂时无法消除<br>W: 没有足够的记忆体分页可分配<br>&lt;: 高优先序的行程<br>N: 低优先序的行程<br>L: 有记忆体分页分配并锁在记忆体内<br>START: 行程开始时间<br>TIME: 执行的时间<br>COMMAND:所执行的指令</p>
+<p>范例：</p>
+<p>ps<br>PID TTY TIME CMD<br>2791 ttyp0 00:00:00 tcsh<br>3092 ttyp0 00:00:00 ps<br>% ps -A<br>PID TTY TIME CMD<br>1 ? 00:00:03 init<br>2 ? 00:00:00 kflushd<br>3 ? 00:00:00 kpiod<br>4 ? 00:00:00 kswapd<br>5 ? 00:00:00 mdrecoveryd<br>…….<br>% ps -aux<br>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND<br>root 1 0.0 0.7 1096 472 ? S Sep10 0:03 init [3]<br>root 2 0.0 0.0 0 0 ? SW Sep10 0:00 [kflushd]<br>root 3 0.0 0.0 0 0 ? SW Sep10 0:00 [kpiod]<br>root 4 0.0 0.0 0 0 ? SW Sep10 0:00 [kswapd]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/linux-ps-command/" data-id="cji00lkgn0099hnzslgo9owp9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-debug-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/linux-debug-command/" class="article-date">
+  <time datetime="2009-12-22T03:25:01.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/linux-debug-command/">linux下调试命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>调试程序时有用的命令：<br>gdb Linux下的调试器<br>pstack 查看进程的调用栈，如果是多线程的话，可以查看每个线程的调用栈<br>pmap 查看内存的映射情况<br>strace 跟踪进程的系统调用<br>ltrace 跟踪程序的系统调用<br>ldd 查看依赖库<br>lsof 查看进程打开的所有文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/linux-debug-command/" data-id="cji00lkf90082hnzshiupnkbm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-principle-and-use-of-ldd-commands" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/the-principle-and-use-of-ldd-commands/" class="article-date">
+  <time datetime="2009-12-22T03:24:24.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/the-principle-and-use-of-ldd-commands/">LDD命令的原理与使用方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>作用：用来查看程式运行所需的共享库**</strong>,<strong>**常用来解决程式因缺少某个库文件而不能运行的一些问题。</strong><br>ldd命令原理</p>
+<p>1、首先ldd不是个可执行程式，而只是个shell脚本<br>2、ldd能够显示可执行模块的dependency，<strong>其原理是通过设置一系列的环境变量</strong>，如下：LD_TRACE_LOADED_OBJECTS、LD_WARN、LD_BIND_NOW、LD_LIBRARY_VERSION、LD_VERBOSE等。当LD_TRACE_LOADED_OBJECTS环境变量不为空时，所有可执行程式在运行时，他<strong>都会只显示模块的**</strong>dependency<strong>**，而程式并不真正执行。</strong>要不你能在shell终端测试一下，如下：(1) export LD_TRACE_LOADED_OBJECTS=1<br>(2) 再执行所有的程式，如ls等，看看程式的运行结果<br>3、<strong>ldd**</strong>显示可执行模块的<strong><strong>dependency</strong></strong>的工作原理，其实质是通过<strong><strong>ld-linux.so</strong></strong>（<strong><strong>elf</strong></strong>动态库的装载器）来实现的。<strong>我们知道，ld-linux.so模块会先于executable模块程式工作，并获得控制权，因此当上述的那些环境变量被设置时，ld-linux.so选择了显示可执行模块的dependency。<br>4、</strong>实际上能直接执行<strong><strong>ld-linux.so</strong></strong>模块，如：<strong><strong>/lib/ld-linux.so.2 –list program</strong></strong>（这相当于<strong><strong>ldd program</strong></strong>）<strong><br>ldd命令使用方法(摘自ldd –help)<br>名称ldd - 打印共享库的依赖关系<br>大纲    ldd [选项]…　文件…<br>描述</strong>ldd<strong> </strong>输出在命令行上指定的每个程式或共享库需要的共享库。**选项<br> –version　　　　　　　打印ldd的版本号<br> -v –verbose　　　　　　　打印所有信息，例如包括符号的版本信息<br> -d –data-relocs　　　　　　　执行符号重部署，并报告缺少的目标对象（只对ELF格式适用）<br> -r –function-relocs　　　　　　　对目标对象和函数执行重新部署，并报告缺少的目标对象和函数（只对ELF格式适用）<br> –help 用法信息<br>注意:<br> ldd的标准版本和glibc2一起提供。Libc5和老版本以前提供，在一些系统中还存在。在libc5版本中长选项不支持。另一方面，glibc2版本不支持-V选项，只提供等价的–version选项。<br>  如果命令行中给定的库名字包含’/’，这个程式的libc5版本将使用他作为库名字；否则他将在标准位置搜索库。运行一个当前目录下的共享库，加前缀”./“。<br>错误:<br> ldd不能工作在a.out格式的共享库上。<br> ldd不能工作在一些非常老的a.out程式上，这些程式在支持ldd的编译器发行前已创建。如果你在这种类型的程式上使用ldd，程式将尝试argc = 0的运行方式，其结果不可预知。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/the-principle-and-use-of-ldd-commands/" data-id="cji00lkpb00gyhnzs0btpr9ya" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-pmap-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/linux-pmap-command/" class="article-date">
+  <time datetime="2009-12-22T03:22:29.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/linux-pmap-command/">linux之pmap命令！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>观察到系统中的指定进程的地址空间分布情况显示一个目标文件或者链接库文件中的目标文件的各个段的大小。该文件从/proc//maps中获得数据。<br>命令格式：<br>pmap  </p>
+<p>范例：<br>[root@localhost security]# pmap -d 4993<br>4993: -bash<br>Address Kbytes Mode Offset Device Mapping<br>08047000 596 r-x– 0000000000000000 003:00006 bash bash的代码段<br>080dc000 28 rwx– 0000000000094000 003:00006 bash bash的数据段<br>080e3000 280 rwx– 00000000080e3000 000:00000 [ anon ] bash的堆<br>4d575000 84 r-x– 0000000000000000 003:00006 ld-2.3.4.so 共享库的代码段<br>4d58a000 4 r-x– 0000000000015000 003:00006 ld-2.3.4.so 共享库的数据段<br>4d58b000 4 rwx– 0000000000016000 003:00006 ld-2.3.4.so 共享库的堆<br>4d58e000 1164 r-x– 0000000000000000 003:00006 libc-2.3.4.so<br>4d6b1000 4 r-x– 0000000000123000 003:00006 libc-2.3.4.so<br>4d6b2000 12 rwx– 0000000000124000 003:00006 libc-2.3.4.so<br>4d6b5000 8 rwx– 000000004d6b5000 000:00000 [ anon ] 匿名物理内存，<br>4d6de000 8 r-x– 0000000000000000 003:00006 libdl-2.3.4.so<br>4d6e0000 8 rwx– 0000000000001000 003:00006 libdl-2.3.4.so<br>4d807000 12 r-x– 0000000000000000 003:00006 libtermcap.so.2.0.8<br>4d80a000 4 rwx– 0000000000002000 003:00006 libtermcap.so.2.0.8<br>b7bc2000 176 r-x– 0000000000000000 003:00006 GB18030.so<br>b7bee000 8 rwx– 000000000002b000 003:00006 GB18030.so<br>b7bf0000 24 r-xs- 0000000000000000 003:00006 gconv-modules.cache<br>b7bf6000 1060 r-x– 0000000002197000 003:00006 locale-archive<br>b7cff000 2048 r-x– 0000000000000000 003:00006 locale-archive<br>b7eff000 36 r-x– 0000000000000000 003:00006 libnss_files-2.3.4.so<br>b7f08000 8 rwx– 0000000000008000 003:00006 libnss_files-2.3.4.so<br>b7f0a000 8 rwx– 00000000b7f0a000 000:00000 [ anon ]<br>b7f20000 8 rwx– 00000000b7f20000 000:00000 [ anon ]<br>bff0d000 84 rw— 00000000bff0d000 000:00000 [ stack ]<br>ffffe000 4 —– 0000000000000000 000:00000 [ anon ]<br>mapped: 5680K writeable/private: 460K shared: 24K  </p>
+<p>每列的含义如下：<br>参数 解释<br>Address:00378000-0038d000 进程所占的地址空间<br>Kbytes 该虚拟段的大小<br>RSS 设备号（主设备：次设备）<br>Anon 设备的节点号，0表示没有节点与内存相对应<br>Locked 是否允许swapped<br>Mode 权限：r=read, w=write, x=execute, s=shared, p=private(copy on write)<br>Mapping: bash 对应的映像文件名  </p>
+<p>[root@localhost security]# pmap -x 4993<br>4993: -bash<br>Address Kbytes RSS Anon Locked Mode Mapping<br>08047000 596 - - - r-x– bash<br>080dc000 28 - - - rwx– bash<br>080e3000 280 - - - rwx– [ anon ]<br>4d575000 84 - - - r-x– ld-2.3.4.so<br>4d58a000 4 - - - r-x– ld-2.3.4.so<br>4d58b000 4 - - - rwx– ld-2.3.4.so<br>4d58e000 1164 - - - r-x– libc-2.3.4.so<br>4d6b1000 4 - - - r-x– libc-2.3.4.so<br>4d6b2000 12 - - - rwx– libc-2.3.4.so<br>4d6b5000 8 - - - rwx– [ anon ]<br>4d6de000 8 - - - r-x– libdl-2.3.4.so<br>4d6e0000 8 - - - rwx– libdl-2.3.4.so<br>4d807000 12 - - - r-x– libtermcap.so.2.0.8<br>4d80a000 4 - - - rwx– libtermcap.so.2.0.8<br>b7bc2000 176 - - - r-x– GB18030.so<br>b7bee000 8 - - - rwx– GB18030.so<br>b7bf0000 24 - - - r-xs- gconv-modules.cache<br>b7bf6000 1060 - - - r-x– locale-archive<br>b7cff000 2048 - - - r-x– locale-archive<br>b7eff000 36 - - - r-x– libnss_files-2.3.4.so<br>b7f08000 8 - - - rwx– libnss_files-2.3.4.so<br>b7f0a000 8 - - - rwx– [ anon ]<br>b7f20000 8 - - - rwx– [ anon ]<br>bff0d000 84 - - - rw— [ stack ]<br>ffffe000 4 - - - —– [ anon ]<br>-------- ------- ------- ------- -------<br>total kB 5680 - - -</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/linux-pmap-command/" data-id="cji00lkg9008xhnzsj9swi8tc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-a-solution-to-track-unix-applications" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/a-solution-to-track-unix-applications/" class="article-date">
+  <time datetime="2009-12-22T03:21:34.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/a-solution-to-track-unix-applications/">跟踪 UNIX 应用程序的解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用 truss 和 strace</p>
+<p>在 Solaris 和 AIX 上可以使用 truss 工具，它能够跟踪应用程序中的系统调用和信号。可以在 Linux? 上使用的 strace 工具提供相似的功能。在不同的系统上，还有提供相似信息的其他工具，包括 ktrace (FreeBSD) 和 trace。</p>
+<p>truss/strace 概述</p>
+<p>truss 和 strace 工具提供相似的信息，但是命令行选项稍有差异。使用这两种工具的标准方法都是把工具名放在要执行的命令前面。</p>
+<p>例如，清单 3 给出 truss 对于本教程前面提到的 ageindays 程序的输出。</p>
+<p><strong>清单 3. truss 的输出</strong>  </p>
+<p>$ truss ./ageindays 24/1/1980 26/3/2009<br>execve(“ageindays”, 0x08047BBC, 0x08047BCC)  argc = 3<br>mmap(0x00000000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, -1, 0)<br>   = 0xFEFB0000<br>resolvepath(“/usr/lib/ld.so.1”, “/lib/ld.so.1”, 1023) = 12<br>getcwd(“/root”, 1013)                           = 0<br>resolvepath(“/root/ageindays”, “/root/ageindays”, 1023) = 15<br>xstat(2, “/root/ageindays”, 0x08047880)         = 0<br>open(“/var/ld/ld.config”, O_RDONLY)             = 3<br>fxstat(2, 3, 0x08047760)                        = 0<br>mmap(0x00000000, 144, PROT_READ, MAP_SHARED, 3, 0) = 0xFEFA0000<br>close(3)                                        = 0<br>sysconfig(_CONFIG_PAGESIZE)                     = 4096<br>xstat(2, “/usr/lib/libc.so.1”, 0x08046FA0)      = 0<br>resolvepath(“/usr/lib/libc.so.1”, “/lib/libc.so.1”, 1023) = 14<br>open(“/usr/lib/libc.so.1”, O_RDONLY)            = 3<br>mmap(0x00010000, 32768, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_ALIGN, 3, 0)<br>    = 0xFEF90000<br>mmap(0x00010000, 1413120, PROT_NONE, MAP_PRIVATE|MAP_NORESERVE|MAP_ANON|MAP_ALIGN, -1, 0)<br>    = 0xFEE30000<br>mmap(0xFEE30000, 1302809, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_TEXT, 3, 0)<br>    = 0xFEE30000<br>mmap(0xFEF7F000, 30862, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|<br>    MAP_INITDATA, 3, 1306624) = 0xFEF7F000<br>mmap(0xFEF87000, 4776, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_ANON,<br>   -1, 0) = 0xFEF87000<br>munmap(0xFEF6F000, 65536)                       = 0<br>memcntl(0xFEE30000, 187632, MC_ADVISE, MADV_WILLNEED, 0, 0) = 0<br>close(3)                                        = 0<br>mmap(0x00010000, 24576, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON|MAP_ALIGN,<br>   -1, 0)<br>    = 0xFEE20000<br>munmap(0xFEF90000, 32768)                       = 0<br>getcontext(0x080475D0)<br>getrlimit(RLIMIT_STACK, 0x080475C8)             = 0<br>getpid()                                        = 15691 [15690]<br>lwp_private(0, 1, 0xFEE22A00)                   = 0x000001C3<br>setustack(0xFEE22A60)<br>sysi86(SI86FPSTART, 0xFEF879BC, 0x0000133F, 0x00001F80) = 0x00000001<br>ioctl(1, TCGETA, 0x08046C20)                    = 0<br>fstat64(1, 0x08046B80)                          = 0<br>You have been alive 10654 days<br>write(1, “ Y o u   h a v e   b e e”.., 31)      = 31<br>You were born on 24/1/1980 which is a Thursday<br>write(1, “ Y o u   w e r e   b o r”.., 47)      = 47<br>_exit(134511508)  </p>
+<p>清单 4 给出 Linux 上 strace 的输出。</p>
+<p><strong>清单 4. strace 的输出</strong>  </p>
+<p>$ strace ./ageindays 24/1/1980 26/3/2009<br>execve(“./ageindays”, [“./ageindays”, “24/1/1980”, “26/3/2009”],<br>[/* 50 vars */]) = 0<br>brk(0)                                  = 0x602000<br>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)<br>    = 0x7f47db185000<br>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)<br>    = 0x7f47db184000<br>access(“/etc/ld.so.preload”, R_OK)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/lib/tls/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/lib/tls/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/lib/tls/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/lib/tls”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/lib/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/lib/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/lib/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/lib”, {st_mode=S_IFDIR|0755, st_size=53248, …}) = 0<br>open(“/usr/local/lib/tls/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/lib/tls/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/lib/tls/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/lib/tls”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/lib/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/lib/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/lib/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/lib”, {st_mode=S_IFDIR|0755, st_size=4096, …}) = 0<br>open(“/usr/local/qt/lib/tls/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/qt/lib/tls/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/qt/lib/tls/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/qt/lib/tls”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/qt/lib/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/qt/lib/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/local/qt/lib/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/local/qt/lib”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/X11R6/lib/tls/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/X11R6/lib/tls/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/X11R6/lib/tls/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/X11R6/lib/tls”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/X11R6/lib/x86_64/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/X11R6/lib/x86_64”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/usr/X11R6/lib/libc.so.6”, O_RDONLY)<br>    = -1 ENOENT (No such file or directory)<br>stat(“/usr/X11R6/lib”, 0x7fffe31858f0)<br>    = -1 ENOENT (No such file or directory)<br>open(“/etc/ld.so.cache”, O_RDONLY)      = 3<br>fstat(3, {st_mode=S_IFREG|0644, st_size=85050, …}) = 0<br>mmap(NULL, 85050, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f47db16f000<br>close(3)                                = 0<br>open(“/lib/libc.so.6”, O_RDONLY)        = 3<br>read(3, “177ELF211?????????3?&gt;1???3003451?????@”…,<br>    832) = 832<br>fstat(3, {st_mode=S_IFREG|0755, st_size=1330352, …}) = 0<br>mmap(NULL, 3437208, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0)<br>    = 0x7f47dac24000<br>mprotect(0x7f47dad63000, 2093056, PROT_NONE) = 0<br>mmap(0x7f47daf62000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE,<br>    3, 0x13e000) = 0x7f47daf62000<br>mmap(0x7f47daf67000, 17048, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS,<br>   -1, 0) = 0x7f47daf67000<br>clo<br>se(3)                                = 0<br>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)<br>    = 0x7f47db16e000<br>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)<br>    = 0x7f47db16d000<br>arch_prctl(ARCH_SET_FS, 0x7f47db16d6f0) = 0<br>mprotect(0x7f47daf62000, 16384, PROT_READ) = 0<br>mprotect(0x600000, 4096, PROT_READ)     = 0<br>mprotect(0x7f47db186000, 4096, PROT_READ) = 0<br>munmap(0x7f47db16f000, 85050)           = 0<br>fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 1), …}) = 0<br>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)<br>    = 0x7f47db183000<br>write(1, “You have been alive 10654 days<br>“…, 31You have been alive 10654 days<br>) = 31<br>write(1, “You were born on 24/1/1980 which “…, 47You were born on 24/1/1980<br>   which is a Thursday<br>) = 47<br>exit_group(0)    </p>
+<p>在这两个输出中，每个输出行对应于应用程序执行的一个函数调用，其中显示函数的参数和函数调用的返回值。与调试示例不同，列出的每个函数调用都是系统或系统库中的函数，因此表示调用的函数的更低层接口。例如，在应用程序中可能使用 C 或 C++ 中的 de&lt;fpopen()de&lt; 函数打开文件，但是这个函数实际上是更低层的 de&lt;open()de&lt; 函数的包装器。</p>
+<p>了解应用程序正在执行的操作并不需要了解每个函数的情况。输出中的许多行与操作系统为装载和执行程序所做的初始化相关。这两个跟踪输出的基本结构是相同的：</p>
+<ul>
+<li>调用 de&lt;execve()de&lt; 函数以启动一个新程序。</li>
+<li>装载程序所需的库。在 Solaris 输出中，首先使用 de&lt;resolvepath()de&lt; 寻找库，然后使用 de&lt;open()de&lt; 打开库。对于 Linux，使用 de&lt;stat()de&lt; 检查库是否存在，然后使用 de&lt;open()de&lt; 打开它。</li>
+<li>为进程保留和分配一些内存。其中一部分内存是为应用程序保留的堆栈空间，一部分用来保存程序，其他内存保存程序使用的变量。</li>
+<li>最后，执行程序，调用 de&lt;write()de&lt; 函数输出年龄和生日信息。</li>
+</ul>
+<p>如果执行跟踪并希望了解每个步骤的具体情况，可以使用 man 命令访问每个函数的手册页。</p>
+<p>识别应用程序启动问题</p>
+<p>在启动应用程序时的一个典型问题是，程序无法正确地初始化，但是在终止时给出一个不完整或导致误解的消息。对应用程序运行跟踪常常可以揭示这个问题的根源。例如，清单 5 显示一个测试应用程序运行失败了。</p>
+<p><strong>清单 5. 应用程序失败</strong>  </p>
+<p>$ ./errnoacc<br>ERROR: Application failed to initialize  </p>
+<p>错误消息并没有提供关于应用程序为什么会启动失败的具体信息。在这里，问题是故意引入的，但是您使用的任何命令或应用程序都可能出现相同的问题，而错误消息没什么帮助，有时候甚至没有错误消息。</p>
+<p>对应用程序运行跟踪可能会提供一些线索（见清单 6）。</p>
+<p><strong>清单 6. 运行跟踪</strong>  </p>
+<p>$ truss ./errnoacc<br>execve(“errnoacc”, 0x08047B20, 0x08047B28)  argc = 1<br>mmap(0x00000000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, -1, 0)<br>    = 0xFEFB0000<br>resolvepath(“/usr/lib/ld.so.1”, “/lib/ld.so.1”, 1023) = 12<br>getcwd(“/export/home/mc”, 1014)                 = 0<br>resolvepath(“/export/home/mc/errnoacc”, “/export/home/mc/errnoacc”, 1023) = 24<br>xstat(2, “/export/home/mc/errnoacc”, 0x080477E4) = 0<br>open(“/var/ld/ld.config”, O_RDONLY)             = 3<br>fxstat(2, 3, 0x080476C4)                        = 0<br>mmap(0x00000000, 144, PROT_READ, MAP_SHARED, 3, 0) = 0xFEFA0000<br>close(3)                                        = 0<br>sysconfig(_CONFIG_PAGESIZE)                     = 4096<br>xstat(2, “/usr/lib/libc.so.1”, 0x08046F04)      = 0<br>resolvepath(“/usr/lib/libc.so.1”, “/lib/libc.so.1”, 1023) = 14<br>open(“/usr/lib/libc.so.1”, O_RDONLY)            = 3<br>mmap(0x00010000, 32768, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_ALIGN, 3, 0) = 0xFEF90000<br>mmap(0x00010000, 1413120, PROT_NONE, MAP_PRIVATE|MAP_NORESERVE|MAP_ANON|MAP_ALIGN,<br>    -1, 0) = 0xFEE30000<br>mmap(0xFEE30000, 1302809, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_TEXT, 3, 0)<br>    = 0xFEE30000<br>mmap(0xFEF7F000, 30862, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|<br>    MAP_INITDATA, 3, 1306624) = 0xFEF7F000<br>mmap(0xFEF87000, 4776, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_ANON,<br>    -1, 0) = 0xFEF87000<br>munmap(0xFEF6F000, 65536)                       = 0<br>memcntl(0xFEE30000, 187632, MC_ADVISE, MADV_WILLNEED, 0, 0) = 0<br>close(3)                                        = 0<br>mmap(0x00010000, 24576, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON|MAP_ALIGN,<br>    -1, 0) = 0xFEE20000<br>munmap(0xFEF90000, 32768)                       = 0<br>getcontext(0x08047534)<br>getrlimit(RLIMIT_STACK, 0x0804752C)             = 0<br>getpid()                                        = 15727 [15726]<br>lwp_private(0, 1, 0xFEE22A00)                   = 0x000001C3<br>setustack(0xFEE22A60)<br>sysi86(SI86FPSTART, 0xFEF879BC, 0x0000133F, 0x00001F80) = 0x00000001<br>open(“/etc/shadow”, O_RDONLY)                   Err#13 EACCES [file_dac_read]<br>ioctl(1, TCGETA, 0x08046BB0)                    = 0<br>fstat64(1, 0x08046B10)                          = 0<br>ERROR: Application failed to initialize<br>write(1, “ E R R O R :   A p p l i”.., 40)      = 40<br>_exit(0)  </p>
+<p>问题出现在这一行上：de&lt;open(“/etc/shadow”, O_RDONLY) Err#13 EACCES [file_dac_read]de&lt;。</p>
+<p>在这里，应用程序试图打开一个文件，但是因为有文件权限保护这个文件，运行应用程序的用户没有访问权。因为无法打开这个文件，应用程序终止并在进程中写错误消息。</p>
+<p>跟踪正在运行的应用程序</p>
+<p>希望跟踪应用程序常常是因为应用程序已经启动，而您希望查明应用程序为什么不工作了。与初始化示例一样，应用程序提供的错误消息或其他信息常常没有准确地指出问题。</p>
+<p>试图锁定或访问另一个进程正在使用的资源会使应用程序看起来冻结了，没有响应。</p>
+<p>strace 和 truss 都能够 “连接” 到正在运行的进程。连接到进程的跟踪与从命令行运行进程的跟踪相似，也产生程序正在执行的系统函数的列表。实际的跟踪从跟踪启动时执行的函数开始；对于在执行期间 “挂起” 的程序，跟踪应该会显示程序正在等待的函数。</p>
+<p>要想跟踪正在运行的程序，需要指定要跟踪的进程的进程 ID (PID)。例如，在清单 6 中，跟踪的程序已经停止，但是没有报告错误。这里使用 ps 工具列出正在运行的进程（见清单 7）。</p>
+<p><strong>清单 7. 使用 ps 工具列出正在运行的进程</strong>  </p>
+<p>$ ps -ef|grep errlock<br>      mc 15779 15747   0 18:26:59 pts/2       0:00 ./errlock<br>      mc 15742   680   0 18:26:36 pts/3       0:00 ./errlock<br>      mc 15817 15784   0 18:28:44 pts/4       0:00 grep errlock<br>      mc 15734   680   0 18:25:00 pts/3       0:01 /usr/bin/emacs-nox errlock.c<br>$ truss -p 15779<br>fcntl(3, F_SETLKW, 0x08047AC4)  (sleeping…)  </p>
+<p>在输出中可以看到，已经调用了 de&lt;fcntl()de&lt; 函数，它要在一个文件上设置锁。在这里，这个函数会一直等待到成功地设置锁，然后才继续运行。不幸的是，另一个进程已经锁住了这个文件，所以第二个应用程序必须等待第一个应用程序使用完文件并释放锁。</p>
+<p>对 于这种情况，truss 有点儿局限性：它无法指出要锁住哪个文件，也无法指出当前锁住了哪个文件，从而阻碍了第二个程序的执行。这是因为跟踪过程是在已经调用了打开文件的函数之 后启动的。truss 和 strace 只跟踪在它们执行期间调用的函数；它们无法查明已经调用的函数。</p>
+<p>获取堆栈跟踪</p>
+<p>可以看出，truss 对于监视整个程序很有用，但是对于监视已经启动的程序可能有点儿局限性。如果使用基于 SVR4 的 UNIX，比如 Solaris 或 AIX，那么 pstack 命令可能有帮助。</p>
+<p>pstack 命令实际上属于一组进程检查命令，这些命令输出正在运行的进程的相关信息。其他工具包括 pfiles（输出进程使用的文件的列表）和 psig（显示信号和信号处理函数的列表）。</p>
+<p>在使用这些命令时，需要指定进程的 PID。pstack 命令输出一个正在运行的进程的调用堆栈，显示在进程到达当前函数之前调用的函数。例如，对正在等待被锁住的文件的进程使用 pstack，会产生清单 8 中的输出。</p>
+<p><strong>清单 8. 对正在等待被锁住的文件的进程使用 pstack</strong>  </p>
+<p>$ pstack 15828<br>15828:  ./errlock<br> feef0877 fcntl    (3, 7, 8047ac4)<br> feedcd49 fcntl    (3, 7, 8047ac4, 8050e74) + 91<br> 08050f10 main     (1, 8047b24, 8047b2c) + d8<br> 08050cdc _start   (1, 8047c08, 0, 8047c12, 8047c7d, 8047c8e) + 80  </p>
+<p>在这里，它没有提供我们需要的信息。现在试试 pfiles（见清单 9）。</p>
+<p><strong>清单 9. 使用 pfiles</strong>  </p>
+<p>$ pfiles 15856<br>15856:  ./errlock<br>  Current rlimit: 256 file descriptors<br>   0: S_IFCHR mode:0620 dev:292,0 ino:989038936 uid:101 gid:7 rdev:24,3<br>      O_RDWR|O_NOCTTY|O_LARGEFILE<br>      /dev/pts/3<br>   1: S_IFCHR mode:0620 dev:292,0 ino:989038936 uid:101 gid:7 rdev:24,3<br>      O_RDWR|O_NOCTTY|O_LARGEFILE<br>      /dev/pts/3<br>   2: S_IFCHR mode:0620 dev:292,0 ino:989038936 uid:101 gid:7 rdev:24,3<br>      O_RDWR|O_NOCTTY|O_LARGEFILE<br>      /dev/pts/3<br>   3: S_IFREG mode:0666 dev:182,65545 ino:198 uid:101 gid:10 size:0<br>      O_RDWR<br>      advisory write lock set by process 15828<br>      /export/home/mc/lockdemo  </p>
+<p>这些输出就比较有用了。可以看到进程已经打开的文件称为 lockdemo ，因为 truss 显示正在等待文件锁，所以可能是这个文件导致了问题。</p>
+<p>truss 和 strace 都是被动的跟踪。可以查看正在执行的函数，但是无法了解关于正在发生的情况的详细信息，也无法更有针对性地指定要跟踪的东西和跟踪时要输出的信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/a-solution-to-track-unix-applications/" data-id="cji00lk5g000shnzsa6bl80v8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-application-tracking-makes-quantitative-analysis-of-performance-changes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/" class="article-date">
+  <time datetime="2009-12-22T03:18:11.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/">应用程序跟踪对性能改变进行量化分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用 Apache Web 服务器作为示例，以了解如何分析公共配置的性能含义。使用应用程序跟踪来观察应用程序运行过程中进行的系统调用。通过统计调用的次数和发生的时间，您可以轻松地了解性能改变的影响。</p>
+<p>您 可以对应用程序进行跟踪，以找出它们暂停或不运行的原因。并且可以使用同样的方法，了解更多关于应用程序的信息并理解某些配置的性能含义。因为 Apache 非常流行并且大多数读者对它都比较熟悉，所以本文使用 Apache 作为示例。Apache 所进行的每次系统调用都会对 Web 页面的提供带来延迟，通过跟踪不同配置下的 Web 服务器，您可以确定具体配置的影响。</p>
+<p>应用程序跟踪概述</p>
+<p>在应用程序的执行 过程中，当需要打开文件、发送数据包或者使用系统资源时，它会对基础操作系统进行相应的系统调用。跟踪应用程序意味着可以 在调用发生时观察到这些系统调用，这将使得您能够深入地了解该应用程序的行为。在 Solaris 和 IBM AIX? 操作系统 (AIX) 中，使用 truss 命令完成这项任务，而在 Linux? 中则使用 strace。清单 1 显示了对 pwd 命令进行跟踪的示例。</p>
+<p>清单 1. 跟踪 pwd 命令</p>
+<p>-bash-3.00$ truss pwd … getcwd(“/export/home/sean”, 1025) = 0 /export/home/sean write(1, “ / e x p o r t / h o m e”.., 18) = 18 _exit(0)</p>
+<p>在删除开始处与加载该应用程序相关的输出内容后，您可以看到所进行的三次系统调用：</p>
+<p>getcwd 返回当前工作目录。输出内容中显示了字符串“/export/home/sean”返回到缓冲区。</p>
+<p>write 可以显示给定的字符串。因为在其执行之后才显示这个系统调用，所以先输出了它的执行结果。还可以注意到，write 系统调用的结果是写入字符的个数数目，在这个示例中为 17 加上一个回车。</p>
+<p>_exit 使用错误代码 0 退出该程序，这个错误代码通常表示成功结束。</p>
+<p>尽管这是一个很简单的示例，但它演示了通过应用程序跟踪可以观察程序内部机制的程度。有关跟踪方面更深入的信息，请参见参考资料部分。</p>
+<p>Apache 配置的简要介绍</p>
+<p>可以通过一个名为 httpd.conf 的文件对 Apache Web 服务器进行配置。清单 2 显示了一个简单配置中的部分内容。</p>
+<p>清单 2. 示例 httpd.conf</p>
+<p>DocumentRoot “/var/apache/htdocs” Options FollowSymLinks AllowOverride None Options Indexes FollowSymLinks MultiViews</p>
+<p>第一行定义了在何处可以找到 HTML 文件。将所有的请求都映射到这个目录。如果请求 /project/charter.html，将使用 /var/apache/htdocs/project/charter.html 提供该页面。httpd.conf 中剩余的部分由两个 Directory 节组成。 和 之间的任何内容都将应用于指定目录及其所有的子目录。在本例中，第一节将两项设置应用于根目录，而第二节则指向 /var/apache/htdocs。</p>
+<p>如果多个节应用于单个请求，那么将会对这些命令进行组合，并且最适合的目录具有高优先级。例如，将 使用 /var/apache/htdocs/project/charter.html 提供 /project/charter.html 请求的页面。/var/apache/htdocs 是 / 的子目录，所以 Options Indexes FollowSymLinks MultiViews 来自第二节，AllowOverride None 来自第一节。</p>
+<p>可以对许多内容进行配置，并且每项内容都具有其性能含义。本文余下的内容重点关注于如何对这些改变的影响进行量化分析。</p>
+<p>建立基准</p>
+<p>在您进行任何调整之前，务必要了解系统当前的运行方式。使用 -X 参数启动 Apache，这个参数将强制 Apache 进入单进程调试模式。这样做可以确保将请求发送到正在进行跟踪的进程，并且消除常规进程间通信所带来的开销。</p>
+<p>在 守护进程启动之后，通过运行 ps -ef 找到相应的进程 ID，并查找 httpd 守护进程。在找到该进程之后，使用 truss -c -p PID 附加到该进程。-c 选项表示对系统调用进行计数，而不是逐个显示它们，而 -p 则表示将跟踪器附加于一个正在运行的进程。</p>
+<p>使用 Web 浏览器请求文档。在页面加载之后，回到 truss 应用程序，然后按 Ctrl-C 以结束计数。对于静态 HTML 页面，您应该看到如清单 3 所示的内容（为使这些数字变得更有趣，本示例进行了 100 次相同的请求）。</p>
+<p>清单 3. 系统调用基准</p>
+<p>sunbox# truss -c -p 15026 (make the Web request 100 times) ^C syscall seconds calls errors read .009 200 write .020 200 close .020 200 time .004 300 alarm .018 1100 fcntl .009 300 sigaction .007 400 munmap .007 100 llseek .001 100 pollsys .005 100 mmap64 .008 100 stat64 .007 100 open64 .006 100 accept .019 100 getsockname .002 100 setsockopt .002 100 ——– —— —- sys totals: .149 3600 0 usr time: .120 elapsed: 8.960</p>
+<p>truss 返回系统调用的列表、执行调用耗费的总时间、调用的次数和任何发现的问题。在这个报表的结尾处，返回了这些系统调用耗费的总时间，以及执行应用程序所耗费 的时间。对于这些目的来说，所耗时间是没有意义的，因为它指的是从启动 truss 开始到其结束的时间，而与 Web 请求没有任何关系。</p>
+<p>清 单 3 显示了最简单的情况。在来自 Web 浏览器的连接请求到达后，accept 系统调用完成该连接。Web 服务器使用 read 调用获得请求的内容，将请求的内容映射到磁盘上的文件。Web 服务器首先使用 stat64 验证该文件是否存在，使用 open64 打开该文件以便进行读取，然后使用 mmap64 将该文件的内容映射到内存中。然后使用 write 将这个文件发送回客户端，使用另一个 write 生成日志文件，并且服务器执行来自浏览器的最后一个 read。该列表中其余的调用都是系统开销，并且当配置发生改变时，不会有显著的变化。</p>
+<p>解释这些数值</p>
+<p>100 次请求总共耗费 0.269 秒 (0.149 + 0.120)，这样的性能相当不错，并且该服务器每秒钟应该可以提供大约 370 个页面 (100/0.269)。但是不能完全相信这些数值，因为它们仅表示进程耗费在 CPU 上的时间，而不是其真正的执行时间（也称为时钟时间）。还有更多的因素需要考虑，如磁盘和网络的速度、计算机上正运行的其他内容、该守护进程运行于调试模 式的事实。您还需要考虑系统调用跟踪本身的开销。</p>
+<p>本文中使用的方法重点关注这些操作的相对计时和使用应用程序跟踪消除浪费掉的操作。如果您需要了解 Web 服务器每秒可以提供的页面数目，参考资料部分中有相应的软件链接，它可以帮助您确定该数值。</p>
+<p>跟踪 AllowOverride 范围</p>
+<p>Apache 允许管理员通过 .htaccess 机制将配置权委托给个别的用户。.htaccess 是一个包含附加配置指令的文件，如果在 httpd.conf 中通过 AllowOverride 配置了请求的目录，那么 Web 服务器将搜索这个文件。清单 4 显示了前面的配置了 AllowOverride Limit 的配置信息，它允许用户获取访问 Web 页面的用户名和密码。</p>
+<p>清单 4. 配置了 AllowOverride 的示例 httpd.conf</p>
+<p>DocumentRoot “/var/apache/htdocs” Options FollowSymLinks AllowOverride Limit Options Indexes FollowSymLinks MultiViews</p>
+<p>重新启动 httpd 守护进程并再次运行这些测试，其结果如清单 5 所示。</p>
+<p>清单 5. 开启了 AllowOverride Limit 的 100 次请求的结果</p>
+<p>sunbox# truss -c -t write,read,open64,stat64,mmap64 -p 21136 ^C syscall seconds calls errors read .012 200 write .021 200 mmap64 .007 100 stat64 .007 100 open64 .022 500 400 ——– —— —- sys totals: .072 1100 400 usr time: .141 elapsed: 16.660</p>
+<p>初看起来，系统调用耗费的时间下降了，但这是因为使用了 -t 选项将跟踪任务限制于一些有意义的系统调用。大多数系统调用并没有发生变化，但现在有 500 次 open64 调用，其中有 400 次返回了错误。执行 open64 的时间增加了（从 0.006 秒增加到 0.22 秒），同时用户空间部分的时间也增加了（从 0.12 秒增加到 0.141 秒）。</p>
+<p>时间增加是因为 Apache 现在必须完成附加的工作以处理该请求，即使没有配置重写。单独的 AllowOverride Limit 配置明显地增加了开销。问题依然存在，即什么导致了这些错误？ 要回答这个问题，可以跟踪单个 Web 请求，如清单 6 所示。</p>
+<p>清单 6. 确定 open64 调用失败的原因</p>
+<p>sunbox# truss -t open64 -p 21136 open64(“/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/htdocs/.htaccess”, O_RDONLY) Err#2 ENOENT open64(“/var/apache/htdocs/test.html”, O_RDONLY) = 5</p>
+<p>清单 6 显示了当请求进入时，Apache 对每个指向 /var/apache/htdocs 的目录进行检查并尝试打开 .htaccess 文件，但是因为 AllowOverride 配置为根目录，所以这个文件并不存在。Apache 必须在每个子目录中查找 .htaccess 文件的重写信息，并对它们进行处理。这样一来，由于额外的系统调用、更多的用户空间开销和额外的磁盘活动，从而进一步增加了延迟。对于 100 次请求来说，增加零点几秒的时间看起来并不是很明显，但是对于一台繁忙的服务器，就会增加更长的延迟。</p>
+<p>既然您了解了重写的范围，那么理想的 解决方案是不允许重写，并且强制在 httpd.conf 中对所有的内容进行配置。如果失败，可以将配置的范围限制于需要它的目录。在这个研究示例中，把 AllowOverride Limit 放到第二个 Directory 节中，这将仅添加一个额外的 open64 调用，以便在 /var/apache/htdocs 中查找 .htaccess。对所有的父目录进行搜索是浪费时间，因为在这个配置中，不会使用其中的任何文件来提供页面。</p>
+<p>研究主机名查找</p>
+<p>当 Web 服务器接收到一个请求时，它所知道的关于客户端的信息只有其 IP 地址，如 129.42.42.212 对应于 IBM.com。然而，Web 服务器并不知道这个地址来自于 IBM.com，因此，它必须进行反向 DNS 查找。这样做需要耗费一定的时间，如果在发送请求之前需要这个名称，那么将会延迟对客户端的响应。过去，Apache 在缺省情况下会执行这些反向查找，但现在这种行为已经有了改变。</p>
+<p>还有另一种情况，其中必须进行反向 DNS 搜索。当基于主机名（而不是 IP 地址）配置访问限制时，Apache 必须首先将 IP 地址反向解析为相应的主机名，然后再次将主机名解析为 IP 地址，以确保它们正确匹配。因为反向域名搜索可以由地址块所有者确定，所以要防止 IP 欺骗的发生，必须进行第二次查找。可以通过应用程序跟踪来确定 DNS 解析的影响吗？</p>
+<p>要对其进行测试，可以从前面的示例中删除 AllowOverride Limit，然后添加 Allow from ibm.com 代替缺省的 Allow from all。然后，对 DNS 服务器进行更改以便向您的工作站返回 something.ibm.com，确保初始反向检查能够成功并且随后的正向查找必须通过 Internet 完成。在示例运行过程中，对保护的 Web 服务器的请求耗费了 15 秒的时间。相反，使用 IP 地址代替 ibm.com 所耗费的时间小于半秒钟。清单 7 显示了在使用 DNS 确保安全时，对一些系统调用进行统计。</p>
+<p>清单 7. 通过主机名进行限制的 Web 请求的 truss 输出</p>
+<p>bash-3.00# truss -c -p 26089 ^C syscall seconds calls errors read .000 5 write .000 3 open .000 2 close .001 10 time .000 3 stat .000 5 alarm .000 8 fcntl .000 7 2 sigaction .000 3 sysconfig .000 5 pollsys .001 5 door_info .000 2 stat64 .000 1 open64 .000 2 so_socket .001 5 accept .000 1 connect .002 5 recvfrom .000 2 send .001 5 getsockname .000 1 setsockopt .000 1 ——– —— —- sys totals: .011 81 2 usr time: .004</p>
+<p>truss 报告了该进程所耗费的时间远远小于客户端感觉到的时间（0.015 秒与 15 秒）。这是因为大多数套接字操作都是异步地 进行的，其中套接字进行轮询以检查数据是否出现，而不是使得应用程序处于阻塞（等待）状态以等待响应。如此一来，应用程序在等待结果的时候不会消耗 CPU 时间。这就解释了 truss 报告的时间和客户端感觉到的时间之间出现差异的原因。</p>
+<p>truss 并没有忘记所做的更改，0.015 秒比本文中研究的第一个简单示例要高一个数量级。从系统调用计数中可以看出，有一些以前没有出现过的调用，包括 read、write、close 和 stat。以及还有 send、connect、so_socket 和 pollsys，这些系统调用用于进行名称请求。因为名称解析可以来自于不同的来源，包括本地文件系统和名称缓存守护进程，所以必须对这几个位置进行检 查。在随后的调用中，请求时间小于 1 秒，这是因为对 DNS 信息进行了缓存。</p>
+<p>最后，大部分的延迟来自于远程名称服务器和正向解析。这 个事实进一步强调了，如果您希望依赖于名称查找，那么就需要使用 DNS 缓存和快速 DNS 服务器。然而，最佳的解决方案是使用一种可选的方法来处理这个问题。一种比较简单的解决方案是指定 IP 地址块（如 Allow from 10.0.0.0/8），这种方法比 DNS 查找要快得多。因为反向和正向查找必须匹配，所以对名称进行的操作，很可能可以用于网段。另外，Apache 可以集成各种身份验证系统，所以基于用户的身份验证是另一种可选方法。</p>
+<p>系统调用与库调用</p>
+<p>如果熟悉套接字编程，那么您可能会寻 找 gethostbyname 和其他类似的调用，这些调用都可以用来执行主机查找功能。有一些库调用，由 /usr/lib 中的系统库 libc 和 libsocket 提供。库调用封装了一个或多个系统调用，以及额外的逻辑。您可以将它们作为程序员友好的接口来进行系统调用。例如，gethostbyname 库调用将执行许多步骤，以便根据服务器的配置查找相应的名称，如检查 /etc/hosts 或搜索网络信息系统 (NIS) 或 DNS。这些步骤包含了内核所提供的更小的构件，即系统调用。在大多数这样的这种情况下，两者之间的差别通常很小。truss 还可以跟踪库调用，但是无法提供像系统调用那样详细的信息。</p>
+<p>结束语</p>
+<p>监视和统计系统调用的功能不仅有助于进行故障排除，还有助 于理解应用程序配置如何对性能产生影响。与系统的其他部分之间的每个交互操作都会 调用一个或多个系统调用，并且每次调用都会增加系统开销。这并不是说系统调用非常糟糕，如果程序员不与其他的部分进行交互，那将是很乏味的。相反，在改变 应用程序时，您可以监视系统调用的使用，以便更好地了解这些改变对总体性能的影响。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/application-tracking-makes-quantitative-analysis-of-performance-changes/" data-id="cji00lk6s001hhnzsp21nrxcg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-program-analysis-tool-gprof" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/program-analysis-tool-gprof/" class="article-date">
+  <time datetime="2009-12-22T03:17:41.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/program-analysis-tool-gprof/">程序分析工具gprof介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>程 序分析是以某种语言书写的程序为对象，对其内部的运作流程进行分析。程序分析的目的主要有三点：一是通过程序内部各个模块之间的调用关系，整体上把握程序 的运行流程，从而更好地理解程序，从中汲取有价值的内容。二是以系统优化为目的，通过对程序中关键函数的跟踪或者运行时信息的统计，找到系统性能的瓶颈， 从而采取进一步行动对程序进行优化。最后一点，程序分析也有可能用于系统测试和程序调试中。当系统跟踪起来比较复杂，而某个BUG又比较难找时，可以通过一些特殊的数据构造一个测试用例，然后将分析到的函数调用关系和运行时实际的函数调用关系进行对比，从而找出错误代码的位置。</p>
+<p>程序分析工具不同于调试器，它只产生程序运行时某些函数的调用次数、执行时间等等宏观信息，而不是每条语句执行时的详细信息。Gprof是Linux下一个强有力的程序分析工具。对于C、Pascal或者Fortran77语 言的程序，它能够以“日志”的形式记录程序运行时的统计信息：程序运行中各个函数消耗的时间和函数调用关系，以及每个函数被调用的次数等等。从而可以帮助 程序员找出众多函数中耗时最多的函数，也可以帮助程序员分析程序的运行流程。相信这些功能对于分析开源代码的程序员来说，有着相当大的诱惑力。</p>
+<h2 id="用gprof分析程序"><a href="#用gprof分析程序" class="headerlink" title="用gprof分析程序"></a>用gprof分析程序</h2><p>用gprof对程序进行分析主要分以下三个步骤：</p>
+<p>l 用编译器对程序进行编译，加上-pg参数。</p>
+<p>l 运行编译后的程序。</p>
+<p>l 用gprof命令查看程序的运行时信息。</p>
+<p>先以一个简单的例子演示一下吧。随便找一个能够运行的程序的源代码，比如下面的文件test.c：</p>
+<p> 1<br> 2 int IsEven(int x)<br> 3<br> 4 {<br> 5<br> 6 return0== x &1;<br> 7<br> 8 }<br> 9<br>10 int main(int argc, char*argv[]<br>11<br>12 {<br>13<br>14 int i =0;<br>15<br>16 while(++i &lt;1000) IsEven(i);<br>17<br>18 }</p>
+<p>首先，用以下命令进行编译：</p>
+<p> [root@localhost]#gcc –o test –pg test.c</p>
+<p>然后，运行可执行文件test.</p>
+<p> [root@localhost]#./test</p>
+<p>运行后，在当前目录下将生成一个文件gmon.out，这就是gprof生成的文件，保存有程序运行期间函数调用等信息。</p>
+<p>最后，用gprof命令查看gmon.out保存的信息：</p>
+<p> [root@localhost]#gprof test gmon.out –b</p>
+<p>这样就有一大堆信息输出到屏幕上，有函数执行单间，函数调用关系图等等，如下：</p>
+<p>Flat profile:</p>
+<p>Each sample counts as 0.01 seconds.</p>
+<p>no time accumulated</p>
+<p> % cumulative self self total</p>
+<p>time seconds seconds calls Ts/call Ts/call name</p>
+<p> 0.00 0.00 0.00 1000 0.00 0.00 IsEven(int)</p>
+<p> Call graph</p>
+<p>granularity: each sample hit covers 2 byte(s) no time propagated</p>
+<p>index % time self children called name</p>
+<p> 0.00 0.00 1000/1000 main [7]</p>
+<p>[8] 0.0 0.00 0.00 1000 IsEven(int) [8]</p>
+<p>-----------------------------------------------</p>
+<p>Index by function name</p>
+<p> [8] IsEven(int)</p>
+<p>以上介绍了gprof最简单的使用方法，下面针对其使用过程中的三个步骤详细说明。</p>
+<h2 id="编译和链接"><a href="#编译和链接" class="headerlink" title="编译和链接"></a>编译和链接</h2><p>上面的例子中，程序比较简单，只有一个文件。如果源代码有多个文件，或者代码结构比较复杂，编译过程中先生成若干个目标文件，然后又由链接器将这些目标文件链接到一起，这时该怎么使用gprof呢？</p>
+<p>对于由多个源文件组成的程序，编译时需要在生成每个.o文件的时候加上-pg参数，同时在链接的时候也要加上-pg参数。对于链接器不是GCC的情况，如ld，又有特殊的要求。</p>
+<p>同时，-pg参数只能记录源代码中各个函数的调用关系，而不能记录库函数的调用情况。要想记录每个库函数的调用情况，链接的时候必须指定库函数的动态（或者静态）链接库libc_p.a，即加上-lc_p，而不是-lc。</p>
+<p>还要说明的是，如果有一部分代码在编译时指定了-pg参数，而另一部分代码没有指定，则生成的gmon.out文件中将缺少一部分函数，也没有那些函数的调用关系。但是并不影响gprof对其它函数进行记录。</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>编译好的程序运行时和运行一般的程序没有什么不同，只是比正常的程序多生成了一个文件gmon.out。注意，这个文件名是固定的，没法通过参数的设置进行改变。如果程序目录中已经有一个gmon.out，则它会被新的gmon.out覆盖掉。</p>
+<p>关于生成的gmon.out文件所在的目录，也有以下约定：程序退出时所运行的文件所在目录就是生成的gmon.out文件所在的目录。如果一个程序执行过程中调用了另一个程序，并在另一个程序的运行中终止，则gmon.out会在另一个程序所在的目录中生成。</p>
+<p>还有一点要注意的就是当程序非正常终止时不会生成gmon.out文件，也因此就没法查看程序运行时的信息。只有当程序从main函数中正常退出，或者通过系统调用exit()函数而退出时，才会生成gmon.out文件。而通过底层调用如_exit()等退出时不会生成gmon.out。</p>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>查看程序运行信息的命令是gprof，它以gmon.out文件作为输入，也就是将gmon.out文件翻译成可读的形式展现给用户。其命令格式如下：</p>
+<p> gprof [可执行文件] [gmon.out文件] [其它参数]</p>
+<p>方括号中的内容可以省略。如果省略了“可执行文件”，gprof会在当前目录下搜索a.out文件作为可执行文件，而如果省略了gmon.out文件，gprof也会在当前目录下寻找gmon.out。其它参数可以控制gprof输出内容的格式等信息。最常用的参数如下：</p>
+<p>l -b 不再输出统计图表中每个字段的详细描述。</p>
+<p>l -p 只输出函数的调用图（Call graph的那部分信息）。</p>
+<p>l -q 只输出函数的时间消耗列表。</p>
+<p>l -e Name 不再输出函数Name 及其子函数的调用图（除非它们有未被限制的其它父函数）。可以给定多个 -e 标志。一个 -e 标志只能指定一个函数。</p>
+<p>l -E Name 不再输出函数Name 及其子函数的调用图，此标志类似于 -e 标志，但它在总时间和百分比时间的计算中排除了由函数Name 及其子函数所用的时间。</p>
+<p>l -f Name 输出函数Name 及其子函数的调用图。可以指定多个 -f 标志。一个 -f 标志只能指定一个函数。</p>
+<p>l -F Name 输出函数Name 及其子函数的调用图，它类似于 -f 标志，但它在总时间和百分比时间计算中仅使用所打印的例程的时间。可以指定多个 -F 标志。一个 -F 标志只能指定一个函数。-F 标志覆盖 -E 标志。</p>
+<p>l -z 显示使用次数为零的例程（按照调用计数和累积时间计算）。</p>
+<p>不过,gprof不能显示对象之间的继承关系,这也是它的弱点.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/program-analysis-tool-gprof/" data-id="cji00lkkg00cnhnzsvm9ikmwx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/" class="article-date">
+  <time datetime="2009-12-22T03:17:10.000Z" itemprop="datePublished">2009-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/">配置开发支持高并发TCP连接的Linux应用程序全攻略</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、修改用户进程可打开文件数限制  </p>
+<p>   在Linux平台上，无论编写客户端程序还是服务端程序，在进行高并发TCP连接处理时，最高的并发数量都要受到系统对用户单一进程同时可打开文件数量 的限制(这是因为系统为每个TCP连接都要创建一个socket句柄，每个socket句柄同时也是一个文件句柄)。可使用ulimit命令查看系统允许 当前用户进程打开的文件数限制：<br>   [speng@as4 ~]$ ulimit -n<br>   1024<br>   这表示当前用户的每个进程最多允许同时打开1024个文件，这1024个文件中还得除去每个进程必然打开的标准输入，标准输出，标准错误，服务器监听 socket，进程间通讯的unix域socket等文件，那么剩下的可用于客户端socket连接的文件数就只有大概1024-10=1014个左右。 也就是说缺省情况下，基于Linux的通讯程序最多允许同时1014个TCP并发连接。  </p>
+<p>   对于想支持更高数量的TCP并发连接的通讯处理程序，就必须修改Linux对当前用户的进程同时打开的文件数量的软限制(soft limit)和硬限制(hardlimit)。其中软限制是指Linux在当前系统能够承受的范围内进一步限制用户同时打开的文件数；硬限制则是根据系统 硬件资源状况(主要是系统内存)计算出来的系统最多可同时打开的文件数量。通常软限制小于或等于硬限制。  </p>
+<p>   修改上述限制的最简单的办法就是使用ulimit命令：<br>   [speng@as4 ~]$ ulimit -n &lt;file_num&gt;<br>   上述命令中，在&lt;file_num&gt;中指定要设置的单一进程允许打开的最大文件数。如果系统回显类似于“Operation notpermitted”之类的话，说明上述限制修改失败，实际上是因为在&lt;file_num&gt;中指定的数值超过了Linux系统对该用户 打开文件数的软限制或硬限制。因此，就需要修改Linux系统对用户的关于打开文件数的软限制和硬限制。  </p>
+<p>   第一步，修改/etc/security/limits.conf文件，在文件中添加如下行：<br>   speng soft nofile 10240<br>   speng hard nofile 10240<br>   其中speng指定了要修改哪个用户的打开文件数限制，可用’*’号表示修改所有用户的限制；soft或hard指定要修改软限制还是硬限制；10240则指定了想要修改的新的限制值，即最大打开文件数(请注意软限制值要小于或等于硬限制)。修改完后保存文件。  </p>
+<p>   第二步，修改/etc/pam.d/login文件，在文件中添加如下行：<br>   session required /lib/security/pam_limits.so<br>   这是告诉Linux在用户完成系统登录后，应该调用pam_limits.so模块来设置系统对该用户可使用的各种资源数量的最大限制(包括用户可打开 的最大文件数限制)，而pam_limits.so模块就会从/etc/security/limits.conf文件中读取配置来设置这些限制值。修改 完后保存此文件。  </p>
+<p>   第三步，查看Linux系统级的最大打开文件数限制，使用如下命令：<br>   [speng@as4 ~]$ cat /proc/sys/fs/file-max<br>   12158<br>   这表明这台Linux系统最多允许同时打开(即包含所有用户打开文件数总和)12158个文件，是Linux系统级硬限制，所有用户级的打开文件数限制 都不应超过这个数值。通常这个系统级硬限制是Linux系统在启动时根据系统硬件资源状况计算出来的最佳的最大同时打开文件数限制，如果没有特殊需要，不 应该修改此限制，除非想为用户级打开文件数限制设置超过此限制的值。修改此硬限制的方法是修改/etc/rc.local脚本，在脚本中添加如下行：<br>   echo 22158 &gt; /proc/sys/fs/file-max<br>   这是让Linux在启动完成后强行将系统级打开文件数硬限制设置为22158。修改完后保存此文件。  </p>
+<p>   完成上述步骤后重启系统，一般情况下就可以将Linux系统对指定用户的单一进程允许同时打开的最大文件数限制设为指定的数值。如果重启后用 ulimit-n命令查看用户可打开文件数限制仍然低于上述步骤中设置的最大值，这可能是因为在用户登录脚本/etc/profile中使用ulimit -n命令已经将用户可同时打开的文件数做了限制。由于通过ulimit-n修改系统对用户可同时打开文件的最大数限制时，新修改的值只能小于或等于上次 ulimit-n设置的值，因此想用此命令增大这个限制值是不可能的。所以，如果有上述问题存在，就只能去打开/etc/profile脚本文件，在文件 中查找是否使用了ulimit-n限制了用户可同时打开的最大文件数量，如果找到，则删除这行命令，或者将其设置的值改为合适的值，然后保存文件，用户退 出并重新登录系统即可。<br>   通过上述步骤，就为支持高并发TCP连接处理的通讯处理程序解除关于打开文件数量方面的系统限制。  </p>
+<p>2、修改网络内核对TCP连接的有关限制  </p>
+<p>   在Linux上编写支持高并发TCP连接的客户端通讯处理程序时，有时会发现尽管已经解除了系统对用户同时打开文件数的限制，但仍会出现并发TCP连接数增加到一定数量时，再也无法成功建立新的TCP连接的现象。出现这种现在的原因有多种。  </p>
+<p>   第一种原因可能是因为Linux网络内核对本地端口号范围有限制。此时，进一步分析为什么无法建立TCP连接，会发现问题出在connect()调用返 回失败，查看系统错误提示消息是“Can’t assign requestedaddress”。同时，如果在此时用tcpdump工具监视网络，会发现根本没有TCP连接时客户端发SYN包的网络流量。这些情况 说明问题在于本地Linux系统内核中有限制。其实，问题的根本原因在于Linux内核的TCP/IP协议实现模块对系统中所有的客户端TCP连接对应的 本地端口号的范围进行了限制(例如，内核限制本地端口号的范围为1024~32768之间)。当系统中某一时刻同时存在太多的TCP客户端连接时，由于每 个TCP客户端连接都要占用一个唯一的本地端口号(此端口号在系统的本地端口号范围限制中)，如果现有的TCP客户端连接已将所有的本地端口号占满，则此 时就无法为新的TCP客户端连接分配一个本地端口号了，因此系统会在这种情况下在connect()调用中返回失败，并将错误提示消息设为“Can’t assignrequested address”。有关这些控制逻辑可以查看Linux内核源代码，以linux2.6内核为例，可以查看tcp_ipv4.c文件中如下函数：<br>   static int tcp_v4_hash_connect(struct sock *sk)<br>   请注意上述函数中对变量sysctl_local_port_range的访问控制。变量sysctl_local_port_range的初始化则是在tcp.c文件中的如下函数中设置：<br>   void __init tcp_init(void)<br>   内核编译时默认设置的本地端口号范围可能太小，因此需要修改此本地端口范围限制。<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_local_port_range = 1024 65000<br>   这表明将系统对本地端口范围限制设置为1024~65000之间。请注意，本地端口范围的最小值必须大于或等于1024；而端口范围的最大值则应小于或等于65535。修改完后保存此文件。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明新的本地端口范围设置成功。如果按上述端口范围进行设置，则理论上单独一个进程最多可以同时建立60000多个TCP客户端连接。  </p>
+<p>   第二种无法建立TCP连接的原因可能是因为Linux网络内核的IP_TABLE防火墙对最大跟踪的TCP连接数有限制。此时程序会表现为在 connect()调用中阻塞，如同死机，如果用tcpdump工具监视网络，也会发现根本没有TCP连接时客户端发SYN包的网络流量。由于 IP_TABLE防火墙在内核中会对每个TCP连接的状态进行跟踪，跟踪信息将会放在位于内核内存中的conntrackdatabase中，这个数据库 的大小有限，当系统中存在过多的TCP连接时，数据库容量不足，IP_TABLE无法为新的TCP连接建立跟踪信息，于是表现为在connect()调用 中阻塞。此时就必须修改内核对最大跟踪的TCP连接数的限制，方法同修改内核对本地端口号范围的限制是类似的：<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_conntrack_max = 10240<br>   这表明将系统对最大跟踪的TCP连接数限制设置为10240。请注意，此限制值要尽量小，以节省对内核内存的占用。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明系统对新的最大跟踪的TCP连接数限制修改成功。如果按上述参数进行设置，则理论上单独一个进程最多可以同时建立10000多个TCP客户端连接。  </p>
+<p>3、使用支持高并发网络I/O的编程技术  </p>
+<p>   在Linux上编写高并发TCP连接应用程序时，必须使用合适的网络I/O技术和I/O事件分派机制。  </p>
+<p>   可用的I/O技术有同步I/O，非阻塞式同步I/O(也称反应式I/O)，以及异步I/O。在高TCP并发的情形下，如果使用同步I/O，这会严重阻塞 程序的运转，除非为每个TCP连接的I/O创建一个线程。但是，过多的线程又会因系统对线程的调度造成巨大开销。因此，在高TCP并发的情形下使用同步 I/O是不可取的，这时可以考虑使用非阻塞式同步I/O或异步I/O。非阻塞式同步I/O的技术包括使用select()，poll()，epoll等机 制。异步I/O的技术就是使用AIO。  </p>
+<p>   从I/O事件分派机制来看，使用select()是不合适的，因为它所支持的并发连接数有限(通常在1024个以内)。如果考虑性能，poll()也是 不合适的，尽管它可以支持的较高的TCP并发数，但是由于其采用“轮询”机制，当并发数较高时，其运行效率相当低，并可能存在I/O事件分派不均，导致部 分TCP连接上的I/O出现“饥饿”现象。而如果使用epoll或AIO，则没有上述问题(早期Linux内核的AIO技术实现是通过在内核中为每个 I/O请求创建一个线程来实现的，这种实现机制在高并发TCP连接的情形下使用其实也有严重的性能问题。但在最新的Linux内核中，AIO的实现已经得 到改进)。  </p>
+<p>   综上所述，在开发支持高并发TCP连接的Linux应用程序时，应尽量使用epoll或AIO技术来实现并发的TCP连接上的I/O控制，这将为提升程序对高并发TCP连接的支持提供有效的I/O保证。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/" data-id="cji00lk9r003hhnzsnoky340m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/23/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/25/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

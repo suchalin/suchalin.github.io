@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-hal-set-property-modifies-lshal-information" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/09/hal-set-property-modifies-lshal-information/" class="article-date">
+  <time datetime="2011-03-09T04:45:56.000Z" itemprop="datePublished">2011-03-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/09/hal-set-property-modifies-lshal-information/">hal-set-property修改lshal信息</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于使用gnome-mount或者hal的朋友来说，当分区被挂载后，会在桌面上显示”多少G的设备“这样的东西，是不是看着眼烦，现在介绍一种比较简单的方法来修改hal的参数<br>首先，使用hal-device,来查看自动挂载信息，例如hal-device |less 然后查找sda5<br>代码:  </p>
+<p>代码</p>
+<p>8: udi = ‘/org/freedesktop/Hal/devices/volume_uuid_EE0454B90454868D’<br>  block.minor = 5  (0x5)  (int)<br>  org.freedesktop.Hal.Device.Volume.method_names = { ‘Mount’, ‘Unmount’, ‘Eject’<br>} (string list)<br>  volume.ignore = false  (bool)<br>  volume.label = ‘winE’  (string)<br>  info.capabilities = { ‘volume’, ‘block’ } (string list)<br>  volume.is_partition = true  (bool)<br>  volume.mount_point = ‘/media/winE’  (string)<br>  info.category = ‘volume’  (string)<br>  info.product = ‘Volume (ntfs)’  (string)<br>  volume.is_disc = false  (bool)<br>  volume.is_mounted = true  (bool)<br>  block.is_volume = true  (bool)<br>  volume.linux.is_device_mapper = false  (bool)<br>  block.storage_device = ‘/org/freedesktop/Hal/devices/storage_serial_SATA_ST916<br>0821AS_5MA9TVM1’  (string)<br>  info.parent = ‘/org/freedesktop/Hal/devices/storage_serial_SATA_ST9160821AS_5M<br>A9TVM1’  (string)<br>  volume.block_size = 512  (0x200)  (int)<br>  volume.partition.number = 5  (0x5)  (int)<br>  volume.num_blocks = 182305557  (0xaddc315)  (int)  </p>
+<p>volume.fsversion = ‘3.1’  (string)<br>  block.device = ‘/dev/sda5’  (string)<br>  volume.uuid = ‘EE0454B90454868D’  (string)<br>  volume.partition.media_size = 160041885696  (0x25433d6000)  (uint64)<br>  volume.fsusage = ‘filesystem’  (string)<br>  volume.is_mounted_read_only = false  (bool)<br>  org.freedesktop.Hal.Device.Volume.method_argnames = { ‘mount_point fstype extr<br>a_options’, ‘extra_options’, ‘extra_options’ } (string list)<br>  info.interfaces = { ‘org.freedesktop.Hal.Device.Volume’ } (string list)<br>  storage.model = ‘’  (string)<br>  volume.size = 93340445184  (0x15bb862a00)  (uint64)<br>  info.udi = ‘/org/freedesktop/Hal/devices/volume_uuid_EE0454B90454868D’  (strin<br>g)<br>  volume.mount.valid_options = { ‘ro’, ‘sync’, ‘dirsync’, ‘noatime’, ‘nodiratime<br>‘, ‘noexec’, ‘quiet’, ‘remount’, ‘exec’, ‘uid=’, ‘gid=’, ‘umask=’, ‘dmask=’, ‘fm<br>ask=’, ‘locale=’, ‘utf8’ } (string list)<br>  org.freedesktop.Hal.Device.Volume.method_signatures = { ‘ssas’, ‘as’, ‘as’ } (string list)<br>  block.major = 8  (0x8)  (int)<br>  volume.fstype = ‘ntfs’  (string)<br>  org.freedesktop.Hal.Device.Volume.method_execpaths = { ‘hal-storage-mount’, ‘hal-storage-unmount’, ‘hal-storage-eject’ } (string list)<br>  volume.unmount.valid_options = { ‘lazy’ } (string list)<br>linux.hotplug_type = 3  (0x3)  (int)<br>  volume.partition.start = 62915198976  (0xea609c000)  (uint64)<br>  linux.sysfs_path = ‘/sys/block/sda/sda5’  (string)  </p>
+<p>这里的全部都是关于hal自动挂载sda5的信息，上面的信息都是可以改动的。<br>现在我们要做的就是改动上面的信息，我们使用hal-set-property，来改变他们的值(这个命令需要root用户权限)。<br>通 常情况下使用这样的命令结构，hal-set-property –udi 设备的udi值（udi，相当于hal挂载设备的id是唯一的） –key 要改的键(如要改标卷volume.label) 然后接要改的值的类型 (–string 表示值为字符串, –int 值为整型，–bool 值为布尔) 后面为具体的值。<br>例如，我们要修改sda5的自动挂载的挂载点，让他固定而非disk-x，<br>hal-set-property –udi /org/freedesktop/Hal/devices/volume_uuid_EE0454B90454868D –key volume.mount_point –string /media/winE<br> hal-set-property –udi /org/freedesktop/Hal/devices/computer –key system.hardware.product –string “PowerEdge R610”<br>hal-set-property –udi /org/freedesktop/Hal/devices/computer –key system.hardware.serial –string “H5C3X3X”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/09/hal-set-property-modifies-lshal-information/" data-id="cji00lkc2005mhnzswe8lx4rk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fuxin-pdf-reader-v4-to-advertising-methods" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/07/fuxin-pdf-reader-v4-to-advertising-methods/" class="article-date">
+  <time datetime="2011-03-07T05:40:43.000Z" itemprop="datePublished">2011-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/07/fuxin-pdf-reader-v4-to-advertising-methods/">福昕PDF阅读器 V4去广告方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>清理历史痕迹的批处理</em></strong></p>
+<p>将以下批处理内容（蓝色字体），复制到记事本，另存为，“清理Foxit PDF Reader历史痕迹.bat”即可。</p>
+<p>（名字任意，不带双引号）</p>
+<p>———————————-华丽的分割线———————————————</p>
+<p>@echo off</p>
+<p>title清理Foxit PDF Reader历史痕迹</p>
+<p>echo.</p>
+<p>echo清理Foxit PDF Reader历史痕迹</p>
+<p>pause</p>
+<p>reg delete “HKCU\Software\Foxit Software\福昕阅读器\Recent File List” /f &gt;nul 2&gt;nul</p>
+<p>echo.</p>
+<p>echo.</p>
+<p>echo.</p>
+<p>echo清理完成</p>
+<p>echo.</p>
+<p>echo按任意键关闭</p>
+<p>pause&gt;nul</p>
+<p>exit</p>
+<p>——————————–华丽的分割线———————————————–</p>
+<p><strong><em>设置为不显示广告的批处理</em></strong></p>
+<p>将以下批处理内容（绿色字体），复制到记事本，另存为，“不显示软件界面右上角的广告条.bat”即可。</p>
+<p>（名字任意，不带双引号）</p>
+<p>——————————–华丽的分割线———————————————–</p>
+<p>@echo off</p>
+<p>title不显示软件界面右上角的广告条</p>
+<p>echo.</p>
+<p>echo不显示软件界面右上角的广告条</p>
+<p>pause</p>
+<p>reg add “HKCU\Software\Foxit Software\福昕阅读器\MainFrame” /f /v ShowAd /t REG_SZ /d 0 &gt;nul 2&gt;nul</p>
+<p>echo.</p>
+<p>echo.</p>
+<p>echo.</p>
+<p>echo设置完成</p>
+<p>echo.</p>
+<p>echo按任意键关闭</p>
+<p>pause&gt;nul</p>
+<p>exit</p>
+<p>——————————–华丽的分割线———————————————–</p>
+<p>+++++++++</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/07/fuxin-pdf-reader-v4-to-advertising-methods/" data-id="cji00lkbh0055hnzsgl5pri1k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx-s-nginx-http-push-module-module-test-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/03/nginx-s-nginx-http-push-module-module-test-2/" class="article-date">
+  <time datetime="2011-03-03T10:10:59.000Z" itemprop="datePublished">2011-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/03/nginx-s-nginx-http-push-module-module-test-2/">Nginx的nginx_http_push_module模块测试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://pushmodule.slact.net/" target="_blank" rel="noopener">Nginx的nginx_http_push_modul</a>e模块，可以使nginx服务器成为一个comet服务器</p>
+<p>可以接受Client端的一个长连接请求，当server端有消息push时，则返回消息给Client</p>
+<p>1. 编译很简单：</p>
+<p>–add-module=../slact-nginx_http_push_module</p>
+<p>2.配置如下：</p>
+<p>折叠展开复制代码</p>
+<ol>
+<li>push_max_reserved_memory 20M;</li>
+<li>push_authorized_channels_only on;</li>
+<li></li>
+<li><p>server{</p>
+</li>
+<li>listen 80;</li>
+<li>server_name localhost test.ysz.com;</li>
+<li>access_log /opt/work/log/nginx_access_ysz.log main;</li>
+<li>error_log /opt/work/log/nginx_error_ysz.log error;</li>
+<li></li>
+<li><p>location /publish {</p>
+</li>
+<li>set $push_channel_id $arg_id;</li>
+<li>push_publisher;</li>
+<li>push_store_messages on;</li>
+<li>push_message_timeout 2h;</li>
+<li>push_max_message_buffer_length 10;</li>
+<li>}</li>
+<li>location /activity {</li>
+<li>push_subscriber;</li>
+<li>set $push_channel_id $arg_id;</li>
+<li>push_subscriber_concurrency broadcast;</li>
+<li>default_type text/plain;</li>
+<li>}</li>
+<li>}</li>
+</ol>
+<p>3.测试：</p>
+<p>浏览器端访问<a href="http://localhost/activity?id=10000，则请求会被堵塞" target="_blank" rel="noopener">http://localhost/activity?id=10000，则请求会被堵塞</a></p>
+<p>用python写一个简单的post程序，向<a href="http://localhost//publish?id=10000上post数据，则浏览器端会马上得到该消息" target="_blank" rel="noopener">http://localhost//publish?id=10000上post数据，则浏览器端会马上得到该消息</a></p>
+<p>注意：请求publish时，如果要发布消息，则必须得是POST请求，而且对应的Content-Type会被转发给长连接的Client。Get请求会返回当前是否有存在的channel_id。具体的Http Push协议细节，可参考<a href="http://pushmodule.slact.net/protocol.html" target="_blank" rel="noopener">http://pushmodule.slact.net/protocol.html</a></p>
+<p>4.一些问题：</p>
+<ul>
+<li>如果push模块放在后端的nginx上，而前段nginx反响代理到后端，当Client发送长连接请求时，<br>默认1分钟会直接断掉连接，返回504，不过可以设置proxy_read_timeout时间足够长来解决</li>
+<li>设置push_subscriber_concurrency broadcast，可以将push消息同时发送给同一个用户开启的多个浏览器窗口，但我在一个浏览器里开多个tab也来请求，却只有一个能得到消息，另外一个请求仍旧没有返回。当设置成first时，对应同一个channel_id，如果有多个长连接请求，则只有第一个会等待返回，其它的都返回409。设置成last时，我的测试结果是所有请求都会断掉，似乎是一个Bug?</li>
+<li>设置push_store_messages on，当没有对应的长连接请求时，可以暂时把msg缓存起来</li>
+<li>设置push_authorized_channels_only on可以打开认证功能，只有当publisher给对应的<br>channel_id发送过消息后，Client端才可以发起一个长连接请求，否则会返回403 Forbidden错误</li>
+<li>当client发起一个长连接请求时，accesslog和后端应用是无法知道其发送请求。不过，通过向publish发送一个Get请求来判断是否有对应channel_id的长连接请求.</li>
+</ul>
+<p>5.部分协议细节：</p>
+<ul>
+<li><p>订阅者：</p>
+<p>The <a href="http://suchalin.blog.163.com/blog/#term-server" target="_blank" rel="noopener">server</a> MUST accept all valid HTTP <code>GET</code> requests to the <a href="http://suchalin.blog.163.com/blog/#term-subscriber" target="_blank" rel="noopener">subscriber</a> <a href="http://suchalin.blog.163.com/blog/#term-location" target="_blank" rel="noopener">location</a>. All other request methods SHOULD be responded to with a <code>405 Method Not Allowed</code>status code.  </p>
+<p>Subscriber requests are considered notifications of intent to receive some message. Subscribers may request existing messages, messages that are not yet available, and messages that are no longer available. The requested message is identified using the <code>If-Modified-Since</code> and <code>If-None-Match</code> request headers. A request with no <code>If-Modified-Since</code> header MUST be assumed to be requesting the oldest available message in a channel. Each <code>200 OK</code> response containing a message MUST have its<code>Last-Modified</code> and <code>Etag</code> headers set so that a request using those headers will be interpreted as a request for the next available message. Additionally, said <code>200 OK</code>MUST contain the <code>Content-Type</code> header of the message publisher request, unless no <code>Content-Type</code> header had been provided or it is explicitly overridden by server configuration.</p>
+<p>There are several common mechanisms for performing an HTTP server push. The rest of the behavior of the server in response to a subscriber request SHOULD be configurable and MUST be selected from the following list of mechanisms:</p>
+<p>Long-Polling</p>
+<p>Requests for existing messages will be responded to immediately; responses to requests for messages not yet available MUST be delayed until the message becomes available. Delayed responses MUST satisfy all of the following conditions:  </p>
+<ul>
+<li>A <code>200 OK</code> response containing the message (and its <code>Content-Type</code>) MUST be sent immediately after the message becomes available<br>. The entire response must be indistinguishable from a response to a request for an existing message.</li>
+<li>If the channel the subscriber is waiting on is deleted or for some reason becomes unavailable, the server MUST immediately send a <code>410 Gone</code> response.</li>
+<li>If another subscriber has conflicted with this request, the server MUST immediately send a <code>409 Conflict</code> response.</li>
+</ul>
+<p>Interval-Polling</p>
+<p>All requests will be responded to immediately. Requests for messages not yet available MUST produce a <code>304 Not Modified</code> response code.</p>
+<p>In addition, when the server receives more than one concurrent subscriber request on the same channel, it MUST do one of the following:</p>
+<p>Broadcast</p>
+<p>No additional actions are performed</p>
+<p>Last-in, first-out</p>
+<p>All but the most recent long-held <a href="http://suchalin.blog.163.com/blog/#term-subscriber" target="_blank" rel="noopener">subscriber</a> request on the channel are sent a <code>409 Conflict</code> response.</p>
+<p>First-in, last-out</p>
+<p>All but the oldest request will be sent a <code>409 Conflict</code></p>
+</li>
+</ul>
+<pre><code>The [server](http://suchalin.blog.163.com/blog/#term-server) SHOULD make this selection configurable, and MUST default to `broadcast` behavior.
+</code></pre><ul>
+<li>发送者：</li>
+</ul>
+<pre><code>The [server](http://suchalin.blog.163.com/blog/#term-server) MUST accept all valid HTTP requests to the publisher [location](http://suchalin.blog.163.com/blog/#term-location). The [server](http://suchalin.blog.163.com/blog/#term-server), when sent a publisher request, MUST satisfy all of the following conditions:  
+
+*   GET requests receive a `200 OK` response for existing [channels](http://suchalin.blog.163.com/blog/#term-channel) and a `404 Not Found` otherwise. &lt; /li&gt;
+*   PUT requests receive a `200 OK` response. The request creates a [channel](http://suchalin.blog.163.com/blog/#term-channel) if no [channel](http://suchalin.blog.163.com/blog/#term-channel) with the given [channel id](http://suchalin.blog.163.com/blog/#term-channel_id) exists.
+*   DELETE requests receive a `200 OK` if the [channel](http://suchalin.blog.163.com/blog/#term-channel) identified by the [channel id](http://suchalin.blog.163.com/blog/#term-channel_id) exists and has been completely deleted. All [subscribers](http://suchalin.blog.163.com/blog/#term-subscriber) MUST have been sent a`410 Gone` response. Requests for nonexistent [channels](http://suchalin.blog.163.com/blog/#term-channel) MUST be responded to with a `404 Not Found`.
+*   POST requests are used to send [messages](http://suchalin.blog.163.com/blog/#term-message). The request MAY contain a body in any encoding representing a [message](http://suchalin.blog.163.com/blog/#term-message) to be sent over the [channel](http://suchalin.blog.163.com/blog/#term-channel). The[message](http://suchalin.blog.163.com/blog/#term-message) MUST be immediately delivered to all currently long-held [subscriber](http://suchalin.blog.163.com/blog/#term-subscriber) requests. Additionally, the [message](http://suchalin.blog.163.com/blog/#term-message) MAY be stored for future retrieval and the oldest [message](http://suchalin.blog.163.com/blog/#term-message) stored for the [channel](http://suchalin.blog.163.com/blog/#term-channel) MAY be deleted.
+
+    A POST request MUST be replied to with a `201 Created` if there were any long-held [subscribers](http://suchalin.blog.163.com/blog/#term-subscriber) that have been sent this [message](http://suchalin.blog.163.com/blog/#term-message), and with a `202 Accepted`otherwise.
+
+    The Content-Type header of the request MUST be forwarded with the [message](http://suchalin.blog.163.com/blog/#term-message).
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/03/nginx-s-nginx-http-push-module-module-test-2/" data-id="cji00lkj000bdhnzss7qfixph" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module/">module</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/push/">push</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx-s-nginx-http-push-module-module-test" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/01/nginx-s-nginx-http-push-module-module-test/" class="article-date">
+  <time datetime="2011-03-01T06:27:39.000Z" itemprop="datePublished">2011-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/01/nginx-s-nginx-http-push-module-module-test/">Nginx的nginx_http_push_module模块测试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://pushmodule.slact.net/" target="_blank" rel="noopener">Nginx的nginx_http_push_modul</a>e模块，可以使nginx服务器成为一个comet服务器</p>
+<p>可以接受Client端的一个长连接请求，当server端有消息push时，则返回消息给Client</p>
+<p>1. 编译很简单：</p>
+<p>–add-module=../slact-nginx_http_push_module</p>
+<p>2.配置如下：</p>
+<p>折叠展开复制代码</p>
+<ol>
+<li>push_max_reserved_memory 20M;</li>
+<li>push_authorized_channels_only on;</li>
+<li></li>
+<li><p>server{</p>
+</li>
+<li>listen 80;</li>
+<li>server_name localhost test.ysz.com;</li>
+<li>access_log /opt/work/log/nginx_access_ysz.log main;</li>
+<li>error_log /opt/work/log/nginx_error_ysz.log error;</li>
+<li></li>
+<li><p>location /publish {</p>
+</li>
+<li>set $push_channel_id $arg_id;</li>
+<li>push_publisher;</li>
+<li>push_store_messages on;</li>
+<li>push_message_timeout 2h;</li>
+<li>push_max_message_buffer_length 10;</li>
+<li>}</li>
+<li>location /activity {</li>
+<li>push_subscriber;</li>
+<li>set $push_channel_id $arg_id;</li>
+<li>push_subscriber_concurrency broadcast;</li>
+<li>default_type text/plain;</li>
+<li>}</li>
+<li>}</li>
+</ol>
+<p>3.测试：</p>
+<p>浏览器端访问<a href="http://localhost/activity?id=10000，则请求会被堵塞" target="_blank" rel="noopener">http://localhost/activity?id=10000，则请求会被堵塞</a></p>
+<p>用python写一个简单的post程序，向<a href="http://localhost//publish?id=10000上post数据，则浏览器端会马上得到该消息" target="_blank" rel="noopener">http://localhost//publish?id=10000上post数据，则浏览器端会马上得到该消息</a></p>
+<p>注意：请求publish时，如果要发布消息，则必须得是POST请求，而且对应的Content-Type会被转发给长连接的Client。Get请求会返回当前是否有存在的channel_id。具体的Http Push协议细节，可参考<a href="http://pushmodule.slact.net/protocol.html" target="_blank" rel="noopener">http://pushmodule.slact.net/protocol.html</a></p>
+<p>4.一些问题：</p>
+<ul>
+<li>如果push模块放在后端的nginx上，而前段nginx反响代理到后端，当Client发送长连接请求时，<br>默认1分钟会直接断掉连接，返回504，不过可以设置proxy_read_timeout时间足够长来解决</li>
+<li>设置push_subscriber_concurrency broadcast，可以将push消息同时发送给同一个用户开启的多个浏览器窗口，但我在一个浏览器里开多个tab也来请求，却只有一个能得到消息，另外一个请求仍旧没有返回。当设置成first时，对应同一个channel_id，如果有多个长连接请求，则只有第一个会等待返回，其它的都返回409。设置成last时，我的测试结果是所有请求都会断掉，似乎是一个Bug?</li>
+<li>设置push_store_messages on，当没有对应的长连接请求时，可以暂时把msg缓存起来</li>
+<li>设置push_authorized_channels_only on可以打开认证功能，只有当publisher给对应的<br>channel_id发送过消息后，Client端才可以发起一个长连接请求，否则会返回403 Forbidden错误</li>
+<li>当client发起一个长连接请求时，accesslog和后端应用是无法知道其发送请求。不过，通过向publish发送一个Get请求来判断是否有对应channel_id的长连接请求.</li>
+</ul>
+<p>5.部分协议细节：</p>
+<ul>
+<li><p>订阅者：</p>
+<p>The <a href="http://suchalin.blog.163.com/blog/#term-server" target="_blank" rel="noopener">server</a> MUST accept all valid HTTP <code>GET</code> requests to the <a href="http://suchalin.blog.163.com/blog/#term-subscriber" target="_blank" rel="noopener">subscriber</a> <a href="http://suchalin.blog.163.com/blog/#term-location" target="_blank" rel="noopener">location</a>. All other request methods SHOULD be responded to with a <code>405 Method Not Allowed</code>status code.  </p>
+<p>Subscriber requests are considered notifications of intent to receive some message. Subscribers may request existing messages, messages that are not yet available, and messages that are no longer available. The requested message is identified using the <code>If-Modified-Since</code> and <code>If-None-Match</code> request headers. A request with no <code>If-Modified-Since</code> header MUST be assumed to be requesting the oldest available message in a channel. Each <code>200 OK</code> response containing a message MUST have its<code>Last-Modified</code> and <code>Etag</code> headers set so that a request using those headers will be interpreted as a request for the next available message. Additionally, said <code>200 OK</code>MUST contain the <code>Content-Type</code> header of the message publisher request, unless no <code>Content-Type</code> header had been provided or it is explicitly overridden by server configuration.</p>
+<p>There are several common mechanisms for performing an HTTP server push. The rest of the behavior of the server in response to a subscriber request SHOULD be configurable and MUST be selected from the following list of mechanisms:</p>
+<p>Long-Polling</p>
+<p>Requests for existing messages will be responded to immediately; responses to requests for messages not yet available MUST be delayed until the message becomes available. Delayed responses MUST satisfy all of the following conditions:  </p>
+<ul>
+<li>A <code>200 OK</code> response containing the message (and its <code>Content-Type</code>) MUST be sent immediately after the message becomes available<br>. The entire response must be indistinguishable from a response to a request for an existing message.</li>
+<li>If the channel the subscriber is waiting on is deleted or for some reason becomes unavailable, the server MUST immediately send a <code>410 Gone</code> response.</li>
+<li>If another subscriber has conflicted with this request, the server MUST immediately send a <code>409 Conflict</code> response.</li>
+</ul>
+<p>Interval-Polling</p>
+<p>All requests will be responded to immediately. Requests for messages not yet available MUST produce a <code>304 Not Modified</code> response code.</p>
+<p>In addition, when the server receives more than one concurrent subscriber request on the same channel, it MUST do one of the following:</p>
+<p>Broadcast</p>
+<p>No additional actions are performed</p>
+<p>Last-in, first-out</p>
+<p>All but the most recent long-held <a href="http://suchalin.blog.163.com/blog/#term-subscriber" target="_blank" rel="noopener">subscriber</a> request on the channel are sent a <code>409 Conflict</code> response.</p>
+<p>First-in, last-out</p>
+<p>All but the oldest request will be sent a <code>409 Conflict</code></p>
+</li>
+</ul>
+<pre><code>The [server](http://suchalin.blog.163.com/blog/#term-server) SHOULD make this selection configurable, and MUST default to `broadcast` behavior.
+</code></pre><ul>
+<li>发送者：</li>
+</ul>
+<pre><code>The [server](http://suchalin.blog.163.com/blog/#term-server) MUST accept all valid HTTP requests to the publisher [location](http://suchalin.blog.163.com/blog/#term-location). The [server](http://suchalin.blog.163.com/blog/#term-server), when sent a publisher request, MUST satisfy all of the following conditions:  
+
+*   GET requests receive a `200 OK` response for existing [channels](http://suchalin.blog.163.com/blog/#term-channel) and a `404 Not Found` otherwise. &lt; /li&gt;
+*   PUT requests receive a `200 OK` response. The request creates a [channel](http://suchalin.blog.163.com/blog/#term-channel) if no [channel](http://suchalin.blog.163.com/blog/#term-channel) with the given [channel id](http://suchalin.blog.163.com/blog/#term-channel_id) exists.
+*   DELETE requests receive a `200 OK` if the [channel](http://suchalin.blog.163.com/blog/#term-channel) identified by the [channel id](http://suchalin.blog.163.com/blog/#term-channel_id) exists and has been completely deleted. All [subscribers](http://suchalin.blog.163.com/blog/#term-subscriber) MUST have been sent a`410 Gone` response. Requests for nonexistent [channels](http://suchalin.blog.163.com/blog/#term-channel) MUST be responded to with a `404 Not Found`.
+*   POST requests are used to send [messages](http://suchalin.blog.163.com/blog/#term-message). The request MAY contain a body in any encoding representing a [message](http://suchalin.blog.163.com/blog/#term-message) to be sent over the [channel](http://suchalin.blog.163.com/blog/#term-channel). The[message](http://suchalin.blog.163.com/blog/#term-message) MUST be immediately delivered to all currently long-held [subscriber](http://suchalin.blog.163.com/blog/#term-subscriber) requests. Additionally, the [message](http://suchalin.blog.163.com/blog/#term-message) MAY be stored for future retrieval and the oldest [message](http://suchalin.blog.163.com/blog/#term-message) stored for the [channel](http://suchalin.blog.163.com/blog/#term-channel) MAY be deleted.
+
+    A POST request MUST be replied to with a `201 Created` if there were any long-held [subscribers](http://suchalin.blog.163.com/blog/#term-subscriber) that have been sent this [message](http://suchalin.blog.163.com/blog/#term-message), and with a `202 Accepted`otherwise.
+
+    The Content-Type header of the request MUST be forwarded with the [message](http://suchalin.blog.163.com/blog/#term-message).
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/01/nginx-s-nginx-http-push-module-module-test/" data-id="cji00lkj300bghnzsrs8orewk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bash-shell-program-design-while-read-encounters-ssh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/01/bash-shell-program-design-while-read-encounters-ssh/" class="article-date">
+  <time datetime="2011-03-01T02:18:26.000Z" itemprop="datePublished">2011-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/03/01/bash-shell-program-design-while-read-encounters-ssh/">[Bash Shell 程序设计]当while read 遇上ssh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先看一段简化过的BASH SHELL代码  </p>
+<p>TODAY=`date +%Y%m%d`<br>SUFFIX=”tar”<br>CONF=the_config_file<br>i=0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while read HOST SRCPATH DSTPATH  </span><br><span class="line">do  </span><br><span class="line">        (( i++ ))  </span><br><span class="line">        if \[ &quot;X$&#123;HOST:0:1&#125;&quot; = &quot;X#&quot; -o $&#123;#DSTPATH&#125; -eq 0 \]  </span><br><span class="line">        then  </span><br><span class="line">                #忽略注释行及少于3个项的记录  </span><br><span class="line">        else ssh $&#123;HOST&#125; &quot;tar c $&#123;SRCPATH&#125;&quot; &gt;$&#123;DSTPATH&#125;.$&#123;TODAY&#125;.$&#123;SUFFIX&#125; 2&gt;/dev/null  </span><br><span class="line">        fi  </span><br><span class="line">done &lt; $CONF</span><br></pre></td></tr></table></figure></p>
+<p>作者的本意是通过脚本读取配置文件$CONF，然后打包备份$CONF中指定的文件，但执行后发现程序在成功备份$CONF中指定的第一个文件后即退出……  </p>
+<p>跟踪后发现read在备份完第一个文件后就再读不到任何数据，所以while循环结束－－也就是说，<br>通过重定向$CONF文件传给标准输入的数据被  </p>
+<p>ssh ${HOST} “tar c ${SRCPATH}” &gt;${DSTPATH}.${TODAY}.${SUFFIX} 2&gt;/dev/null  </p>
+<p>这个命令提前吃掉了。  </p>
+<p>将其改为<br>ssh ${HOST} “tar c ${SRCPATH}” &gt;${DSTPATH}.${TODAY}.${SUFFIX} 2&gt;/dev/null &lt;/dev/null  </p>
+<p>将ssh的标准输入重定向到/dev/null，程序正常备份所有$CONF中指定的文件。  </p>
+<p>--------------------------------------------------------<br>结论:  </p>
+<p>while read时，要注意那些处理标准输入的命令，例如  </p>
+<p>cat,mail,ssh,grep,sed,tr,awk……（几乎所有支持流文本处理的命令都包含在内)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/01/bash-shell-program-design-while-read-encounters-ssh/" data-id="cji00lk870024hnzseb80lxv4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/read/">read</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/while/">while</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-network-card-set-up-gigabit-network-speed-and-mode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/02/25/linux-network-card-set-up-gigabit-network-speed-and-mode/" class="article-date">
+  <time datetime="2011-02-25T09:26:57.000Z" itemprop="datePublished">2011-02-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/02/25/linux-network-card-set-up-gigabit-network-speed-and-mode/">LINUX网卡(设置千兆网卡速度及模式)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ethtool是用于查询及设置网卡参数的命令。<br>概要：<br>ethtool ethX      //查询ethX网口基本设置<br>ethtool –h        //显示ethtool的命令帮助(help)<br>ethtool –i ethX    //查询ethX网口的相关信息<br>ethtool –d ethX    //查询ethX网口注册性信息<br>ethtool –r ethX    //重置ethX网口到自适应模式<br>ethtool –S ethX    //查询ethX网口收发包统计<br>ethtool –s ethX [speed 10|100|1000]\         //设置网口速率10/100/1000M<br>[duplex half|full]\           //设置网口半/全双工<br>[autoneg on|off]\            //设置网口是否自协商<br>[port tp|aui|bnc|mii]\         //设置网口类型<br>[phyad N]\<br>[xcvr internal|exteral]\<br>[wol p|u|m|b|a|g|s|d…]\<br>[sopass xx:yy:zz:aa:bb:cc]\<br>[msglvl N]</p>
+<p>举例：<br>1）[root@linux /]# ethtool eth1<br>   Settings for eth1:<br>        Supported ports: [ TP ]<br>        Supported link modes:   10baseT/Half 10baseT/Full<br>                                100baseT/Half 100baseT/Full<br>                                1000baseT/Full<br>        Supports auto-negotiation: Yes<br>        Advertised link modes:  10baseT/Half 10baseT/Full<br>                                100baseT/Half 100baseT/Full<br>                                1000baseT/Full<br>        Advertised auto-negotiation: Yes<br>        Speed: 1000Mb/s<br>        Duplex: Full<br>        Port: Twisted Pair<br>        PHYAD: 0<br>        Transceiver: internal<br>        Auto-negotiation: on<br>        Supports Wake-on: umbg<br>        Wake-on: d<br>        Link detected: yes<br>2）[root@linux /]# ethtool -i eth1<br>   driver: e1000<br>   version: 5.0.43-k1<br>   firmware-version: N/A<br>   bus-info: 06:08.1<br>3）[root@linux /]# ethtool -S eth1<br>   NIC statistics:<br>     rx_packets: 58068300<br>     tx_packets: 87124083<br>     rx_bytes: 1589713008<br>     tx_bytes: 2165825901<br>     rx_errors: 0<br>     tx_errors: 0<br>     rx_dropped: 0<br>     tx_dropped: 0<br>     multicast: 0<br>     collisions: 0<br>     rx_length_errors: 0<br>     rx_over_errors: 0<br>     rx_crc_errors: 0<br>     rx_frame_errors: 0<br>     rx_fifo_errors: 0<br>     rx_missed_errors: 0<br>     tx_aborted_errors: 0<br>     tx_carrier_errors: 0<br>     tx_fifo_errors: 0<br>     tx_heartbeat_errors: 0<br>     tx_window_errors: 0<br>4）[root@linux /]# ethtool -s eth1 autoneg off speed 100 duplex full</p>
+<p>相关：<br>1）[root@linux /]# which ethtool<br>    /sbin/ethtool<br>2）[root@linux /]# rpm -qf /sbin/ethtool<br>   ethtool-1.6-5<br>3）怎样使ethtool设置永久保存在网络设备中？<br>   解决方法一:<br>    ethtool设置可通过/etc/sysconfig/network-scripts/ifcfg-ethX文件保存,从而在设备下次启动时激活选项。<br>例如：ethtool -s eth0 speed 100 duplex full autoneg off<br>此指令将eth0设备设置为全双工自适应，速度为100Mbs。若要eth0启动时设置这些参数, 修改文件/etc/sysconfig/network-scripts/ifcfg-eth0 ，添加如下一行:<br> ETHTOOL_OPTS=”speed 100 duplex full autoneg off”<br>解决方法二:<br>将ethtool设置写入/etc/rc.d/rc.local之中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/02/25/linux-network-card-set-up-gigabit-network-speed-and-mode/" data-id="cji00lkg2008qhnzshsgs8w8u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-happiness" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/01/27/happiness/" class="article-date">
+  <time datetime="2011-01-27T06:20:45.000Z" itemprop="datePublished">2011-01-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/01/27/happiness/">幸福</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>小猪问妈妈幸福在哪里，妈妈说幸福就在自己的尾巴上。于是小猪开始用嘴咬它的小尾巴，却总也咬不到，它沮丧地告诉妈妈自己抓不住幸福，妈妈笑笑说：“孩子，只要你一直往前走，幸福就会一直跟着你……”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/01/27/happiness/" data-id="cji00lkc5005phnzscna3lcw9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小猪/">小猪</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/尾巴/">尾巴</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-about-money" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/01/20/about-money/" class="article-date">
+  <time datetime="2011-01-20T05:34:25.000Z" itemprop="datePublished">2011-01-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/01/20/about-money/">关于金钱</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有了钱  </p>
+<p>你可以买楼  </p>
+<p>但不可以买到一个家<br>有了钱  </p>
+<p>你可以买钟表  </p>
+<p>但不可以买到时间<br>有了钱  </p>
+<p>你可以买一张床  </p>
+<p>但不可以买到充足的睡眠<br>有了钱  </p>
+<p>你可以买书  </p>
+<p>但不可以买到知识<br>有了钱  </p>
+<p>你可以买到医疗服务  </p>
+<p>但不可以买到健康<br>有了钱  </p>
+<p>你可以买到地位  </p>
+<p>但不可以买到尊重<br>有了钱  </p>
+<p>你可以买到血液  </p>
+<p>但不可以买到生命<br>有了钱  </p>
+<p>你可以买性  </p>
+<p>但不可以买到爱</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/01/20/about-money/" data-id="cji00lk5b000ohnzs9a6zj1rc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关于金钱/">关于金钱</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx-upon-jjs-route-plug-in-is-forwarded-by-sessionid" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/01/19/nginx-upon-jjs-route-plug-in-is-forwarded-by-sessionid/" class="article-date">
+  <time datetime="2011-01-19T10:39:50.000Z" itemprop="datePublished">2011-01-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/01/19/nginx-upon-jjs-route-plug-in-is-forwarded-by-sessionid/">nginx-upstream-jvm-route插件 按sessionid转发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1–安装nginx-0.7.65<br>1-0 下载包<br>jvm-route安装包下载命令：<br>svn checkout <a href="http://nginx-upstream-jvm-route.googlecode.com/svn/trunk/" target="_blank" rel="noopener">http://nginx-upstream-jvm-route.googlecode.com/svn/trunk/</a> nginx-upstream-jvm-route-read-only</p>
+<p>nginx当前稳定版下载路径<br>wget  <a href="http://nginx.org/download/nginx-0.7.65.tar.gz" target="_blank" rel="noopener">http://nginx.org/download/nginx-0.7.65.tar.gz</a></p>
+<p>1-1 解压缩 nginx-0.7.65.tar.gz 到 /usr/develop/yagnwr<br>1-2 解压缩 jvm-route.zip 到/usr/develop/yagnwr<br> 还可以从 网站上下载svn checkout <a href="http://nginx-upstream-jvm-route.googlecode.com/svn/trunk/" target="_blank" rel="noopener">http://nginx-upstream-jvm-route.googlecode.com/svn/trunk/</a> nginx-upstream-jvm-route-read-only<br>1-3 切换到 /usr/develop/yagnwr/nginx-0.7.65<br>1-4 patch -p0 &lt; /usr/develop/yagnwr/jvm-route/jvm_route.patch<br>1-5 ./configure –prefix=/usr/mpsp/nginx-0.7.65  –add-module=/home/yangwr/soft/jvm-route/  –with-http_stub_status_module<br>1-6 make<br>1-7 make install</p>
+<p>2–配置文件<br>rm -f /usr/mpsp/nginx-0.7.65/nginx.conf<br>vi /usr/mpsp/nginx-0.7.65/nginx.conf</p>
+<p>3–修改nginx.conf–针对tomcat<br> 服务器10.110.5.151上的nginx.conf负载做如下配置<br> upstream newjboss {  </p>
+<pre><code>   #ip_hash;  
+   server 10.110.5.151:9081    srun_id=a;  
+   server 10.110.5.152:9081     srun_id=b;  
+   jvm\_route $cookie\_JSESSIONID|sessionid reverse;  
+}  
+</code></pre><p>  4–修改tomcat配置/tomcat/conf/server.xml<br>10.110.5.151修改为  </p>
+<engine name="Catalina" defaulthost="localhost" jvmroute="a">
+
+<p>10.110.5.152修改为  </p>
+<engine name="Catalina" defaulthost="localhost" jvmroute="b"></engine></engine>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/01/19/nginx-upon-jjs-route-plug-in-is-forwarded-by-sessionid/" data-id="cji00lkj700bkhnzs7rwa8kg5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-a-little-insight-into-the-nce-program" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/01/18/a-little-insight-into-the-nce-program/" class="article-date">
+  <time datetime="2011-01-18T06:23:21.000Z" itemprop="datePublished">2011-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/01/18/a-little-insight-into-the-nce-program/">关于报读NCE课程的小小心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本科毕业后，换了几份工作，但是总觉得在这个社会中找不到自己的位置，表面上是在积极地工作，但胸口却藏着一颗迷茫、缺乏自信的心。回忆起中学时光，我是一个多么自信的小伙子，完全是一个闭着眼睛便可以考上大学的优等理科生。因此，我对自己说：我不能再这样的活下去，我必须重新找回那久违的信心！可是那份信心藏在哪儿了呢？我陷入了迷茫。我一直在想：究竟是什么事情让我不再自信呢？这个问题让我失眠了一个星期，到了第八天的早上，我的一个朋友在网上给我发了一个网址，打开一看，是一个英文网站，而也就在意识到这是一个英文网站的瞬间，我的潜意识立即让我回了一条信息“晕！全英文的，要我怎么看啊”。而也就在这一刻，我突然意识到了问题的严重性：我终于找到了失去自信的关键——一股面对英语的畏难情绪！</p>
+<p>所以，就我而言，要重拾信心，就首先得学好英语，而学好英语的关键就是要打好基础。况且，要不就不学，要学就要把它学透学精，于是我选择了辞职，全身心地投入到英语学习中。通过网友的推荐，我决定报读《新概念英语》的课程，由于在此之前，我从未报读过任何一所培训学校，所以选择学校时候也相对比较谨慎。首先，学校要有一定的社会知名度（因为这样，师资才有保证）；第二，性价比高（相对便宜的价钱能上更多的课时）；第三，允许试听（试听后不满意的就可以不再报读，将教育投资风险减到最低）。所以，鉴于这三点，我选择了新东方。</p>
+<p>当我来到了黄花岗校区，把我的英语状况向前台的一名服务人员讲述了后，她建议我报读新概念二册的课程。当时听了后，我的内心有种说不出的难受。我本来是想报读新概念三册课程，因为我自问自己：我无论如何都是一名本科生，怎么还要从新概念二册学起？难道以往那么多年的英语学习都白搭了？我真的不能接受这事实，我的信心受到了打击。从那天晚上开始，连续五天，我都没能睡好觉，我的左脑和右脑一直在互相斗争，但谁也没能说服谁。第六天，我勉强作出了决定：先去试听一下新概念二册课程，然后再作决定。</p>
+<p>2006年8月，我开始了我的新概念二册的旅程。我原以为，这个班几乎是中学生的场所，但随后却惊讶地发现，这个班的绝大部分学员都是和我一样已走出校园的人士，这使我内心产生了一丝的安慰和鼓舞。但是，真正让我下定决心报读二册课程的，是一名叫范琛的老师（他的英文名字是Sam）。上课之前，他在黑板上写了一句话：Attitude decides altitude ! 正是这一句普通得不能再普通的话坚定了我的信念。直到现在，我已经在新东方完成了三个课程，但却不曾缺席任何一节课，就因为他写的一句“Attitude decides altitude”。</p>
+<p>而在新概念二册的学习过程中，我运用的是最笨、最耗费时间的方法：听、背和译。晚上上课，然后第二天白天就在家里通过泛听和精听，把课文都完全听懂了，然后就背下来，日复一日地坚持着，每到周日、周一就把之前所背的课文重新背诵，强迫把课文都印在脑子里，完全不需要考虑如何灵活应用，因为我知道，如果脑子里面没有一定量的文章，根本就不懂得如何灵活应用。二册一共是96课（其中有10篇课文是自学的），课程越往后，学习量就会越大（因为周日、周一需要重新背诵的课文就越多，但却绝不能偷懒，因为前三个单元是打基础的，讲得很详细，到了第四单元的进度就变得很快。如果前三个单元偷懒的话，到了第四单元的课程，就会觉得很难，所以，到了最后一节课时候，班里人数还不足第一节课时候的人数的一半，我觉得就是这个原因）。上完了二册（共36节课）以后，实际上，我的第二册学习还没完成，因为第四单元的课程讲得很快，还未来得及一一背诵，课程就已经结束了，因此有必要上完所有课程后，继续把没背诵的课文都背诵了，然后便开始中译英练习。看着每篇课文的中文，按自己的想法译成英文（这时候的我已经掌握了比较多的句型，已经可以从容地把简单句型改为复合句型了），再之后便挑选一些优美的课文进行英译中训练。当经过了这一段的二册学习后，我发觉听、说、读、写能力都有了质的飞跃，这种飞跃并不是一言两语就能表述清楚的，也只有学透了二册的学员，才可能领会这般的感悟。</p>
+<p>2006年11月中旬，我便真正地进入了三册的课程学习。三册课程的起点要比二册高很多，老师也是全英文授课的，但由于我学透了二册后，才报读三册课程，于是我很快就适应了，而且我也暗暗庆幸一开始选择了报读新概念二册。如果我一开始就固执己见地报读三册的话，换来的肯定是对自我信心的成倍重挫，甚至作出一辈子远离英语的决定。在三册的学习中，我沿用了学习二册的方法。虽然三册的课文无论是篇幅还是难度都有很大程度的提升，但由于已经学透了二册，所以背诵起来并不觉得困难。</p>
+<p>过完年以后，我报读了口语二级班，或许很多人感到不解，为什么背完新概念二册、三册后，还要去学习口语二级？因为我认为，口语和书面语的着重点不同，口语是生活化的，并非一味地提高难度，就能操一口生动的口语，所以，根据自身的情况，我决定从口语二级学起。就我而言，有了新概念英语打下的扎实基础，学习口语时候，我把精力更多的放在学习口语技巧，以及掌握西方人的思维模式，并且每天都坚持看《新英语900句》的VCD和一部英文电影，并且用英文复述《新英语900句》每一个小故事和电影的情节。这样，到了口语二级课程结束时，我的英语口语水平已经有了很大的提升。</p>
+<p>此后，我面试了一家外企，并成功拿到了offer。</p>
+<p>当然，并非每个人都得依照我的学习心得去提升英语水平，每个人所走的历程必然不同，我只是与大家分享一下自身的学习心得罢了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/01/18/a-little-insight-into-the-nce-program/" data-id="cji00lk4o000dhnzsj7alh8u1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/概念/">概念</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/英语/">英语</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课文/">课文</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课程/">课程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

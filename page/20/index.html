@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/20/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux-load-balancing-topics-personal-notes-and-notes-can-build-available-clusters-as-follows" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/23/linux-load-balancing-topics-personal-notes-and-notes-can-build-available-clusters-as-follows/" class="article-date">
+  <time datetime="2010-01-23T06:21:20.000Z" itemprop="datePublished">2010-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/23/linux-load-balancing-topics-personal-notes-and-notes-can-build-available-clusters-as-follows/">Linux负载均衡专题(个人心得和笔记按照下面的步骤就能建立可用的集群)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>haproxy+keepalived</p>
+<p>Linux企业集群</p>
+<p><a href="http://book.51cto.com/art/200806/76015.htm" target="_blank" rel="noopener">http://book.51cto.com/art/200806/76015.htm</a>#</p>
+<p>第一步:rsync同步web数据（测试通过并且自己加入了ssh的RSA key验证）</p>
+<p><a href="http://www.linuxsir.org/main/?q=node/256" target="_blank" rel="noopener">http://www.linuxsir.org/main/?q=node/256</a>   rsync 服务器架设方法 v0.1b （正在修订中）</p>
+<p>第二步:安装heartbeat并且可以故障切换(正在学习中..)</p>
+<p>centos 5.2</p>
+<p>yum install -y heartbeat heartbeat-devel heartbeat-ldirectord heartbeat-gui piranha</p>
+<p>第三步:配置heartbeat</p>
+<p>因为是rpm安装所以默认/etc/ha.d/中没有包含ha.cf,authkeys,haresources这三个文件必须拷贝过来</p>
+<p>rpm查询cat /etc/ha.d/README.config</p>
+<p>You need three configuration files to make heartbeat happy,<br>and they all go in this directory.</p>
+<p>They are:<br>        ha.cf           Main configuration file<br>        haresources     Resource configuration file<br>        authkeys        Authentication information</p>
+<p>These first two may be readable by everyone, but the authkeys file<br>must not be.</p>
+<p>The good news is that sample versions of these files may be found in<br>the documentation directory (providing you installed the documentation).</p>
+<p>If you installed heartbeat using rpm packages then<br>this command will show you where they are on your system:<br>                rpm -q heartbeat -d</p>
+<p>If you installed heartbeat using Debian packages then<br>the documentation should be located in /usr/share/doc/heartbeat</p>
+<p>然后利用cp把三个文件拷贝到/etc/ha.d/中</p>
+<p>第四步:具体安装</p>
+<p><a href="http://linux.chinaunix.net/bbs/viewthread.php?tid=1051263" target="_blank" rel="noopener">http://linux.chinaunix.net/bbs/viewthread.php?tid=1051263</a></p>
+<p>heartbeat2.x的测试终结篇，针对使用heartbeat的新手</p>
+<p>注意:例如我们想做httpd的双机热备份的话,首先要把httpd的启动脚本从init中删除</p>
+<p>chkconfig –del httpd</p>
+<p>chkconfig –level 345 httpd off</p>
+<p>删除完成以后修改haresources</p>
+<p>HA2 192.168.0.40 httpd</p>
+<p>注意这里生成完成了还是不能用必须用/usr/lib/heartbeat/haresources2cib.py haresources重新弄cib.xml和cib.xml.sig</p>
+<p>主题：heartbeat V2在CentOS4.6上简要安装、配置笔记</p>
+<p><a href="http://www.javaeye.com/topic/191076" target="_blank" rel="noopener">http://www.javaeye.com/topic/191076</a></p>
+<p>heartbeat2.1.4 实现监控应用服务(mysql)具体步骤<br><a href="http://www.china-lg.com/blog/index.php?play=show&amp;id=553" target="_blank" rel="noopener">http://www.china-lg.com/blog/index.php?play=show&amp;id=553</a></p>
+<p>Linux 上的高可用中间件，第 1 部分: heartbeat 与 Apache Web 服务器</p>
+<p><a href="http://www.ibm.com/developerworks/cn/linux/l-halinux/index.html" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/linux/l-halinux/index.html</a></p>
+<p>LVS+Heartbeat+Ldirectord在RHEL5上</p>
+<p><a href="http://blog.chinaunix.net/u2/82873/showart_1405630.html" target="_blank" rel="noopener">http://blog.chinaunix.net/u2/82873/showart_1405630.html</a></p>
+<p>基于LVS的互联网应用</p>
+<p><a href="http://unix.ctocio.com.cn/196/8689196_5.shtml" target="_blank" rel="noopener">http://unix.ctocio.com.cn/196/8689196_5.shtml</a></p>
+<p>基于LVS的Linux负载均衡技术实现</p>
+<p> <a href="http://net.it168.com/a2008/0731/199/000000199163.shtml" target="_blank" rel="noopener">http://net.it168.com/a2008/0731/199/000000199163.shtml</a></p>
+<p>ipvsadm Man</p>
+<p><a href="http://linux.die.net/man/8/ipvsadm" target="_blank" rel="noopener">http://linux.die.net/man/8/ipvsadm</a></p>
+<p> 利用LVS+Keepalived 实现高性能高可用负载均衡服务器</p>
+<p><a href="http://www.linuxtone.org/thread-1077-1-1.html" target="_blank" rel="noopener">http://www.linuxtone.org/thread-1077-1-1.html</a></p>
+<p>Linux Virtual Server负载均衡 ipvsadm使用方法</p>
+<p><a href="http://www.lslnet.com/linux/docs/linux-7916.htm" target="_blank" rel="noopener">http://www.lslnet.com/linux/docs/linux-7916.htm</a></p>
+<p>使用LVS（Linux Virtual Server）在Linux上搭建负载均衡的集群服务</p>
+<p><a href="http://www.clusting.com/cluster/load_balancing/LVS_1.html" target="_blank" rel="noopener">http://www.clusting.com/cluster/load_balancing/LVS_1.html</a></p>
+<p>请教LVS三种工作模式和算法、session保持的问题！！！</p>
+<p>有几个关LVS问题，小弟想请教一下：<br>1、<br>在配置LVS时，小弟想用DR模式。我想请问一下如果确定使用此模式，或是改用NAT 或是TUN模式时，该通过ipvsadm的哪个命令参数指定，ipvsadm -A -t $VIP:80 -s rr 变化rr 这个参数指定的。<br>2、LVS的十种轮询算法，该如何通过配置文件或是命令指定。</p>
+<p>3、在配置LVS不知道该如何解决session保持的问题，因为有些电子商务网站需要始终保持同一个连接，连接到同一个realserver.</p>
+<p>-m NAT<br>-i TUN<br>算法：<br>-s 指定<br>session保持：-p</p>
+<p>—这全在手册中，或者ipvsadm -h都可以查到</p>
+<p>多谢指点已经明白，小弟还有一问，请指点，，，</p>
+<p>关于网站后台数据库或资料同步的问题，小弟想到如下办法：前提在没有做共享磁盘的前提下，如果数据库想要同步的话，可能要配置oracle热备，如果是mysql就可配置主从，等等，关于网站其它文件，如图片之类的，小弟想到rsync 或是在上传时同步上传。如果是做了共享磁盘，如果/date目录吧。那么几台realserver可以挂载此目录到本机了，网站的数据，还数据库都可以放在此目录了。。但问题是多个realserve要是同时写一个文件时，该如果是好呢？不知是否支持并行写入，小弟觉得关于集群配置磁盘共享这块，也就是多个realserver数据同步的问题不太好解决，也是小弟最大凝问之处，很想有机会搭建SAN,或是NAS，好好试验一下，如果搭建NAS，，使用linux的NFS就可以吧。而且也有一些集群文件系统GFS之类，等等。。。一直不太明确后端数据存储的一致性问题。</p>
+<p><a href="http://www.diybl.com/course/6_system/linux/Linuxjs/200868/123619.html" target="_blank" rel="noopener">http://www.diybl.com/course/6_system/linux/Linuxjs/200868/123619.html</a></p>
+<p>在RHEL5中用piranha架设squid的lvs集群</p>
+<p><a href="http://www.yatan.com/group/topic.php?tid=21513" target="_blank" rel="noopener">http://www.yatan.com/group/topic.php?tid=21513</a></p>
+<p>在RHEL4系统中配置LVS负载均衡群集</p>
+<p><a href="http://www.linuxbyte.net.cn/article/rhel/2008-08-10/843.html" target="_blank" rel="noopener">http://www.linuxbyte.net.cn/article/rhel/2008-08-10/843.html</a></p>
+<p>RHEL-LVS 实验（1）VS-NAT<br><a href="http://www.linuxtopia.org/online_books/rhel5/rhel5_clustering_guide/rhel5_cluster_s2-lvs-routing-CSO.html" target="_blank" rel="noopener">http://www.linuxtopia.org/online_books/rhel5/rhel5_clustering_guide/rhel5_cluster_s2-lvs-routing-CSO.html</a></p>
+<p>rhel 5 cluseter</p>
+<p><a href="http://blog.80s.net.cn/?p=476" target="_blank" rel="noopener">http://blog.80s.net.cn/?p=476</a></p>
+<p>lvs安装以及配置</p>
+<p><a href="http://tech.ddvip.com/2008-11/122768078295163_3.html" target="_blank" rel="noopener">http://tech.ddvip.com/2008-11/122768078295163_3.html</a></p>
+<p>redhatAS4.2 安装集群LVS<br><a href="http://bbs.bbsgood.com/post_45_129231_1.html" target="_blank" rel="noopener">http://bbs.bbsgood.com/post_45_129231_1.html</a></p>
+<p>虚拟机中的lvs负载均衡</p>
+<p>本文来自CSDN博客，转载请标明出处：<a href="http://blog.csdn.net/cnbird2008/archive/2009/01/25/3853108.aspx" target="_blank" rel="noopener">http://blog.csdn.net/cnbird2008/archive/2009/01/25/3853108.aspx</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/23/linux-load-balancing-topics-personal-notes-and-notes-can-build-available-clusters-as-follows/" data-id="cji00lkfn008fhnzs5nuhm61x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-cluster-management-tool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/23/cluster-management-tool/" class="article-date">
+  <time datetime="2010-01-23T06:18:31.000Z" itemprop="datePublished">2010-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/23/cluster-management-tool/">集群管理工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>synctool 是一个集群管理工具，用来在集群中的所有节点间进行保证配置文件的同步。节点可以是一个逻辑组和类的一部分，它们可能需要部分的配置文件。synctool 守护进程可以根据配置更改而对应用进行重启，还包括执行一些其他的管理任务。</p>
+<p>新版本增加了一个新的工具 synctool-scp ，你可以使用这个工具来将文件复制到集群中的所有节点。</p>
+<p><a href="http://freshmeat.net/projects/synctool" target="_blank" rel="noopener">下载 Synctool 4.2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/23/cluster-management-tool/" data-id="cji00lk98002zhnzs0lv25lpm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lvs-cluster-technology" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/23/lvs-cluster-technology/" class="article-date">
+  <time datetime="2010-01-23T06:15:34.000Z" itemprop="datePublished">2010-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/23/lvs-cluster-technology/">LVS集群技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>集群技术主要分为三大类：</p>
+<ul>
+<li><p>高可用性(High Available Cluster)，例：</p>
+<p><a href="http://www.linux-ha.org/" target="_blank" rel="noopener">Linux-HA</a></p>
+</li>
+<li><p>负载均衡(Load balancing Cluster)，例：</p>
+<p><a href="http://www.linuxvirtualserver.org/" target="_blank" rel="noopener">LVS</a></p>
+<p>、</p>
+<p><a href="http://www.mosix.org/" target="_blank" rel="noopener">MOSIX</a></p>
+</li>
+<li><p>高性能计算(High Performance Computing)，例：</p>
+<p><a href="http://www.beowulf.org/" target="_blank" rel="noopener">Beowulf</a></p>
+</li>
+</ul>
+<p>我们这里使用RedHat AS 3.x，LVS，Linux-HA，Ldirectord，构造一个高可用的负载均衡集群系统。如图：</p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/zh_linuxvirtualserver_lvs-architecture.jpg" alt=" LVS集群技术 - suchalin - 为了更好的生活而奋斗！" title=" LVS集群技术 - suchalin - 为了更好的生活而奋斗！">screen.width*0.7) {this.resized=true; this.width=screen.width*0.7; this.alt=’Click here to open new window\nCTRL+Mouse wheel to zoom in/out’;}”&gt;</p>
+<p>各层的作用：</p>
+<ul>
+<li><p>Load Balancer(负载均衡器)：</p>
+<pre><code>Load Balancer是整个集群系统的前端，负责把客户请求转发到Real Server上。
+
+Backup是备份Load Balancer，当Load Balancer不可用时接替它，成为实际的Load Balancer。
+
+Load Balancer通过Ldirectord监测各Real Server的健康状况。在Real Server不可用时
+</code></pre><p>把它从群中剔除，恢复时重新加入。</p>
+</li>
+<li><p>Server Array(服务器群)：</p>
+<pre><code>Server Array是一组运行实际应用服务的机器，比如WEB, Mail, FTP, DNS, Media等等。
+
+在实际应用中，Load Balancer和Backup也可以兼任Real Server的角色。
+</code></pre></li>
+<li><p>Shared Storage(共享存储)：</p>
+<pre><code>Shared Storage为所有Real Server提供共享存储空间和一致的数据内容。
+</code></pre></li>
+</ul>
+<p>各服务器IP分配：</p>
+<p>Virtual IP：</p>
+<p>192.168.136.10</p>
+<p>Load Balancer：</p>
+<p>192.168.136.11</p>
+<p>Backup：</p>
+<p>192.168.136.12</p>
+<p>Real Server 1：</p>
+<p>192.168.136.101</p>
+<p>Real Server 2：</p>
+<p>192.168.136.102</p>
+<p>Real Server 3：</p>
+<p>192.168.136.103</p>
+<p>IPVS</p>
+<p>IPVS是LVS集群系统的核心软件，它的主要作用是：</p>
+<ul>
+<li>安装在Load Balancer上，把发往Virtual IP的请求转发到Real Server上。</li>
+</ul>
+<p>IPVS的负载均衡机制有三种，这里使用IP Tunneling机制：</p>
+<ul>
+<li>Virtual Server via NAT</li>
+<li>Virtual Server via IP Tunneling</li>
+<li>Virtual Server via Direct Routing</li>
+</ul>
+<p>IPVS的负载调度算法有十种：</p>
+<ul>
+<li>轮叫（Round Robin）</li>
+<li>加权轮叫（Weighted Round Robin）</li>
+<li>最少链接（Least Connections）</li>
+<li>加权最少链接（Weighted Least Connections）</li>
+<li>基于局部性的最少链接（Locality-Based Least Connections）</li>
+<li>带复制的基于局部性最少链接（Locality-Based Least Connections with Replication）</li>
+<li>目标地址散列（Destination Hashing ）</li>
+<li>源地址散列（Source Hashing）</li>
+<li>最短期望延迟(Shortest Expected Delay)</li>
+<li>无须队列等待（Never Queue）</li>
+</ul>
+<p>IPVS安装主要包括三方面：</p>
+<ul>
+<li>在Load Banlancer上安装IPVS内核补丁</li>
+<li>在Load Banlancer上安装IPVS管理软件</li>
+<li>在Real Server上安装ARP hidden内核补丁</li>
+</ul>
+<p>关于如何编译内核请参考其他文档，这里使用从UltraMonkey下载的已编译好的内核。</p>
+<p>在Load Banlancer、Backup和Real Server上使用同一内核，IPVS和ARP hidden都已编译在这个内核里：</p>
+<p>wget <a href="http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/mkinitrd-3.5.13-1.um.1.i386.rpm" target="_blank" rel="noopener">http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/mkinitrd-3.5.13-1.um.1.i386.rpm</a></p>
+<p>wget <a href="http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/kernel-2.4.21-27.0.2.EL.um.1.i686.rpm" target="_blank" rel="noopener">http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/kernel-2.4.21-27.0.2.EL.um.1.i686.rpm</a></p>
+<p>wget <a href="http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/kernel-smp-2.4.21-27.0.2.EL.um.1.i686.rpm" target="_blank" rel="noopener">http://www.ultramonkey.org/download/2.0.1/rh.el.3.0/RPMS/kernel-smp-2.4.21-27.0.2.EL.um.1.i686.rpm</a></p>
+<p>rpm -Fhv mkinitrd-3.5.13-1.um.1.i386.rpm</p>
+<p>rpm -Fhv kernel-2.4.21-27.0.2.EL.um.1.i686.rpm</p>
+<p>在Load Banlancer和Backup上安装IPVS管理软件：</p>
+<p>wget <a href="http://www.linuxvirtualserver.org/software/kernel-2.4/ipvs-1.0.10.tar.gz" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/software/kernel-2.4/ipvs-1.0.10.tar.gz</a></p>
+<pre><code>tar zxf ipvs-1.0.10.tar.gz
+
+cd ipvs-1.0.10/ipvs/ipvsadm
+
+make install
+</code></pre><p>chkconfig –del ipvsadm</p>
+<p>配置IPVS(/etc/sysconfig/ipvsadm)，添加Real Server：</p>
+<p>-A -t 192.168.136.10:80 -s rr</p>
+<pre><code>-a -t 192.168.136.10:80 -r 192.168.136.11:80 -i
+
+-a -t 192.168.136.10:80 -r 192.168.136.12:80 -i
+
+-a -t 192.168.136.10:80 -r 192.168.136.101:80 -i
+
+-a -t 192.168.136.10:80 -r 192.168.136.102:80 -i
+
+-a -t 192.168.136.10:80 -r 192.168.136.103:80 -i
+</code></pre><p>相关链接：</p>
+<p>Kernel：</p>
+<p><a href="http://www.kernel.org/" target="_blank" rel="noopener">http://www.kernel.org/</a></p>
+<p>IPVS和IPVSadm：</p>
+<p><a href="http://www.linuxvirtualserver.org/software/ipvs.html" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/software/ipvs.html</a></p>
+<p>ARP hidden：</p>
+<p><a href="http://www.ssi.bg/~ja/#hidden" target="_blank" rel="noopener">http://www.ssi.bg/~ja/#hidden</a></p>
+<p>注意事项：</p>
+<p>1. Kernel,IPVS,IPVSadm,ARP hidden之间的版本必须对应。</p>
+<p>2. 自己编译内核时，从<a href="http://www.kernel.org/下载标准内核源文件，不要使用发行版的内核源文件。" target="_blank" rel="noopener">http://www.kernel.org/下载标准内核源文件，不要使用发行版的内核源文件。</a></p>
+<p>3. Kernel 2.4.28和2.6.10及以上版本已内置IPVS，有些Linux发行版也在其内核里编译了IPVS。</p>
+<p>4. ARP hidden可以用arp_ignore/arp_announce或者arptables代替</p>
+<p>HeartBeat</p>
+<p>HeartBeat是Linux-HA 的高可用性集群软件，它的主要作用是：</p>
+<ul>
+<li><p>安装在Load Balancer和Backup上，运行于active/standby模式。</p>
+<pre><code>当Load Balancer失效时，Backup自动激活，成为实际的Load Balancer。
+</code></pre></li>
+<li><p>切换到active模式时，按顺序启动Virtual IP、IPVS和Ldirectord。</p>
+<pre><code>切换到standby模式时，按顺序关闭Ldirectord、IPVS和Virtual IP。
+</code></pre></li>
+</ul>
+<p>HeartBeat串口线连接测试方法：</p>
+<p>在Load Balancer上：cat  /dev/ttyS0</p>
+<p>修改主机名(/etc/hosts)：</p>
+<p>127.0.0.1         localhost.localdomain localhost</p>
+<p>  192.168.136.11    loadbalancer</p>
+<p>  192.168.136.12    backup</p>
+<p>安装：</p>
+<p>groupadd -g 694 haclient</p>
+<pre><code>useradd -u 694 -g haclient hacluster
+
+        rpm -ivh /mnt/cdrom/RedHat/RPMS/glib2-devel-*
+
+    wget http://www.packetfactory.net/libnet/dist/libnet.tar.gz
+
+tar zxf libnet.tar.gz
+
+cd libnet
+
+./configure
+
+make
+
+make install
+
+wget http://www.linux-ha.org/download/heartbeat-1.99.4-tar.gz
+
+tar zxf heartbeat-1.99.4.tar.gz
+
+cd heartbeat-1.99.4
+
+./ConfigureMe configure --disable-swig --disable-snmp-subagent
+
+make
+
+make install
+
+        cp doc/ha.cf doc/haresources doc/authkeys /etc/ha.d/
+
+        cp ldirectord/ldirectord.cf /etc/ha.d/
+
+chkconfig --add heartbeat
+
+        chkconfig --del ldirectord
+</code></pre><p>主配置文件(/etc/ha.d/ha.cf)：</p>
+<p>#debugfile /var/log/ha-debug</p>
+<pre><code>logfile /var/log/ha-log
+
+logfacility local0
+
+keepalive 2
+
+deadtime 30
+
+warntime 10
+
+initdead 120
+
+udpport 694
+
+baud 19200
+
+serial /dev/ttyS0
+
+mcast eth0 225.0.0.1 694 1 0
+
+# 当主节点恢复后，是否自动切回
+
+auto_failback on
+
+# stonith用来保证共享存储环境中的数据完整性
+
+#stonith baytech /etc/ha.d/conf/stonith.baytech
+
+# watchdog能让系统在出现故障1分钟后重启该机器。这个功能可以帮助服务器在确实停止心跳后能够重新恢复心跳。
+
+# 如果使用该特性，则在内核中装入&quot;softdog&quot;内核模块，用来生成实际的设备文件，输入&quot;insmod softdog&quot;加载模块。
+
+# 输入&quot;grep misc /proc/devices&quot;(应为10)，输入&quot;cat /proc/misc | grep watchdog&quot;(应为130)。
+
+# 生成设备文件：&quot;mknod /dev/watchdog c 10 130&quot; 。
+
+#watchdog /dev/watchdog
+
+node loadbalancer
+
+node backup
+
+# 默认heartbeat并不检测除本身之外的其他任何服务，也不检测网络状况。
+
+# 所以当网络中断时，并不会进行Load Balancer和Backup之间的切换。
+
+# 可以通过ipfail插件，设置&apos;ping nodes&apos;来解决这一问题。详细说明参考hearbeat文档。
+
+#ping 192.168.136.1 172.16.0.1
+
+ping_group group1 192.168.136.1 192.168.136.2
+
+respawn root /usr/lib/heartbeat/ipfail
+
+apiauth ipfail gid=root uid=root
+
+# 其他一些插件可以在/usr/lib/heartbeat下找到
+
+#apiauth ipfail uid=hacluster
+
+#apiauth ccm uid=hacluster
+
+#apiauth cms uid=hacluster
+
+#apiauth ping gid=haclient uid=alanr,root
+
+#apiauth default gid=haclient
+</code></pre><p>资源文件(/etc/ha.d/haresources)：</p>
+<p>loadbalancer lvs IPaddr::192.168.136.10/24/eth0 ipvsadm ldirectord</p>
+<p>认证文件(/etc/ha.d/authkeys)，选取一种认证方式，这个文件的权限必须是600：</p>
+<p>auth 1</p>
+<pre><code>1 crc
+
+#2 sha1 sha1\_any\_password
+
+#3 md5 md5\_any\_password
+</code></pre><p>相关链接：</p>
+<p>  Linux-HA：</p>
+<p><a href="http://www.linux-ha.org/" target="_blank" rel="noopener">http://www.linux-ha.org</a></p>
+<p>ldirectord</p>
+<p>安装HeartBeat过程中，已经自动安装了Ldirectord，它的作用是：</p>
+<ul>
+<li>监测Real Server，当Real Server失效时 ，把它从Load Balancer列表中删除，恢复时重新添加。</li>
+</ul>
+<p>配置(/etc/ha.d/ldirectord.cf)：</p>
+<p># Global Directives</p>
+<p>  checktimeout=3</p>
+<p>  checkinterval=1</p>
+<p>  fallback=127.0.0.1:80</p>
+<p>  autoreload=yes</p>
+<p>  logfile=”/var/log/ldirectord.log”</p>
+<p>  quiescent=yes</p>
+<p># A sample virual with a fallback that will override the gobal setting</p>
+<pre><code>virtual=192.168.136.10:80
+
+        real=192.168.136.11:80  ipip
+
+        real=192.168.136.12:80  ipip
+
+        real=192.168.136.101:80 ipip
+
+                real=192.168.136.102:80 ipip
+
+                real=192.168.136.103:80 ipip
+
+        fallback=127.0.0.1:80   gate
+
+        service=http
+
+        request=&quot;test.html&quot;
+
+        receive=&quot;Test Page&quot;
+
+        virtualhost=www.funbsd.net
+
+        scheduler=rr
+
+        #persistent=600
+
+        #netmask=255.255.255.255
+
+        protocol=tcp
+</code></pre><p>在每个Real Server的中添加监控页：</p>
+<p>echo “Test Page” &gt;&gt; /var/www/html/test.html</p>
+<p>Patch</p>
+<p>在启动集群系统之前，我们认为包括Load Balancer和Backup在内的所有服务器都是Real Server。</p>
+<p>在服务器上添加以下脚本/etc/init.d/tunl，用来配置tunl端口，应用arp补丁：</p>
+<p>#!/bin/sh</p>
+<h1 id="chkconfig-2345-70-10"><a href="#chkconfig-2345-70-10" class="headerlink" title="chkconfig: 2345 70 10"></a>chkconfig: 2345 70 10</h1><h1 id="description-Config-tunl-port-and-apply-arp-patch"><a href="#description-Config-tunl-port-and-apply-arp-patch" class="headerlink" title="description: Config tunl port and apply arp patch"></a>description: Config tunl port and apply arp patch</h1><p>VIP=192.168.136.10</p>
+<p>. /etc/rc.d/init.d/functions</p>
+<p>case “$1” in</p>
+<pre><code>start)
+
+    echo &quot;Tunl port starting&quot;
+
+    ifconfig tunl0 $VIP netmask 255.255.255.255 broadcast $VIP up
+
+    echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+    echo 1 &gt; /proc/sys/net/ipv4/conf/all/hidden
+
+    echo 1 &gt; /proc/sys/net/ipv4/conf/tunl0/hidden
+
+    ;;
+
+stop)
+
+    echo &quot;Tunl port closing&quot;
+
+    ifconfig tunl0 down
+
+    echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+    echo 0 &gt; /proc/sys/net/ipv4/conf/all/hidden
+
+    ;;
+
+*)
+
+    echo &quot;Usage: $0 {start|stop}&quot;
+
+    exit 1
+</code></pre><p>  esac</p>
+<p>如果有多个Virutal IP，可以使用tunl0:0,tunl0:1…。</p>
+<pre><code>chmod 755 /etc/init.d/tunl
+
+chkconfig --add tunl
+</code></pre><p>在Load Balancer和Backup上，这个脚本的启动级必须先于heartbeat，关闭级必须后于heartbeat。</p>
+<p>Scripts</p>
+<p>在HeartBeat资源文件(/etc/ha.d/haresources)中定义了实现集群所需的各个软件的启动脚本。</p>
+<p>这些脚本必须放在/etc/init.d或者/etc/ha.d/resource.d目录里，启动顺序不能变：</p>
+<p>loadbalancer lvs IPaddr::192.168.136.10/24/eth0 ipvsadm ldirectord</p>
+<p>IPaddr的作用是启动Virutal IP，它是HeartBeart自带的一个脚本。</p>
+<p>ipvsadm的作用是在启动的时候把所有Real Server加入群中。</p>
+<p>ldirectord的作用是启动ldirectord监控程序。</p>
+<p>lvs的作用是为启动Load Balancer做准备，关闭tunl端口，取消arp补丁：</p>
+<p>#!/bin/sh</p>
+<h1 id="chkconfig-2345-90-10"><a href="#chkconfig-2345-90-10" class="headerlink" title="chkconfig: 2345 90 10"></a>chkconfig: 2345 90 10</h1><h1 id="description-Preparing-for-Load-Balancer-and-Real-Server-switching"><a href="#description-Preparing-for-Load-Balancer-and-Real-Server-switching" class="headerlink" title="description: Preparing for Load Balancer and Real Server switching"></a>description: Preparing for Load Balancer and Real Server switching</h1><p>VIP=192.168.136.10</p>
+<p>. /etc/rc.d/init.d/functions</p>
+<p>case “$1” in</p>
+<pre><code>start)
+
+    echo &quot;Preparing for Load Balancer&quot;
+
+    ifconfig tunl0 down
+
+    echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+    echo 0 &gt; /proc/sys/net/ipv4/conf/all/hidden
+
+    ;;
+
+stop)
+
+    echo &quot;Preparing for Real Server&quot;
+
+    ifconfig tunl0 $VIP netmask 255.255.255.255 broadcast $VIP up
+
+    echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+    echo 1 &gt; /proc/sys/net/ipv4/conf/all/hidden
+
+    echo 1 &gt; /proc/sys/net/ipv4/conf/tunl0/hidden
+
+    ;;
+
+*)
+
+    echo &quot;Usage: lvs {start|stop}&quot;
+
+    exit 1
+</code></pre><p>  esac</p>
+<p>chmod 755 /etc/ha.d/resource.d/lvs</p>
+<p>启动集群系统：</p>
+<p>/etc/init.d/heartbeat start</p>
+<p>Reference</p>
+<p><a href="http://www.linuxvirtualserver.org/" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/</a></p>
+<p><a href="http://www.linux-ha.org/" target="_blank" rel="noopener">http://www.linux-ha.org/</a></p>
+<p><a href="http://www.ultramonkey.org/" target="_blank" rel="noopener">http://www.ultramonkey.org/</a></p>
+<p><a href="http://www.linuxts.com/modules/sections/index.php?op=viewarticle&amp;artid=375" target="_blank" rel="noopener">http://www.linuxts.com/modules/sections/index.php?op=viewarticle&amp;artid=375</a></p>
+<p><a href="http://www.yesky.com/SoftChannel/72341302397632512/20040311/1776261.shtml" target="_blank" rel="noopener">http://www.yesky.com/SoftChannel/72341302397632512/20040311/1776261.shtml</a></p>
+<p><a href="http://www-900.ibm.com/developerWorks/cn/linux/theme/special/index.shtml#cluster" target="_blank" rel="noopener">http://www-900.ibm.com/developerWorks/cn/linux/theme/special/index.shtml#cluster</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/23/lvs-cluster-technology/" data-id="cji00lkhe00a0hnzsplpz0juo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lvs-keepalived-implements-high-availability-clusters" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/23/lvs-keepalived-implements-high-availability-clusters/" class="article-date">
+  <time datetime="2010-01-23T06:13:37.000Z" itemprop="datePublished">2010-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/23/lvs-keepalived-implements-high-availability-clusters/">LVS+Keepalived实现高可用集群</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>操作系统平台：CentOS5.2</p>
+<p>软件：LVS+keepalived</p>
+<p>LVS+Keepalived 介绍</p>
+<p>LVS</p>
+<p>LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；</p>
+<p>十种调度算法（rrr|wrr|lc|wlc|lblc|lblcr|dh|sh|sed|nq）。</p>
+<p>Keepalvied</p>
+<p>Keepalived在这里主要用作RealServer的健康状态检查以及LoadBalance主机和BackUP主机之间failover的实现</p>
+<p><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/blogimg_chinaunix_090403211022.jpg" alt="LVS+Keepalived实现高可用集群  - suchalin - 为了更好的生活而奋斗！" title="LVS+Keepalived实现高可用集群  - suchalin - 为了更好的生活而奋斗！"></p>
+<p>IP配置信息:</p>
+<p>LVS-DR-Master          192.168.2.166</p>
+<p>LVS-DR-BACKUP          192.168.2.167</p>
+<p>LVS-DR-VIP             192.168.2.170        </p>
+<p>WEB1-Realserver        192.168.2.171</p>
+<p>WEB2-Realserver        192.168.2.172</p>
+<p>GateWay                192.168.2.253</p>
+<p>安装LVS和Keepalvied软件包</p>
+<p>1. 下载相关软件包</p>
+<p>#mkdir /usr/local/src/lvs</p>
+<p>#cd /usr/local/src/lvs</p>
+<p>#wget</p>
+<p><a href="http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.24.tar.gz" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.24.tar.gz</a></p>
+<p>#wget</p>
+<p><a href="http://www.keepalived.org/software/keepalived-1.1.15.tar.gz" target="_blank" rel="noopener">http://www.keepalived.org/software/keepalived-1.1.15.tar.gz</a></p>
+<p>2. 安装LVS和Keepalived</p>
+<p>#lsmod |grep ip_vs</p>
+<p>#uname -r</p>
+<p>2.6.18-53.el5PAE</p>
+<p>#ln -s /usr/src/kernels/2.6.18-53.el5PAE-i686/  /usr/src/linux</p>
+<p>#tar zxvf ipvsadm-1.24.tar.gz</p>
+<p>#cd ipvsadm-1.24</p>
+<p>#make &amp;&amp; make install</p>
+<p>#find / -name ipvsadm  # 查看ipvsadm的位置</p>
+<p>#tar zxvf keepalived-1.1.15.tar.gz</p>
+<p>#cd keepalived-1.1.15</p>
+<p>#./configure  &amp;&amp; make &amp;&amp; make install</p>
+<p>#find / -name keepalived  # 查看keepalived位置               </p>
+<p>#cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</p>
+<p>#cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/</p>
+<p>#mkdir /etc/keepalived</p>
+<p>#cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</p>
+<p>#cp /usr/local/sbin/keepalived /usr/sbin/</p>
+<p>#service keepalived start|stop     #做成系统启动服务方便管理.</p>
+<p>四. 配置LVS实现负载均衡</p>
+<p>  1． LVS-DR，配置LVS脚本实现负载均衡</p>
+<p>vi /usr/local/sbin/lvs-dr.sh</p>
+<p>#!/bin/bash</p>
+<p># description: start LVS of DirectorServer</p>
+<p>#Written by :NetSeek</p>
+<p><a href="http://www.linuxtone.org" target="_blank" rel="noopener">http://www.linuxtone.org</a></p>
+<p>GW=192.168.2.253</p>
+<p># website director vip.</p>
+<p>WEB_VIP=192.168.2.170</p>
+<p>WEB_RIP1=192.168.2.171</p>
+<p>WEB_RIP2=192.168.2.172</p>
+<p>. /etc/rc.d/init.d/functions</p>
+<p>logger $0 called with $1</p>
+<p>case “$1” in</p>
+<p>start)</p>
+<pre><code># Clear all iptables rules.
+
+/sbin/iptables -F
+
+# Reset iptables counters.
+
+/sbin/iptables -Z
+
+# Clear all ipvsadm rules/services.
+
+/sbin/ipvsadm -C
+</code></pre><p>#set lvs vip for dr</p>
+<pre><code> /sbin/ipvsadm --set 30 5 60
+
+ /sbin/ifconfig eth0:0 $WEB\_VIP broadcast $WEB\_VIP netmask 255.255.255.255 up
+
+ /sbin/route add -host $WEB_VIP dev eth0:0
+
+ /sbin/ipvsadm -A -t $WEB_VIP:80 -s wrr -p 3
+
+ /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP1:80 -g -w 1
+
+ /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP2:80 -g -w 1
+
+ touch /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1
+
+ # set Arp
+
+ /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW &gt;/dev/null 2&gt;&amp;1
+
+;;
+</code></pre><p>stop)</p>
+<pre><code> /sbin/ipvsadm -C
+
+ /sbin/ipvsadm -Z
+
+ ifconfig eth0:0 down
+
+ route del $WEB_VIP  &gt;/dev/null 2&gt;&amp;1
+
+ rm -rf /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1
+
+ /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW
+
+ echo &quot;ipvsadm stoped&quot;
+
+;;
+</code></pre><p>status)</p>
+<pre><code>  if \[ ! -e /var/lock/subsys/ipvsadm \];then
+
+          echo &quot;ipvsadm is stoped&quot;
+
+          exit 1
+
+  else
+
+          ipvsadm -ln
+
+          echo &quot;..........ipvsadm is OK.&quot;
+
+  fi
+
+;;
+</code></pre><p>*)</p>
+<pre><code>echo &quot;Usage: $0 {start|stop|status}&quot;
+
+exit 1
+</code></pre><p>esac</p>
+<p>exit 0</p>
+<p>2． 配置Realserver脚本.</p>
+<p>#!/bin/bash</p>
+<p># Written by NetSeek</p>
+<p># description: Config realserver lo and apply noarp</p>
+<p>WEB_VIP=192.168.2.170</p>
+<p>. /etc/rc.d/init.d/functions</p>
+<p>case “$1” in</p>
+<p>start)</p>
+<pre><code>ifconfig lo:0 $WEB\_VIP netmask 255.255.255.255 broadcast $WEB\_VIP
+
+/sbin/route add -host $WEB_VIP dev lo:0
+
+echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore
+
+echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce
+
+echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore
+
+echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce
+
+sysctl -p &gt;/dev/null 2&gt;&amp;1
+
+echo &quot;RealServer Start OK&quot;
+
+;;
+</code></pre><p>stop)</p>
+<pre><code>ifconfig lo:0 down
+
+route del $WEB_VIP &gt;/dev/null 2&gt;&amp;1
+
+echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore
+
+echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce
+
+echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore
+
+echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce
+
+echo &quot;RealServer Stoped&quot;
+
+;;
+</code></pre><p>status)</p>
+<pre><code># Status of LVS-DR real server.
+
+islothere=`/sbin/ifconfig lo:0 | grep $WEB_VIP`
+
+isrothere=\`netstat -rn | grep &quot;lo:0&quot; | grep $web_VIP\`
+
+if \[ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; \];then
+
+    # Either the route or the lo:0 device
+
+    # not found.
+
+    echo &quot;LVS-DR real server Stopped.&quot;
+
+else
+
+    echo &quot;LVS-DR Running.&quot;
+
+fi
+</code></pre><p>;;</p>
+<p>*)</p>
+<pre><code># Invalid entry.
+
+echo &quot;$0: Usage: $0 {start|status|stop}&quot;
+
+exit 1
+</code></pre><p>;;</p>
+<p>esac</p>
+<p>exit 0</p>
+<p>附上realserver机上的/etc/sysctl.conf：</p>
+<p># Kernel sysctl configuration file for Red Hat Linux</p>
+<p>#</p>
+<p># For binary values, 0 is disabled, 1 is enabled.  See sysctl(8) and</p>
+<p># sysctl.conf(5) for more details.</p>
+<p># Controls IP packet forwarding</p>
+<p>net.ipv4.ip_forward = 1</p>
+<p># Controls source route verification</p>
+<p>net.ipv4.conf.default.rp_filter = 1</p>
+<p># Do not accept source routing</p>
+<p>net.ipv4.conf.default.accept_source_route = 0</p>
+<p># Controls the System Request debugging functionality of the kernel</p>
+<p>kernel.sysrq = 0</p>
+<p># Controls whether core dumps will append the PID to the core filename.</p>
+<p># Useful for debugging multi-threaded applications.</p>
+<p>kernel.core_uses_pid = 1</p>
+<p>net.ipv4.conf.lo.arp_ignore = 1</p>
+<p>net.ipv4.conf.lo.arp_announce = 2</p>
+<p>net.ipv4.conf.all.arp_ignore = 1</p>
+<p>net.ipv4.conf.all.arp_announce = 2</p>
+<p>或者采用secondary ip address方式配置</p>
+<p># vi /etc/sysctl.conf</p>
+<p>添加以下内容如上所示：</p>
+<p>net.ipv4.conf.lo.arp_ignore = 1</p>
+<p>net.ipv4.conf.lo.arp_announce = 2</p>
+<p>net.ipv4.conf.all.arp_ignore = 1</p>
+<p>net.ipv4.conf.all.arp_announce = 2</p>
+<p>#sysctl –p</p>
+<p>#ip addr add 61.164.122.8/32 dev lo</p>
+<p>#ip add list 查看是否绑定</p>
+<p>3. 启动lvs-dr脚本和realserver启本，在DR上可以查看LVS当前状态:</p>
+<p>#watch ipvsadm –ln</p>
+<p>五．利用Keepalvied实现负载均衡和和高可用性</p>
+<p>1.配置在主负载均衡服务器上配置keepalived.conf</p>
+<p>#vi /etc/keepalived/keepalived.conf (主调度器)</p>
+<p>! Configuration File for keepalived</p>
+<p>global_defs {</p>
+<p>   notification_email {</p>
+<p><a href="mailto:acassen@firewall.loc" target="_blank" rel="noopener">acassen@firewall.loc</a></p>
+<p><a href="mailto:failover@firewall.loc" target="_blank" rel="noopener">failover@firewall.loc</a></p>
+<p><a href="mailto:sysadmin@firewall.loc" target="_blank" rel="noopener">sysadmin@firewall.loc</a></p>
+<p>   }</p>
+<p>   notification_email_from</p>
+<p><a href="mailto:Alexandre.Cassen@firewall.loc" target="_blank" rel="noopener">Alexandre.Cassen@firewall.loc</a></p>
+<p>   smtp_server 127.0.0.1</p>
+<p>   smtp_connect_timeout 30</p>
+<p>   router_id LVS_DEVEL</p>
+<p>}</p>
+<p>vrrp_instance VI_1 {</p>
+<pre><code>state MASTER
+
+interface eth0
+
+virtual\_router\_id 51
+
+priority 100
+
+advert_int 1
+
+authentication {
+
+    auth_type PASS
+
+    auth_pass 1111
+
+}
+
+virtual_ipaddress {
+
+    192.168.2.170
+
+}
+</code></pre><p>}</p>
+<p>virtual_server 192.168.2.170 80 {</p>
+<pre><code>delay_loop 6
+
+lb_algo wrr
+
+lb_kind DR
+
+persistence_timeout 60
+
+protocol TCP
+
+real_server 192.168.2.171 80 {
+
+    weight 3            
+
+    TCP_CHECK {
+
+    connect_timeout 10   
+
+    nb\_get\_retry 3
+
+    delay\_before\_retry 3
+
+    connect_port 80
+</code></pre><p>}</p>
+<pre><code>}
+
+real_server 192.168.2.172 80 {
+
+    weight 3
+
+    TCP_CHECK {
+
+    connect_timeout 10
+
+    nb\_get\_retry 3
+
+    delay\_before\_retry 3
+
+    connect_port 80
+
+    }
+
+ }
+</code></pre><p>}</p>
+<p>在备用调度器上：</p>
+<p>#vi /etc/keepalived/keepalived.conf (备用调度器)</p>
+<p>! Configuration File for keepalived</p>
+<p>global_defs {</p>
+<p>   notification_email {</p>
+<p><a href="mailto:acassen@firewall.loc" target="_blank" rel="noopener">acassen@firewall.loc</a></p>
+<p><a href="mailto:failover@firewall.loc" target="_blank" rel="noopener">failover@firewall.loc</a></p>
+<p><a href="mailto:sysadmin@firewall.loc" target="_blank" rel="noopener">sysadmin@firewall.loc</a></p>
+<p>   }</p>
+<p>   notification_email_from</p>
+<p><a href="mailto:Alexandre.Cassen@firewall.loc" target="_blank" rel="noopener">Alexandre.Cassen@firewall.loc</a></p>
+<p>   smtp_server 127.0.0.1</p>
+<p>   smtp_connect_timeout 30</p>
+<p>   router_id LVS_DEVEL</p>
+<p>}</p>
+<p>vrrp_instance VI_1 {</p>
+<pre><code>state BACKUP
+
+interface eth0
+
+virtual\_router\_id 51
+
+priority 99
+
+advert_int 1
+
+authentication {
+
+    auth_type PASS
+
+    auth_pass 1111
+
+}
+
+virtual_ipaddress {
+
+    192.168.2.170
+
+}
+</code></pre><p>}</p>
+<p>virtual_server 192.168.2.170 80 {</p>
+<pre><code>delay_loop 6
+
+lb_algo wrr
+
+lb_kind DR
+
+persistence_timeout 60
+
+protocol TCP
+
+real_server 192.168.2.171 80 {
+
+    weight 3            
+
+    TCP_CHECK {
+
+    connect_timeout 10   
+
+    nb\_get\_retry 3
+
+    delay\_before\_retry 3
+
+    connect_port 80
+</code></pre><p>}</p>
+<pre><code>}
+
+real_server 192.168.2.172 80 {
+
+    weight 3
+
+    TCP_CHECK {
+
+    connect_timeout 10
+
+    nb\_get\_retry 3
+
+    delay\_before\_retry 3
+
+    connect_port 80
+
+    }
+
+ }
+</code></pre><p>}</p>
+<p>2. BACKUP服务器同上配置，先安装lvs再按装keepalived,仍后配置/etc/keepalived/keepalived.conf，只需将红色标示的部分改一下即可.</p>
+<p>3. vi /etc/rc.local</p>
+<p>   #/usr/local/sbin/lvs-dr.sh  将lvs-dr.sh这个脚本注释掉。</p>
+<p>   #/usr/local/sbin/lvs-dr.sh stop 停止lvs-dr脚本</p>
+<p>   #/etc/init.d/keepalived start  启动keepalived 服务，keepalived就能利用keepalived.conf 配</p>
+<p>   置文件，实现负载均衡和高可用.</p>
+<p>4. 查看lvs服务是否正常</p>
+<p>#watch ipvsadm –ln</p>
+<p>IP Virtual Server version 1.2.1 (size=4096)</p>
+<p>Prot LocalAddressort Scheduler Flags</p>
+<p>  -> RemoteAddressort           Forward Weight ActiveConn InActConn</p>
+<p>TCP  61.164.122.8:80 wrr persistent 60</p>
+<p>  -> 61.164.122.10:80            Route   3      0          0</p>
+<p>  -> 61.164.122.9:80             Route   3      0          0</p>
+<p>复制代码</p>
+<p>#tail –f /var/log/message  监听日志，查看状态，测试LVS负载均衡及高可用性是否有效。</p>
+<p>5．停Master服务器的keepalived服务，查看BAKCUP服务器是否能正常接管服务。</p>
+<p>四．相关参考</p>
+<p>1．LVS 基础知识汇总</p>
+<p>LVS的算法介绍            </p>
+<p><a href="http://www.linuxtone.org/viewthread.php?tid=69" target="_blank" rel="noopener">http://www.linuxtone.org/viewthread.php?tid=69</a></p>
+<p>学习LVS的三种转发模式     </p>
+<p><a href="http://www.linuxtone.org/viewthread.php?tid=77" target="_blank" rel="noopener">http://www.linuxtone.org/viewthread.php?tid=77</a></p>
+<p>LVS中的IP负载均衡技术     </p>
+<p><a href="http://www.linuxtone.org/viewthread.php?tid=68" target="_blank" rel="noopener">http://www.linuxtone.org/viewthread.php?tid=68</a></p>
+<p>更多的请到</p>
+<p><a href="http://www.linuxtone.org" target="_blank" rel="noopener">http://www.linuxtone.org</a></p>
+<p>负载均衡版查看</p>
+<p>Keepalived 相关参考资料。</p>
+<p><a href="http://www.keepalived.org/documentation.html" target="_blank" rel="noopener">http://www.keepalived.org/documentation.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/23/lvs-keepalived-implements-high-availability-clusters/" data-id="cji00lkhg00a4hnzs3bx7fni1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2009-it-company-salary-statistics-gossip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/21/2009-it-company-salary-statistics-gossip/" class="article-date">
+  <time datetime="2010-01-21T12:23:48.000Z" itemprop="datePublished">2010-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/21/2009-it-company-salary-statistics-gossip/">2009年IT公司薪水统计（八卦）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Morgan IT 18万＋bonus，共25万左右</p>
+<p>Google 17万9千多</p>
+<p>NI 拿到手14万，四金全部是公司交。</p>
+<p>MS atc 15.3万</p>
+<p>百度 7000至8500，发14个月，每个季度有4500至6000的奖金。</p>
+<p>美国道富银行IT部 8000至12000，发15个月</p>
+<p>浙大网新恒天  9500×15</p>
+<p>网易杭州研究院  9000至10000，发14个月</p>
+<p>ask.com  9000至12000，发14个月</p>
+<p>IBM CRL  (7500+800+900)*12+7500*2.5+3.3万（住房补贴，三年10万，平均到一年。）</p>
+<p>IBM CDL   (7500+800)*12+7500*2.5+3.3万</p>
+<p>nVidia  测试8000×15，研发10000×15，有期权。</p>
+<pre><code>（另一说是9000×13，有期权）
+</code></pre><p>Trilogy 16万左右</p>
+<p>上海威盛 7500×13，不再提供宿舍</p>
+<p>杭州威盛 6000×13</p>
+<p>UT斯达康 6500/月，福利不错</p>
+<p>腾讯 7000×13，年终奖金15000，但是没有住房公积金</p>
+<p>MicroStategy 杭州职位每月12000，14个月，美国职位待遇不详</p>
+<p>泰鼎 8000×13，年终奖2个月薪水左右</p>
+<p>上海展讯 6500至7000，发14－16个月，有期权</p>
+<p>Intel 8000×13，加上一些补贴</p>
+<p>华为 5500+1000，年终奖不定，几千到几万都有可能。</p>
+<p>中兴 8－10万</p>
+<p>Morgan IT：  18万＋bonus，共25万左右。我班一个很低调的小伙貌似搞定了。</p>
+<p>Google：     17万9千多。今年交大只听说一个很强的女生搞定了，其他的一些大牛都挂了。</p>
+<p>微软：       15.3万</p>
+<p>NI：         拿到手14万，四金全部是公司交。</p>
+<p>百度：       系统部16W。新产品搜索的offer17.8W。</p>
+<p>中船舶系统工程部：   据说年薪可达20W，对成绩要求比较高。</p>
+<p>恩杰ASK.com：       9000至12000，发14个月</p>
+<p>美国道富：    很轻松,待遇7500。几个月知道，同学有拿到的也有去的，不过感觉并没有想象中的那么多。</p>
+<p>浙大网新：   9000,8000,7000*13，分为几个级别，主要看你面试和笔试成绩，然后还有两个月的浮动奖金</p>
+<p>网易杭州研究院：  9000至10000，发14个月</p>
+<p>美国虹软（杭州）：  6000*14。</p>
+<p>IBM CRL：       (7500+800+900)*12+7500*2.5+3.3万（住房补贴，三年10万，平均到一年。）</p>
+<p>IBM CDL：       (7500+800)*12+7500*2.5+3.3万</p>
+<p>EMC：           12000/月，福利超好，有股票和期权，而且很轻松。</p>
+<p>Autodesk：      8.5k×12＋年奖</p>
+<p>Intel：         8k×13，各种补贴较多</p>
+<p>思爱普SAP：      约13万</p>
+<p>意法半导体：     约10万</p>
+<p>博奥杰BO：      8.5k×13</p>
+<p>Cisco：         约13万</p>
+<p>nVidia：        测试8000×15，研发10000×15，有期权。(另一说9000×13,有期权)</p>
+<p>Trilogy：       16万左右</p>
+<p>趋势科技：       OFFER上说10W多一点，斜对面宿舍有一个同学去了，企业氛围很好地说。</p>
+<p>上海威盛：       7500×13，不再提供宿舍.</p>
+<p>上海博朗软件：    6500/月，年终奖金最多2个月工资。</p>
+<p>群硕软件（上海）：7500/月，外包，显示器都是CRT的。</p>
+<p>杭州威盛：        6500×13</p>
+<p>苏州瑞晟realtek： 8.5K*13，住房公积金占22%，其他五险什么都有，还有很多其他待遇，企业培训很好。</p>
+<p>苏州诚致：        (7400+600)*13,年终奖金0-3个月基本工资。</p>
+<p>UT斯达康：        6500/月，福利不错</p>
+<p>腾讯：            7000×13，年终奖金15000，但是没有住房公积金</p>
+<p>MicroStategy：    杭州职位每月12000，14个月，美国职位待遇不详</p>
+<p>泰鼎：             8000×13，年终奖2个月薪水左右</p>
+<p>NEC北京：          6000/月，加班费另算，号称解决户口的能力很强。</p>
+<p>雅虎中国：         7000*12，年终奖金0-3个月基本工资，每月还有一些补助。</p>
+<p>淘宝网研发：       6000/月。</p>
+<p>上海展讯：         6500至7000，发14－16个月，有期权</p>
+<p>华为：             5500+1000，年终奖不定，几千到几万都有可能。</p>
+<p>中兴：             8－10万</p>
+<p>ATI：              8.5k×13</p>
+<p>安捷伦：           约11万</p>
+<p>育碧：             约10万</p>
+<p>Dows IT：          7.1k*13，福利较好</p>
+<p>豪威微电子：        8.5k×13</p>
+<p>波士顿咨询：        约15万</p>
+<p>Marvell：          9.5k×12</p>
+<p>神州数码：        5000*16个月，其他不知道不过不少人把它拒了或者毁约不知道为什么，分笔试和面试。</p>
+<p>珠海矩力：        6500*14个月还有年终奖感觉还可以，招聘从组织上来说不错。</p>
+<p>深圳睿初：        10K*13，</p>
+<p>大唐：            8-10w，承诺是给16个月工资，同学有拿到OFFER的，也有毁约的。</p>
+<p>台达能源（上海）： 6K*17，当然这里面包括了奖金</p>
+<p>网易：           同学拿到OFFER了，面试官问：你期望待遇多少？他咬咬牙说：8K，结果直</p>
+<pre><code>接说没问题。可见待遇在这个之上，年薪11W左右
+</code></pre><p>中国平安保险：    待遇5.8K+其他一些补助和补贴每月。年薪8W左右（硕士）。</p>
+<p>深圳迈瑞：        宣传上说是10W以上，待遇还可以在电子生物医疗方面排名前四。</p>
+<p>步步高：          试用期是4900，转正后是5200还有一些年终奖。</p>
+<p>华硕：            6500*12+年底奖金和项目奖金，不过没有人签，应该名声不好。</p>
+<p>阿尔卡特青岛朗讯： 7500*13.面试就2面，英语口语好，其他的不是太差就给OFFER，</p>
+<p>飞索半导体（Spansion）面试态度很好，面试几次都送礼物，而且最后一次请我们吃了个饭哈哈。那个老总很nice,以前在微软做主管。技术人也很nice. 据说待遇（去年去的师兄）：7K*13，其他的具体保险公积金等不知道怎么算的。不过飞索是亚洲最佳雇主不是盖的，还是很人道的，我也体验过了呵呵。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/21/2009-it-company-salary-statistics-gossip/" data-id="cji00lk3r0003hnzsgr8nhdls" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-treatment-of-35-large-it-enterprises-has-been-exposed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/21/the-treatment-of-35-large-it-enterprises-has-been-exposed/" class="article-date">
+  <time datetime="2010-01-21T12:20:46.000Z" itemprop="datePublished">2010-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/21/the-treatment-of-35-large-it-enterprises-has-been-exposed/">三十五家大型IT企业待遇曝光</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以自己的经历和周围同学的待遇情况，将所知道的公司的待遇，公司招聘人员的态度，公司的好坏，招聘诚信度全部列出来，当然是指2008年的校园招聘。</p>
+<p>　　1。浙大网新待遇：9000,8000,7000*13，分为几个级别，主要看你面试和笔试成绩，然后</p>
+<p>　　还有两个月的浮动奖金，住房公积金也有。保险也有，和微软一起工作，工作后应该可以跳到微软，感觉笔试组织的很混乱我当时收到电话去笔试结果竟然没有试卷去抢了份题答了，迟到了30多分钟答题。</p>
+<p>　　2。美国道富：很轻松,待遇7500。几个月知道，同学有拿到的也有去的，不过感觉并没有想象中的那么多。</p>
+<p>　　3。神州数码：5000*16个月，其他不知道不过不少人把它拒了或者毁约不知道为什么，分笔试和面试。</p>
+<p>　　4。珠海矩力：6500*14个月还有年终奖感觉还可以，招聘从组织上来说不错。</p>
+<p>　　5。深圳睿初：10K*13，听说是被AMSL(阿斯麦)给收购了，面试3次全是技术和算法，最后还有一轮美国总部的面试。感觉面试管态度很好，而且说2个星期后给通知就给通知了，总的来说诚信度还可以。</p>
+<p>　　6。IBM(CDSL)：7500*13+800*12，同学有五个去那边了，四个做硬件的，一个做软件的。</p>
+<p>　　7。趋势科技：OFFER上说10W多一点，有一个同学去了，也有一个同学把它给拒了，面试听说人也很好。</p>
+<p>　　8。大唐：8-10w，承诺是给16个月工资，同学有拿到OFFER的，也有毁约的。</p>
+<p>　　9。百度：今年给16W，商务搜索部门和市场部门差不多都这个价。同学拿到OFFER了，因为要实习老板不让走，把它拒了，来得比较早，笔试场面很宏大。牛人也n多。不过感觉时间太久了，过了一个多月才给回复。要么据信要么给OFFER。要实习一个月。</p>
+<p>　　10。intel今年不知道为什么很少，才给5000，我同学直接拒掉了。</p>
+<p>　　11。realtek：8。5K*13，住房公积金占22%，其他五险什么都有，还有很多其他待遇，而且毁约也不是很难，当然除非你很猛，才会毁约。比如说拿到nvidia的OFFER。</p>
+<p>　　12。台达能源(上海)研发中心：6K*17，当然这里面包括了奖金，真正拿到的应该没那么多。不过公司包吃，到是可以省很多钱。相当于7K*17吧，反正师兄在里面是税后6。2K，税前应该有8K多吧。招聘人员态度也相当好。</p>
+<p>　　13。杭州ECI，来学校招聘时你写多少就给多少，当时煞笔的很，感觉写个6.5K还挺不好意思，结果写那么多就直接给了，还加2k的伙食和住房补贴。所以如果有招聘要写期望待遇的就多写点，招聘人员态度很好。</p>
+<p>　　14。中兴：很少才5.8K，在实习期才4.5K，做海外销售可能多一点，而且感觉招聘的人很拽似的，明明说你可以了，结果却让你久等或者当候补，当时却不说清楚。鄙视之，毁约也很麻烦。</p>
+<p>　　15。华为：工资5500+1000，面试整体感觉不太好，就是走个形式，给你考虑得时间很少，而且如果你当时没有协议就不让你签了，丝毫不给机会让我毁约。毁约很麻烦。</p>
+<p>　    16。网易待遇：同学拿到OFFER了，面试官问：你期望待遇多少?他咬咬牙说：8K，结果直接说没问题。可见待遇在这个之上，年薪11W左右，而且给你20天的考虑时间，总体来说不错。</p>
+<p>　　17。Thomson,不知道给多少，Tencent据说是硕士7500，一年能拿10w多一点，不过腾讯毁约起来很是麻烦，到明年4月份才给你寄，所以签之前考虑清楚，因为这样好多同学都拒它。</p>
+<p>　　18。深圳宇龙通信：招聘人员态度很好，承诺是年薪102800.不过硕士一面就给OFFER，所以感觉是相当的假，网上说是经常加班，不过没有去所以不作评论。</p>
+<p>　　19。中国平安保险：待遇5.8K+其他一些补助和补贴每月。年薪8W左右(硕士)。不过要用Java+linux+oracle.对于搞嵌入式的来说不是很适合，不过硕士都可以学习的，在前两个月去平安大学培训，所以违约费用很高，毕竟人家培训过你。</p>
+<p>　　20。威盛：待遇估计7500左右。</p>
+<p>　　21。深圳迈瑞：宣传上说是10W以上，待遇还可以在电子生物医疗方面排名前四。2005年还是第一位，前两个星期拉去山上培训。</p>
+<p>　　22。富士康：公司非议很多，印象不是很好，这边基本上没人去考虑，就不做评论反正没有去管它。</p>
+<p>　　23。步步高：试用期是4900，转正后是5200还有一些年终奖。</p>
+<p>　　24。华硕：6500*12+年底奖金和项目奖金，不过没有人签，应该名声不好。</p>
+<p>　　25。阿尔卡特青岛朗讯：7500*13.面试就2面，英语口语好，其他的不是太差就给OFFER，前3-6个月会去美国搞技术培训，至少面试官这样跟我说的，具体的能不能做到不知道了。招聘人员态度很好，感觉很nice，其实我很想去的，毕竟以后跳到别的外企也轻松点。但是老婆不允许!!!!气死我了。</p>
+<p>　　26。超图(5000或者4000看你做核心开发还是其他开发)，久其软件(4000的基本工资)，中体彩(4500基本工资+700补助)(北京)。</p>
+<p>　　27。中电14所(最鄙视，妈的当时告诉我(原话):我们拿的笔华为多，它们只是刚开始那么多。我们越来越多)</p>
+<p>　　28。云南电力：3000块。</p>
+<p>　　29。深圳招商融博(10W左右)</p>
+<p>　　30。上海sim(晨讯科技)工资5K，加上其他的补贴年薪估计是7。2w到8W之间吧，总体来讲待遇很差，师兄有在里面的。</p>
+<p>　　31。上海先锋：硕士工资给7K，具体其他不太清楚了。</p>
+<pre><code>32。应用材料(AM):工资很一般不是很多，5K*16?不清楚(呵呵看过两天给不给OFFER再说。)不过听说出差费用很高，可以拿到2w/月了，而且面试时面试官说他们基本上50%的时间在国外，可见出差的比例很大.软件开发面试是几个老外。
+</code></pre><p>　　33。飞索半导体(Spansion)面试态度很好，面试几次都送礼物，而且最后一次请我们吃了个饭哈哈。那个老总很nice,以前在微软做主管。技术人也很nice.据说待遇(去年去的师兄)：7K*13，其他的具体保险公积金等不知道怎么算的。不过飞索是亚洲最佳雇主不是盖的，还是很人道的，我也体验过了呵呵。</p>
+<p>　　34。中科院光电研究院：工资5K，解决北京户口。</p>
+<p>　　35。中科大洋：听说是工资7K，而且解决北京户口，晕，都没听过，不过同学有那到，不知道去了没有。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/21/the-treatment-of-35-large-it-enterprises-has-been-exposed/" data-id="cji00lkq800hnhnzswu568iii" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-port-together" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/20/port-together/" class="article-date">
+  <time datetime="2010-01-19T17:17:38.000Z" itemprop="datePublished">2010-01-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/20/port-together/">端口汇聚</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code> 端口汇聚是将多个端口聚合在一起形成 1个汇聚组，以实现出/入负荷在各成员端口中的分担，同时也提供了更高的连接可靠性。端口汇聚可以分为手工汇聚、动态LACP 汇聚和静态 LACP 汇聚。同一个汇聚组中端口的基本配置应该保持一致，即如果某端口为 Trunk端口，则其他端口也配置为 Trunk端口；如该端口的链路类型改为 Access端口，则其他端口的链路类型也改为 Access端口。  
+端口的基本配置主要包括 STP、QoS、VLAN、端口等相关配置。其中 STP配置包括：端口的 STP使能/关闭、与端口相连的链路属性（如点对点或非点对点）、STP优先级、路径开销、报文发送速率限制、是否环路保护、是否根保护、是否为边缘端口。QoS配置包括：流量限速、优先级标记、缺省的 802.1p优先级、带宽保证、  
+</code></pre><p>拥塞避免、流重定向、流量统计等。VLAN 配置包括：端口上允许通过的 VLAN、端口缺省 VLAN ID。端口配置包括：端口的链路类型，如 Trunk、Hybrid、Access属性。</p>
+<p>一台S8500系列路由交换机最多可以配置920个汇聚组，其中1～31为手工或者静态聚合组；32～64为预留组号；65～192为Routed Trunk；193～920为动态聚合组。</p>
+<p>系统中存在MPLS VPN单板时，只支持7个负载分担聚合组，没有MPLS VPN单板时，可以支持31组负载分担组，对于FE单板（采用EX芯片），只支持7个负载分担聚合组。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/20/port-together/" data-id="cji00lkk200cbhnzsjnycs818" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-about-remote-desktop-presence-this-session-will-end-due-to-data-encryption-errors-please-reconnect-to-the-remote-computer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/18/about-remote-desktop-presence-this-session-will-end-due-to-data-encryption-errors-please-reconnect-to-the-remote-computer/" class="article-date">
+  <time datetime="2010-01-18T08:42:18.000Z" itemprop="datePublished">2010-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/18/about-remote-desktop-presence-this-session-will-end-due-to-data-encryption-errors-please-reconnect-to-the-remote-computer/">关于远程桌面出现：“由于数据加密错误，这个会话将结束。请重新连接到远程计算机。”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>远程桌面出现了如下错误：“由于数据加密错误，这个会话将结束。请重新连接到远程计算机。”。</p>
+<p><a href="http://suchalin.blog.163.com/;" target="_blank" rel="noopener">症状</a>：安装 Windows 2000 安全累积包 1 (SRP1) 之后，终端服务客户端可能无法连接到终端服务服务器。当您在 Windows XP Professional 计算机上使用远程桌面 Web 连接连接到终端服务服务器时，也可能会遇到此问题。发生此问题时，系统事件日志中将记录事件 ID 50：</p>
+<p>Event Type:Error</p>
+<p>Event Source:TermDD</p>
+<p>Event ID:50</p>
+<p>Description:</p>
+<p>The RDP protocol component “DATA ENCRYPTION” detected an error in the protocol stream and has disconnected the client.</p>
+<p>有关其他信息，请单击下面的文章编号，以查看 Microsoft 知识库中相应的文章：</p>
+<p><a href="http://support.microsoft.com/kb/307454/" target="_blank" rel="noopener">307454</a>  (<a href="http://support.microsoft.com/kb/307454/" target="_blank" rel="noopener">http://support.microsoft.com/kb/307454/</a> ) MS01-052：无效的 RDP 数据可能导致终端服务故障</p>
+<p>终端服务客户端在连接尝试期间还可能会收到以下错误信息：</p>
+<p>The terminal Server has ended the connection.</p>
+<p><a href="http://suchalin.blog.163.com/;" target="_blank" rel="noopener">原因</a>：Icaapi.dll 和 Rdpwsx.dll 动态链接库 (DLL) 之间潜在的争用条件可能会导致终端服务服务器上的证书私钥不同步。</p>
+<p><a href="http://suchalin.blog.163.com/;" target="_blank" rel="noopener">解决方案</a>：<strong>警告</strong>：注册表编辑器使用不当可导致严重问题，可能需要重新安装操作系统。Microsoft 不能保证您可以解决因注册表编辑器使用不当而导致的问题。使用注册表编辑器需要您自担风险。  </p>
+<p>要解决此问题，请按照下列步骤操作：</p>
+<ol>
+<li>启动注册表编辑器。</li>
+<li><p>找到并单击下面的注册表子项：</p>
+<p><strong>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\TermService\Parameters</strong></p>
+</li>
+<li><p>在此注册表子项下，删除下列值：</p>
+<ul>
+<li>Certificate</li>
+<li>X509 Certificate</li>
+<li>X509 Certificate ID</li>
+</ul>
+</li>
+<li>退出注册表编辑器，然后重新启动服务器。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/18/about-remote-desktop-presence-this-session-will-end-due-to-data-encryption-errors-please-reconnect-to-the-remote-computer/" data-id="cji00lk5k000uhnzs036irhkn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-how-to-change-the-information-before-and-after-the-linux-login" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/18/how-to-change-the-information-before-and-after-the-linux-login/" class="article-date">
+  <time datetime="2010-01-18T06:03:12.000Z" itemprop="datePublished">2010-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/18/how-to-change-the-information-before-and-after-the-linux-login/">如何修改linux登录前后的信息</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>/etc/motd和/etc/issue分别是log in后和之前的消息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/18/how-to-change-the-information-before-and-after-the-linux-login/" data-id="cji00lkd1006ehnzsrqb5lbwy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-what-are-the-unspoken-rules" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/13/what-are-the-unspoken-rules/" class="article-date">
+  <time datetime="2010-01-13T15:40:39.000Z" itemprop="datePublished">2010-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/13/what-are-the-unspoken-rules/">为人处事有哪些潜规则？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“德”系为人处事的中心和根本。是“信”“诺”“礼”的根基。</p>
+<p>人心是别人的人心。记住这样的话，或让自己终身受益。正所谓“害人之心不可有，防人之心不可无”。</p>
+<p>　　让我们来了解一下为人处事必知的几大“潜规则”吧！</p>
+<p>　　<strong>一、人生要乐观，人心要悲观</strong></p>
+<p>　　<strong>人生</strong>是自己的人生，要乐观，所谓笑着过是一天，哭着过也是一天，那就笑着过吧。</p>
+<p>　　<strong>人心</strong>是别人的人心。所谓“害人之心不可有，防人之心不可无”。对人不能轻易相信，尤其是现在骗子太多了。不要给陌生人开门，尽可能不与你的仇人一起喝酒，不要消费你不了解的人送给你的入口的礼品，在旅途中不要喝陌生人送给你的饮料。</p>
+<p>　　<strong>不要轻易把别人当作知己。</strong>不要对自己的眼力太自信，对人一定要经过长期的观察，经过若干事件的考验。俗话说：路遥知马力，日久见人心。当你把某人当作可以信赖、可以依靠的知己的时候，危险可能正在悄悄向你袭来；</p>
+<p>　　<strong>不要轻易向别人诉说心事。</strong>当年林彪说：“见人只说三分话，未可抛却一片心”。当你向某人说出你心里的秘密后，灾难可能就要降临了；当你向某人倾诉心里的苦恼后，你的心里话极有可能就成了公开的话。</p>
+<p>　　<strong>二、封住自己的嘴，硬化自己的耳</strong></p>
+<p>　　<strong>封住自己的嘴，包括四个意思：</strong></p>
+<p>　　一是说没有调查研究就没有发言权，不可拾人牙慧，对自己并不了解事实真相的事情，不要瞎说，免得被动；</p>
+<p>　　二是不要过于发牢骚，因为发牢骚没有用，“牢骚太盛防肠断”；</p>
+<p>　　三是对别人少批评，少指责，除非人家真心实意听你教导并而且有非常强的心理承受能力，凡事还是要讲个效果，既然批评无用而且有负效果，何苦呢？尤其是不要当着众人的面指责人；</p>
+<p>　　四是不要在背地议论人的是非，不要跟张三说李四如何如何，因为当你跟张三说了有关李四的事情后，那张三极有可能把你说的话传给李四，这样一来，你与李四就会产生矛盾。</p>
+<p>　<strong>　硬化自己的耳，是说不要耳根子发软</strong>，听风就是雨，别人说什么你就信什么，而是要多问几个为何，更不要被人当枪炮使。有的人比较愚笨，头脑过于简单，经不起别人挑拨，总是被人当枪使，这种可恨又可气、缺乏定力的人太多了。</p>
+<p>　　进一步说，对于媒体记者的报道，不要轻易相信，不要被媒体利用，不要轻易表态，不要轻易评论，不要被人给忽悠了，要了解事实真相以后再说。</p>
+<p>　　<strong>三、沉着冷静，控制情绪</strong></p>
+<p>　　俗话说：“冲动是魔鬼”。人在情绪失控的时候，极有可能不计后果，骂脏话，出拳头，捅刀子，等冷静下来之后才后悔，然而后悔也晚了。遇事一定要冷静冷静再冷静，忍耐忍耐再忍耐，控制控制再控制。有一些人喜欢把激将法改为激怒法，目的是让你情绪失控，失去理智，干出蠢事，你可不能上当。</p>
+<p>　　<strong>四、与人交谈要控制音量，会议发言要把握份量</strong></p>
+<p>　　一般认为，一个人在与人交谈时假若高腔大嗓，那么这个人就缺乏修养，没有多少才华。可能这是一种偏见。可是应该尽可能避免偏见给你带来的不利后果。与人交谈时，一定要控制自己的音量，声音不高不低，语速不快不慢，显得稳稳当当，成熟老道。</p>
+<p>　　在会议上发言时，对发言内容要反复推敲，逻辑严密，不要有漏洞。有人发言后，其观点极容易就被别人否定，就是因为有漏洞，不严密，经不起反驳。对于别人的发言，当你要否定其观点时，一定要考虑你的否定意见能立的住？是不是经不起人家反戈一击？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/13/what-are-the-unspoken-rules/" data-id="cji00lkuf00l2hnzsv1cgse8b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/19/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/21/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
