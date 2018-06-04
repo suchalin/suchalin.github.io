@@ -1,223 +1,760 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+
+
 
   
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/page/18/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/18/"/>
+
+
+
+
+
+  <title>Hexo</title>
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-compare-remote-files-with-local-files-using-diff-or-vimdiff" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/compare-remote-files-with-local-files-using-diff-or-vimdiff/" class="article-date">
-  <time datetime="2010-06-11T09:06:06.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/compare-remote-files-with-local-files-using-diff-or-vimdiff/">使用diff或者vimdiff比较远程文件与本地文件</a>
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/compare-remote-files-with-local-files-using-diff-or-vimdiff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/compare-remote-files-with-local-files-using-diff-or-vimdiff/" itemprop="url">使用diff或者vimdiff比较远程文件与本地文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T17:06:06+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>方法1：管道给diff</p>
+      
+
+      
+        
+          
+            <p>方法1：管道给diff</p>
 <p>$ssh <a href="mailto:eric@192.168.1.11" target="_blank" rel="noopener">eric@192.168.1.11</a> “cat ~/remote_file.txt” | diff - ~/local_file.txt  </p>
 <p>方法2：使用vim内建的scp支持</p>
 <p>$vimdiff scp:<a href="mailto://eric@192.168.1.11" target="_blank" rel="noopener">//eric@192.168.1.11</a>/~/remote_file.txt ~/local_file.txt  </p>
 <p>另外，vim内建的scp支持还可以编辑远程文件：</p>
 <p>$vim scp:<a href="mailto://eric@192.168.1.11" target="_blank" rel="noopener">//eric@192.168.1.11</a>/~/remote_file.txt</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/compare-remote-files-with-local-files-using-diff-or-vimdiff/" data-id="cji00lk9k003ahnzsc3k5ixei" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file/" class="article-date">
-  <time datetime="2010-06-11T05:52:33.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file/">linux下实现&amp;quot;断点继传&amp;quot;复制文件</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file/" itemprop="url">linux下实现&quot;断点继传&quot;复制文件</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T13:52:33+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>朋友们有时侯会碰到在复制一个游戏盘时复制了一部分文件时出现错误，又得重新来过，非常费时。这里介绍一个有效的方法可以节省复制时间，即类似”断点续传的功能”，只复制剩余的部分。<br>方法: cp -au <source-dir> <dist-dir><br>其中 -a 等价于 -dpR 即递归复制。<br>-u /–update 表示只复制源文件比目的文件更新的部分，或复制目的文件不存在时也进行复制。  </dist-dir></source-dir></p>
+      
+
+      
+        
+          
+            <p>朋友们有时侯会碰到在复制一个游戏盘时复制了一部分文件时出现错误，又得重新来过，非常费时。这里介绍一个有效的方法可以节省复制时间，即类似”断点续传的功能”，只复制剩余的部分。<br>方法: cp -au <source-dir> <dist-dir><br>其中 -a 等价于 -dpR 即递归复制。<br>-u /–update 表示只复制源文件比目的文件更新的部分，或复制目的文件不存在时也进行复制。  </dist-dir></source-dir></p>
 <p><source-dir> 源文件，<dist-dir>目的文件<br>例如：复制 /file1 目录树到 /file2目录去<br>cp -a /file1 /file2<br>如果复制了一半发生错误，则再次输入<br>cp -au /file1 /file2<br>即可’断点续传’.</dist-dir></source-dir></p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/linux-implementation-amp-quot-breakpoint-relay-amp-quot-copy-the-file/" data-id="cji00lkfj008ahnzsmk38mivd" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-the-use-of-the-fuser" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/the-use-of-the-fuser/" class="article-date">
-  <time datetime="2010-06-11T05:17:32.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/the-use-of-the-fuser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/the-use-of-the-fuser/">fuser的使用</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/the-use-of-the-fuser/" itemprop="url">fuser的使用</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T13:17:32+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>fuser：使用文件或者套节字来表示识别进程。我常用的他的两个功能：查看我需要的进程和我要杀死我查到的进程。<br>比如当你想umount光驱的时候，结果系统提示你设备正在使用或者正忙，可是你又找不到到底谁使用了他。这个时候fuser可派上用场了。<br>[root@lancy sbin]# eject<br>umount: /media/cdrom: device is busy<br>umount: /media/cdrom: device is busy<br>eject: unmount of `/media/cdrom’ failed<br>[root@lancy sbin]# fuser /mnt/cdrom<br>/mnt/cdrom: 4561c 5382c<br>[root@lancy sbin]# ps -ef |egrep ‘(4561|5382)’ |grep -v grep<br>root 4561 4227 0 20:13 pts/1 00:00:00 bash<br>root 5382 4561 0 21:42 pts/1 00:00:00 vim Autorun.inf<br>示例中，我想弹出光驱，系统告诉我设备忙着，于是采用fuser命令，参数是你文件或scoket，fuser将查出那些使用了他。<br>4561c,5382c表示目前用两个进程在占用着/mnt/cdrom，分别是4561,5382,进程ID后的字母表示占用资源的方式，有下面几种表示：<br>c 当前路径(current directory.)我的理解是表示这个资源的占用是以文件目录方式，也就是进进入了需要释放的资源的路径，这是最常用的资源占用方式。<br>e 正在运行可执行文件（executable being run.），比如运行了光盘上的某个程序<br>f 打开文件（ open file），缺省模式下f忽略。所以上面的例子中，虽然是开打了光盘上的Autorun.inf文件，但是给出的标识是c，而不是f。<br>r root目录（root directory）.没有明白什么意思，难道是说进入了/root这个特定目录？<br>m mmap文件或者共享库( mmap’ed file or shared library).这应该是说某个进程使用了你要释放的资源的某个共享文件。<br>在查找的同时，你还可定指定一些参数，比如<br>-k 杀死这些正在访问这些文件的进程。除非使用-signal修改信号，否则将发送SIGKILL信号。<br>-i 交互模式<br>-l 列出所有已知的信号名称。<br>-n 空间，选择不同的名字空间，可是file,udp,tcp。默认是file，也就是文件。<br>-signal 指定发送的信号，而不是缺省的SIGKILL<br>-4 仅查询IPV4套接字<br>-6 仅查询IPV6套接字<br>- 重置所有的选项，将信息设回SIGKILL<br>再看下面的例子<br>[root@lancy sbin]# fuser -l<br>HUP INT QUIT ILL TRAP ABRT IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM<br>STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH IO PWR SYS<br>UNUSED<br>现在我们试试fuser -k的威力：<br>[root@lancy sbin]# fuser -k /mnt/cdrom<br>/mnt/cdrom: 4561c 5382c<br>kill 5382: 没有那个进程<br>No automatic removal. Please use umount /media/cdrom<br>[root@lancy sbin]# eject<br>套节字方式的使用：<br>[root@lancy sbin]# fuser -4 -n tcp 3306<br>here: 3306<br>3306/tcp: 5595<br>[root@lancy sbin]# ps -ef |grep 5595 |grep -v grep<br>mysql 5595 5563 0 22:24 pts/0 00:00:00 /usr/libexec/mysqld –defaults-file=/etc/my.cnf –basedir=/usr –datadir=/var/lib/mysql –user=mysql –pid-file=/var/run/mysqld/mysqld.pid –skip-locking –socket=/var/lib/mysql/mysql.sock<br>[root@lancy sbin]# fuser -4 -n tcp 80<br>here: 80<br>80/tcp: 5685 5688 5689 5690 5691 5692 5693 5694 5695</p>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/the-use-of-the-fuser/" data-id="cji00lkqb00hqhnzsfs5z0iw7" class="article-share-link">Share</a>
       
+
+      
+        
+          
+            <p>fuser：使用文件或者套节字来表示识别进程。我常用的他的两个功能：查看我需要的进程和我要杀死我查到的进程。<br>比如当你想umount光驱的时候，结果系统提示你设备正在使用或者正忙，可是你又找不到到底谁使用了他。这个时候fuser可派上用场了。<br>[root@lancy sbin]# eject<br>umount: /media/cdrom: device is busy<br>umount: /media/cdrom: device is busy<br>eject: unmount of `/media/cdrom’ failed<br>[root@lancy sbin]# fuser /mnt/cdrom<br>/mnt/cdrom: 4561c 5382c<br>[root@lancy sbin]# ps -ef |egrep ‘(4561|5382)’ |grep -v grep<br>root 4561 4227 0 20:13 pts/1 00:00:00 bash<br>root 5382 4561 0 21:42 pts/1 00:00:00 vim Autorun.inf<br>示例中，我想弹出光驱，系统告诉我设备忙着，于是采用fuser命令，参数是你文件或scoket，fuser将查出那些使用了他。<br>4561c,5382c表示目前用两个进程在占用着/mnt/cdrom，分别是4561,5382,进程ID后的字母表示占用资源的方式，有下面几种表示：<br>c 当前路径(current directory.)我的理解是表示这个资源的占用是以文件目录方式，也就是进进入了需要释放的资源的路径，这是最常用的资源占用方式。<br>e 正在运行可执行文件（executable being run.），比如运行了光盘上的某个程序<br>f 打开文件（ open file），缺省模式下f忽略。所以上面的例子中，虽然是开打了光盘上的Autorun.inf文件，但是给出的标识是c，而不是f。<br>r root目录（root directory）.没有明白什么意思，难道是说进入了/root这个特定目录？<br>m mmap文件或者共享库( mmap’ed file or shared library).这应该是说某个进程使用了你要释放的资源的某个共享文件。<br>在查找的同时，你还可定指定一些参数，比如<br>-k 杀死这些正在访问这些文件的进程。除非使用-signal修改信号，否则将发送SIGKILL信号。<br>-i 交互模式<br>-l 列出所有已知的信号名称。<br>-n 空间，选择不同的名字空间，可是file,udp,tcp。默认是file，也就是文件。<br>-signal 指定发送的信号，而不是缺省的SIGKILL<br>-4 仅查询IPV4套接字<br>-6 仅查询IPV6套接字<br>- 重置所有的选项，将信息设回SIGKILL<br>再看下面的例子<br>[root@lancy sbin]# fuser -l<br>HUP INT QUIT ILL TRAP ABRT IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM<br>STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH IO PWR SYS<br>UNUSED<br>现在我们试试fuser -k的威力：<br>[root@lancy sbin]# fuser -k /mnt/cdrom<br>/mnt/cdrom: 4561c 5382c<br>kill 5382: 没有那个进程<br>No automatic removal. Please use umount /media/cdrom<br>[root@lancy sbin]# eject<br>套节字方式的使用：<br>[root@lancy sbin]# fuser -4 -n tcp 3306<br>here: 3306<br>3306/tcp: 5595<br>[root@lancy sbin]# ps -ef |grep 5595 |grep -v grep<br>mysql 5595 5563 0 22:24 pts/0 00:00:00 /usr/libexec/mysqld –defaults-file=/etc/my.cnf –basedir=/usr –datadir=/var/lib/mysql –user=mysql –pid-file=/var/run/mysqld/mysqld.pid –skip-locking –socket=/var/lib/mysql/mysql.sock<br>[root@lancy sbin]# fuser -4 -n tcp 80<br>here: 80<br>80/tcp: 5685 5688 5689 5690 5691 5692 5693 5694 5695</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-recommended-reading-career-as-a-dba" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/recommended-reading-career-as-a-dba/" class="article-date">
-  <time datetime="2010-06-11T05:08:47.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/recommended-reading-career-as-a-dba/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/recommended-reading-career-as-a-dba/">推荐阅读:成就DBA职业生涯</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/recommended-reading-career-as-a-dba/" itemprop="url">推荐阅读:成就DBA职业生涯</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T13:08:47+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>一篇网络上很流行的文章,对于如何走向dba之路有很大帮助!</p>
+      
+
+      
+        
+          
+            <p>一篇网络上很流行的文章,对于如何走向dba之路有很大帮助!</p>
 <p>介绍</p>
 <p>许多年来，我在不同的新闻组上花费了很多时间与那些想知道如何得到数据库管理员（DBA）的工作或者如何成长为一名DBA的IT人进行交谈，现在他们有了工作。这些年来许多人针对如何达到这个目标提出了不同意见。本文即是那些意见的综合并且能够在如何才能出色的完成DBA的工作方面给出好的建议。这篇文章同样对于如何让一名DBA变得对老板更有价值。假如你已经是一名DBA，那么也许你会希望跳过文章的前几段。</p>
 <p>我应该成为一名DBA么？</p>
@@ -298,46 +835,147 @@
 <p><strong>结论</strong></p>
 <p>从获得第一份工作，到从一名初级的DBA成长成一名高级DBA，我希望这篇文章在如何度过你的职业生涯的各个阶段方面给了你一些建议。无论你现在处在你的DBA职业生涯的哪一阶段都可以用到这篇文章。</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/recommended-reading-career-as-a-dba/" data-id="cji00lkkq00czhnzser6k28y8" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-three-ways-to-limit-cpu-usage-under-linux" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/three-ways-to-limit-cpu-usage-under-linux/" class="article-date">
-  <time datetime="2010-06-11T04:43:49.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/three-ways-to-limit-cpu-usage-under-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/three-ways-to-limit-cpu-usage-under-linux/">linux下限制CPU使用率的3种方法</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/three-ways-to-limit-cpu-usage-under-linux/" itemprop="url">linux下限制CPU使用率的3种方法</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T12:43:49+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>1,apache本身的限制功能(RLimitCPU)</p>
+      
+
+      
+        
+          
+            <p>1,apache本身的限制功能(RLimitCPU)</p>
 <p><a href="http://www.wrensoft.com/forum/archive/index.php/t-12.html" target="_blank" rel="noopener">http://www.wrensoft.com/forum/archive/index.php/t-12.html</a></p>
 <p>引用国外这个帖子</p>
 <p>Ray03-19-2008, 05:20 AM<br>The PHP test can be used to show that the problem is evident, but it is not conclusive to prove that there is no limit put in place.</p>
@@ -367,46 +1005,147 @@
 <p>cpulimit命令:</p>
 <p>Error: You must specify a target process, by name or by PID<br>Usage: cpulimit TARGET [OPTIONS…]<br>   TARGET must be exactly one of these:<br>      -p, –pid=N        pid of the process (implies -z)<br>      -e, –exe=FILE     name of the executable program file or absolute path name<br>   OPTIONS<br>      -l, –limit=N      percentage of cpu allowed from 0 to 100 (required)<br>      -v, –verbose      show control statistics<br>      -z, –lazy         exit if there is no suitable target process, or if it dies<br>      -h, –help         display this help and exit</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/three-ways-to-limit-cpu-usage-under-linux/" data-id="cji00lkqp00i0hnzsrqwr6vwe" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-linux-network-connection-status-check" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/11/linux-network-connection-status-check/" class="article-date">
-  <time datetime="2010-06-11T03:40:31.000Z" itemprop="datePublished">2010-06-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/linux-network-connection-status-check/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/11/linux-network-connection-status-check/">Linux网络连接状态检查</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/11/linux-network-connection-status-check/" itemprop="url">Linux网络连接状态检查</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-11T11:40:31+08:00">
+                2010-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>统计连接数状态：  </p>
+      
+
+      
+        
+          
+            <p>统计连接数状态：  </p>
 <p>[root@localhost conf]# netstat -n|awk ‘/^tcp/{++S[$NF]} END {for(a in S) print a,S[a]}’<br>LAST_ACK 173<br>SYN_RECV 35<br>CLOSE_WAIT 159<br>ESTABLISHED 152<br>FIN_WAIT1 29<br>FIN_WAIT2 10<br>CLOSING 39<br>TIME_WAIT 103</p>
 <p><a href="http://a3linux.blogspot.com/2008/07/linux.html" target="_blank" rel="noopener">Linux网络连接状态检查！</a>  </p>
 <p>检查linux的网络连接状态其实很简单，利用Linux内置的一些命令和SHELL的几个小技巧就可以完成看似复杂的检查任务，这也是Linux的魅力之一！<br>最基本的，<br>netstat -atn<br>该命令的解释是列出基于TCP协议(-t)的所有连接，并将通信双方以IP地址的（-n)的方式显示，而不是主机名！！<br>netstat -atn | cut -b 49-75 | grep -o -P “\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b” | sort | uniq -c | sort -n -r -k 1,7 | head -10<br>这行命令用来分析netstat的输出结果，最后得出的是目前处于连接中的不同的IP地址；这个命令在Ubuntu（cut -b 45-75)上不能实现，这是不同的Linux对于一些基本命令的实现不同（编译的选项和参数不一致），但是ubuntu上可以用下面的命令实现相似的功能，<br>netstat -atn | cut -b 45-75 | cut -d’:’ -f1 |sort | uniq -c | sort -n -r -k 1,7 | head -10<br>唯一的缺点是不用正则表达式的情况下title内容行也被放了进来，当然还可以用一些命令去除这些文字行，这里就不展开了！<br>netstat -atn |cut -b 77-90 ｜ sort | uniq -c 是列出每个连接的状态并统计！<br>对于netstat命令输出的分析其实还有很多方法，这儿就不再列举！<br>time tcpdump -ns 200 -c 100 ‘(dst port http or dst port https) and tcp[13] &amp; 2!=0’ | grep -o -P ‘\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,5}\s\&gt;’ | cut -d ‘.’ -f 1-4 | sort | uniq -c | sort -n -r -k 1,7 | head -25<br>这个命令是对于100个包中有多少个新连接请求的统计！运用了tcpdump抓取100个（－c 100）包，最后列出这些请求的IP地址。<br>这里只是两个简单的例子，还有很多命令组合运用的实例可以大大加快我们的工作效率，这些都只要合理运用Linux的命令就可以了！！</p>
@@ -414,46 +1153,147 @@
 <p>[root@localhost conf]# ps -ef|grep httpd|wc -l</p>
 <p>结果 - 1 (因为包含了grep httpd这个进程)</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/11/linux-network-connection-status-check/" data-id="cji00lkg5008uhnzssx5uoxg4" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-ps-and-top-command-cpu-meaning" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/09/ps-and-top-command-cpu-meaning/" class="article-date">
-  <time datetime="2010-06-09T02:13:24.000Z" itemprop="datePublished">2010-06-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/09/ps-and-top-command-cpu-meaning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/09/ps-and-top-command-cpu-meaning/">ps和top命令的%CPU含义</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/09/ps-and-top-command-cpu-meaning/" itemprop="url">ps和top命令的%CPU含义</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-09T10:13:24+08:00">
+                2010-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>一直以为ps命令中的”%CPU”也是指实时的CPU使用率，所以一直都用它来做cacti监控process的cpu使用率。但是上周发现有点不对，ps的”%CPU”与top或者vmstat 的”%CPU”不一样。</p>
+      
+
+      
+        
+          
+            <p>一直以为ps命令中的”%CPU”也是指实时的CPU使用率，所以一直都用它来做cacti监控process的cpu使用率。但是上周发现有点不对，ps的”%CPU”与top或者vmstat 的”%CPU”不一样。</p>
 <p>ps命令的man里面的解释：</p>
 <p>CPU usage is currently expressed as the percentage of time spent running during the entire lifetime of a process. This is not ideal, and it does not conform to the standards that ps otherwise conforms to. CPU usage is unlikely to add up to exactly 100%.</p>
 <p>top命令的man的解释：</p>
@@ -464,46 +1304,147 @@
 <p>进程启动以来使用的CPU时间/进程启动以来的实际时间  </p>
 <p>两者有很大的区别。<br>(上述所说的ps和top命令所在的操作系统是debian)。</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/09/ps-and-top-command-cpu-meaning/" data-id="cji00lkkb00ckhnzsrxxr635g" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-how-do-you-activate-the-onenote-2007-method" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/04/how-do-you-activate-the-onenote-2007-method/" class="article-date">
-  <time datetime="2010-06-04T00:43:25.000Z" itemprop="datePublished">2010-06-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/04/how-do-you-activate-the-onenote-2007-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/04/how-do-you-activate-the-onenote-2007-method/">教你如何激活OneNote 2007的方法</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/04/how-do-you-activate-the-onenote-2007-method/" itemprop="url">教你如何激活OneNote 2007的方法</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-04T08:43:25+08:00">
+                2010-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>OneNote很不错吧，但是你不会激活它？呵呵，下面cwitter就教你激活OneNote 2007的方法：</p>
+      
+
+      
+        
+          
+            <p>OneNote很不错吧，但是你不会激活它？呵呵，下面cwitter就教你激活OneNote 2007的方法：</p>
 <p>1、使用序列码安装完毕（<a href="http://www.weste.net/2008/10-26/21122832217.html" target="_blank" rel="noopener">点击获得OneNote 2007安装序列号</a>）</p>
 <p>2、关闭所有Office程序</p>
 <p>3、开始 -&gt; 运行regedit -&gt; 打开注册表</p>
@@ -513,46 +1454,147 @@
 <p>7、保存关闭Proof.XML 文件</p>
 <p>8、成功激活OneNote 2007</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/04/how-do-you-activate-the-onenote-2007-method/" data-id="cji00lkcx006bhnzsu0qv4r3x" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-will-you-choose-technology-or-market-reproduced" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/03/will-you-choose-technology-or-market-reproduced/" class="article-date">
-  <time datetime="2010-06-03T03:13:06.000Z" itemprop="datePublished">2010-06-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/03/will-you-choose-technology-or-market-reproduced/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/03/will-you-choose-technology-or-market-reproduced/">你会选择技术还是市场？(转载)</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/03/will-you-choose-technology-or-market-reproduced/" itemprop="url">你会选择技术还是市场？(转载)</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-03T11:13:06+08:00">
+                2010-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>前两天看有网友说很多人反馈技术是干活的，市场有做老板的潜质。<br>我就问自己：微软的比尔盖茨和苹果的乔布斯这样的人是做技术的还是做市场的？  </p>
+      
+
+      
+        
+          
+            <p>前两天看有网友说很多人反馈技术是干活的，市场有做老板的潜质。<br>我就问自己：微软的比尔盖茨和苹果的乔布斯这样的人是做技术的还是做市场的？  </p>
 <p>这两天跟个朋友讨论这个问题，朋友说你看身边的这些老板，一般都是市场和财务出身的。做市场的人有人脉，做财务的人懂资本运作。<br>为什么你身边的人都是这样的人做老板，而那些做技术的老板都看不见？  </p>
 <p>大的层面上说，这就是中国的国情。对于世界来讲，中国是一个大市场。即使到中国来投资，其实也是为了赚中国人的钱。他们掌握的核心的技术，不是跑来跟你分享的，他们用技术来换你的不可再生的资源。<br>这时候，他们当然希望中国只有干活的基层技术人员和懂得把东西销售出去的市场人才。  </p>
 <p>我们必须承认，同质的商品比拼的就是市场能力，劣质的商品更需要市场人才。所以在中国，市场人才最吃得开。因为中国存在了大量的价值低于价格的商品。我认识个香港人，他说我们超市里的东西非常贵啊！顺便就佩服了一下内地人的生存能力。  </p>
@@ -573,46 +1615,147 @@
 <p>以上说的很乱，我整理一下：<br>一、我们中国的市场很大，是全世界都要争夺的战略要地，同时这也是我们的优势。<br>二、我们还很落后，不要大谈技术和市场，因为都控制在人家的手里。<br>三、我们还能有作为，国际接轨不是说向人家掏钱买标准和技术，我们自己可以研究标准和技术。<br>四、人生规划不要用地位和金钱作为标准，要理性看待自己到底有多少分量，自己适合做什么！<br>五，如果中国可以出现比尔盖茨和乔布斯这样的人，学技术和学市场都没关系，说明我们已经有了基础。  </p>
 <p>题外话，美国的经济危机我认为是创新缺乏的危机，不是次贷危机，次贷危机不过是引子和现象。创新的缺乏造成了美国的技术供应不足，反过来消费没有下降，就是说只有花钱的渠道，没有赚钱的渠道。其实这是我们的机会，日本可以在某些技术领域上超过美国，我们同样可以。世界离不开中国，但也离不开美国，地球要共享不是争夺。</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/03/will-you-choose-technology-or-market-reproduced/" data-id="cji00lkvf00lthnzsdrqemox2" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-sun-zhenyao-s-retirement-speech" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/06/03/sun-zhenyao-s-retirement-speech/" class="article-date">
-  <time datetime="2010-06-03T03:03:17.000Z" itemprop="datePublished">2010-06-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/默认分类/">默认分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/03/sun-zhenyao-s-retirement-speech/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/06/03/sun-zhenyao-s-retirement-speech/">孙振耀退休演讲</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/06/03/sun-zhenyao-s-retirement-speech/" itemprop="url">孙振耀退休演讲</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-03T11:03:17+08:00">
+                2010-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>如果这篇文章没有分享给你，那是我的错。<br>如果这篇文章分享给你了，你却没有读，继续走弯路的你不要怪我。<br>如果你看了这篇文章，只读了一半你就说没时间了，说明你已经是个“茫”人了。<br>如果你看完了，你觉得这篇文章只是讲讲大道理，说明你的人生阅历还不够，需要你把这篇文章珍藏，走出去碰几年壁，头破血流后再回来，再读，你就会感叹自己的年少无知。<br>如果你看完了，觉得很有道理，然后束之高阁，继续走进拥挤的地铁，依然用着自己昨日的观念来思考自己的未来，你的人生也将继续重复着昨日的状况。<br>如果你看完了，觉得那是一个过来人，对你的人生忠告，并你也愿意用他告诉你的思想去指导自己今后的生活，对你来讲成功不是很难，难的是你是否可以用这篇文章里的思想一直鞭策自己。<br>如果你看完了，觉得那是一个长辈用他的一生的时间来写的一篇对你忠告的文章，说明你已经有了和他相似的人生阅历，只要你继续努力，成就伟业并不难，难的是你是否可以把自己的人生经验和他人分享呢？<strong>体验决定深度，知识决定广度?</strong> 你的人生是什么呢？  </p>
+      
+
+      
+        
+          
+            <p>如果这篇文章没有分享给你，那是我的错。<br>如果这篇文章分享给你了，你却没有读，继续走弯路的你不要怪我。<br>如果你看了这篇文章，只读了一半你就说没时间了，说明你已经是个“茫”人了。<br>如果你看完了，你觉得这篇文章只是讲讲大道理，说明你的人生阅历还不够，需要你把这篇文章珍藏，走出去碰几年壁，头破血流后再回来，再读，你就会感叹自己的年少无知。<br>如果你看完了，觉得很有道理，然后束之高阁，继续走进拥挤的地铁，依然用着自己昨日的观念来思考自己的未来，你的人生也将继续重复着昨日的状况。<br>如果你看完了，觉得那是一个过来人，对你的人生忠告，并你也愿意用他告诉你的思想去指导自己今后的生活，对你来讲成功不是很难，难的是你是否可以用这篇文章里的思想一直鞭策自己。<br>如果你看完了，觉得那是一个长辈用他的一生的时间来写的一篇对你忠告的文章，说明你已经有了和他相似的人生阅历，只要你继续努力，成就伟业并不难，难的是你是否可以把自己的人生经验和他人分享呢？<strong>体验决定深度，知识决定广度?</strong> 你的人生是什么呢？  </p>
 <p>虽然离开惠普仅有十五天，但感觉上惠普已经离我很远。我的心思更多放在规划自己第二阶段的人生，这并非代表我对惠普没有任何眷恋，主要还是想以此驱动自己往前走。<br>万科王石登珠穆朗玛峰的体验给我很多启发，虽然在出发时携带大量的物资，但是登顶的过程中，必须不断减轻负荷，最终只有一个氧气瓶和他登上峰顶。登山如此，漫长的人生又何尝不是。<br>我宣布退休后，接到同事朋友同学的祝贺。大部分人都认为我能够在这样的职位上及年龄选择退休，是一种勇气，也是一种福气。  </p>
 <p>还有一部分人怀疑我只是借此机会换个工作，当然还有一些人说我在HP做不下去了，趁此机会离开。<br>我多年来已经习惯别人对我的说三道四，但对于好友，我还是挺关心大家是否真正理解我的想法，这也是写这篇文章的目的。<br>由于受我父亲早逝的影响，我很早就下定决心，要在有生之年实现自己的愿望，我不要像我父亲一样，为家庭生活忙碌一辈子，临终前感伤，懊恼自己有很多没有实现的理想。<br>一本杂志的文章提到我们在生前就应该思考自己的墓志铭，因为那代表你自己对完美人生的定义，我们应该尽可能在有生之年去实现它。<br>我希望我的墓志铭上除了与家人及好友有关的内容外，是这样写着：<br>1.这个人曾经服务于一家全球最大的IT公司（HP）25年，和她一起经历过数次重大的变革，看着她从以电子仪表为主要的业务变革成全球最大的IT公司。<br>2.这个人曾经在全球发展最快的国家（中国）工作16年，并担任HP中国区总裁7年，见证及经历过中国改革开放的关键 最新突破阶段，与中国一起成长。<br>3.这个人热爱飞行，曾经是一个有执照的飞行员，累积飞行时数超过X小时，曾经在X个机场起降过。<br>4. 这个人曾经获得管理硕士学位，在领导管理上特别关注中国企业的组织行为及绩效，并且在这个领域上获得中国企业界的认可。<br>我费时25年才总结1和2两项成果，我不知还要费时多久才能达成3和4的愿望，特别是第4个愿望需要经历学术的训练，才能将我的经验总结成知识。<br>否则我的经验将无法有效影响及传授他人。因此重新进入学校学习，拿一个管理学位是有必要的，更何况这是我一个非常重要的愿望。<br>另一方面，我25年的时间都花在运营(operation) 的领域，兢兢业业的做好职业人士的工作，它是一份好工作，特别是在HP，这份工作也帮助我建立财务的基础，支持家庭的发展。<br>但是我不想终其一生，都陷入在运营的领域，我想象企业家一样，有机会靠一些点子 (ideas)赚钱，虽然风险很高，但是值得一试，即使失败，也不枉走一回，这也是第4个愿望其中的一部份。<br>Carly Fiorina 曾经对我说过“这个世界上有好想法的人很多，但有能力去实现的人很少”，2007 年5月21日在北大演讲时，有人问起那些书对我影响较大，我想对我人生观有影响的其中一本书叫“Trigger Point”，它的主要观点是：人生最需要的不是规划，而是在适当的时机掌握机会，采取行动。<br>我这些愿望在我心中已经酝酿一段很长的时间，开始的时候，也许一年想个一两次，过了也就忘掉，但逐渐的，这个心中的声音，愈来愈大，出现的频率也愈来愈高，当它几乎每一个星期都会来与我对话时，我知道时机已经成熟。<br>但和任何人一样，要丢掉自己现在所拥有的，所熟悉的环境及稳定的收入，转到一条自己未曾经历过，存在未知风险的道路，需要绝大的勇气，家人的支持和好友的鼓励。有舍才有得，真是知易行难，我很高兴自己终于跨出了第一步。<br>我要感谢HP的EER提前退休优惠政策，它是其中一个关键的Trigger Points,另一个关键因素是在去年五六月发生的事。<br>当时我家老大从大学毕业，老二从高中毕业，在他们继续工作及求学前，这是一个黄金时段，让我们全家可以相聚一段较长的时间，我为此很早就计划休一个长假，带着他们到各地游玩。<br>但这个计划因为工作上一件重要的事情（Mark Hurd 访华）不得不取消。这个事件刺激了我必须严肃的去对待那心中的声音，我会不会继续不断的错失很多关键的机会?<br>我已经年过50，我会不会走向和我父亲一样的道路？人事部老总Charles跟我说，很多人在所有对他有利的星星都排成一列时，还是错失时机。<br>我知道原因，因为割舍及改变对人是多么的困难，我相信大部分的人都有自己人生的理想，但我也相信很多人最终只是把这些理想当成是幻想，然后不断的为自己寻找不能实现的藉口，南非前总统曼德拉曾经说过，“与改变世界相比，改变自己更困难”，真是一针见血。<br>什么是快乐及有意义的人生？我相信每一个人的定义都不一样，对我来说，能实现我墓志铭上的内容就是我的定义。<br>在中国惠普总裁的位置上固然可以吸引很多的关注及眼球，但是我太太及较亲近的好友，都知道那不是我追求的，那只是为扮演好这个角色必须尽力做好的地方。<br>做一个没有名片的人士，虽然只有十多天的时间，但我发现我的脑袋里已经空出很多空间及能量，让我可以静心的为我Chapter II的新生活做细致的调研及规划。<br>我预订以两年的时间来完成转轨的准备工作，并且花多点时间与家人共处。这两年的时间我希望拿到飞行执照，拿到管理有关的硕士学位，提升英文的水平，建立新的网络，多认识不同行业的人，保持与大陆的联系。希望两年后，我可以顺利回到大陆去实现我第四个愿望。<br>毫不意外，在生活上，我发现很多需要调整的地方。<br>二十多年来，我生活的步调及节奏，几乎完全被公司及工作所左右，不断涌出的deadline及任务驱动我每天的安排，一旦离开这样的环境，第一个需要调整的就是要依靠自己的自律及意志力来驱动每天的活动，睡觉睡到自然醒的态度绝对不正确，放松自己，不给事情设定目标及时间表，或者对错失时间目标无所谓，也不正确，没有年度，季度，月及周计划也不正确。<br>担任高层经理多年，已经养成交待事情的习惯，自己的时间主要花在思考，决策及追踪项目的进展情况，更多是依靠一个庞大的团队来执行具体的事项及秘书来处理很多协调及繁琐的事情。<br>到美国后，很多事情需要打800号电话联系，但这些电话很忙，常让你在waiting line上等待很长的时间，当我在等待时，我可以体会以前秘书工作辛苦的地方，但同时也提醒我自己，在这个阶段要改变态度，培养更大的耐性及自己动手做的能力。<br>生活的内容也要做出很大的调整，多出时间锻炼身体，多出时间关注家人，多出时间关注朋友，多出时间体验不同的休闲活动及飞行，一步步的，希望生活逐步调整到我所期望的轨道上，期待这两年的生活既充实又充满乐趣及意义。<br>第一个快乐的体验就是准备及参加大儿子的订婚礼，那种全心投入，不需担忧工作数字的感觉真好。同时我也租好了公寓，买好了家具及车子，陪家人在周末的时候到Reno 及Lake Tahoe玩了一趟，Lake Tahoe我去了多次，但这次的体验有所不同，我从心里欣赏到它的美丽。<br>但同时我也在加紧调研的工作，为申请大学及飞行学校做准备，这段时间也和在硅谷的朋友及一些风险投资公司见面，了解不同的产业。<br>我的人生观是“完美的演出来自充分的准备”，“勇于改变自己，适应不断变化的环境，机会将不断出现”，“快乐及有意义的人生来自于实现自己心中的愿望，而非外在的掌声”。<br>我离开时，有两位好朋友送给我两个不同的祝语，Baron的是“多年功过化烟尘”，杨华的是“莫春者，风乎舞雩，咏而归”，它们分别代表了我离开惠普及走向未来的心情。<br>我总结人生有三个阶段，一个阶段是为现实找一份工作，一个阶段是为现实，但可以选择一份自己愿意投入的工作，一个阶段是为理想去做一些事情。<br>我珍惜我的福气，感激HP及同事、好朋友给我的支持，鼓励及协助，这篇文字化我心声的文章与好友分享。</p>
 <p> <strong>关于工作与生活</strong><br>我有个有趣的观察，外企公司多的是25-35岁的白领，40岁以上的员工很少，二三十岁的外企员工是意气风发的，但外企公司40岁附近的经理人是很尴尬的。我见过的40岁附近的外企经理人大多在一直跳槽，最后大多跳到民企，比方说，唐骏。外企员工的成功很大程度上是公司的成功，并非个人的成功，西门子的确比国美大，但并不代表西门子中国经理比国美的老板强，甚至可以说差得很远。而进外企的人往往并不能很早理解这一点，把自己的成功90％归功于自己的能力，实际上，外企公司随便换个中国区总经理并不会给业绩带来什么了不起的影响。好了问题来了，当这些经理人40多岁了，他们的薪资要求变得很高，而他们的才能其实又不是那么出众，作为外企公司的老板，你会怎么选择？有的是只要不高薪水的，要出位的精明强干精力冲沛的年轻人，有的是，为什么还要用你？<br>从上面这个例子，其实可以看到我们的工作轨迹，二三十岁的时候，生活的压力还比较小，身体还比较好，上面的父母身体还好，下面又没有孩子，不用还房贷，也没有孩子要上大学，当个外企小白领还是很光鲜的，挣得不多也够花了。但是人终归要结婚生子，终归会老，到了40岁，父母老了，要看病要吃药，要有人看护，自己要还房贷，要过基本体面的生活，要养小孩……那个时候需要挣多少钱才够花才重要。所以，看待工作，眼光要放远一点，一时的谁高谁低并不能说明什么。<br>从这个角度上来说，我不太赞成过于关注第一份工作的薪水，更没有必要攀比第一份工作的薪水，这在刚刚出校园的学生中间是很常见的。正常人大概要工作35 年，这好比是一场马拉松比赛，和真正的马拉松比赛不同的是，这次比赛没有职业选手，每个人都只有一次机会。要知道，有很多人甚至坚持不到终点，大多数人最后是走到终点的，只有少数人是跑过终点的，因此在刚开始的时候，去抢领先的位置并没有太大的意义。刚进社会的时候如果进500强公司，大概能拿到3k- 6k/月的工资，有些特别技术的人才可能可以到8k/月，可问题是，5年以后拿多少？估计5k-10k了不起了。起点虽然高，但增幅有限，而且，后面的年轻人追赶的压力越来越大。<br>　　 我前两天问我的一个销售，你会的这些东西一个新人2年就都学会了，但新人所要求的薪水却只是你的一半，到时候，你怎么办？<br>职业生涯就像一场体育比赛，有初赛、复赛、决赛。初赛的时候大家都刚刚进社会，大多数都是实力一般的人，这时候努力一点认真一点很快就能让人脱颖而出，于是有的人二十多岁做了经理，有的人迟些也终于赢得了初赛，三十多岁成了经理。然后是复赛，能参加复赛的都是赢得初赛的，每个人都有些能耐，在聪明才智上都不成问题，这个时候再想要胜出就不那么容易了，单靠一点点努力和认真还不够，要有很强的坚忍精神，要懂得靠团队的力量，要懂得收服人心，要有长远的眼光……<br>看上去赢得复赛并不容易，但，还不是那么难。因为这个世界的规律就是给人一点成功的同时让人骄傲自满，刚刚赢得初赛的人往往不知道自己赢得的仅仅是初赛，有了一点小小的成绩大多数人都会骄傲自满起来，认为自己已经懂得了全部，不需要再努力再学习了，他们会认为之所以不能再进一步已经不是自己的原因了。虽然他们仍然不好对付，但是他们没有耐性，没有容人的度量，更没有清晰长远的目光。就像一只愤怒的斗牛，虽然猛烈，最终是会败的，而赢得复赛的人则象斗牛士一样，不急不躁，跟随着自己的节拍，慢慢耗尽对手的耐心和体力。赢得了复赛以后，大约已经是一位很了不起的职业经理人了，当上了中小公司的总经理，大公司的副总经理，主管着每年几千万乃至几亿的生意。<br>最终的决赛来了，说实话我自己都还没有赢得决赛，因此对于决赛的决胜因素也只能凭自己的猜测而已，这个时候的输赢或许就像武侠小说里写得那样，大家都是高手，只能等待对方犯错了，要想轻易击败对手是不可能的，除了使上浑身解数，还需要一点运气和时间。世界的规律依然发挥着作用，赢得复赛的人已经不只是骄傲自满了，他们往往刚愎自用，听不进去别人的话，有些人的脾气变得暴躁，心情变得浮躁，身体变得糟糕，他们最大的敌人就是他们自己，在决赛中要做的只是不被自己击败，等着别人被自己击败。这和体育比赛是一样的，最后高手之间的比赛，就看谁失误少谁就赢得了决赛。  </p>
@@ -630,133 +1773,329 @@
 <p>选择职业  </p>
 <p>职业的选择，总的来说，无非就是销售、市场、客服、物流、行政、人事、财务、技术、管理几个大类，有个有趣的现象就是，500强的CEO当中最多的是销售出身，第二多的人是财务出身，这两者加起来大概超过95％。现代IT行业也有技术出身成为老板的，但实际上，后来他们还是从事了很多销售和市场的工作，并且表现出色，公司才获得了成功，完全靠技术能力成为公司老板的，几乎没有。这是有原因的，因为销售就是一门跟人打交道的学问，而管理其实也是跟人打交道的学问，这两者之中有很多相通的东西，他们的共同目标就是“让别人去做某件特定的事情。”而财务则是从数字的层面了解生意的本质，从宏观上看待生意的本质，对于一个生意是否挣钱，是否可以正常运作有着最深刻的认识。<br>公司小的时候是销售主导公司，而公司大的时候是财务主导公司，销售的局限性在于只看人情不看数字，财务的局限性在于只看数字不看人情。公司初期，运营成本低，有订单就活得下去，跟客户也没有什么谈判的条件，别人肯给生意做已经谢天谢地了，这个时候订单压倒一切，客户的要求压倒一切，所以当然要顾人情。公司大了以后，一切都要规范化，免得因为不规范引起一些不必要的风险，同时运营成本也变高，必须提高利润率，把有限的资金放到最有产出的地方。对于上市公司来说，股东才不管你客户是不是最近出国，最近是不是那个省又在搞严打，到了时候就要把业绩拿出来，拿不出来就抛股票，这个时候就是数字压倒一切。<br>前两天听到有人说一句话觉得很有道理，开始的时候我们想“能做什么？”，等到公司做大了有规模了，我们想“不能做什么。”很多人在工作中觉得为什么领导这么保守，这也不行那也不行，错过很多机会。很多时候是因为，你还年轻，你想的是“能做什么”，而作为公司领导要考虑的方面很多，他比较关心“不能做什么”。<br>我并非鼓吹大家都去做销售或者财务，究竟选择什么样的职业，和你究竟要选择什么样的人生有关系，有些人就喜欢下班按时回家，看看书听听音乐，那也挺好，但就不适合找个销售的工作了，否则会是折磨自己。有些人就喜欢出风头，喜欢成为一群人的中心，如果选择做财务工作，大概也干不久，因为一般老板不喜欢财务太积极，也不喜欢财务话太多。先想好自己要过怎样的人生，再决定要找什么样的职业。有很多的不快乐，其实是源自不满足，而不满足，很多时候是源自于心不定，而心不定则是因为不清楚究竟自己要什么，不清楚要什么的结果就是什么都想要，结果什么都没得到。<br>我想，我们还是因为生活而工作，不是因为工作而生活，生活是最要紧的，工作只是生活中的一部分。我总是觉得生活的各方方面都是相互影响的，如果生活本身一团乱麻，工作也不会顺利。所以要有娱乐、要有社交、要锻炼身体，要有和睦的家庭……最要紧的，要开心，我的两个销售找我聊天，一肚子苦水，我问他们，2年以前，你什么都没有，工资不高，没有客户关系，没有业绩，处于被开的边缘，现在的你比那时条件好了很多，为什么现在却更加不开心了？如果你做得越好越不开心，那你为什么还要工作？首先的首先，人还是要让自己高兴起来，让自己心态好起来，这种发自内心的改变会让你更有耐心，更有信心，更有气质，更能包容…… 否则，看看镜子里的你，你满意么？<br>有人会说，你说得容易，我每天加班，不加班老板就会把我炒掉，每天累得要死，哪有时间娱乐、社交、锻炼？那是人们把目标设定太高的缘故，如果你还在动不动就会被老板炒掉的边缘，那么你当然不能设立太高的目标，难道你还想每天去打高尔夫？你没时间去健身房锻炼身体，但是上下班的时候多走几步可以吧，有楼梯的时候走走楼梯不走电梯可以吧？办公的间隙扭扭脖子拉拉肩膀做做俯卧撑可以吧？谁规定锻炼就一定要拿出每天2个小时去健身房？你没时间社交，每月参加郊游一次可以吧，周末去参加个什么音乐班，绘画班之类的可以吧，去尝试认识一些同行，和他们找机会交流交流可以吧？开始的时候总是有些难的，但迈出这一步就会向良性循环的方向发展。而每天工作得很苦闷，剩下的时间用来咀嚼苦闷，只会陷入恶性循环，让生活更加糟糕。</p>
 
+          
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/06/03/sun-zhenyao-s-retirement-speech/" data-id="cji00lkmx00ewhnzsezb0jhxy" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+  </section>
 
   
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
-</section>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-          <aside id="sidebar">
+          
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HR/">HR</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MAC/">MAC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/windows/">windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活琐事/">生活琐事</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络美文/">网络美文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/进步进行中/">进步进行中</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/默认分类/">默认分类</a></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-
-  
+  <aside id="sidebar" class="sidebar">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/n/">-n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proc-pid-stat/">/proc/[pid]/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-04/">12.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3/">3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/413/">413</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/442/">442</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/500k/">500k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/5709网卡异常down分析与解决/">5709网卡异常down分析与解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/7/">7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/access、hybrid和trunk三种模式的理解/">access、hybrid和trunk三种模式的理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adhoc/">adhoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adsl的上行带宽参考/">adsl的上行带宽参考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/altered/">altered</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ambiguous/">ambiguous</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blktrace使用简析/">blktrace使用简析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/broadcom/">broadcom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comodo与cisco/">comodo与cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dpi和ppi的区别/">dpi和ppi的区别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enable/">enable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity/">entity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eth0/">eth0:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext3/">ext3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ext4/">ext4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/failed/">failed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/faq/">faq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/file-max/">file-max</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gns3/">gns3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hal-set-property修改lshal信息/">hal-set-property修改lshal信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/how/">how</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/io-c/">io.c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iowait高的一些处理方法/">iowait高的一些处理方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/key/">key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kvm/">kvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/large/">large</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/last/">last</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下/">linux下</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下-proc-stat/">linux下/proc/stat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下可用内存只有不到4g/">linux下可用内存只有不到4g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下文件大小不一致的情况分析/">linux下文件大小不一致的情况分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux下替换运行中的程序/">linux下替换运行中的程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux中时间戳转换命令/">linux中时间戳转换命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux使用iptables实现-邮件-端口重定向/">linux使用iptables实现(邮件)端口重定向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux网卡-设置千兆网卡速度及模式/">linux网卡(设置千兆网卡速度及模式)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcache的限制/">memcache的限制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcahced/">memcahced</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/messages/">messages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modinfo/">modinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netdev/">netdev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-upstream-jvm-route插件/">nginx-upstream-jvm-route插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-http-push-module/">nginx_http_push_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx出现/">nginx出现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx版本无缝升级/">nginx版本无缝升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/of/">of</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/on/">on</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/out/">out</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/outside/">outside</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/over/">over</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/printk/">printk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/push/">push</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read/">read</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reason/">reason</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redirect/">redirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repeate/">repeate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rhel5-4安装spacewalk/">rhel5.4安装spacewalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpmdb/">rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsync/">rsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rz上传出错问题/">rz上传出错问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendmail主题乱码/">sendmail主题乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sl410k/">sl410k</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snapshot/">snapshot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh登录很慢的问题/">ssh登录很慢的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/support/">support</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/suppressed/">suppressed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tag/">tag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timed/">timed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/to/">to</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/too/">too</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transmit/">transmit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ttserver/">ttserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ulimit/">ulimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unexpected/">unexpected</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/upstream-hash/">upstream_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/url-hash/">url_hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/users/">users</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/value/">value</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtio/">virtio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vncviewer/">vncviewer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn蓝屏解决记/">vpn蓝屏解决记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd/">vsftpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vsftpd时区/">vsftpd时区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/warning/">warning:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchdog/">watchdog:</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wget整站下载/">wget整站下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/while/">while</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x/">x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xcutsel/">xcutsel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yum升级python26/">yum升级python26</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zeroconf/">zeroconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zssh/">zssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主目录/">主目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传输剪贴板/">传输剪贴板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/但东西没有回收/">但东西没有回收</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改/">修改</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关于金钱/">关于金钱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除了文件/">删除了文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态增加数据节点配置步骤/">动态增加数据节点配置步骤</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级nginx/">升级nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/去广告方法/">去广告方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/取得前3天前1小时前一分钟的时间/">取得前3天前1小时前一分钟的时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令小结/">命令小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行查看memcache状态/">命令行查看memcache状态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看linux内核是否为64位版本？/">如何查看linux内核是否为64位版本？</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/如何查看rpm包的更新日志changelog/">如何查看rpm包的更新日志changelog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/妈妈/">妈妈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/将nginx配置成url-hash转发方式/">将nginx配置成url_hash转发方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小猪/">小猪</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尾巴/">尾巴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平滑/">平滑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强制位与冒险位/">强制位与冒险位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/我相信/">我相信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/找不到一个要连接的有效/">找不到一个要连接的有效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/按sessionid转发/">按sessionid转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敌人/">敌人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件解释/">文件解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/是否是因为bnx2id的启动而引起的网卡down/">是否是因为bnx2id的启动而引起的网卡down</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未能初始化远程显示子系统/">未能初始化远程显示子系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/查看有多少个交换分区或交换文件在使用的方法/">查看有多少个交换分区或交换文件在使用的方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/社会规则3则/">社会规则3则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/福昕pdf阅读器/">福昕pdf阅读器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绿色/">绿色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/英语/">英语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏拙/">藏拙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/藏锋/">藏锋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决/">解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决python升级为2-5高版本后yum不能使用的问题/">解决python升级为2.5高版本后yum不能使用的问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算cpu利用率/">计算cpu利用率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课文/">课文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程/">课程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈谈背诵新概念英语第四册历程/">谈谈背诵新概念英语第四册历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置sendmail/">配置sendmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重建rpmdb/">重建rpmdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接表的附加功能尚未激活的解决方法/">链接表的附加功能尚未激活的解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误解决方法/">错误解决方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决办法小结/">问题解决办法小结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a></li></ul>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
     </div>
-  </div>
+  </aside>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/n/" style="font-size: 10px;">-n</a> <a href="/tags/proc-pid-stat/" style="font-size: 10px;">/proc/[pid]/stat</a> <a href="/tags/12-04/" style="font-size: 10px;">12.04</a> <a href="/tags/3/" style="font-size: 10px;">3</a> <a href="/tags/413/" style="font-size: 10px;">413</a> <a href="/tags/442/" style="font-size: 10px;">442</a> <a href="/tags/500k/" style="font-size: 10px;">500k</a> <a href="/tags/5709网卡异常down分析与解决/" style="font-size: 10px;">5709网卡异常down分析与解决</a> <a href="/tags/7/" style="font-size: 10px;">7</a> <a href="/tags/access、hybrid和trunk三种模式的理解/" style="font-size: 10px;">access、hybrid和trunk三种模式的理解</a> <a href="/tags/adhoc/" style="font-size: 10px;">adhoc</a> <a href="/tags/adsl的上行带宽参考/" style="font-size: 10px;">adsl的上行带宽参考</a> <a href="/tags/altered/" style="font-size: 10px;">altered</a> <a href="/tags/ambiguous/" style="font-size: 10px;">ambiguous</a> <a href="/tags/blktrace使用简析/" style="font-size: 10px;">blktrace使用简析</a> <a href="/tags/broadcom/" style="font-size: 10px;">broadcom</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/comodo与cisco/" style="font-size: 10px;">comodo与cisco</a> <a href="/tags/dpi和ppi的区别/" style="font-size: 10px;">dpi和ppi的区别</a> <a href="/tags/enable/" style="font-size: 10px;">enable</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/eth0/" style="font-size: 10px;">eth0:</a> <a href="/tags/ext3/" style="font-size: 10px;">ext3</a> <a href="/tags/ext4/" style="font-size: 10px;">ext4</a> <a href="/tags/failed/" style="font-size: 10px;">failed</a> <a href="/tags/faq/" style="font-size: 10px;">faq</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/file-max/" style="font-size: 10px;">file-max</a> <a href="/tags/gns3/" style="font-size: 10px;">gns3</a> <a href="/tags/hal-set-property修改lshal信息/" style="font-size: 10px;">hal-set-property修改lshal信息</a> <a href="/tags/how/" style="font-size: 10px;">how</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/io-c/" style="font-size: 10px;">io.c</a> <a href="/tags/iowait高的一些处理方法/" style="font-size: 10px;">iowait高的一些处理方法</a> <a href="/tags/key/" style="font-size: 10px;">key</a> <a href="/tags/kvm/" style="font-size: 15px;">kvm</a> <a href="/tags/large/" style="font-size: 10px;">large</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux下/" style="font-size: 10px;">linux下</a> <a href="/tags/linux下-proc-stat/" style="font-size: 10px;">linux下/proc/stat</a> <a href="/tags/linux下可用内存只有不到4g/" style="font-size: 10px;">linux下可用内存只有不到4g</a> <a href="/tags/linux下文件大小不一致的情况分析/" style="font-size: 10px;">linux下文件大小不一致的情况分析</a> <a href="/tags/linux下替换运行中的程序/" style="font-size: 10px;">linux下替换运行中的程序</a> <a href="/tags/linux中时间戳转换命令/" style="font-size: 10px;">linux中时间戳转换命令</a> <a href="/tags/linux使用iptables实现-邮件-端口重定向/" style="font-size: 10px;">linux使用iptables实现(邮件)端口重定向</a> <a href="/tags/linux网卡-设置千兆网卡速度及模式/" style="font-size: 10px;">linux网卡(设置千兆网卡速度及模式)</a> <a href="/tags/memcache的限制/" style="font-size: 10px;">memcache的限制</a> <a href="/tags/memcahced/" style="font-size: 10px;">memcahced</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/messages/" style="font-size: 10px;">messages</a> <a href="/tags/modinfo/" style="font-size: 10px;">modinfo</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netdev/" style="font-size: 10px;">netdev</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/nginx-upstream-jvm-route插件/" style="font-size: 10px;">nginx-upstream-jvm-route插件</a> <a href="/tags/nginx-http-push-module/" style="font-size: 10px;">nginx_http_push_module</a> <a href="/tags/nginx出现/" style="font-size: 10px;">nginx出现</a> <a href="/tags/nginx版本无缝升级/" style="font-size: 10px;">nginx版本无缝升级</a> <a href="/tags/of/" style="font-size: 10px;">of</a> <a href="/tags/on/" style="font-size: 10px;">on</a> <a href="/tags/out/" style="font-size: 10px;">out</a> <a href="/tags/outside/" style="font-size: 10px;">outside</a> <a href="/tags/over/" style="font-size: 10px;">over</a> <a href="/tags/printk/" style="font-size: 10px;">printk</a> <a href="/tags/push/" style="font-size: 10px;">push</a> <a href="/tags/read/" style="font-size: 10px;">read</a> <a href="/tags/reason/" style="font-size: 10px;">reason</a> <a href="/tags/redirect/" style="font-size: 10px;">redirect</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/repeate/" style="font-size: 10px;">repeate</a> <a href="/tags/request/" style="font-size: 10px;">request</a> <a href="/tags/rhel5-4安装spacewalk/" style="font-size: 10px;">rhel5.4安装spacewalk</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/rpmdb/" style="font-size: 10px;">rpmdb</a> <a href="/tags/rsync/" style="font-size: 15px;">rsync</a> <a href="/tags/rz上传出错问题/" style="font-size: 10px;">rz上传出错问题</a> <a href="/tags/sendmail主题乱码/" style="font-size: 10px;">sendmail主题乱码</a> <a href="/tags/sl410k/" style="font-size: 10px;">sl410k</a> <a href="/tags/snapshot/" style="font-size: 10px;">snapshot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh登录很慢的问题/" style="font-size: 10px;">ssh登录很慢的问题</a> <a href="/tags/support/" style="font-size: 10px;">support</a> <a href="/tags/suppressed/" style="font-size: 10px;">suppressed</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/timed/" style="font-size: 10px;">timed</a> <a href="/tags/to/" style="font-size: 20px;">to</a> <a href="/tags/too/" style="font-size: 10px;">too</a> <a href="/tags/transmit/" style="font-size: 10px;">transmit</a> <a href="/tags/ttserver/" style="font-size: 10px;">ttserver</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/ulimit/" style="font-size: 10px;">ulimit</a> <a href="/tags/unexpected/" style="font-size: 10px;">unexpected</a> <a href="/tags/upstream-hash/" style="font-size: 10px;">upstream_hash</a> <a href="/tags/url-hash/" style="font-size: 10px;">url_hash</a> <a href="/tags/users/" style="font-size: 10px;">users</a> <a href="/tags/value/" style="font-size: 10px;">value</a> <a href="/tags/virtio/" style="font-size: 10px;">virtio</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vncviewer/" style="font-size: 10px;">vncviewer</a> <a href="/tags/vpn蓝屏解决记/" style="font-size: 10px;">vpn蓝屏解决记</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/vsftpd时区/" style="font-size: 10px;">vsftpd时区</a> <a href="/tags/warning/" style="font-size: 10px;">warning:</a> <a href="/tags/watchdog/" style="font-size: 10px;">watchdog:</a> <a href="/tags/wget整站下载/" style="font-size: 10px;">wget整站下载</a> <a href="/tags/while/" style="font-size: 10px;">while</a> <a href="/tags/wifi/" style="font-size: 10px;">wifi</a> <a href="/tags/x/" style="font-size: 10px;">x</a> <a href="/tags/xcutsel/" style="font-size: 10px;">xcutsel</a> <a href="/tags/yum升级python26/" style="font-size: 10px;">yum升级python26</a> <a href="/tags/zeroconf/" style="font-size: 10px;">zeroconf</a> <a href="/tags/zssh/" style="font-size: 10px;">zssh</a> <a href="/tags/主目录/" style="font-size: 10px;">主目录</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/传输剪贴板/" style="font-size: 10px;">传输剪贴板</a> <a href="/tags/但东西没有回收/" style="font-size: 10px;">但东西没有回收</a> <a href="/tags/修改/" style="font-size: 10px;">修改</a> <a href="/tags/关于金钱/" style="font-size: 10px;">关于金钱</a> <a href="/tags/删除了文件/" style="font-size: 10px;">删除了文件</a> <a href="/tags/动态增加数据节点配置步骤/" style="font-size: 10px;">动态增加数据节点配置步骤</a> <a href="/tags/升级nginx/" style="font-size: 10px;">升级nginx</a> <a href="/tags/去广告方法/" style="font-size: 10px;">去广告方法</a> <a href="/tags/取得前3天前1小时前一分钟的时间/" style="font-size: 10px;">取得前3天前1小时前一分钟的时间</a> <a href="/tags/命令小结/" style="font-size: 10px;">命令小结</a> <a href="/tags/命令行查看memcache状态/" style="font-size: 10px;">命令行查看memcache状态</a> <a href="/tags/如何查看linux内核是否为64位版本？/" style="font-size: 10px;">如何查看linux内核是否为64位版本？</a> <a href="/tags/如何查看rpm包的更新日志changelog/" style="font-size: 10px;">如何查看rpm包的更新日志changelog</a> <a href="/tags/妈妈/" style="font-size: 10px;">妈妈</a> <a href="/tags/将nginx配置成url-hash转发方式/" style="font-size: 10px;">将nginx配置成url_hash转发方式</a> <a href="/tags/小猪/" style="font-size: 10px;">小猪</a> <a href="/tags/尾巴/" style="font-size: 10px;">尾巴</a> <a href="/tags/平滑/" style="font-size: 10px;">平滑</a> <a href="/tags/强制位与冒险位/" style="font-size: 10px;">强制位与冒险位</a> <a href="/tags/我相信/" style="font-size: 10px;">我相信</a> <a href="/tags/找不到一个要连接的有效/" style="font-size: 10px;">找不到一个要连接的有效</a> <a href="/tags/按sessionid转发/" style="font-size: 10px;">按sessionid转发</a> <a href="/tags/敌人/" style="font-size: 10px;">敌人</a> <a href="/tags/文件解释/" style="font-size: 10px;">文件解释</a> <a href="/tags/是否是因为bnx2id的启动而引起的网卡down/" style="font-size: 10px;">是否是因为bnx2id的启动而引起的网卡down</a> <a href="/tags/未能初始化远程显示子系统/" style="font-size: 10px;">未能初始化远程显示子系统</a> <a href="/tags/查看有多少个交换分区或交换文件在使用的方法/" style="font-size: 10px;">查看有多少个交换分区或交换文件在使用的方法</a> <a href="/tags/概念/" style="font-size: 10px;">概念</a> <a href="/tags/社会规则3则/" style="font-size: 10px;">社会规则3则</a> <a href="/tags/福昕pdf阅读器/" style="font-size: 10px;">福昕pdf阅读器</a> <a href="/tags/绿色/" style="font-size: 10px;">绿色</a> <a href="/tags/英语/" style="font-size: 15px;">英语</a> <a href="/tags/藏拙/" style="font-size: 10px;">藏拙</a> <a href="/tags/藏锋/" style="font-size: 10px;">藏锋</a> <a href="/tags/解决/" style="font-size: 10px;">解决</a> <a href="/tags/解决python升级为2-5高版本后yum不能使用的问题/" style="font-size: 10px;">解决python升级为2.5高版本后yum不能使用的问题</a> <a href="/tags/计算cpu利用率/" style="font-size: 10px;">计算cpu利用率</a> <a href="/tags/课文/" style="font-size: 10px;">课文</a> <a href="/tags/课程/" style="font-size: 10px;">课程</a> <a href="/tags/谈谈背诵新概念英语第四册历程/" style="font-size: 10px;">谈谈背诵新概念英语第四册历程</a> <a href="/tags/配置sendmail/" style="font-size: 10px;">配置sendmail</a> <a href="/tags/重建rpmdb/" style="font-size: 10px;">重建rpmdb</a> <a href="/tags/链接表的附加功能尚未激活的解决方法/" style="font-size: 10px;">链接表的附加功能尚未激活的解决方法</a> <a href="/tags/错误解决方法/" style="font-size: 10px;">错误解决方法</a> <a href="/tags/问题解决办法小结/" style="font-size: 10px;">问题解决办法小结</a> <a href="/tags/限制/" style="font-size: 10px;">限制</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">July 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">August 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">July 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">March 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">November 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">October 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">May 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">March 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/11/">November 2007</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/">unix sock dump方法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/16/ubuntu-e7-94-a8kubeadm-e5-bf-ab-e9-80-9f-e6-90-ad-e5-bb-bakubernetes-e7-8e-af-e5-a2-83/">ubuntu用kubeadm快速搭建kubernetes环境</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/16/docker-e6-9b-b4-e6-8d-a2-e6-ba-90/">docker更换源</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/02/e8-a7-a3-e5-86-b3docker-e5-88-a0-e9-99-a4container-e5-87-ba-e7-8e-b0device-or-resource-busy/">解决docker删除container出现device or resource busy</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/29/e4-bb-bb-e6-84-8f-e9-82-ae-e7-ae-b1-e4-bc-aa-e9-80-a0-e6-bc-8f-e6-b4-9e-e5-a4-84-e7-90-86/">任意邮箱伪造漏洞处理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
