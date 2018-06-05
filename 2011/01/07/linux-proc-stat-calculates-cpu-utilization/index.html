@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="一般来说对于需要大量cpu计算的进程，当前端压力越大时，CPU利用率越高。但对于I/O网络密集型的进程，即使请求很多，服务器的CPU也不一定很到，这时的服务瓶颈一般是在磁盘的I/O上。比较长见的就是，大文件频繁读写的cpu开销远小于小文件频繁读写的开销。因为在I/O吞吐量一定时，小文件的读写更加频繁，需要更多的cpu来处理I/O的中断。在Linux/Unix下，CPU利用率分为用户态，系统态和空闲">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.677Z">
+<meta property="og:updated_time" content="2018-06-05T06:08:05.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下&#x2F;proc&#x2F;stat 计算CPU利用率">
 <meta name="twitter:description" content="一般来说对于需要大量cpu计算的进程，当前端压力越大时，CPU利用率越高。但对于I/O网络密集型的进程，即使请求很多，服务器的CPU也不一定很到，这时的服务瓶颈一般是在磁盘的I/O上。比较长见的就是，大文件频繁读写的cpu开销远小于小文件频繁读写的开销。因为在I/O吞吐量一定时，小文件的读写更加频繁，需要更多的cpu来处理I/O的中断。在Linux/Unix下，CPU利用率分为用户态，系统态和空闲">
@@ -187,6 +187,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -329,11 +359,8 @@
 <p>以下用分别用bash和perl做的一个cpu利用率的计算：<br>本人注:以下代码则采用公式为:  </p>
 <p>total_0USER[0]+NICE[0]+SYSTEM[0]+IDLE[0]+IOWAIT[0]+IRQ[0]+SOFTIRQ[0]<br>total_1=USER[1]+NICE[1]+SYSTEM[1]+IDLE[1]+IOWAIT[1]+IRQ[1]+SOFTIRQ[1]<br>cpu usage=(IDLE[0]-IDLE[1]) / (total_0-total_1) * 100</p>
 <p>###bash 代码(本人提供.可用)  </p>
-<p>CODE:  </p>
-<p>#!/bin/sh  </p>
-<p>##echo user nice system idle iowait irq softirq<br>CPULOG_1=$(cat /proc/stat | grep ‘cpu ‘ | awk ‘{print $2” “$3” “$4” “$5” “$6” “$7” “$8}’)<br>SYS_IDLE_1=$(echo $CPULOG_1 | awk ‘{print $4}’)<br>Total_1=$(echo $CPULOG_1 | awk ‘{print $1+$2+$3+$4+$5+$6+$7}’)<br>sleep 5<br>CPULOG_2=$(cat /proc/stat | grep ‘cpu ‘ | awk ‘{print $2” “$3” “$4” “$5” “$6” “$7” “$8}’)<br>SYS_IDLE_2=$(echo $CPULOG_2 | awk ‘{print $4}’)<br>Total_2=$(echo $CPULOG_2 | awk ‘{print $1+$2+$3+$4+$5+$6+$7}’)<br>SYS_IDLE=`expr $SYS_IDLE_2 - $SYS_IDLE_1`<br>Total=`expr $Total_2 - $Total_1`<br>SYS_USAGE=`expr $SYS_IDLE/$Total*100 |bc -l`<br>SYS_Rate=`expr 100-$SYS_USAGE |bc -l`<br>Disp_SYS_Rate=`expr “scale=3; $SYS_Rate/1” |bc`<br>echo $Disp_SYS_Rate%  </p>
-<p>###perl 代码(网友提供.可用)  </p>
-<p>#!/usr/bin/perl<br>use warnings;<br>$SLEEPTIME=5;<br>if (-e “/tmp/stat”) {<br>unlink “/tmp/stat”;<br>}<br>open (JIFF_TMP, “&gt;&gt;/tmp/stat”) || die “Can’t open /proc/stat file!\n”;<br>open (JIFF, “/proc/stat”) || die “Can’t open /proc/stat file!\n”;<br>@jiff_0=<jiff>;<br>print JIFF_TMP $jiff_0[0] ;<br>close (JIFF);<br>sleep $SLEEPTIME;<br>open (JIFF, “/proc/stat”) || die “Can’t open /proc/stat file!\n”;<br>@jiff_1=<jiff>;<br>print JIFF_TMP $jiff_1[0];<br>close (JIFF);<br>close (JIFF_TMP);<br>@USER=`awk ‘{print \$2}’ “/tmp/stat”`;<br>@NICE=`awk ‘{print \$3}’ “/tmp/stat”`;<br>@SYSTEM=`awk ‘{print \$4}’ “/tmp/stat”`;<br>@IDLE=`awk ‘{print \$5}’ “/tmp/stat”`;<br>@IOWAIT=`awk ‘{print \$6}’ “/tmp/stat”`;<br>@IRQ=`awk ‘{print \$7}’ “/tmp/stat”`;<br>@SOFTIRQ=`awk ‘{print \$8}’ “/tmp/stat”`;<br>$JIFF_0=$USER[0]+$NICE[0]+$SYSTEM[0]+$IDLE[0]+$IOWAIT[0]+$IRQ[0]+$SOFTIRQ[0];<br>$JIFF_1=$USER[1]+$NICE[1]+$SYSTEM[1]+$IDLE[1]+$IOWAIT[1]+$IRQ[1]+$SOFTIRQ[1];<br>$SYS_IDLE=($IDLE[0]-$IDLE[1]) / ($JIFF_0-$JIFF_1) * 100;<br>$SYS_USAGE=100 - $SYS_IDLE;<br>printf (“The CPU usage is %1.2f%%\n”,$SYS_USAGE);</jiff></jiff></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh  </span><br><span class="line">##echo user nice system idle iowait irq softirq  </span><br><span class="line">CPULOG_1=$(cat /proc/stat | grep &apos;cpu &apos; | awk &apos;&#123;print $2&quot; &quot;$3&quot; &quot;$4&quot; &quot;$5&quot; &quot;$6&quot; &quot;$7&quot; &quot;$8&#125;&apos;)  </span><br><span class="line">SYS\_IDLE\_1=$(echo $CPULOG_1 | awk &apos;&#123;print $4&#125;&apos;)  </span><br><span class="line">Total\_1=$(echo $CPULOG\_1 | awk &apos;&#123;print $1+$2+$3+$4+$5+$6+$7&#125;&apos;)  </span><br><span class="line">sleep 5  </span><br><span class="line">CPULOG_2=$(cat /proc/stat | grep &apos;cpu &apos; | awk &apos;&#123;print $2&quot; &quot;$3&quot; &quot;$4&quot; &quot;$5&quot; &quot;$6&quot; &quot;$7&quot; &quot;$8&#125;&apos;)  </span><br><span class="line">SYS\_IDLE\_2=$(echo $CPULOG_2 | awk &apos;&#123;print $4&#125;&apos;)  </span><br><span class="line">Total\_2=$(echo $CPULOG\_2 | awk &apos;&#123;print $1+$2+$3+$4+$5+$6+$7&#125;&apos;)  </span><br><span class="line">SYS\_IDLE=\`expr $SYS\_IDLE\_2 - $SYS\_IDLE_1\`  </span><br><span class="line">Total=\`expr $Total\_2 - $Total\_1\`  </span><br><span class="line">SYS\_USAGE=\`expr $SYS\_IDLE/$Total*100 |bc -l\`  </span><br><span class="line">SYS\_Rate=\`expr 100-$SYS\_USAGE |bc -l\`  </span><br><span class="line">Disp\_SYS\_Rate=\`expr &quot;scale=3; $SYS_Rate/1&quot; |bc\`  </span><br><span class="line">echo $Disp\_SYS\_Rate%</span><br></pre></td></tr></table></figure>
+<p>###perl 代码(网友提供.可用)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/perl  </span><br><span class="line">use warnings;  </span><br><span class="line">$SLEEPTIME=5;  </span><br><span class="line">if (-e &quot;/tmp/stat&quot;) &#123;  </span><br><span class="line">unlink &quot;/tmp/stat&quot;;  </span><br><span class="line">&#125;  </span><br><span class="line">open (JIFF_TMP, &quot;&gt;&gt;/tmp/stat&quot;) || die &quot;Can&apos;t open /proc/stat file!\\n&quot;;  </span><br><span class="line">open (JIFF, &quot;/proc/stat&quot;) || die &quot;Can&apos;t open /proc/stat file!\\n&quot;;  </span><br><span class="line">@jiff_0=&lt;JIFF&gt;;  </span><br><span class="line">print JIFF\_TMP $jiff\_0[0] ;  </span><br><span class="line">close (JIFF);  </span><br><span class="line">sleep $SLEEPTIME;  </span><br><span class="line">open (JIFF, &quot;/proc/stat&quot;) || die &quot;Can&apos;t open /proc/stat file!\\n&quot;;  </span><br><span class="line">@jiff_1=&lt;JIFF&gt;;  </span><br><span class="line">print JIFF\_TMP $jiff\_1[0];  </span><br><span class="line">close (JIFF);  </span><br><span class="line">close (JIFF_TMP);  </span><br><span class="line">@USER=\`awk &apos;&#123;print \\$2&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@NICE=\`awk &apos;&#123;print \\$3&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@SYSTEM=\`awk &apos;&#123;print \\$4&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@IDLE=\`awk &apos;&#123;print \\$5&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@IOWAIT=\`awk &apos;&#123;print \\$6&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@IRQ=\`awk &apos;&#123;print \\$7&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">@SOFTIRQ=\`awk &apos;&#123;print \\$8&#125;&apos; &quot;/tmp/stat&quot;\`;  </span><br><span class="line">$JIFF_0=$USER[0]+$NICE[0]+$SYSTEM[0]+$IDLE[0]+$IOWAIT[0]+$IRQ[0]+$SOFTIRQ[0];  </span><br><span class="line">$JIFF_1=$USER[1]+$NICE[1]+$SYSTEM[1]+$IDLE[1]+$IOWAIT[1]+$IRQ[1]+$SOFTIRQ[1];  </span><br><span class="line">$SYS\_IDLE=($IDLE[0]-$IDLE[1]) / ($JIFF\_0-$JIFF_1) * 100;  </span><br><span class="line">$SYS\_USAGE=100 - $SYS\_IDLE;  </span><br><span class="line">printf (&quot;The CPU usage is %1.2f%%\\n&quot;,$SYS_USAGE);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

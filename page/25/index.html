@@ -187,6 +187,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -478,8 +508,8 @@
           
             <p>各位<a href="http://www.vpser.net/" target="_blank" rel="noopener">VPSer</a>在使用Linux VPS的时候应该还是比较关注自己VPS的流量的，怕有盗链或者流量超标而被停等等。而且现在N多家VPS，都把<a href="http://www.vpser.net/vps-cp/hypervm-bug.html" target="_blank" rel="noopener">HyperVM面板关闭</a>了，根本看不到用了多少流量及各个时段的网站流量状况，所以我们急需一个流量监控工具。</p>
 <p><a href="http://humdi.net/vnstat/" target="_blank" rel="noopener">vnStat</a>是一个应用于Linux或BSD平台，对网卡流量做监控。 因为并非是基于网络包嗅探的方式而是基于/proc的分析。现在vnStat已经有出<a href="http://www.sqweek.com/sqweek/index.php?p=1" target="_blank" rel="noopener">vnstat PHP frontend</a> 扩展了，可以以PHP脚本的形式直接调用vnStat监测的数据，如下图：</p>
-<p><a href="http://www.vpser.net/uploads/2009/08/vnstat1.png" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_vpser_vnstat1-300x278.png" alt="vnstat1" title="vnstat1"></a></p>
-<p><a href="http://www.vpser.net/uploads/2009/08/vnstat2.png" target="_blank" rel="noopener"><img src="http://blog.atop.fun/wp-content/uploads/netease/other_site/www_vpser_vnstat2-300x278.png" alt="vnstat2" title="vnstat2"></a></p>
+<p><a href="http://www.vpser.net/uploads/2009/08/vnstat1.png" target="_blank" rel="noopener">http://www.vpser.net/uploads/2009/08/vnstat1.png</a></p>
+<p><a href="http://www.vpser.net/uploads/2009/08/vnstat2.png" target="_blank" rel="noopener">http://www.vpser.net/uploads/2009/08/vnstat2.png</a></p>
 <p>下面说一下具体的安装步骤：</p>
 <p>下载：<br>wget <a href="http://soft.vpser.net/status/vnstat-1.9.tar.gz" target="_blank" rel="noopener">http://soft.vpser.net/status/vnstat-1.9.tar.gz</a><br>解压：<br>tar xvzf vnstat-1.9.tar.gz<br>进入目录：<br>cd vnstat-1.9<br>编译安装：<br>make<br>make install<br>如果64位平台上编译的话用make 64bit命令</p>
 <p>这样vnstat 就安装好了。下面讲vnstat的工作运行配置。</p>
@@ -491,7 +521,8 @@
 <p>第一行为安装时自动指定的.</p>
 <p>第二行是为了更新eth0的数据后，dump出来一个文件，给 php访问接口访问.</p>
 <p>这里dump出来的vnstat_dump_eth0 文件名是有规定的。</p>
-<h1 id="注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法"><a href="#注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法" class="headerlink" title="注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法"></a>注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法</h1><p>vim /var/lib/vnstat/dump.sh</p>
+<p># 注意：有时候采用上面的收集办法，无法采集到数据，可以采用下面的办法</p>
+<p>vim /var/lib/vnstat/dump.sh</p>
 <p>vnstat -u -i eth0<br>vnstat –dumpdb -i eth0 &gt;/var/lib/vnstat/vnstat_dump_eth0</p>
 <p>crontab -e</p>
 <p>加入执行命令</p>
@@ -508,8 +539,8 @@
 <p>指定vnstat的安装目录，如果是安装上述方法安装，直接按下面填写即可。</p>
 <p>$vnstat_bin = ‘/usr/bin/vnstat’;</p>
 <p>将要监控的网卡指定为１个：</p>
-<p>// list of network interfaces monitored by vnStat<br>    //$iface_list = array(’eth0′, ‘eth1′, ’sixxs’);<br>        $iface_list = array(’eth0′,);</p>
-<p>// will be displayed instead<br>    //<br>    $iface_title[‘eth0’] = ‘Internal’;<br>    //$iface_title[‘eth1’] = ‘Internet’;<br>    //$iface_title[‘sixxs’] = ‘SixXS IPv6′;</p>
+<p>// list of network interfaces monitored by vnStat<br>    //\$iface_list = array(’eth0′, ‘eth1′, ’sixxs’);<br>        $iface_list = array(’eth0′,);</p>
+<p>// will be displayed instead<br>    //<br>    \$iface_title[‘eth0’] = ‘Internal’;<br>    //\$iface_title[‘eth1’] = ‘Internet’;<br>    //$iface_title[‘sixxs’] = ‘SixXS IPv6′;</p>
 <p>这一切都搞好后，现在用　<a href="http://www.mydomain.com/vnstat/" target="_blank" rel="noopener">www.mydomain.com/vnstat/</a>访问，就会发现有流量统计了,统计的数据更新是５分钟刷新一次．</p>
 
           

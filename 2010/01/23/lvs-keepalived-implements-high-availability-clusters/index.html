@@ -87,7 +87,7 @@
 <meta property="og:description" content="操作系统平台：CentOS5.2 软件：LVS+keepalived LVS+Keepalived 介绍 LVS LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）； 十种调度算法（rrr|wr">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/blogimg_chinaunix_090403211022.jpg">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.689Z">
+<meta property="og:updated_time" content="2018-06-05T06:16:50.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVS+Keepalived实现高可用集群">
 <meta name="twitter:description" content="操作系统平台：CentOS5.2 软件：LVS+keepalived LVS+Keepalived 介绍 LVS LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）； 十种调度算法（rrr|wr">
@@ -188,6 +188,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -340,407 +370,25 @@
 <p>WEB2-Realserver        192.168.2.172</p>
 <p>GateWay                192.168.2.253</p>
 <p>安装LVS和Keepalvied软件包</p>
-<p>1. 下载相关软件包</p>
-<p>#mkdir /usr/local/src/lvs</p>
-<p>#cd /usr/local/src/lvs</p>
-<p>#wget</p>
-<p><a href="http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.24.tar.gz" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.24.tar.gz</a></p>
-<p>#wget</p>
-<p><a href="http://www.keepalived.org/software/keepalived-1.1.15.tar.gz" target="_blank" rel="noopener">http://www.keepalived.org/software/keepalived-1.1.15.tar.gz</a></p>
-<p>2. 安装LVS和Keepalived</p>
-<p>#lsmod |grep ip_vs</p>
-<p>#uname -r</p>
-<p>2.6.18-53.el5PAE</p>
-<p>#ln -s /usr/src/kernels/2.6.18-53.el5PAE-i686/  /usr/src/linux</p>
-<p>#tar zxvf ipvsadm-1.24.tar.gz</p>
-<p>#cd ipvsadm-1.24</p>
-<p>#make &amp;&amp; make install</p>
-<p>#find / -name ipvsadm  # 查看ipvsadm的位置</p>
-<p>#tar zxvf keepalived-1.1.15.tar.gz</p>
-<p>#cd keepalived-1.1.15</p>
-<p>#./configure  &amp;&amp; make &amp;&amp; make install</p>
-<p>#find / -name keepalived  # 查看keepalived位置               </p>
-<p>#cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</p>
-<p>#cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/</p>
-<p>#mkdir /etc/keepalived</p>
-<p>#cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</p>
-<p>#cp /usr/local/sbin/keepalived /usr/sbin/</p>
-<p>#service keepalived start|stop     #做成系统启动服务方便管理.</p>
+<p>1. 下载相关软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#mkdir /usr/local/src/lvs</span><br><span class="line"></span><br><span class="line">#cd /usr/local/src/lvs</span><br><span class="line"></span><br><span class="line">#wget</span><br><span class="line"></span><br><span class="line">http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.24.tar.gz</span><br><span class="line"></span><br><span class="line">#wget</span><br><span class="line"></span><br><span class="line">http://www.keepalived.org/software/keepalived-1.1.15.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>2. 安装LVS和Keepalived<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#lsmod |grep ip_vs</span><br><span class="line"></span><br><span class="line">#uname -r</span><br><span class="line"></span><br><span class="line">2.6.18-53.el5PAE</span><br><span class="line"></span><br><span class="line">#ln -s /usr/src/kernels/2.6.18-53.el5PAE-i686/  /usr/src/linux</span><br><span class="line"></span><br><span class="line">#tar zxvf ipvsadm-1.24.tar.gz</span><br><span class="line"></span><br><span class="line">#cd ipvsadm-1.24</span><br><span class="line"></span><br><span class="line">#make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#find / -name ipvsadm  # 查看ipvsadm的位置</span><br><span class="line"></span><br><span class="line">#tar zxvf keepalived-1.1.15.tar.gz</span><br><span class="line"></span><br><span class="line">#cd keepalived-1.1.15</span><br><span class="line"></span><br><span class="line">#./configure  &amp;&amp; make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#find / -name keepalived  # 查看keepalived位置               </span><br><span class="line"></span><br><span class="line">#cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</span><br><span class="line"></span><br><span class="line">#cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/</span><br><span class="line"></span><br><span class="line">#mkdir /etc/keepalived</span><br><span class="line"></span><br><span class="line">#cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</span><br><span class="line"></span><br><span class="line">#cp /usr/local/sbin/keepalived /usr/sbin/</span><br><span class="line"></span><br><span class="line">#service keepalived start|stop     #做成系统启动服务方便管理.</span><br></pre></td></tr></table></figure></p>
 <p>四. 配置LVS实现负载均衡</p>
-<p>  1． LVS-DR，配置LVS脚本实现负载均衡</p>
-<p>vi /usr/local/sbin/lvs-dr.sh</p>
-<p>#!/bin/bash</p>
-<p># description: start LVS of DirectorServer</p>
-<p>#Written by :NetSeek</p>
-<p><a href="http://www.linuxtone.org" target="_blank" rel="noopener">http://www.linuxtone.org</a></p>
-<p>GW=192.168.2.253</p>
-<p># website director vip.</p>
-<p>WEB_VIP=192.168.2.170</p>
-<p>WEB_RIP1=192.168.2.171</p>
-<p>WEB_RIP2=192.168.2.172</p>
-<p>. /etc/rc.d/init.d/functions</p>
-<p>logger $0 called with $1</p>
-<p>case “$1” in</p>
-<p>start)</p>
-<pre><code># Clear all iptables rules.
-
-/sbin/iptables -F
-
-# Reset iptables counters.
-
-/sbin/iptables -Z
-
-# Clear all ipvsadm rules/services.
-
-/sbin/ipvsadm -C
-</code></pre><p>#set lvs vip for dr</p>
-<pre><code> /sbin/ipvsadm --set 30 5 60
-
- /sbin/ifconfig eth0:0 $WEB\_VIP broadcast $WEB\_VIP netmask 255.255.255.255 up
-
- /sbin/route add -host $WEB_VIP dev eth0:0
-
- /sbin/ipvsadm -A -t $WEB_VIP:80 -s wrr -p 3
-
- /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP1:80 -g -w 1
-
- /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP2:80 -g -w 1
-
- touch /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1
-
- # set Arp
-
- /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW &gt;/dev/null 2&gt;&amp;1
-
-;;
-</code></pre><p>stop)</p>
-<pre><code> /sbin/ipvsadm -C
-
- /sbin/ipvsadm -Z
-
- ifconfig eth0:0 down
-
- route del $WEB_VIP  &gt;/dev/null 2&gt;&amp;1
-
- rm -rf /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1
-
- /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW
-
- echo &quot;ipvsadm stoped&quot;
-
-;;
-</code></pre><p>status)</p>
-<pre><code>  if [ ! -e /var/lock/subsys/ipvsadm ];then
-
-          echo &quot;ipvsadm is stoped&quot;
-
-          exit 1
-
-  else
-
-          ipvsadm -ln
-
-          echo &quot;..........ipvsadm is OK.&quot;
-
-  fi
-
-;;
-</code></pre><p>*)</p>
-<pre><code>echo &quot;Usage: $0 {start|stop|status}&quot;
-
-exit 1
-</code></pre><p>esac</p>
-<p>exit 0</p>
-<p>2． 配置Realserver脚本.</p>
-<p>#!/bin/bash</p>
-<p># Written by NetSeek</p>
-<p># description: Config realserver lo and apply noarp</p>
-<p>WEB_VIP=192.168.2.170</p>
-<p>. /etc/rc.d/init.d/functions</p>
-<p>case “$1” in</p>
-<p>start)</p>
-<pre><code>ifconfig lo:0 $WEB\_VIP netmask 255.255.255.255 broadcast $WEB\_VIP
-
-/sbin/route add -host $WEB_VIP dev lo:0
-
-echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore
-
-echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce
-
-echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore
-
-echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce
-
-sysctl -p &gt;/dev/null 2&gt;&amp;1
-
-echo &quot;RealServer Start OK&quot;
-
-;;
-</code></pre><p>stop)</p>
-<pre><code>ifconfig lo:0 down
-
-route del $WEB_VIP &gt;/dev/null 2&gt;&amp;1
-
-echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore
-
-echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce
-
-echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore
-
-echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce
-
-echo &quot;RealServer Stoped&quot;
-
-;;
-</code></pre><p>status)</p>
-<pre><code># Status of LVS-DR real server.
-
-islothere=`/sbin/ifconfig lo:0 | grep $WEB_VIP`
-
-isrothere=\`netstat -rn | grep &quot;lo:0&quot; | grep $web_VIP\`
-
-if [ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; ];then
-
-    # Either the route or the lo:0 device
-
-    # not found.
-
-    echo &quot;LVS-DR real server Stopped.&quot;
-
-else
-
-    echo &quot;LVS-DR Running.&quot;
-
-fi
-</code></pre><p>;;</p>
-<p>*)</p>
-<pre><code># Invalid entry.
-
-echo &quot;$0: Usage: $0 {start|status|stop}&quot;
-
-exit 1
-</code></pre><p>;;</p>
-<p>esac</p>
-<p>exit 0</p>
-<p>附上realserver机上的/etc/sysctl.conf：</p>
-<p># Kernel sysctl configuration file for Red Hat Linux</p>
-<p>#</p>
-<p># For binary values, 0 is disabled, 1 is enabled.  See sysctl(8) and</p>
-<p># sysctl.conf(5) for more details.</p>
-<p># Controls IP packet forwarding</p>
-<p>net.ipv4.ip_forward = 1</p>
-<p># Controls source route verification</p>
-<p>net.ipv4.conf.default.rp_filter = 1</p>
-<p># Do not accept source routing</p>
-<p>net.ipv4.conf.default.accept_source_route = 0</p>
-<p># Controls the System Request debugging functionality of the kernel</p>
-<p>kernel.sysrq = 0</p>
-<p># Controls whether core dumps will append the PID to the core filename.</p>
-<p># Useful for debugging multi-threaded applications.</p>
-<p>kernel.core_uses_pid = 1</p>
-<p>net.ipv4.conf.lo.arp_ignore = 1</p>
-<p>net.ipv4.conf.lo.arp_announce = 2</p>
-<p>net.ipv4.conf.all.arp_ignore = 1</p>
-<p>net.ipv4.conf.all.arp_announce = 2</p>
-<p>或者采用secondary ip address方式配置</p>
-<p># vi /etc/sysctl.conf</p>
-<p>添加以下内容如上所示：</p>
-<p>net.ipv4.conf.lo.arp_ignore = 1</p>
-<p>net.ipv4.conf.lo.arp_announce = 2</p>
-<p>net.ipv4.conf.all.arp_ignore = 1</p>
-<p>net.ipv4.conf.all.arp_announce = 2</p>
-<p>#sysctl –p</p>
-<p>#ip addr add 61.164.122.8/32 dev lo</p>
-<p>#ip add list 查看是否绑定</p>
+<p>  1． LVS-DR，配置LVS脚本实现负载均衡<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/sbin/lvs-dr.sh</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">\# description: start LVS of DirectorServer</span><br><span class="line"></span><br><span class="line">#Written by :NetSeek</span><br><span class="line"></span><br><span class="line">http://www.linuxtone.org</span><br><span class="line"></span><br><span class="line">GW=192.168.2.253</span><br><span class="line"></span><br><span class="line">\# website director vip.</span><br><span class="line"></span><br><span class="line">WEB_VIP=192.168.2.170</span><br><span class="line"></span><br><span class="line">WEB_RIP1=192.168.2.171</span><br><span class="line"></span><br><span class="line">WEB_RIP2=192.168.2.172</span><br><span class="line"></span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"></span><br><span class="line">logger $0 called with $1</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line"></span><br><span class="line">start)</span><br><span class="line"></span><br><span class="line">        # Clear all iptables rules.</span><br><span class="line"></span><br><span class="line">        /sbin/iptables -F</span><br><span class="line"></span><br><span class="line">        # Reset iptables counters.</span><br><span class="line"></span><br><span class="line">        /sbin/iptables -Z</span><br><span class="line"></span><br><span class="line">        # Clear all ipvsadm rules/services.</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -C</span><br><span class="line"></span><br><span class="line">#set lvs vip for dr</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm --set 30 5 60</span><br><span class="line"></span><br><span class="line">        /sbin/ifconfig eth0:0 $WEB\_VIP broadcast $WEB\_VIP netmask 255.255.255.255 up</span><br><span class="line"></span><br><span class="line">        /sbin/route add -host $WEB_VIP dev eth0:0</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -A -t $WEB_VIP:80 -s wrr -p 3</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP1:80 -g -w 1</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -a -t $WEB\_VIP:80 -r $WEB\_RIP2:80 -g -w 1</span><br><span class="line"></span><br><span class="line">        touch /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">        # set Arp</span><br><span class="line"></span><br><span class="line">        /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">       ;;</span><br><span class="line"></span><br><span class="line">stop)</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -C</span><br><span class="line"></span><br><span class="line">        /sbin/ipvsadm -Z</span><br><span class="line"></span><br><span class="line">        ifconfig eth0:0 down</span><br><span class="line"></span><br><span class="line">        route del $WEB_VIP  &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">        rm -rf /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">        /sbin/arping -I eth0 -c 5 -s $WEB_VIP $GW</span><br><span class="line"></span><br><span class="line">        echo &quot;ipvsadm stoped&quot;</span><br><span class="line"></span><br><span class="line">       ;;</span><br><span class="line"></span><br><span class="line">status)</span><br><span class="line"></span><br><span class="line">        if [ ! -e /var/lock/subsys/ipvsadm ];then</span><br><span class="line"></span><br><span class="line">                echo &quot;ipvsadm is stoped&quot;</span><br><span class="line"></span><br><span class="line">                exit 1</span><br><span class="line"></span><br><span class="line">        else</span><br><span class="line"></span><br><span class="line">                ipvsadm -ln</span><br><span class="line"></span><br><span class="line">                echo &quot;..........ipvsadm is OK.&quot;</span><br><span class="line"></span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">*)</span><br><span class="line"></span><br><span class="line">        echo &quot;Usage: $0 &#123;start|stop|status&#125;&quot;</span><br><span class="line"></span><br><span class="line">        exit 1</span><br><span class="line"></span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
+<p>2． 配置Realserver脚本.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">\# Written by NetSeek</span><br><span class="line"></span><br><span class="line">\# description: Config realserver lo and apply noarp</span><br><span class="line"></span><br><span class="line">WEB_VIP=192.168.2.170</span><br><span class="line"></span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line"></span><br><span class="line">start)</span><br><span class="line"></span><br><span class="line">       ifconfig lo:0 $WEB\_VIP netmask 255.255.255.255 broadcast $WEB\_VIP</span><br><span class="line"></span><br><span class="line">       /sbin/route add -host $WEB_VIP dev lo:0</span><br><span class="line"></span><br><span class="line">       echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line"></span><br><span class="line">       echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line"></span><br><span class="line">       echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line"></span><br><span class="line">       echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line"></span><br><span class="line">       sysctl -p &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">       echo &quot;RealServer Start OK&quot;</span><br><span class="line"></span><br><span class="line">       ;;</span><br><span class="line"></span><br><span class="line">stop)</span><br><span class="line"></span><br><span class="line">       ifconfig lo:0 down</span><br><span class="line"></span><br><span class="line">       route del $WEB_VIP &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">       echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line"></span><br><span class="line">       echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line"></span><br><span class="line">       echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line"></span><br><span class="line">       echo &quot;0&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line"></span><br><span class="line">       echo &quot;RealServer Stoped&quot;</span><br><span class="line"></span><br><span class="line">       ;;</span><br><span class="line"></span><br><span class="line">status)</span><br><span class="line"></span><br><span class="line">        # Status of LVS-DR real server.</span><br><span class="line"></span><br><span class="line">        islothere=`/sbin/ifconfig lo:0 | grep $WEB_VIP`</span><br><span class="line"></span><br><span class="line">        isrothere=\`netstat -rn | grep &quot;lo:0&quot; | grep $web_VIP\`</span><br><span class="line"></span><br><span class="line">        if [ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; ];then</span><br><span class="line"></span><br><span class="line">            # Either the route or the lo:0 device</span><br><span class="line"></span><br><span class="line">            # not found.</span><br><span class="line"></span><br><span class="line">            echo &quot;LVS-DR real server Stopped.&quot;</span><br><span class="line"></span><br><span class="line">        else</span><br><span class="line"></span><br><span class="line">            echo &quot;LVS-DR Running.&quot;</span><br><span class="line"></span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">*)</span><br><span class="line"></span><br><span class="line">        # Invalid entry.</span><br><span class="line"></span><br><span class="line">        echo &quot;$0: Usage: $0 &#123;start|status|stop&#125;&quot;</span><br><span class="line"></span><br><span class="line">        exit 1</span><br><span class="line"></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
+<p>附上realserver机上的/etc/sysctl.conf：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">\# Kernel sysctl configuration file for Red Hat Linux</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">\# For binary values, 0 is disabled, 1 is enabled.  See sysctl(8) and</span><br><span class="line"></span><br><span class="line">\# sysctl.conf(5) for more details.</span><br><span class="line"></span><br><span class="line">\# Controls IP packet forwarding</span><br><span class="line"></span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line"></span><br><span class="line">\# Controls source route verification</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.default.rp_filter = 1</span><br><span class="line"></span><br><span class="line">\# Do not accept source routing</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.default.accept\_source\_route = 0</span><br><span class="line"></span><br><span class="line">\# Controls the System Request debugging functionality of the kernel</span><br><span class="line"></span><br><span class="line">kernel.sysrq = 0</span><br><span class="line"></span><br><span class="line">\# Controls whether core dumps will append the PID to the core filename.</span><br><span class="line"></span><br><span class="line">\# Useful for debugging multi-threaded applications.</span><br><span class="line"></span><br><span class="line">kernel.core\_uses\_pid = 1</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.lo.arp_ignore = 1</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.lo.arp_announce = 2</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.all.arp_ignore = 1</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.all.arp_announce = 2</span><br></pre></td></tr></table></figure></p>
+<p>或者采用secondary ip address方式配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">\# vi /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line">添加以下内容如上所示：</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.lo.arp_ignore = 1</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.lo.arp_announce = 2</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.all.arp_ignore = 1</span><br><span class="line"></span><br><span class="line">net.ipv4.conf.all.arp_announce = 2</span><br><span class="line"></span><br><span class="line">#sysctl –p</span><br><span class="line"></span><br><span class="line">#ip addr add 61.164.122.8/32 dev lo</span><br><span class="line"></span><br><span class="line">#ip add list 查看是否绑定</span><br></pre></td></tr></table></figure></p>
 <p>3. 启动lvs-dr脚本和realserver启本，在DR上可以查看LVS当前状态:</p>
 <p>#watch ipvsadm –ln</p>
 <p>五．利用Keepalvied实现负载均衡和和高可用性</p>
-<p>1.配置在主负载均衡服务器上配置keepalived.conf</p>
-<p>#vi /etc/keepalived/keepalived.conf (主调度器)</p>
-<p>! Configuration File for keepalived</p>
-<p>global_defs {</p>
-<p>   notification_email {</p>
-<p><a href="mailto:acassen@firewall.loc" target="_blank" rel="noopener">acassen@firewall.loc</a></p>
-<p><a href="mailto:failover@firewall.loc" target="_blank" rel="noopener">failover@firewall.loc</a></p>
-<p><a href="mailto:sysadmin@firewall.loc" target="_blank" rel="noopener">sysadmin@firewall.loc</a></p>
-<p>   }</p>
-<p>   notification_email_from</p>
-<p><a href="mailto:Alexandre.Cassen@firewall.loc" target="_blank" rel="noopener">Alexandre.Cassen@firewall.loc</a></p>
-<p>   smtp_server 127.0.0.1</p>
-<p>   smtp_connect_timeout 30</p>
-<p>   router_id LVS_DEVEL</p>
-<p>}</p>
-<p>vrrp_instance VI_1 {</p>
-<pre><code>state MASTER
-
-interface eth0
-
-virtual\_router\_id 51
-
-priority 100
-
-advert_int 1
-
-authentication {
-
-    auth_type PASS
-
-    auth_pass 1111
-
-}
-
-virtual_ipaddress {
-
-    192.168.2.170
-
-}
-</code></pre><p>}</p>
-<p>virtual_server 192.168.2.170 80 {</p>
-<pre><code>delay_loop 6
-
-lb_algo wrr
-
-lb_kind DR
-
-persistence_timeout 60
-
-protocol TCP
-
-real_server 192.168.2.171 80 {
-
-    weight 3            
-
-    TCP_CHECK {
-
-    connect_timeout 10   
-
-    nb\_get\_retry 3
-
-    delay\_before\_retry 3
-
-    connect_port 80
-</code></pre><p>}</p>
-<pre><code>}
-
-real_server 192.168.2.172 80 {
-
-    weight 3
-
-    TCP_CHECK {
-
-    connect_timeout 10
-
-    nb\_get\_retry 3
-
-    delay\_before\_retry 3
-
-    connect_port 80
-
-    }
-
- }
-</code></pre><p>}</p>
-<p>在备用调度器上：</p>
-<p>#vi /etc/keepalived/keepalived.conf (备用调度器)</p>
-<p>! Configuration File for keepalived</p>
-<p>global_defs {</p>
-<p>   notification_email {</p>
-<p><a href="mailto:acassen@firewall.loc" target="_blank" rel="noopener">acassen@firewall.loc</a></p>
-<p><a href="mailto:failover@firewall.loc" target="_blank" rel="noopener">failover@firewall.loc</a></p>
-<p><a href="mailto:sysadmin@firewall.loc" target="_blank" rel="noopener">sysadmin@firewall.loc</a></p>
-<p>   }</p>
-<p>   notification_email_from</p>
-<p><a href="mailto:Alexandre.Cassen@firewall.loc" target="_blank" rel="noopener">Alexandre.Cassen@firewall.loc</a></p>
-<p>   smtp_server 127.0.0.1</p>
-<p>   smtp_connect_timeout 30</p>
-<p>   router_id LVS_DEVEL</p>
-<p>}</p>
-<p>vrrp_instance VI_1 {</p>
-<pre><code>state BACKUP
-
-interface eth0
-
-virtual\_router\_id 51
-
-priority 99
-
-advert_int 1
-
-authentication {
-
-    auth_type PASS
-
-    auth_pass 1111
-
-}
-
-virtual_ipaddress {
-
-    192.168.2.170
-
-}
-</code></pre><p>}</p>
-<p>virtual_server 192.168.2.170 80 {</p>
-<pre><code>delay_loop 6
-
-lb_algo wrr
-
-lb_kind DR
-
-persistence_timeout 60
-
-protocol TCP
-
-real_server 192.168.2.171 80 {
-
-    weight 3            
-
-    TCP_CHECK {
-
-    connect_timeout 10   
-
-    nb\_get\_retry 3
-
-    delay\_before\_retry 3
-
-    connect_port 80
-</code></pre><p>}</p>
-<pre><code>}
-
-real_server 192.168.2.172 80 {
-
-    weight 3
-
-    TCP_CHECK {
-
-    connect_timeout 10
-
-    nb\_get\_retry 3
-
-    delay\_before\_retry 3
-
-    connect_port 80
-
-    }
-
- }
-</code></pre><p>}</p>
+<p>1.配置在主负载均衡服务器上配置keepalived.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#vi /etc/keepalived/keepalived.conf (主调度器)</span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line"></span><br><span class="line">   notification_email &#123;</span><br><span class="line"></span><br><span class="line">acassen@firewall.loc</span><br><span class="line"></span><br><span class="line">failover@firewall.loc</span><br><span class="line"></span><br><span class="line">sysadmin@firewall.loc</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   notification\_email\_from</span><br><span class="line"></span><br><span class="line">Alexandre.Cassen@firewall.loc</span><br><span class="line"></span><br><span class="line">   smtp_server 127.0.0.1</span><br><span class="line"></span><br><span class="line">   smtp\_connect\_timeout 30</span><br><span class="line"></span><br><span class="line">   router\_id LVS\_DEVEL</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp\_instance VI\_1 &#123;</span><br><span class="line"></span><br><span class="line">    state MASTER</span><br><span class="line"></span><br><span class="line">    interface eth0</span><br><span class="line"></span><br><span class="line">    virtual\_router\_id 51</span><br><span class="line"></span><br><span class="line">    priority 100</span><br><span class="line"></span><br><span class="line">    advert_int 1</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line"></span><br><span class="line">        auth_type PASS</span><br><span class="line"></span><br><span class="line">        auth_pass 1111</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"></span><br><span class="line">        192.168.2.170</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.2.170 80 &#123;</span><br><span class="line"></span><br><span class="line">    delay_loop 6</span><br><span class="line"></span><br><span class="line">    lb_algo wrr</span><br><span class="line"></span><br><span class="line">    lb_kind DR</span><br><span class="line"></span><br><span class="line">    persistence_timeout 60</span><br><span class="line"></span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.2.171 80 &#123;</span><br><span class="line"></span><br><span class="line">        weight 3            </span><br><span class="line"></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">        connect_timeout 10   </span><br><span class="line"></span><br><span class="line">        nb\_get\_retry 3</span><br><span class="line"></span><br><span class="line">        delay\_before\_retry 3</span><br><span class="line"></span><br><span class="line">        connect_port 80</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    real_server 192.168.2.172 80 &#123;</span><br><span class="line"></span><br><span class="line">        weight 3</span><br><span class="line"></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">        connect_timeout 10</span><br><span class="line"></span><br><span class="line">        nb\_get\_retry 3</span><br><span class="line"></span><br><span class="line">        delay\_before\_retry 3</span><br><span class="line"></span><br><span class="line">        connect_port 80</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在备用调度器上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#vi /etc/keepalived/keepalived.conf (备用调度器)</span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line"></span><br><span class="line">   notification_email &#123;</span><br><span class="line"></span><br><span class="line">acassen@firewall.loc</span><br><span class="line"></span><br><span class="line">failover@firewall.loc</span><br><span class="line"></span><br><span class="line">sysadmin@firewall.loc</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   notification\_email\_from</span><br><span class="line"></span><br><span class="line">Alexandre.Cassen@firewall.loc</span><br><span class="line"></span><br><span class="line">   smtp_server 127.0.0.1</span><br><span class="line"></span><br><span class="line">   smtp\_connect\_timeout 30</span><br><span class="line"></span><br><span class="line">   router\_id LVS\_DEVEL</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp\_instance VI\_1 &#123;</span><br><span class="line"></span><br><span class="line">    state BACKUP</span><br><span class="line"></span><br><span class="line">    interface eth0</span><br><span class="line"></span><br><span class="line">    virtual\_router\_id 51</span><br><span class="line"></span><br><span class="line">    priority 99</span><br><span class="line"></span><br><span class="line">    advert_int 1</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line"></span><br><span class="line">        auth_type PASS</span><br><span class="line"></span><br><span class="line">        auth_pass 1111</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"></span><br><span class="line">        192.168.2.170</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.2.170 80 &#123;</span><br><span class="line"></span><br><span class="line">    delay_loop 6</span><br><span class="line"></span><br><span class="line">    lb_algo wrr</span><br><span class="line"></span><br><span class="line">    lb_kind DR</span><br><span class="line"></span><br><span class="line">    persistence_timeout 60</span><br><span class="line"></span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.2.171 80 &#123;</span><br><span class="line"></span><br><span class="line">        weight 3            </span><br><span class="line"></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">        connect_timeout 10   </span><br><span class="line"></span><br><span class="line">        nb\_get\_retry 3</span><br><span class="line"></span><br><span class="line">        delay\_before\_retry 3</span><br><span class="line"></span><br><span class="line">        connect_port 80</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    real_server 192.168.2.172 80 &#123;</span><br><span class="line"></span><br><span class="line">        weight 3</span><br><span class="line"></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">        connect_timeout 10</span><br><span class="line"></span><br><span class="line">        nb\_get\_retry 3</span><br><span class="line"></span><br><span class="line">        delay\_before\_retry 3</span><br><span class="line"></span><br><span class="line">        connect_port 80</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2. BACKUP服务器同上配置，先安装lvs再按装keepalived,仍后配置/etc/keepalived/keepalived.conf，只需将红色标示的部分改一下即可.</p>
 <p>3. vi /etc/rc.local</p>
 <p>   #/usr/local/sbin/lvs-dr.sh  将lvs-dr.sh这个脚本注释掉。</p>
 <p>   #/usr/local/sbin/lvs-dr.sh stop 停止lvs-dr脚本</p>
 <p>   #/etc/init.d/keepalived start  启动keepalived 服务，keepalived就能利用keepalived.conf 配</p>
 <p>   置文件，实现负载均衡和高可用.</p>
-<p>4. 查看lvs服务是否正常</p>
-<p>#watch ipvsadm –ln</p>
-<p>IP Virtual Server version 1.2.1 (size=4096)</p>
-<p>Prot LocalAddressort Scheduler Flags</p>
-<p>  -> RemoteAddressort           Forward Weight ActiveConn InActConn</p>
-<p>TCP  61.164.122.8:80 wrr persistent 60</p>
-<p>  -> 61.164.122.10:80            Route   3      0          0</p>
-<p>  -> 61.164.122.9:80             Route   3      0          0</p>
-<p>复制代码</p>
-<p>#tail –f /var/log/message  监听日志，查看状态，测试LVS负载均衡及高可用性是否有效。</p>
+<p>4. 查看lvs服务是否正常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#watch ipvsadm –ln</span><br><span class="line"></span><br><span class="line">IP Virtual Server version 1.2.1 (size=4096)</span><br><span class="line"></span><br><span class="line">Prot LocalAddressort Scheduler Flags</span><br><span class="line"></span><br><span class="line">  -\&gt; RemoteAddressort           Forward Weight ActiveConn InActConn</span><br><span class="line"></span><br><span class="line">TCP  61.164.122.8:80 wrr persistent 60</span><br><span class="line"></span><br><span class="line">  -\&gt; 61.164.122.10:80            Route   3      0          0</span><br><span class="line"></span><br><span class="line">  -\&gt; 61.164.122.9:80             Route   3      0          0</span><br><span class="line"></span><br><span class="line">#tail –f /var/log/message  监听日志，查看状态，测试LVS负载均衡及高可用性是否有效。</span><br></pre></td></tr></table></figure></p>
 <p>5．停Master服务器的keepalived服务，查看BAKCUP服务器是否能正常接管服务。</p>
 <p>四．相关参考</p>
 <p>1．LVS 基础知识汇总</p>

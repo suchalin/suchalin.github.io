@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="Nginx的nginx_http_push_module模块，可以使nginx服务器成为一个comet服务器 可以接受Client端的一个长连接请求，当server端有消息push时，则返回消息给Client 1. 编译很简单： –add-module=../slact-nginx_http_push_module 2.配置如下： 折叠展开复制代码  push_max_reserved_memor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.702Z">
+<meta property="og:updated_time" content="2018-06-05T06:19:55.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx的nginx_http_push_module模块测试">
 <meta name="twitter:description" content="Nginx的nginx_http_push_module模块，可以使nginx服务器成为一个comet服务器 可以接受Client端的一个长连接请求，当server端有消息push时，则返回消息给Client 1. 编译很简单： –add-module=../slact-nginx_http_push_module 2.配置如下： 折叠展开复制代码  push_max_reserved_memor">
@@ -187,6 +187,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -349,7 +379,7 @@
 <li>}</li>
 <li>location /activity {</li>
 <li>push_subscriber;</li>
-<li>set $push_channel_id $arg_id;</li>
+<li>set \$push_channel_id \$arg_id;</li>
 <li>push_subscriber_concurrency broadcast;</li>
 <li>default_type text/plain;</li>
 <li>}</li>

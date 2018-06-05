@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="工具AB(apache benchmark).在APACHE的bin目录下。 格式： ./ab [options] [http://]hostname[:port]/path 参数： -n requests     Number of requests to perform  //在测试会话中所执行的请求个数。默认时，仅执行一个请求  -c concurrency Number of multip">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.602Z">
+<meta property="og:updated_time" content="2018-06-05T06:06:11.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache ab详解">
 <meta name="twitter:description" content="工具AB(apache benchmark).在APACHE的bin目录下。 格式： ./ab [options] [http://]hostname[:port]/path 参数： -n requests     Number of requests to perform  //在测试会话中所执行的请求个数。默认时，仅执行一个请求  -c concurrency Number of multip">
@@ -186,6 +186,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -403,70 +433,7 @@
 //-attributes 设置 属性的字符串. 缺陷程序中有各种静态声明的固定长度的缓冲区。另外，对命令行参数、服务器的响应头和其他外部输入的解析也很简单，这可能会有不良后果。它没有完整地实现 HTTP/1.x; 仅接受某些&apos;预想&apos;的响应格式。 strstr(3)的频繁使用可能会带来性能问题，即, 你可能是在测试ab而不是服务器的性能。
 </code></pre><p>参数很多,一般我们用 -c 和 -n 参数就可以了. 例如:</p>
 <p>./ab -c 1000 -n 1000 <a href="http://127.0.0.1/index.php" target="_blank" rel="noopener">http://127.0.0.1/index.php</a></p>
-<p>这个表示同时处理1000个请求并运行1000次index.php文件.</p>
-<p>#/usr/local/xiaobai/apache2054/bin/ab -c 1000 -n 1000 <a href="http://127.0.0.1/index.html.zh-cn.gb2312" target="_blank" rel="noopener">http://127.0.0.1/index.html.zh-cn.gb2312</a></p>
-<p>This is ApacheBench, Version 2.0.41-dev &lt;$Revision: 1.121.2.12 $&gt; apache-2.0</p>
-<p>Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, <a href="http://www.zeustech.net/" target="_blank" rel="noopener">http://www.zeustech.net/</a></p>
-<p>Copyright (c) 1998-2002 The Apache Software Foundation, <a href="http://www.apache.org/" target="_blank" rel="noopener">http://www.apache.org/</a></p>
-<p>Benchmarking 127.0.0.1 (be patient)</p>
-<p>Completed 100 requests</p>
-<p>Completed 200 requests</p>
-<p>Completed 300 requests</p>
-<p>Completed 400 requests</p>
-<p>Completed 500 requests</p>
-<p>Completed 600 requests</p>
-<p>Completed 700 requests</p>
-<p>Completed 800 requests</p>
-<p>Completed 900 requests</p>
-<p>Finished 1000 requests</p>
-<p>Server Software:        Apache/2.0.54</p>
-<p>//平台apache 版本2.0.54</p>
-<p>Server Hostname:        127.0.0.1</p>
-<p>//服务器主机名</p>
-<p>Server Port:            80</p>
-<p>//服务器端口</p>
-<p>Document Path:          /index.html.zh-cn.gb2312</p>
-<p>//测试的页面文档</p>
-<p>Document Length:        1018 bytes</p>
-<p>//文档大小</p>
-<p>Concurrency Level:      1000</p>
-<p>//并发数</p>
-<p>Time taken for tests:   8.188731 seconds</p>
-<p>//整个测试持续的时间</p>
-<p>Complete requests:      1000</p>
-<p>//完成的请求数量</p>
-<p>Failed requests:        0</p>
-<p>//失败的请求数量</p>
-<p>Write errors:           0</p>
-<p>Total transferred:      1361581 bytes</p>
-<p>//整个场景中的网络传输量</p>
-<p>HTML transferred:       1055666 bytes</p>
-<p>//整个场景中的HTML内容传输量</p>
-<p>Requests per second:    122.12 [#/sec] (mean)</p>
-<p>//大家最关心的指标之一，相当于 LR 中的 每秒事务数 ，后面括号中的 mean 表示这是一个平均值</p>
-<p>Time per request:       8188.731 [ms] (mean)</p>
-<p>//大家最关心的指标之二，相当于 LR 中的 平均事务响应时间 ，后面括号中的 mean 表示这是一个平均值</p>
-<p>Time per request:       8.189 [ms] (mean, across all concurrent requests)</p>
-<p>//每个请求实际运行时间的平均值</p>
-<p>Transfer rate:          162.30 [Kbytes/sec] received</p>
-<p>//平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题</p>
-<p>Connection Times (ms)</p>
-<pre><code>min mean[+/-sd] median   max
-</code></pre><p>Connect:        4 646 1078.7     89    3291</p>
-<p>Processing:   165 992 493.1    938    4712</p>
-<p>Waiting:      118 934 480.6    882    4554</p>
-<p>Total:        813 1638 1338.9   1093    7785</p>
-<p>//网络上消耗的时间的分解，各项数据的具体算法还不是很清楚</p>
-<p>Percentage of the requests served within a certain time (ms)</p>
-<p>50%   1093</p>
-<p>66%   1247</p>
-<p>75%   1373</p>
-<p>80%   1493</p>
-<p>90%   4061</p>
-<p>95%   4398</p>
-<p>98%   5608</p>
-<p>99%   7368</p>
-<p>100%   7785 (longest request)</p>
+<p>这个表示同时处理1000个请求并运行1000次index.php文件.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">#/usr/local/xiaobai/apache2054/bin/ab -c 1000 -n 1000 [http://127.0.0.1/index.html.zh-cn.gb2312](http://127.0.0.1/index.html.zh-cn.gb2312)</span><br><span class="line"></span><br><span class="line">This is ApacheBench, Version 2.0.41-dev &lt;$Revision: 1.121.2.12 $&gt; apache-2.0</span><br><span class="line"></span><br><span class="line">Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, [http://www.zeustech.net/](http://www.zeustech.net/)</span><br><span class="line"></span><br><span class="line">Copyright (c) 1998-2002 The Apache Software Foundation, [http://www.apache.org/](http://www.apache.org/)</span><br><span class="line"></span><br><span class="line">Benchmarking 127.0.0.1 (be patient)</span><br><span class="line"></span><br><span class="line">Completed 100 requests</span><br><span class="line"></span><br><span class="line">Completed 200 requests</span><br><span class="line"></span><br><span class="line">Completed 300 requests</span><br><span class="line"></span><br><span class="line">Completed 400 requests</span><br><span class="line"></span><br><span class="line">Completed 500 requests</span><br><span class="line"></span><br><span class="line">Completed 600 requests</span><br><span class="line"></span><br><span class="line">Completed 700 requests</span><br><span class="line"></span><br><span class="line">Completed 800 requests</span><br><span class="line"></span><br><span class="line">Completed 900 requests</span><br><span class="line"></span><br><span class="line">Finished 1000 requests</span><br><span class="line"></span><br><span class="line">Server Software:        Apache/2.0.54</span><br><span class="line"></span><br><span class="line">//平台apache 版本2.0.54</span><br><span class="line"></span><br><span class="line">Server Hostname:        127.0.0.1</span><br><span class="line"></span><br><span class="line">//服务器主机名</span><br><span class="line"></span><br><span class="line">Server Port:            80</span><br><span class="line"></span><br><span class="line">//服务器端口</span><br><span class="line"></span><br><span class="line">Document Path:          /index.html.zh-cn.gb2312</span><br><span class="line"></span><br><span class="line">//测试的页面文档</span><br><span class="line"></span><br><span class="line">Document Length:        1018 bytes</span><br><span class="line"></span><br><span class="line">//文档大小</span><br><span class="line"></span><br><span class="line">Concurrency Level:      1000</span><br><span class="line"></span><br><span class="line">//并发数</span><br><span class="line"></span><br><span class="line">Time taken for tests:   8.188731 seconds</span><br><span class="line"></span><br><span class="line">//整个测试持续的时间</span><br><span class="line"></span><br><span class="line">Complete requests:      1000</span><br><span class="line"></span><br><span class="line">//完成的请求数量</span><br><span class="line"></span><br><span class="line">Failed requests:        0</span><br><span class="line"></span><br><span class="line">//失败的请求数量</span><br><span class="line"></span><br><span class="line">Write errors:           0</span><br><span class="line"></span><br><span class="line">Total transferred:      1361581 bytes</span><br><span class="line"></span><br><span class="line">//整个场景中的网络传输量</span><br><span class="line"></span><br><span class="line">HTML transferred:       1055666 bytes</span><br><span class="line"></span><br><span class="line">//整个场景中的HTML内容传输量</span><br><span class="line"></span><br><span class="line">Requests per second:    122.12 [#/sec] (mean)</span><br><span class="line"></span><br><span class="line">//大家最关心的指标之一，相当于 LR 中的 每秒事务数 ，后面括号中的 mean 表示这是一个平均值</span><br><span class="line"></span><br><span class="line">Time per request:       8188.731 [ms] (mean)</span><br><span class="line"></span><br><span class="line">//大家最关心的指标之二，相当于 LR 中的 平均事务响应时间 ，后面括号中的 mean 表示这是一个平均值</span><br><span class="line"></span><br><span class="line">Time per request:       8.189 [ms] (mean, across all concurrent requests)</span><br><span class="line"></span><br><span class="line">//每个请求实际运行时间的平均值</span><br><span class="line"></span><br><span class="line">Transfer rate:          162.30 [Kbytes/sec] received</span><br><span class="line"></span><br><span class="line">//平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题</span><br><span class="line"></span><br><span class="line">Connection Times (ms)</span><br><span class="line"></span><br><span class="line">              min mean[+/-sd] median   max</span><br><span class="line"></span><br><span class="line">Connect:        4 646 1078.7     89    3291</span><br><span class="line"></span><br><span class="line">Processing:   165 992 493.1    938    4712</span><br><span class="line"></span><br><span class="line">Waiting:      118 934 480.6    882    4554</span><br><span class="line"></span><br><span class="line">Total:        813 1638 1338.9   1093    7785</span><br><span class="line"></span><br><span class="line">//网络上消耗的时间的分解，各项数据的具体算法还不是很清楚</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line"></span><br><span class="line">50%   1093</span><br><span class="line"></span><br><span class="line">66%   1247</span><br><span class="line"></span><br><span class="line">75%   1373</span><br><span class="line"></span><br><span class="line">80%   1493</span><br><span class="line"></span><br><span class="line">90%   4061</span><br><span class="line"></span><br><span class="line">95%   4398</span><br><span class="line"></span><br><span class="line">98%   5608</span><br><span class="line"></span><br><span class="line">99%   7368</span><br><span class="line"></span><br><span class="line">100%   7785 (longest request)</span><br></pre></td></tr></table></figure></p>
 <p>//整个场景中所有请求的响应情况。在场景中每个请求都有一个响应时间，其中50％的用户响应时间小于1093 毫秒，60％ 的用户响应时间小于1247 毫秒，最大的响应时间小于7785 毫秒</p>
 <pre><code>由于对于并发请求，cpu实际上并不是同时处理的，而是按照每个请求获得的时间片逐个轮转处理的，所以基本上第一个Time per request时间约等于第二个Time per request时间乘以并发请求数
 </code></pre>

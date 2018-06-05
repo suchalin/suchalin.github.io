@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加PROMPT_COMMAND=’printf “\033]0;%s@%s:%s\007” “${USER}” “${HOSTNAME%%.*}” “${PWD/#$HOME/~}”‘">
+<meta name="description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加1PROMPT_COMMAND=&amp;apos;printf &amp;quot;\\033]0;%s@%s:%s\\007&amp;quot; &amp;quot;$&amp;#123;USER&amp;#125;&amp;quot; &amp;quot;$&amp;#123;HOSTNAME%%.*">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mac的terminal中title更新问题">
 <meta property="og:url" content="http://yoursite.com/2018/01/31/mac-e7-9a-84terminal-e4-b8-adtitle-e6-9b-b4-e6-96-b0-e9-97-ae-e9-a2-98/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加PROMPT_COMMAND=’printf “\033]0;%s@%s:%s\007” “${USER}” “${HOSTNAME%%.*}” “${PWD/#$HOME/~}”‘">
+<meta property="og:description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加1PROMPT_COMMAND=&amp;apos;printf &amp;quot;\\033]0;%s@%s:%s\\007&amp;quot; &amp;quot;$&amp;#123;USER&amp;#125;&amp;quot; &amp;quot;$&amp;#123;HOSTNAME%%.*">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.691Z">
+<meta property="og:updated_time" content="2018-06-05T06:18:18.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac的terminal中title更新问题">
-<meta name="twitter:description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加PROMPT_COMMAND=’printf “\033]0;%s@%s:%s\007” “${USER}” “${HOSTNAME%%.*}” “${PWD/#$HOME/~}”‘">
+<meta name="twitter:description" content="在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加1PROMPT_COMMAND=&amp;apos;printf &amp;quot;\\033]0;%s@%s:%s\\007&amp;quot; &amp;quot;$&amp;#123;USER&amp;#125;&amp;quot; &amp;quot;$&amp;#123;HOSTNAME%%.*">
 
 
 
@@ -186,6 +186,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -321,7 +351,7 @@
       
 
       
-        <p>在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加PROMPT_COMMAND=’printf “\033]0;%s@%s:%s\007” “${USER}” “${HOSTNAME%%.*}” “${PWD/#$HOME/~}”‘</p>
+        <p>在mac中，使用terminal中ssh登陆进一台机器，默认的title标签会更新，但登出时无法恢复原来的title，使用修改如下： /etc/bashrc 里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PROMPT_COMMAND=&apos;printf &quot;\\033]0;%s@%s:%s\\007&quot; &quot;$&#123;USER&#125;&quot; &quot;$&#123;HOSTNAME%%.*&#125;&quot; &quot;$&#123;PWD/#$HOME/~&#125;&quot;&apos;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
