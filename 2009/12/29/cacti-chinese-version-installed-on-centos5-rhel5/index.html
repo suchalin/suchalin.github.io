@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="cacti中文版在Centos5(Rhel5)上的安装1.基本安装            cacti是运作在apache+php+mysql+net-snmp工具集+rrdtool这样的一个工作环境之下，所以我们先要做一个基本的工作的环境            记的安装前先安装rpm的扩展包，安装方法见我的另外一个文章”rpm的高级管理”   #yum -y install mysql mysql">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.018Z">
+<meta property="og:updated_time" content="2018-06-05T02:26:34.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cacti中文版在Centos5(Rhel5)上的安装">
 <meta name="twitter:description" content="cacti中文版在Centos5(Rhel5)上的安装1.基本安装            cacti是运作在apache+php+mysql+net-snmp工具集+rrdtool这样的一个工作环境之下，所以我们先要做一个基本的工作的环境            记的安装前先安装rpm的扩展包，安装方法见我的另外一个文章”rpm的高级管理”   #yum -y install mysql mysql">
@@ -337,15 +337,15 @@ mysql&gt;create database cacti default character set utf8;
 # mysql -u cacti -p cacti &lt; cacti.sql  
 修改配置文件  
 # vim /var/www/cacti/include/config.php  
-$database_type = &quot;mysql&quot;;  
-$database_default = &quot;cacti&quot;;  
-$database_hostname = &quot;localhost&quot;;  
-$database_username = &quot;cacti&quot;;  
-$database_password = &quot;passwd&quot;;  
-$database_port = &quot;3306&quot;;  
+\$database_type = &quot;mysql&quot;;  
+\$database_default = &quot;cacti&quot;;  
+\$database_hostname = &quot;localhost&quot;;  
+\$database_username = &quot;cacti&quot;;  
+\$database_password = &quot;passwd&quot;;  
+\$database_port = &quot;3306&quot;;  
 添加cacti用户  
-$useradd cacti -d /var/www/cacti -s /bin/false  
-$chown -R cacti /var/www/cacti/rra /var/www/cacti/log  
+\$useradd cacti -d /var/www/cacti -s /bin/false  
+\$chown -R cacti /var/www/cacti/rra /var/www/cacti/log  
 这个上面可能添加不行试试:  
 #chown -hR cacti /var/www/cacti/rra /var/www/cacti/log  
 

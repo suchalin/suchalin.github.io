@@ -1366,15 +1366,15 @@ mysql&gt;create database cacti default character set utf8;
 # mysql -u cacti -p cacti &lt; cacti.sql  
 修改配置文件  
 # vim /var/www/cacti/include/config.php  
-$database_type = &quot;mysql&quot;;  
-$database_default = &quot;cacti&quot;;  
-$database_hostname = &quot;localhost&quot;;  
-$database_username = &quot;cacti&quot;;  
-$database_password = &quot;passwd&quot;;  
-$database_port = &quot;3306&quot;;  
+\$database_type = &quot;mysql&quot;;  
+\$database_default = &quot;cacti&quot;;  
+\$database_hostname = &quot;localhost&quot;;  
+\$database_username = &quot;cacti&quot;;  
+\$database_password = &quot;passwd&quot;;  
+\$database_port = &quot;3306&quot;;  
 添加cacti用户  
-$useradd cacti -d /var/www/cacti -s /bin/false  
-$chown -R cacti /var/www/cacti/rra /var/www/cacti/log  
+\$useradd cacti -d /var/www/cacti -s /bin/false  
+\$chown -R cacti /var/www/cacti/rra /var/www/cacti/log  
 这个上面可能添加不行试试:  
 #chown -hR cacti /var/www/cacti/rra /var/www/cacti/log  
 

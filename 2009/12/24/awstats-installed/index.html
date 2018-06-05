@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="奇码科技的美国空间是带有详细的统计流量工具awstats，AWStats是一套免费基于Perl的网站日志分析工具。这个工具界面较为友好，执行速度快，扩展功能众多，在国外空间使用apache服务 器的，AWStats是当之无愧的首选。 [root@webserver ~]# rpm -ivh awstats-6.9-1.noarch.rpm error: Failed dependencies: p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.018Z">
+<meta property="og:updated_time" content="2018-06-05T02:08:10.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awstats的安装">
 <meta name="twitter:description" content="奇码科技的美国空间是带有详细的统计流量工具awstats，AWStats是一套免费基于Perl的网站日志分析工具。这个工具界面较为友好，执行速度快，扩展功能众多，在国外空间使用apache服务 器的，AWStats是当之无愧的首选。 [root@webserver ~]# rpm -ivh awstats-6.9-1.noarch.rpm error: Failed dependencies: p">
@@ -335,24 +335,24 @@
 <p>Setting up Install Process</p>
 <p>Parsing package install arguments</p>
 <p>Resolving Dependencies</p>
-<p>–> Running transaction check</p>
-<p>—> Package perl-libwww-perl.noarch 0:5.805-1.1.1 set to be updated</p>
-<p>–> Processing Dependency: perl(URI::URL) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl(URI) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl(HTML::Entities) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl(Compress::Zlib) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl(URI::Heuristic) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl(URI::Escape) for package: perl-libwww-perl</p>
-<p>–> Processing Dependency: perl-HTML-Parser &gt;= 3.33 for package: perl-libwww-perl</p>
-<p>–> Running transaction check</p>
-<p>—> Package perl-Compress-Zlib.i386 0:1.42-1.fc6 set to be updated</p>
-<p>—> Package perl-URI.noarch 0:1.35-3 set to be updated</p>
-<p>—> Package perl-HTML-Parser.i386 0:3.55-1.fc6 set to be updated</p>
-<p>–> Processing Dependency: perl-HTML-Tagset &gt;= 3.03 for package: perl-HTML-Parser</p>
-<p>–> Processing Dependency: perl(HTML::Tagset) for package: perl-HTML-Parser</p>
-<p>–> Running transaction check</p>
-<p>—> Package perl-HTML-Tagset.noarch 0:3.10-2.1.1 set to be updated</p>
-<p>–> Finished Dependency Resolution</p>
+<p>–&gt; Running transaction check</p>
+<p>—&gt; Package perl-libwww-perl.noarch 0:5.805-1.1.1 set to be updated</p>
+<p>–&gt; Processing Dependency: perl(URI::URL) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl(URI) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl(HTML::Entities) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl(Compress::Zlib) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl(URI::Heuristic) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl(URI::Escape) for package: perl-libwww-perl</p>
+<p>–&gt; Processing Dependency: perl-HTML-Parser &gt;= 3.33 for package: perl-libwww-perl</p>
+<p>–&gt; Running transaction check</p>
+<p>—&gt; Package perl-Compress-Zlib.i386 0:1.42-1.fc6 set to be updated</p>
+<p>—&gt; Package perl-URI.noarch 0:1.35-3 set to be updated</p>
+<p>—&gt; Package perl-HTML-Parser.i386 0:3.55-1.fc6 set to be updated</p>
+<p>–&gt; Processing Dependency: perl-HTML-Tagset &gt;= 3.03 for package: perl-HTML-Parser</p>
+<p>–&gt; Processing Dependency: perl(HTML::Tagset) for package: perl-HTML-Parser</p>
+<p>–&gt; Running transaction check</p>
+<p>—&gt; Package perl-HTML-Tagset.noarch 0:3.10-2.1.1 set to be updated</p>
+<p>–&gt; Finished Dependency Resolution</p>
 <p>Dependencies Resolved</p>
 <p>=============================================================================</p>
 <p> Package                 Arch       Version          Repository        Size </p>
@@ -387,7 +387,7 @@
 <p>[root@webserver src]# rpm -ivh awstats-6.9-1.noarch.rpm </p>
 <p>Preparing…                ########################################### [100%]</p>
 <p>   1:awstats                ########################################### [100%]</p>
-<p>----- AWStats 6.9 - Laurent Destailleur —–</p>
+<p>—– AWStats 6.9 - Laurent Destailleur —–</p>
 <p>AWStats files have been installed in /usr/local/awstats</p>
 <p>If first install, follow instructions in documentation</p>
 <p>(/usr/local/awstats/docs/index.html) to setup AWStats in 3 steps:</p>
@@ -396,26 +396,35 @@
 <p>Step 3 : Read Statistics</p>
 <p>[root@webserver src]# cd /usr/local/awstats/tools/</p>
 <p>[root@webserver tools]# ./awstats_configure.pl </p>
-<p>----- AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
+<p>—– AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
 <p>This tool will help you to configure AWStats to analyze statistics for</p>
 <p>one web server. You can try to use it to let it do all that is possible</p>
 <p>in AWStats setup, however following the step by step manual setup</p>
 <p>documentation (docs/index.html) is often a better idea. Above all if:</p>
-<p>- You are not an administrator user,</p>
-<p>- You want to analyze downloaded log files without web server,</p>
-<p>- You want to analyze mail or ftp log files instead of web log files,</p>
-<p>- You need to analyze load balanced servers log files,</p>
-<p>- You want to ‘understand’ all possible ways to use AWStats…</p>
+<ul>
+<li><p>You are not an administrator user,</p>
+</li>
+<li><p>You want to analyze downloaded log files without web server,</p>
+</li>
+<li><p>You want to analyze mail or ftp log files instead of web log files,</p>
+</li>
+<li><p>You need to analyze load balanced servers log files,</p>
+</li>
+<li><p>You want to ‘understand’ all possible ways to use AWStats…</p>
+</li>
+</ul>
 <p>Read the AWStats documentation (docs/index.html).</p>
-<p>—–> Running OS detected: Linux, BSD or Unix</p>
-<p>—–> Check for web server install</p>
+<p>—–&gt; Running OS detected: Linux, BSD or Unix</p>
+<p>—–&gt; Check for web server install</p>
 <p>Enter full config file path of your Web server.</p>
 <p>Example: /etc/httpd/httpd.conf</p>
 <p>Example: /usr/local/apache2/conf/httpd.conf</p>
-<p>Example: c:\Program files\apache group\apache\conf\httpd.conf</p>
+<p>Example: c:Program filesapache groupapacheconfhttpd.conf</p>
 <p>Config file path (‘none’ to skip web server setup):</p>
-<p>> /usr/local/httpd/conf/httpd.conf</p>
-<p>—–> Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
+<blockquote>
+<p>/usr/local/httpd/conf/httpd.conf</p>
+</blockquote>
+<p>—–&gt; Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
 <p>Warning: You Apache config file contains directives to write ‘common’ log files</p>
 <p>This means that some features can’t work (os, browsers and keywords detection).</p>
 <p>Do you want me to setup Apache to write ‘combined’ log files [y/N] ? y</p>
@@ -425,67 +434,80 @@
 <p>  Add ‘ScriptAlias /awstats/ “/usr/local/awstats/wwwroot/cgi-bin/“‘</p>
 <p>  Add ‘<directory>‘ directive</directory></p>
 <p>  AWStats directives added to Apache config file.</p>
-<p>—–> Need to create a new config file ?</p>
+<p>—–&gt; Need to create a new config file ?</p>
 <p>Do you want me to build a new AWStats config/profile</p>
 <p>file (required if first install) [y/N] ? y</p>
-<p>—–> Define config file name to create</p>
+<p>—–&gt; Define config file name to create</p>
 <p>What is the name of your web site or profile analysis ?</p>
 <p>Example: <a href="http://www.mysite.com" target="_blank" rel="noopener">www.mysite.com</a></p>
 <p>Example: demo</p>
 <p>Your web site, virtual server or profile name:</p>
-<p>> <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
-<p>—–> Define config file path</p>
+<blockquote>
+<p><a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+</blockquote>
+<p>—–&gt; Define config file path</p>
 <p>In which directory do you plan to store your config file(s) ?</p>
 <p>Default: /etc/awstats</p>
 <p>Directory path to store config file(s) (Enter for default):</p>
 <blockquote>
 </blockquote>
-<p>—–> Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
+<p>—–&gt; Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
 <p>Error: Failed to open ‘/usr/local/awstats/wwwroot/cgi-bin/awstats.model.conf’ for read.</p>
 <p>/etc/awstats下没有awstats.model.conf文件造成的错误</p>
 <p>[root@webserver tools]# cp /usr/etc/awstats/awstats.model.conf /etc/awstats/</p>
 <p>[root@webserver tools]# ./awstats_configure.pl </p>
-<p>----- AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
+<p>—– AWStats awstats_configure 1.0 (build 1.8) (c) Laurent Destailleur —–</p>
 <p>This tool will help you to configure AWStats to analyze statistics for</p>
 <p>one web server. You can try to use it to let it do all that is possible</p>
 <p>in AWStats setup, however following the step by step manual setup</p>
 <p>documentation (docs/index.html) is often a better idea. Above all if:</p>
-<p>- You are not an administrator user,</p>
-<p>- You want to analyze downloaded log files without web server,</p>
-<p>- You want to analyze mail or ftp log files instead of web log files,</p>
-<p>- You need to analyze load balanced servers log files,</p>
-<p>- You want to ‘understand’ all possible ways to use AWStats…</p>
+<ul>
+<li><p>You are not an administrator user,</p>
+</li>
+<li><p>You want to analyze downloaded log files without web server,</p>
+</li>
+<li><p>You want to analyze mail or ftp log files instead of web log files,</p>
+</li>
+<li><p>You need to analyze load balanced servers log files,</p>
+</li>
+<li><p>You want to ‘understand’ all possible ways to use AWStats…</p>
+</li>
+</ul>
 <p>Read the AWStats documentation (docs/index.html).</p>
-<p>—–> Running OS detected: Linux, BSD or Unix</p>
-<p>—–> Check for web server install</p>
+<p>—–&gt; Running OS detected: Linux, BSD or Unix</p>
+<p>—–&gt; Check for web server install</p>
 <p>Enter full config file path of your Web server.</p>
 <p>Example: /etc/httpd/httpd.conf</p>
 <p>Example: /usr/local/apache2/conf/httpd.conf</p>
-<p>Example: c:\Program files\apache group\apache\conf\httpd.conf</p>
+<p>Example: c:Program filesapache groupapacheconfhttpd.conf</p>
 <p>Config file path (‘none’ to skip web server setup):</p>
-<p>> /usr/local/httpd/conf/httpd.conf</p>
-<p>—–> Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
+<blockquote>
+<p>/usr/local/httpd/conf/httpd.conf</p>
+</blockquote>
+<p>—–&gt; Check and complete web server config file ‘/usr/local/httpd/conf/httpd.conf’</p>
 <p>  All AWStats directives are already present.</p>
-<p>—–> Update model config file ‘/etc/awstats/awstats.model.conf’</p>
+<p>—–&gt; Update model config file ‘/etc/awstats/awstats.model.conf’</p>
 <p>  File awstats.model.conf updated.</p>
-<p>—–> Need to create a new config file ?</p>
+<p>—–&gt; Need to create a new config file ?</p>
 <p>Do you want me to build a new AWStats config/profile</p>
 <p>file (required if first install) [y/N] ? y</p>
-<p>—–> Define config file name to create</p>
+<p>—–&gt; Define config file name to create</p>
 <p>What is the name of your web site or profile analysis ?</p>
 <p>Example: <a href="http://www.mysite.com" target="_blank" rel="noopener">www.mysite.com</a></p>
 <p>Example: demo</p>
 <p>Your web site, virtual server or profile name:</p>
-<p>> <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
-<p>—–> Define config file path</p>
+<blockquote>
+<p><a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+</blockquote>
+<p>—–&gt; Define config file path</p>
 <p>In which directory do you plan to store your config file(s) ?</p>
 <p>Default: /etc/awstats</p>
 <p>Directory path to store config file(s) (Enter for default):</p>
 <blockquote>
 </blockquote>
-<p>—–> Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
+<p>—–&gt; Create config file ‘/etc/awstats/awstats.<a href="http://www.test.com.conf&#39;" target="_blank" rel="noopener">www.test.com.conf&#39;</a></p>
 <p> Config file /etc/awstats/awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a> created.</p>
-<p>—–> Add update process inside a scheduler</p>
+<p>—–&gt; Add update process inside a scheduler</p>
 <p>Sorry, configure.pl does not support automatic add to cron yet.</p>
 <p>You can do it manually by adding the following command to your cron:</p>
 <p>/usr/local/awstats/wwwroot/cgi-bin/awstats.pl -update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
@@ -495,9 +517,13 @@
 <p>A SIMPLE config file has been created: /etc/awstats/awstats.<a href="http://www.test.com.conf" target="_blank" rel="noopener">www.test.com.conf</a></p>
 <p>You should have a look inside to check and change manually main parameters.</p>
 <p>You can then manually update your statistics for ‘<a href="http://www.test.com&#39;" target="_blank" rel="noopener">www.test.com&#39;</a> with command:</p>
-<p>> perl awstats.pl -update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<blockquote>
+<p>perl awstats.pl -update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+</blockquote>
 <p>You can also read your statistics for ‘<a href="http://www.test.com&#39;" target="_blank" rel="noopener">www.test.com&#39;</a> with URL:</p>
-<p>> <a href="http://localhost/awstats/awstats.pl?config=www.test.com" target="_blank" rel="noopener">http://localhost/awstats/awstats.pl?config=www.test.com</a></p>
+<blockquote>
+<p><a href="http://localhost/awstats/awstats.pl?config=www.test.com" target="_blank" rel="noopener">http://localhost/awstats/awstats.pl?config=www.test.com</a></p>
+</blockquote>
 <p>Press ENTER to finish…</p>
 <p>[root@webserver tools]# /usr/local/awstats/wwwroot/cgi-bin/awstats.pl –update -config=<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
 <p>Error: AWStats database directory defined in config file by ‘DirData’ parameter (/var/lib/awstats) does not exist or is not writable.</p>

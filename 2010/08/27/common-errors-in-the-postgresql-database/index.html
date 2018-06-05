@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="我们在操作数据库的时候，我们总会遇到很多错误。下面整理了一下常见的错误。 错误1 FATAL: connection limit exceeded for non-superusers  原因：非超级用户的连接数（max\_connections - superuser\_reserved_connections）超过了设定值  解决办法：增加max_connections设定值，但如果增加了过多">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.024Z">
+<meta property="og:updated_time" content="2018-06-05T02:31:12.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PostgreSQL数据库中的常见错误">
 <meta name="twitter:description" content="我们在操作数据库的时候，我们总会遇到很多错误。下面整理了一下常见的错误。 错误1 FATAL: connection limit exceeded for non-superusers  原因：非超级用户的连接数（max\_connections - superuser\_reserved_connections）超过了设定值  解决办法：增加max_connections设定值，但如果增加了过多">
@@ -355,7 +355,7 @@
 </code></pre><p>错误6</p>
 <p>   ERROR: current transaction is aborted, commands ignored until end of transaction blockp</p>
 <p>   原因：数据库操作时，前一次操作中已经发生过错误了。</p>
-<p>   解决办法： <a href="http://blog.csdn.net/hantiannan/archive/2009/09/24/4590259.aspx" target="_blank" rel="noopener">PostgreSQL包級r：ERROR: current transaction is aborted, commands ignored until end of transaction blockp</a></p>
+<p>   解决办法： <a href="http://blog.csdn.net/hantiannan/archive/2009/09/24/4590259.aspx" target="_blank" rel="noopener">PostgreSQL]：ERROR: current transaction is aborted, commands ignored until end of transaction blockp</a></p>
 <p>错误7</p>
 <p>   ERROR:  operator does not exist: character = integer</p>
 <p>   原因：PostgreSQL8.3以后，取消了默认类型转换。因此需要使比较的类型保持一致。可以看cast函数。</p>
