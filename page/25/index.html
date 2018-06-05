@@ -259,6 +259,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/" itemprop="url">配置开发支持高并发TCP连接的Linux应用程序全攻略</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2009-12-22T11:17:10+08:00">
+                2009-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、修改用户进程可打开文件数限制  </p>
+<p>   在Linux平台上，无论编写客户端程序还是服务端程序，在进行高并发TCP连接处理时，最高的并发数量都要受到系统对用户单一进程同时可打开文件数量 的限制(这是因为系统为每个TCP连接都要创建一个socket句柄，每个socket句柄同时也是一个文件句柄)。可使用ulimit命令查看系统允许 当前用户进程打开的文件数限制：<br>   [speng@as4 ~]$ ulimit -n<br>   1024<br>   这表示当前用户的每个进程最多允许同时打开1024个文件，这1024个文件中还得除去每个进程必然打开的标准输入，标准输出，标准错误，服务器监听 socket，进程间通讯的unix域socket等文件，那么剩下的可用于客户端socket连接的文件数就只有大概1024-10=1014个左右。 也就是说缺省情况下，基于Linux的通讯程序最多允许同时1014个TCP并发连接。  </p>
+<p>   对于想支持更高数量的TCP并发连接的通讯处理程序，就必须修改Linux对当前用户的进程同时打开的文件数量的软限制(soft limit)和硬限制(hardlimit)。其中软限制是指Linux在当前系统能够承受的范围内进一步限制用户同时打开的文件数；硬限制则是根据系统 硬件资源状况(主要是系统内存)计算出来的系统最多可同时打开的文件数量。通常软限制小于或等于硬限制。  </p>
+<p>   修改上述限制的最简单的办法就是使用ulimit命令：<br>   [speng@as4 ~]$ ulimit -n &lt;file_num&gt;<br>   上述命令中，在&lt;file_num&gt;中指定要设置的单一进程允许打开的最大文件数。如果系统回显类似于“Operation notpermitted”之类的话，说明上述限制修改失败，实际上是因为在&lt;file_num&gt;中指定的数值超过了Linux系统对该用户 打开文件数的软限制或硬限制。因此，就需要修改Linux系统对用户的关于打开文件数的软限制和硬限制。  </p>
+<p>   第一步，修改/etc/security/limits.conf文件，在文件中添加如下行：<br>   speng soft nofile 10240<br>   speng hard nofile 10240<br>   其中speng指定了要修改哪个用户的打开文件数限制，可用’*’号表示修改所有用户的限制；soft或hard指定要修改软限制还是硬限制；10240则指定了想要修改的新的限制值，即最大打开文件数(请注意软限制值要小于或等于硬限制)。修改完后保存文件。  </p>
+<p>   第二步，修改/etc/pam.d/login文件，在文件中添加如下行：<br>   session required /lib/security/pam_limits.so<br>   这是告诉Linux在用户完成系统登录后，应该调用pam_limits.so模块来设置系统对该用户可使用的各种资源数量的最大限制(包括用户可打开 的最大文件数限制)，而pam_limits.so模块就会从/etc/security/limits.conf文件中读取配置来设置这些限制值。修改 完后保存此文件。  </p>
+<p>   第三步，查看Linux系统级的最大打开文件数限制，使用如下命令：<br>   [speng@as4 ~]$ cat /proc/sys/fs/file-max<br>   12158<br>   这表明这台Linux系统最多允许同时打开(即包含所有用户打开文件数总和)12158个文件，是Linux系统级硬限制，所有用户级的打开文件数限制 都不应超过这个数值。通常这个系统级硬限制是Linux系统在启动时根据系统硬件资源状况计算出来的最佳的最大同时打开文件数限制，如果没有特殊需要，不 应该修改此限制，除非想为用户级打开文件数限制设置超过此限制的值。修改此硬限制的方法是修改/etc/rc.local脚本，在脚本中添加如下行：<br>   echo 22158 &gt; /proc/sys/fs/file-max<br>   这是让Linux在启动完成后强行将系统级打开文件数硬限制设置为22158。修改完后保存此文件。  </p>
+<p>   完成上述步骤后重启系统，一般情况下就可以将Linux系统对指定用户的单一进程允许同时打开的最大文件数限制设为指定的数值。如果重启后用 ulimit-n命令查看用户可打开文件数限制仍然低于上述步骤中设置的最大值，这可能是因为在用户登录脚本/etc/profile中使用ulimit -n命令已经将用户可同时打开的文件数做了限制。由于通过ulimit-n修改系统对用户可同时打开文件的最大数限制时，新修改的值只能小于或等于上次 ulimit-n设置的值，因此想用此命令增大这个限制值是不可能的。所以，如果有上述问题存在，就只能去打开/etc/profile脚本文件，在文件 中查找是否使用了ulimit-n限制了用户可同时打开的最大文件数量，如果找到，则删除这行命令，或者将其设置的值改为合适的值，然后保存文件，用户退 出并重新登录系统即可。<br>   通过上述步骤，就为支持高并发TCP连接处理的通讯处理程序解除关于打开文件数量方面的系统限制。  </p>
+<p>2、修改网络内核对TCP连接的有关限制  </p>
+<p>   在Linux上编写支持高并发TCP连接的客户端通讯处理程序时，有时会发现尽管已经解除了系统对用户同时打开文件数的限制，但仍会出现并发TCP连接数增加到一定数量时，再也无法成功建立新的TCP连接的现象。出现这种现在的原因有多种。  </p>
+<p>   第一种原因可能是因为Linux网络内核对本地端口号范围有限制。此时，进一步分析为什么无法建立TCP连接，会发现问题出在connect()调用返 回失败，查看系统错误提示消息是“Can’t assign requestedaddress”。同时，如果在此时用tcpdump工具监视网络，会发现根本没有TCP连接时客户端发SYN包的网络流量。这些情况 说明问题在于本地Linux系统内核中有限制。其实，问题的根本原因在于Linux内核的TCP/IP协议实现模块对系统中所有的客户端TCP连接对应的 本地端口号的范围进行了限制(例如，内核限制本地端口号的范围为1024~32768之间)。当系统中某一时刻同时存在太多的TCP客户端连接时，由于每 个TCP客户端连接都要占用一个唯一的本地端口号(此端口号在系统的本地端口号范围限制中)，如果现有的TCP客户端连接已将所有的本地端口号占满，则此 时就无法为新的TCP客户端连接分配一个本地端口号了，因此系统会在这种情况下在connect()调用中返回失败，并将错误提示消息设为“Can’t assignrequested address”。有关这些控制逻辑可以查看Linux内核源代码，以linux2.6内核为例，可以查看tcp_ipv4.c文件中如下函数：<br>   static int tcp_v4_hash_connect(struct sock *sk)<br>   请注意上述函数中对变量sysctl_local_port_range的访问控制。变量sysctl_local_port_range的初始化则是在tcp.c文件中的如下函数中设置：<br>   void __init tcp_init(void)<br>   内核编译时默认设置的本地端口号范围可能太小，因此需要修改此本地端口范围限制。<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_local_port_range = 1024 65000<br>   这表明将系统对本地端口范围限制设置为1024~65000之间。请注意，本地端口范围的最小值必须大于或等于1024；而端口范围的最大值则应小于或等于65535。修改完后保存此文件。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明新的本地端口范围设置成功。如果按上述端口范围进行设置，则理论上单独一个进程最多可以同时建立60000多个TCP客户端连接。  </p>
+<p>   第二种无法建立TCP连接的原因可能是因为Linux网络内核的IP_TABLE防火墙对最大跟踪的TCP连接数有限制。此时程序会表现为在 connect()调用中阻塞，如同死机，如果用tcpdump工具监视网络，也会发现根本没有TCP连接时客户端发SYN包的网络流量。由于 IP_TABLE防火墙在内核中会对每个TCP连接的状态进行跟踪，跟踪信息将会放在位于内核内存中的conntrackdatabase中，这个数据库 的大小有限，当系统中存在过多的TCP连接时，数据库容量不足，IP_TABLE无法为新的TCP连接建立跟踪信息，于是表现为在connect()调用 中阻塞。此时就必须修改内核对最大跟踪的TCP连接数的限制，方法同修改内核对本地端口号范围的限制是类似的：<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_conntrack_max = 10240<br>   这表明将系统对最大跟踪的TCP连接数限制设置为10240。请注意，此限制值要尽量小，以节省对内核内存的占用。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明系统对新的最大跟踪的TCP连接数限制修改成功。如果按上述参数进行设置，则理论上单独一个进程最多可以同时建立10000多个TCP客户端连接。  </p>
+<p>3、使用支持高并发网络I/O的编程技术  </p>
+<p>   在Linux上编写高并发TCP连接应用程序时，必须使用合适的网络I/O技术和I/O事件分派机制。  </p>
+<p>   可用的I/O技术有同步I/O，非阻塞式同步I/O(也称反应式I/O)，以及异步I/O。在高TCP并发的情形下，如果使用同步I/O，这会严重阻塞 程序的运转，除非为每个TCP连接的I/O创建一个线程。但是，过多的线程又会因系统对线程的调度造成巨大开销。因此，在高TCP并发的情形下使用同步 I/O是不可取的，这时可以考虑使用非阻塞式同步I/O或异步I/O。非阻塞式同步I/O的技术包括使用select()，poll()，epoll等机 制。异步I/O的技术就是使用AIO。  </p>
+<p>   从I/O事件分派机制来看，使用select()是不合适的，因为它所支持的并发连接数有限(通常在1024个以内)。如果考虑性能，poll()也是 不合适的，尽管它可以支持的较高的TCP并发数，但是由于其采用“轮询”机制，当并发数较高时，其运行效率相当低，并可能存在I/O事件分派不均，导致部 分TCP连接上的I/O出现“饥饿”现象。而如果使用epoll或AIO，则没有上述问题(早期Linux内核的AIO技术实现是通过在内核中为每个 I/O请求创建一个线程来实现的，这种实现机制在高并发TCP连接的情形下使用其实也有严重的性能问题。但在最新的Linux内核中，AIO的实现已经得 到改进)。  </p>
+<p>   综上所述，在开发支持高并发TCP连接的Linux应用程序时，应尽量使用epoll或AIO技术来实现并发的TCP连接上的I/O控制，这将为提升程序对高并发TCP连接的支持提供有效的I/O保证。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/22/a-good-performance-monitoring-tool-dstat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1840,148 +1998,6 @@ Linux下的32位I/O和DMA默认是关闭的。如果用的是16位I/O的话，�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/13/it-career-planning-and-self-reflection-of-life-value/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2009/12/13/it-career-planning-and-self-reflection-of-life-value/" itemprop="url">IT职业规划和人生价值的自我反思</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2009-12-13T09:15:31+08:00">
-                2009-12-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HR/" itemprop="url" rel="index">
-                    <span itemprop="name">HR</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>规划不仅是对近期工作的计划安排更主要的是对自己职业发展的一种谋略，和大多数人一样，以前我也不太明白给自己人生的发展定个 3 年、 5 年或 10 年计划有什么意义，社会变化快，信息变化快，人的心情变化也快，人的成长阅历思维方式都可能发生变化！ 3 、 5 年后我该从事现在的职业还是转行或者在目前的工作环境中究竟有多大发展都不得而知，那做这种长期的规划真的有意吗？    据科学但不完全分析， 20% 的人在 30 岁以前能明确给自己定位并找好发展方向，而这 20% 的人又仅有 20% 能在任何环境中坚持发展自己； 10% 的人在 35 岁之前能明确给自己定位并找好发展方向，而这 10% 的人又仅有 10% 能在任何环境中坚持发展自己； 5% 的人在 40 岁之前能明确给自己定位并找好发展方向，而这 5% 的人又仅有 50% 能在任何环境中坚持发展自己；若 40 岁还不知道自己该做什么，怎么做？这种人基本上属于随遇而安，得过且过之人，——而这大部分人的确在他们的一生中都不知道自己的优势在那里，自己的天赋在哪里，或者因为性格或环境原因根本不知道怎么发挥自己的优势。这不仅是个人的悲哀也是民族劣根性的悲哀。<br>    随着社会的进步和各行各业竞争的激烈现实，人若在青年时期仅仅为了生存而盲目度日，只会随着年龄的增长倍感生存的艰难，消极者更会怨天尤人、自我堕落甚至铤而走险。因此，在经历多种职业后回头反思自己的人生，我也一声叹息——人为什么总要在自己失败后才知道经验的可贵！而当现成的经验摆在面前又偏偏无动于衷。莫非就象贾平凹所言：人是永远长不大的动物，当他真的长大了，一辈子也就完了。<br>    我做过教师、化妆品销售、直销员、企业管理。不管为别人做还是为自己做，别人都觉得我是一个不错的合作者——有责任心、稳重、有创意、肯吃苦，一定会成功。而实际上我既然能从事这么多行业就表明我是很失败的，——因为我没有定位，没有明确的发展方向，只是简单的满足着自己的生存基础和所谓的存在价值而短期努力着，好象什么都可以，实际上什么都不可以；结果在一种毫无意义的满足中浪费青春。这种状况实际比表面看来毫无优势的人的发展状况可能更惨。因为这种人正是因为优势的存在认为选择的机会更大，而往往更容易错失良机。<br>    而西游记中表面最无庸的唐僧，按逻辑分析是绝对无法去西天取到真经的，但仅仅因为他的执着——对取真经这一目标的明确和坚持！才有了师徒四人的共同努力。其实，他这样就是对他职业的一个长期规划。所以我也明白，人的成功就是两点：一是正确选定目标；二是坚持实现目标。换句话说就是，做好自己的职业规划，并努力通过各种途径投资自己，让自己在实现目标中成长起来。<br>    我是在 33 岁开始对人生顿悟的，我痛恨自己年轻时的浪费，当很多朋友在比我艰难得多的情况下努力时，我还暗自庆幸；但当他们逐步获得一些成就时，我才感到自己幼稚和荒唐。 33 岁，我是在一家企业做管理时才明白自己的真正优势和天赋，现在还不晚，但我知道，我的职业规划就等于我的人生规划了，我要明确的告诉自己，明年的今天我将是什么状态； 3 年后的今天我又将如何。<br>    也奉劝那些想通过正道发展自己的人，今天就计划吧，不管你现在是如何的窘迫和艰难，只要你明白自己的优势，确定自己的发展目标，一切皆有可能。<br>    个的商业奇迹，在这些耀眼的巨星光芒中，有无数的智慧在闪烁，而这些闪烁着的智慧，折射着那些懂得如何用技术工具完成业务模式革命的“影子战士”的积累和行动。技术只是业务变革的推进动力和实现工具，能在技术层面支持用户的需求只能说“称值”，而如果能在业务层面引领用户行业进行业务变革和流程改进，那才是技术人员的“至尊境界”。当一名技术人员通过多年的业务积累，达到“一览众山小”的境界时，可能就会发现，职业和事业的发展视野，都可以打开“山外青山”的局面。职业方面可能承接对你高度认可的客户方抛来的橄榄枝，成为实至名归的行业专家，又或者拥有更大的抱负，想要以厚积而勃发的积累开创自己的事业，相信，你会感激和回味你我都曾无怨无悔地走过的IT路。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2036,7 +2052,7 @@ Linux下的32位I/O和DMA默认是关闭的。如果用的是16位I/O的话，�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2047,7 +2063,7 @@ Linux下的32位I/O和DMA默认是关闭的。如果用的是16位I/O的话，�
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2058,7 +2074,7 @@ Linux下的32位I/O和DMA默认是关闭的。如果用的是16位I/O的话，�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

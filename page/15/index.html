@@ -259,6 +259,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/09/11/increase-swap-partition-size/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/09/11/increase-swap-partition-size/" itemprop="url">增加交换分区大小</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-09-11T09:36:00+08:00">
+                2010-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、检查当前的分区情况（使用free －m或cat /proc/swaps ）</p>
+<p>[root@db2 root]# free -m<br>              total       used       free     shared    buffers     cached<br> Mem:          1006         84        922          0         11         38<br> -/+ buffers/cache:         35        971<br> Swap:            0          0          0<br> [root@db2 root]#</p>
+<p>2、增加交换分区文件及大小</p>
+<p>检查没有swap，下面就需要增加，判定新交换文件的大小，将大小乘以1024来判定块的大小。例如，大小为64MB的交换文件的块大小为65536,在 shell 提示下以根用户身份键入以下命令，其中的 count 等于想要的块大小。</p>
+<p>[root@db2 root]# dd if=/dev/zero of=/home/swap bs=1024 count=1024000<br> 1024000+0 records in<br> 1024000+0 records out<br> [root@db2 root]#</p>
+<p>使用以下命令来设置交换文件：</p>
+<p>[root@db2 root]# mkswap /home/swap<br> Setting up swapspace version 1, size = 1023996 KiB<br> [root@db2 root]#</p>
+<p>3、启用交换分区文件</p>
+<p>要立即启用交换文件而不是在引导时自动启用，使用以下命令：</p>
+<p>[root@db2 root]# swapon /home/swap</p>
+<p>检查增加后的交换情况：</p>
+<p>[root@db2 root]# free -m<br>              total       used       free     shared    buffers     cached<br> Mem:          1006        994         12          0          4        929<br> -/+ buffers/cache:         60        946<br> Swap:          999          0        999<br> [root@db2 root]#</p>
+<p>要在引导时启用，编辑 /etc/fstab 文件来包含以下行（/home/swap swap swap defaults 0 0 ）：</p>
+<p>[root@db2 root]# vi /etc/fstab<br> LABEL=/                 /                   ext3    defaults        1 1<br> LABEL=/boot             /boot               ext2    defaults        1 2<br>/home/swap               swap                    swap    defaults        0 0<br> none                    /dev/pts                devpts  gid=5,mode=620  0 0<br>none                    /proc                   proc    defaults        0 0<br>none                    /dev/shm                tmpfs   defaults        0 0<br>LABEL=/usr              /usr                    ext3    defaults        1 2<br>/dev/sda5               swap                    swap    defaults        0 0 </p>
+<p>系统下次引导时，它就会启用新建的交换文件，再次检查添加后的情况：</p>
+<p>[root@db2 oracledb]# free -m<br>                     total       used       free     shared    buffers     cached<br>        Mem:          1006        979         27          0          6        917<br>        -/+ buffers/cache:         54        952<br>        Swap:          999          0        999<br>        [root@db2 oracledb]#</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/09/08/unable-to-open-c-windows-system32-odbcconf-tmp-no-such-file-or-directory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2298,154 +2455,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/08/18/centos-ulimit-system-command-modification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2010/08/18/centos-ulimit-system-command-modification/" itemprop="url">CentOS ulimit系统命令修改</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-08-18T09:21:33+08:00">
-                2010-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在向大家详细介绍CentOS ulimit之前，首先让大家了解下CentOS ulimit，然后全面介绍CentOS ulimit，希望对大家有用。CentOS ulimit值(Linux文件句柄数量)在CentOS5(RHEL5)中的调整。</p>
-<p>在Linux下面部署应用的时候，有时候会遇上Socket/File: Can’t open so many files的问题，比如还有Squid做代理,当文件打开数到900多时速能就非常快的下降，有可能打不开网页.<br>其实Linux是有文件句柄限制的，而且Linux默认不是很高，一般都是1024，生产服务器用其实很容易就达到这个数量.</p>
-<p>查看方法<br>我们可以用CentOS ulimit -a来查看所有限制值<br>[root@centos5 ~]# Centos ulimit -a<br>core file size          (blocks, -c) 0<br>data seg size           (kbytes, -d) unlimited<br>max nice                        (-e) 0<br>file size               (blocks, -f) unlimited<br>pending signals                 (-i) 4096<br>max locked memory       (kbytes, -l) 32<br>max memory size         (kbytes, -m) unlimited<br>open files                      (-n) 1024<br>pipe size            (512 bytes, -p) 8<br>POSIX message queues     (bytes, -q) 819200<br>max rt priority                 (-r) 0<br>stack size              (kbytes, -s) 10240<br>cpu time               (seconds, -t) unlimited<br>max user processes              (-u) 4096<br>virtual memory          (kbytes, -v) unlimited<br>file locks                      (-x) unlimited||&lt;</p>
-<p>其中 “open files (-n) 1024 “是Linux操作系统对一个进程打开的文件句柄数量的限制(也包含打开的SOCKET数量,可影响MySQL的并发连接数目).这个值可用CentOS ulimit命令来修改,但CentOS ulimit命令修改的数值只对当前登录用户的目前使用环境有效,系统重启或者用户退出后就会失效.<br>系统总限制是在这里，/proc/sys/fs/file-max.可以通过cat查看目前的值，修改/etc/sysctl.conf 中也可以控制.<br>另外还有一个，/proc/sys/fs/file-nr，可以看到整个系统目前使用的文件句柄数量<br>查找文件句柄问题的时候，还有一个很实用的程序lsof.可以很方便看到某个进程开了那些句柄.也可以看到某个文件/目录被什么进程占用了.</p>
-<p>修改方法<br>若要令修改CentOS ulimits的数值永久生效,则必须修改配置文档,可以给CentOS ulimit修改命令放入/etc/profile里面，这个方法实在是不方便,还有一个方法是修改/etc/sysctl.conf .我修改了，测试过,但对用户的CentOS ulimits -a 是不会改变的。只是/proc/sys/fs/file-max的值变了.(我给命令放到rc.local中失败)</p>
-<p>我认为正确的做法，应该是修改/etc/security/limits.conf<br>里面有很详细的注释，比如<br>* soft nofile 32768<br>* hard nofile 65536<br>也可以直接运行下面这个shell。直接copy到你的终端中运行就好了.<br>echo -ne “<br>* soft nofile 65536<br>* hard nofile 65536<br>“ &gt;&gt;/etc/security/limits.conf</p>
-<p>就可以将文件句柄限制统一改成软32768，硬65536.配置文件最前面的是指domain，设置为星号代表全局，另外你也可以针对不同的用户做出不同的限制注意.这个当中的硬限制是实际的限制，而软限制，是warnning限制，只会做出warning.其实CentOS ulimit命令本身就有分软硬设置，加-H就是硬，加-S就是软默认显示的是软限制，如果运行CentOS ulimit命令修改的时候没有加上的话，就是两个参数一起改变.生效<br>修改完重新登录就可以见到.(我的系统是CentOS5.1.修改了，重新登录后就立刻生效.可以用CentOS ulimit -a 查看确认.)<br>如果你使用squid的话,你要在/etc/init.d/squid的文件加入CentOS ulimit -HSn 65535.另外,在squid.conf中也要加入max_filedesc 16384</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2500,7 +2509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2511,7 +2520,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2522,7 +2531,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

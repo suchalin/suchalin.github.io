@@ -259,6 +259,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/22/smartmontools-hard-disk-detection-tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2009/12/22/smartmontools-hard-disk-detection-tool/" itemprop="url">Smartmontools---硬盘检测工具</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2009-12-22T11:27:20+08:00">
+                2009-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-1-什么是Smartmontools？"><a href="#1-1-什么是Smartmontools？" class="headerlink" title="1.1 什么是Smartmontools？"></a>1.1 什么是Smartmontools？</h1><p>Smartmontools 是一种硬盘检测工具，通过控制和管理硬盘的SMART（Self Monitoring Analysis and Reporting Technology，自动检测分析及报告技术）技术来实现的，SMART技术可以对硬盘的磁头单元、盘片电机驱动系统、硬盘内部电路以及盘片表面介质材 料等进行监测，当SMART监测并分析出硬盘可能出现问题时会及时向用户报警以避免计算机数据受损失。SMART技术必须在主板支持的前提下才能发生作 用，而且 SMART技术也不能保证能预报所有可能发生的硬盘故障。SMART(SFF-8035i) 是硬盘生产商们建立的一个工业标准，这个标准就是在硬盘上保存一个跟执行情况，可靠程度，读找错误率等属性的表格。所有属性都有一个1byte(大小范围 1-253)的标准化值，还包含另一个1byte的关键阶段值，如果属性表格内某个数据接近小于或达到关键阶段值，表明硬盘工作不正常了。</p>
+<h1 id="2-1-Smartmontools的使用"><a href="#2-1-Smartmontools的使用" class="headerlink" title="2.1 Smartmontools的使用"></a>2.1 Smartmontools的使用</h1><p>1、启动监控进程</p>
+<p># /etc/init.d/smartd start<br>启动 smartd：                                              [  确定  ]</p>
+<p>2、检查硬盘是否支持SMART 1993年以后出厂的硬盘基本上都支持SMART技术，使用如下命令可以来查看：</p>
+<p># smartctl -i /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF INFORMATION SECTION ===<br>Device Model:     ST3160212A<br>Serial Number:    5LS2EDKN<br>Firmware Version: 3.AAE<br>User Capacity:    160,041,885,696 bytes<br>Device is:        Not in smartctl database [for details use: -P showall]<br>ATA Version is:   7<br>ATA Standard is:  Exact ATA specification draft version not indicated<br>Local Time is:    Mon Sep 17 02:13:37 2007 CST<br>SMART support is: Available - device has SMART capability.<br>SMART support is: Enabled</p>
+<p>在上面的信息可以看到，该硬盘是支持SMART技术，且当前是开启的。如果SMART support is: Disabled表示SMART未启用，执行如下命令，启动SMART：</p>
+<p>smartctl –smart=on –offlineauto=on –saveauto=on /dev/hdb</p>
+<p>3、检查硬盘健康状态</p>
+<p># smartctl -H /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF READ SMART DATA SECTION ===<br>SMART overall-health self-assessment test result: PASSED</p>
+<p>请 注意result后边的结果：PASSED，这表示硬盘健康状态良好，如果这里显示Failure，那么最好立刻给服务器更换硬盘。SMART只 能报告磁盘已经不再健康，但是报警后还能继续运行多久是不确定的，通常，SMART报警参数是有预留的，磁盘报警后，不会当场坏掉，一般能坚持一段时间， 有的硬盘SMART报警后还继续跑了好几年，有的硬盘SMART报错后几天就坏了，千万不要存在侥幸心理。执行如下命令可以看到详细的参数：</p>
+<p># smartctl -A /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF READ SMART DATA SECTION ===<br>SMART Attributes Data Structure revision number: 10<br>Vendor Specific SMART Attributes with Thresholds:<br>ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE<br>  1 Raw_Read_Error_Rate     0x000f   114   100   006    Pre-fail  Always       -       81812244<br>  3 Spin_Up_Time            0x0003   100   099   000    Pre-fail  Always       -       0<br>  4 Start_Stop_Count        0x0032   100   100   020    Old_age   Always       -       257<br>  5 Reallocated_Sector_Ct   0x0033   100   100   036    Pre-fail  Always       -       0<br>  7 Seek_Error_Rate         0x000f   078   060   030    Pre-fail  Always       -       64781708<br>  9 Power_On_Hours          0x0032   096   096   000    Old_age   Always       -       4365<br> 10 Spin_Retry_Count        0x0013   100   100   097    Pre-fail  Always       -       0<br> 12 Power_Cycle_Count       0x0032   100   100   020    Old_age   Always       -       276<br>187 Unknown_Attribute       0x0032   100   100   000    Old_age   Always       -       0<br>189 Unknown_Attribute       0x003a   100   100   000    Old_age   Always       -       0<br>190 Unknown_Attribute       0x0022   058   053   045    Old_age   Always       -       773324842<br>194 Temperature_Celsius     0x0022   042   047   000    Old_age   Always       -       42 (Lifetime Min/Max 0/21)<br>195 Hardware_ECC_Recovered  0x001a   052   048   000    Old_age   Always       -       1562815<br>197 Current_Pending_Sector  0x0012   100   100   000    Old_age   Always       -       0<br>198 Offline_Uncorrectable   0x0010   100   100   000    Old_age   Offline      -       0<br>199 UDMA_CRC_Error_Count    0x003e   200   200   000    Old_age   Always       -       0<br>200 Multi_Zone_Error_Rate   0x0000   100   253   000    Old_age   Offline      -       0<br>202 TA_Increase_Count       0x0032   100   253   000    Old_age   Always       -       0</p>
+<p>FLAG是标记，标准数值(VALUE)应当小于或等於关键值(THRESH)。WHEN_FAILED 代表错误信息，上面显示的WHEN_FAILED纵行是空行，说明硬盘没有故障。如果WHEN_FAILED显示数字，表明硬盘磁道可能有比较大的坏道。</p>
+<p>4、对硬盘进行检测 手工对硬盘进行测试的方法有以下四种：</p>
+<p>smartctl -t short <device>    后台检测硬盘，消耗时间短<br>smartctl -t long <device>      后台检测硬盘，消耗时间长<br>smartctl -C -t short <device> 前台检测硬盘，消耗时间短<br>smartctl -C -t long <device>  前台检测硬盘，消耗时间长</device></device></device></device></p>
+<p>例如，在后台对硬盘进行详细的检查，命令如下：</p>
+<p># smartctl -t long /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF OFFLINE IMMEDIATE AND SELF-TEST SECTION ===<br>Sending command: “Execute SMART Extended self-test routine immediately in off-line mode”.<br>Drive command “Execute SMART Extended self-test routine immediately in off-line mode” successful.<br>Testing has begun.<br>Please wait 54 minutes for test to complete.<br>Test will complete after Mon Sep 17 03:53:32 2007  </p>
+<p>Use smartctl -X to abort test.</p>
+<p>上面的信息显示54分钟后将完成检查，同时可以使用 smartctl -X 终止检查。终止硬盘检查命令的使用方法是：</p>
+<p># smartctl -X /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF OFFLINE IMMEDIATE AND SELF-TEST SECTION ===<br>Sending command: “Abort SMART off-line mode self-test routine”.<br>Self-testing aborted!</p>
+<p>5、查看硬盘日志 使用“smartctl -l logtype <device>”可以查看硬盘的日志，日志又分为多种类型，如selftest、error等等。例如查看硬盘检测的日志，如下：</device></p>
+<p># smartctl -l selftest /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF READ SMART DATA SECTION ===<br>SMART Self-test log structure revision number 1<br>Num  Test_Description    Status                  Remaining  LifeTime(hours)  LBA_of_first_error<br># 1  Extended offline    Aborted by host               90%      4365         -<br># 2  Extended offline    Completed without error       00%      4247         -<br># 3  Short offline       Aborted by ho<br>st               30%      4246         -<br># 4  Short offline       Aborted by host               10%      4246         -<br># 5  Extended offline    Completed without error       00%      4229         -</p>
+<p>查看硬盘错误日志：</p>
+<p># smartctl -l error /dev/hdb<br>smartctl version 5.33 [i686-turbo-linux-gnu] Copyright (C) 2002-4 Bruce Allen<br>Home page is <a href="http://smartmontools.sourceforge.net/" target="_blank" rel="noopener">http://smartmontools.sourceforge.net/</a>  </p>
+<p>=== START OF READ SMART DATA SECTION ===<br>SMART Error Log Version: 1<br>No Errors Logged</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/22/use-smartmontools-to-monitor-the-health-of-your-disks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1694,164 +1865,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2009/12/22/configure-development-to-support-linux-applications-with-high-concurrency-tcp-connections/" itemprop="url">配置开发支持高并发TCP连接的Linux应用程序全攻略</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2009-12-22T11:17:10+08:00">
-                2009-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1、修改用户进程可打开文件数限制  </p>
-<p>   在Linux平台上，无论编写客户端程序还是服务端程序，在进行高并发TCP连接处理时，最高的并发数量都要受到系统对用户单一进程同时可打开文件数量 的限制(这是因为系统为每个TCP连接都要创建一个socket句柄，每个socket句柄同时也是一个文件句柄)。可使用ulimit命令查看系统允许 当前用户进程打开的文件数限制：<br>   [speng@as4 ~]$ ulimit -n<br>   1024<br>   这表示当前用户的每个进程最多允许同时打开1024个文件，这1024个文件中还得除去每个进程必然打开的标准输入，标准输出，标准错误，服务器监听 socket，进程间通讯的unix域socket等文件，那么剩下的可用于客户端socket连接的文件数就只有大概1024-10=1014个左右。 也就是说缺省情况下，基于Linux的通讯程序最多允许同时1014个TCP并发连接。  </p>
-<p>   对于想支持更高数量的TCP并发连接的通讯处理程序，就必须修改Linux对当前用户的进程同时打开的文件数量的软限制(soft limit)和硬限制(hardlimit)。其中软限制是指Linux在当前系统能够承受的范围内进一步限制用户同时打开的文件数；硬限制则是根据系统 硬件资源状况(主要是系统内存)计算出来的系统最多可同时打开的文件数量。通常软限制小于或等于硬限制。  </p>
-<p>   修改上述限制的最简单的办法就是使用ulimit命令：<br>   [speng@as4 ~]$ ulimit -n &lt;file_num&gt;<br>   上述命令中，在&lt;file_num&gt;中指定要设置的单一进程允许打开的最大文件数。如果系统回显类似于“Operation notpermitted”之类的话，说明上述限制修改失败，实际上是因为在&lt;file_num&gt;中指定的数值超过了Linux系统对该用户 打开文件数的软限制或硬限制。因此，就需要修改Linux系统对用户的关于打开文件数的软限制和硬限制。  </p>
-<p>   第一步，修改/etc/security/limits.conf文件，在文件中添加如下行：<br>   speng soft nofile 10240<br>   speng hard nofile 10240<br>   其中speng指定了要修改哪个用户的打开文件数限制，可用’*’号表示修改所有用户的限制；soft或hard指定要修改软限制还是硬限制；10240则指定了想要修改的新的限制值，即最大打开文件数(请注意软限制值要小于或等于硬限制)。修改完后保存文件。  </p>
-<p>   第二步，修改/etc/pam.d/login文件，在文件中添加如下行：<br>   session required /lib/security/pam_limits.so<br>   这是告诉Linux在用户完成系统登录后，应该调用pam_limits.so模块来设置系统对该用户可使用的各种资源数量的最大限制(包括用户可打开 的最大文件数限制)，而pam_limits.so模块就会从/etc/security/limits.conf文件中读取配置来设置这些限制值。修改 完后保存此文件。  </p>
-<p>   第三步，查看Linux系统级的最大打开文件数限制，使用如下命令：<br>   [speng@as4 ~]$ cat /proc/sys/fs/file-max<br>   12158<br>   这表明这台Linux系统最多允许同时打开(即包含所有用户打开文件数总和)12158个文件，是Linux系统级硬限制，所有用户级的打开文件数限制 都不应超过这个数值。通常这个系统级硬限制是Linux系统在启动时根据系统硬件资源状况计算出来的最佳的最大同时打开文件数限制，如果没有特殊需要，不 应该修改此限制，除非想为用户级打开文件数限制设置超过此限制的值。修改此硬限制的方法是修改/etc/rc.local脚本，在脚本中添加如下行：<br>   echo 22158 &gt; /proc/sys/fs/file-max<br>   这是让Linux在启动完成后强行将系统级打开文件数硬限制设置为22158。修改完后保存此文件。  </p>
-<p>   完成上述步骤后重启系统，一般情况下就可以将Linux系统对指定用户的单一进程允许同时打开的最大文件数限制设为指定的数值。如果重启后用 ulimit-n命令查看用户可打开文件数限制仍然低于上述步骤中设置的最大值，这可能是因为在用户登录脚本/etc/profile中使用ulimit -n命令已经将用户可同时打开的文件数做了限制。由于通过ulimit-n修改系统对用户可同时打开文件的最大数限制时，新修改的值只能小于或等于上次 ulimit-n设置的值，因此想用此命令增大这个限制值是不可能的。所以，如果有上述问题存在，就只能去打开/etc/profile脚本文件，在文件 中查找是否使用了ulimit-n限制了用户可同时打开的最大文件数量，如果找到，则删除这行命令，或者将其设置的值改为合适的值，然后保存文件，用户退 出并重新登录系统即可。<br>   通过上述步骤，就为支持高并发TCP连接处理的通讯处理程序解除关于打开文件数量方面的系统限制。  </p>
-<p>2、修改网络内核对TCP连接的有关限制  </p>
-<p>   在Linux上编写支持高并发TCP连接的客户端通讯处理程序时，有时会发现尽管已经解除了系统对用户同时打开文件数的限制，但仍会出现并发TCP连接数增加到一定数量时，再也无法成功建立新的TCP连接的现象。出现这种现在的原因有多种。  </p>
-<p>   第一种原因可能是因为Linux网络内核对本地端口号范围有限制。此时，进一步分析为什么无法建立TCP连接，会发现问题出在connect()调用返 回失败，查看系统错误提示消息是“Can’t assign requestedaddress”。同时，如果在此时用tcpdump工具监视网络，会发现根本没有TCP连接时客户端发SYN包的网络流量。这些情况 说明问题在于本地Linux系统内核中有限制。其实，问题的根本原因在于Linux内核的TCP/IP协议实现模块对系统中所有的客户端TCP连接对应的 本地端口号的范围进行了限制(例如，内核限制本地端口号的范围为1024~32768之间)。当系统中某一时刻同时存在太多的TCP客户端连接时，由于每 个TCP客户端连接都要占用一个唯一的本地端口号(此端口号在系统的本地端口号范围限制中)，如果现有的TCP客户端连接已将所有的本地端口号占满，则此 时就无法为新的TCP客户端连接分配一个本地端口号了，因此系统会在这种情况下在connect()调用中返回失败，并将错误提示消息设为“Can’t assignrequested address”。有关这些控制逻辑可以查看Linux内核源代码，以linux2.6内核为例，可以查看tcp_ipv4.c文件中如下函数：<br>   static int tcp_v4_hash_connect(struct sock *sk)<br>   请注意上述函数中对变量sysctl_local_port_range的访问控制。变量sysctl_local_port_range的初始化则是在tcp.c文件中的如下函数中设置：<br>   void __init tcp_init(void)<br>   内核编译时默认设置的本地端口号范围可能太小，因此需要修改此本地端口范围限制。<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_local_port_range = 1024 65000<br>   这表明将系统对本地端口范围限制设置为1024~65000之间。请注意，本地端口范围的最小值必须大于或等于1024；而端口范围的最大值则应小于或等于65535。修改完后保存此文件。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明新的本地端口范围设置成功。如果按上述端口范围进行设置，则理论上单独一个进程最多可以同时建立60000多个TCP客户端连接。  </p>
-<p>   第二种无法建立TCP连接的原因可能是因为Linux网络内核的IP_TABLE防火墙对最大跟踪的TCP连接数有限制。此时程序会表现为在 connect()调用中阻塞，如同死机，如果用tcpdump工具监视网络，也会发现根本没有TCP连接时客户端发SYN包的网络流量。由于 IP_TABLE防火墙在内核中会对每个TCP连接的状态进行跟踪，跟踪信息将会放在位于内核内存中的conntrackdatabase中，这个数据库 的大小有限，当系统中存在过多的TCP连接时，数据库容量不足，IP_TABLE无法为新的TCP连接建立跟踪信息，于是表现为在connect()调用 中阻塞。此时就必须修改内核对最大跟踪的TCP连接数的限制，方法同修改内核对本地端口号范围的限制是类似的：<br>   第一步，修改/etc/sysctl.conf文件，在文件中添加如下行：<br>   net.ipv4.ip_conntrack_max = 10240<br>   这表明将系统对最大跟踪的TCP连接数限制设置为10240。请注意，此限制值要尽量小，以节省对内核内存的占用。<br>   第二步，执行sysctl命令：<br>   [speng@as4 ~]$ sysctl -p<br>   如果系统没有错误提示，就表明系统对新的最大跟踪的TCP连接数限制修改成功。如果按上述参数进行设置，则理论上单独一个进程最多可以同时建立10000多个TCP客户端连接。  </p>
-<p>3、使用支持高并发网络I/O的编程技术  </p>
-<p>   在Linux上编写高并发TCP连接应用程序时，必须使用合适的网络I/O技术和I/O事件分派机制。  </p>
-<p>   可用的I/O技术有同步I/O，非阻塞式同步I/O(也称反应式I/O)，以及异步I/O。在高TCP并发的情形下，如果使用同步I/O，这会严重阻塞 程序的运转，除非为每个TCP连接的I/O创建一个线程。但是，过多的线程又会因系统对线程的调度造成巨大开销。因此，在高TCP并发的情形下使用同步 I/O是不可取的，这时可以考虑使用非阻塞式同步I/O或异步I/O。非阻塞式同步I/O的技术包括使用select()，poll()，epoll等机 制。异步I/O的技术就是使用AIO。  </p>
-<p>   从I/O事件分派机制来看，使用select()是不合适的，因为它所支持的并发连接数有限(通常在1024个以内)。如果考虑性能，poll()也是 不合适的，尽管它可以支持的较高的TCP并发数，但是由于其采用“轮询”机制，当并发数较高时，其运行效率相当低，并可能存在I/O事件分派不均，导致部 分TCP连接上的I/O出现“饥饿”现象。而如果使用epoll或AIO，则没有上述问题(早期Linux内核的AIO技术实现是通过在内核中为每个 I/O请求创建一个线程来实现的，这种实现机制在高并发TCP连接的情形下使用其实也有严重的性能问题。但在最新的Linux内核中，AIO的实现已经得 到改进)。  </p>
-<p>   综上所述，在开发支持高并发TCP连接的Linux应用程序时，应尽量使用epoll或AIO技术来实现并发的TCP连接上的I/O控制，这将为提升程序对高并发TCP连接的支持提供有效的I/O保证。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1906,7 +1919,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1917,7 +1930,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1928,7 +1941,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

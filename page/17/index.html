@@ -259,6 +259,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/07/23/rhel5-4-and-bcm5709-network-card-drivers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haitian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haitian的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2010/07/23/rhel5-4-and-bcm5709-network-card-drivers/" itemprop="url">RHEL5.4和BCM5709网卡驱动问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-07-23T09:24:59+08:00">
+                2010-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前段时间最折腾的事莫属：RHEL5.4和BCM5709网卡驱动问题。</p>
+<p>系统：rhel5.4 64bit</p>
+<p>服务器：DELL R710</p>
+<p>默认RHEL5.4 64bit的驱动对BCM5709的网卡支持不好，网卡一遇到流量比较大就会hung up，后来不得已去dell官方去寻找驱动，同时将kernel降级为：2.6.18-128.el5（系统安装好后，我做了一个kernel的升级）这样就没有出现过hung up的情况。</p>
+<p>既然64bit有问题，32bit的也是逃脱不了。</p>
+<p><a href="http://hi.baidu.com/farmerluo" target="_blank" rel="noopener">阿辉</a> Says:<br><a href="http://www.ourlinux.net/life/rhel54-bcm5709-nic-drivers-problem/#comment-3460" target="_blank" rel="noopener">一月 7th, 2010 at 17:42</a></p>
+<p>我也碰到过这个问题，我是这么做的，用内核自带的驱动，关闭acpi:<br>vi /boot/grub/grub.conf<br>title CentOS (2.6.18-164.6.1.el5)<br>root (hd0,0)<br>kernel /vmlinuz-2.6.18-164.6.1.el5 ro root=/dev/VolGroup00/LogVol00 rhgb quiet acpi=off noapic<br>initrd /initrd-2.6.18-164.6.1.el5.img</p>
+<p><a href="http://hi.baidu.com/farmerluo" target="_blank" rel="noopener">阿辉</a> Says:<br><a href="http://www.ourlinux.net/life/rhel54-bcm5709-nic-drivers-problem/#comment-3461" target="_blank" rel="noopener">一月 7th, 2010 at 17:43</a></p>
+<p>最高跑到过300多M，没有出过问题了。</p>
+<p><a href="http://www.ourlinux.net/" target="_blank" rel="noopener">bixuan</a> Says:<br><a href="http://www.ourlinux.net/life/rhel54-bcm5709-nic-drivers-problem/#comment-3462" target="_blank" rel="noopener">一月 7th, 2010 at 17:47</a></p>
+<p>是的，关闭acpi也是可以的，多谢分享，呵呵</p>
+<p>今天实然接到通知，说服务器上的服务down了，因为在外面无法查看，过了一会同事又说是因为网络不通重启了网卡又正常了。回到家上服务器进行检查，没有报错，也没有发现什么系统的异常。觉得比较奇怪就上网搜索了一下，发现也有人遇到了Broadcom BCM5709在centos系统出现网卡不工作的情况。重新安装网卡驱动，只能再观察是否还会再出现这种情况。  </p>
+<p>lspci<br>01:00.0 Ethernet controller: Broadcom Corporation NetXtreme II BCM5709 Gigabit Ethernet (rev 20)<br>01:00.1 Ethernet controller: Broadcom Corporation NetXtreme II BCM5709 Gigabit Ethernet (rev 20)<br>02:00.0 Ethernet controller: Broadcom Corporation NetXtreme II BCM5709 Gigabit Ethernet (rev 20)<br>02:00.1 Ethernet controller: Broadcom Corporation NetXtreme II BCM5709 Gigabit Ethernet (rev 20)  </p>
+<p>ethtool -i eth1<br>driver: bnx2<br>version: 1.9.3<br>firmware-version: 5.0.11 NCSI 2.0.5<br>bus-info: 0000:01:00.1  </p>
+<p>下载kernel-devel和网卡新驱动<br>rpm -ivh kernel-devel-2.6.18-164.11.1.el5.x86_64.rpm<br>cd /usr/local/src/Server/Linux/Driver/netxtreme2-5.2.50<br>make &amp;&amp; make install<br>rmmod bnx2;modprobe bnx2<br>ethtool -i eth1<br>driver: bnx2<br>version: 2.0.8b<br>firmware-version: 5.0.12 bc 5.0.11 NCSI 2.0.5<br>bus-info: 0000:01:00.1</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/07/21/the-new-energy-development-plan-will-add-5-trillion-to-the-state-department/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1687,151 +1843,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2010/06/11/cherokee/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="haitian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="haitian的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2010/06/11/cherokee/" itemprop="url">Cherokee</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-06-11T17:07:53+08:00">
-                2010-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/默认分类/" itemprop="url" rel="index">
-                    <span itemprop="name">默认分类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>The Fastest free Web Server out there!  </p>
-<p>Cherokee is a very fast, flexible and easy to configure Web Server. It supports the widespread technologies nowadays: FastCGI, SCGI, PHP, CGI, uWSGI, SSI, TLS and SSL encrypted connections, Virtual hosts, Authentication, on the fly encoding, Load Balancing, Apache compatible log files, Data Base Balancing, Reverse HTTP Proxy, Traffic Shaper, Video Streaming and much more.</p>
-<p>Cherokee-Admin, a user friendly interface, provides a no-hassle configuration of the server. Check out the benchmarks and documentation to learn more, join our active Community and give it a try to squeeze your hardware to the fullest!</p>
-<p><a href="http://www.cherokee-project.com/" target="_blank" rel="noopener">http://www.cherokee-project.com/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1886,7 +1897,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">277</span>
+                  <span class="site-state-item-count">278</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1897,7 +1908,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1908,7 +1919,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-count">164</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
