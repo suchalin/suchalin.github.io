@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if \[ &amp;quot;X$&amp;#123;">
+<meta name="description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if [ &amp;quot;X$&amp;#123;H">
 <meta name="keywords" content="read,ssh,while">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Bash Shell 程序设计]当while read 遇上ssh">
 <meta property="og:url" content="http://yoursite.com/2011/03/01/bash-shell-program-design-while-read-encounters-ssh/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if \[ &amp;quot;X$&amp;#123;">
+<meta property="og:description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if [ &amp;quot;X$&amp;#123;H">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-05T02:11:46.573Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Bash Shell 程序设计]当while read 遇上ssh">
-<meta name="twitter:description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if \[ &amp;quot;X$&amp;#123;">
+<meta name="twitter:description" content="先看一段简化过的BASH SHELL代码1234567891011121314TODAY=\`date +%Y%m%d\`  SUFFIX=&amp;quot;tar&amp;quot;  CONF=the\_config\_file  i=0  while read HOST SRCPATH DSTPATH  do          (( i++ ))          if [ &amp;quot;X$&amp;#123;H">
 
 
 
@@ -322,7 +322,7 @@
       
 
       
-        <p>先看一段简化过的BASH SHELL代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TODAY=\`date +%Y%m%d\`  </span><br><span class="line">SUFFIX=&quot;tar&quot;  </span><br><span class="line">CONF=the\_config\_file  </span><br><span class="line">i=0  </span><br><span class="line"></span><br><span class="line">while read HOST SRCPATH DSTPATH  </span><br><span class="line">do  </span><br><span class="line">        (( i++ ))  </span><br><span class="line">        if \[ &quot;X$&#123;HOST:0:1&#125;&quot; = &quot;X#&quot; -o $&#123;#DSTPATH&#125; -eq 0 \]  </span><br><span class="line">        then  </span><br><span class="line">                #忽略注释行及少于3个项的记录  </span><br><span class="line">        else ssh $&#123;HOST&#125; &quot;tar c $&#123;SRCPATH&#125;&quot; &gt;$&#123;DSTPATH&#125;.$&#123;TODAY&#125;.$&#123;SUFFIX&#125; 2&gt;/dev/null  </span><br><span class="line">        fi  </span><br><span class="line">done &lt; $CONF</span><br></pre></td></tr></table></figure></p>
+        <p>先看一段简化过的BASH SHELL代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TODAY=\`date +%Y%m%d\`  </span><br><span class="line">SUFFIX=&quot;tar&quot;  </span><br><span class="line">CONF=the\_config\_file  </span><br><span class="line">i=0  </span><br><span class="line"></span><br><span class="line">while read HOST SRCPATH DSTPATH  </span><br><span class="line">do  </span><br><span class="line">        (( i++ ))  </span><br><span class="line">        if [ &quot;X$&#123;HOST:0:1&#125;&quot; = &quot;X#&quot; -o $&#123;#DSTPATH&#125; -eq 0 ]  </span><br><span class="line">        then  </span><br><span class="line">                #忽略注释行及少于3个项的记录  </span><br><span class="line">        else ssh $&#123;HOST&#125; &quot;tar c $&#123;SRCPATH&#125;&quot; &gt;$&#123;DSTPATH&#125;.$&#123;TODAY&#125;.$&#123;SUFFIX&#125; 2&gt;/dev/null  </span><br><span class="line">        fi  </span><br><span class="line">done &lt; $CONF</span><br></pre></td></tr></table></figure></p>
 <p>作者的本意是通过脚本读取配置文件\$CONF，然后打包备份\$CONF中指定的文件，但执行后发现程序在成功备份\$CONF中指定的第一个文件后即退出……  </p>
 <p>跟踪后发现read在备份完第一个文件后就再读不到任何数据，所以while循环结束－－也就是说，<br>通过重定向$CONF文件传给标准输入的数据被  </p>
 <p>ssh \${HOST} “tar c \${SRCPATH}” &gt;\${DSTPATH}.\${TODAY}.${SUFFIX} 2&gt;/dev/null  </p>

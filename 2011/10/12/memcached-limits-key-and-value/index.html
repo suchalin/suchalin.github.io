@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="memcached的简单限制就是键（key）和item的限制。最大键长为250个字符。可以接受的储存数据不能超过1MB，因为这是典型slab 的最大值。这里我们可以突破对key长度的限制。问题解决：修改memcached源文件。在memcached.h中定义key的长度，其代码为：   #define KEY_MAX_LENGTH 250   更换为所需要的长度，比如：1024 #define K">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.046Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="memcached对key和value的限制">
 <meta name="twitter:description" content="memcached的简单限制就是键（key）和item的限制。最大键长为250个字符。可以接受的储存数据不能超过1MB，因为这是典型slab 的最大值。这里我们可以突破对key长度的限制。问题解决：修改memcached源文件。在memcached.h中定义key的长度，其代码为：   #define KEY_MAX_LENGTH 250   更换为所需要的长度，比如：1024 #define K">

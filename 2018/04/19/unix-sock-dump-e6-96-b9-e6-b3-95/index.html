@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="#!/bin/bash # Parameterssocket=”/run/foo.sock”dump=”/tmp/capture.pcap” # Extract repetitionport=9876source_socket=”$(dirname “${socket}”)/$(basename “${socket}”).orig” # Move socket filesmv “${socket}">
+<meta name="description" content="1234567891011121314151617181920#!/bin/bash# Parameterssocket=&amp;quot;/run/foo.sock&amp;quot;dump=&amp;quot;/tmp/capture.pcap&amp;quot;# Extract repetitionport=9876source_socket=&amp;quot;$(dirname &amp;quot;$&amp;#123;socket&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="unix sock dump方法">
 <meta property="og:url" content="http://yoursite.com/2018/04/19/unix-sock-dump-e6-96-b9-e6-b3-95/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="#!/bin/bash # Parameterssocket=”/run/foo.sock”dump=”/tmp/capture.pcap” # Extract repetitionport=9876source_socket=”$(dirname “${socket}”)/$(basename “${socket}”).orig” # Move socket filesmv “${socket}">
+<meta property="og:description" content="1234567891011121314151617181920#!/bin/bash# Parameterssocket=&amp;quot;/run/foo.sock&amp;quot;dump=&amp;quot;/tmp/capture.pcap&amp;quot;# Extract repetitionport=9876source_socket=&amp;quot;$(dirname &amp;quot;$&amp;#123;socket&amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.048Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="unix sock dump方法">
-<meta name="twitter:description" content="#!/bin/bash # Parameterssocket=”/run/foo.sock”dump=”/tmp/capture.pcap” # Extract repetitionport=9876source_socket=”$(dirname “${socket}”)/$(basename “${socket}”).orig” # Move socket filesmv “${socket}">
+<meta name="twitter:description" content="1234567891011121314151617181920#!/bin/bash# Parameterssocket=&amp;quot;/run/foo.sock&amp;quot;dump=&amp;quot;/tmp/capture.pcap&amp;quot;# Extract repetitionport=9876source_socket=&amp;quot;$(dirname &amp;quot;$&amp;#123;socket&amp;#">
 
 
 
@@ -321,12 +321,7 @@
       
 
       
-        <p>#!/bin/bash</p>
-<p># Parameters<br>socket=”/run/foo.sock”<br>dump=”/tmp/capture.pcap”</p>
-<p># Extract repetition<br>port=9876<br>source_socket=”$(dirname “${socket}”)/$(basename “${socket}”).orig”</p>
-<p># Move socket files<br>mv “${socket}” “${source_socket}”<br>trap “{ rm ‘${socket}’; mv ‘${source_socket}’ ‘${socket}’; }” EXIT</p>
-<p># Setup pipe over TCP that we can tap into<br>socat -t100 “TCP-LISTEN:${port},reuseaddr,fork” “UNIX-CONNECT:${source_socket}” &amp;<br>socat -t100 “UNIX-LISTEN:${socket},mode=777,reuseaddr,fork” “TCP:localhost:${port}” &amp;</p>
-<p># Record traffic<br>tshark -i lo -w “${dump}” -F pcapng “dst port ${port} or src port ${port}”</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># Parameters</span><br><span class="line">socket=&quot;/run/foo.sock&quot;</span><br><span class="line">dump=&quot;/tmp/capture.pcap&quot;</span><br><span class="line"></span><br><span class="line"># Extract repetition</span><br><span class="line">port=9876</span><br><span class="line">source_socket=&quot;$(dirname &quot;$&#123;socket&#125;&quot;)/$(basename &quot;$&#123;socket&#125;&quot;).orig&quot;</span><br><span class="line"></span><br><span class="line"># Move socket files</span><br><span class="line">mv &quot;$&#123;socket&#125;&quot; &quot;$&#123;source_socket&#125;&quot;</span><br><span class="line">trap &quot;&#123; rm &apos;$&#123;socket&#125;&apos;; mv &apos;$&#123;source_socket&#125;&apos; &apos;$&#123;socket&#125;&apos;; &#125;&quot; EXIT</span><br><span class="line"></span><br><span class="line"># Setup pipe over TCP that we can tap into</span><br><span class="line">socat -t100 &quot;TCP-LISTEN:$&#123;port&#125;,reuseaddr,fork&quot; &quot;UNIX-CONNECT:$&#123;source_socket&#125;&quot; &amp;</span><br><span class="line">socat -t100 &quot;UNIX-LISTEN:$&#123;socket&#125;,mode=777,reuseaddr,fork&quot; &quot;TCP:localhost:$&#123;port&#125;&quot; &amp;</span><br><span class="line"></span><br><span class="line"># Record traffic</span><br><span class="line">tshark -i lo -w &quot;$&#123;dump&#125;&quot; -F pcapng &quot;dst port $&#123;port&#125; or src port $&#123;port&#125;&quot;</span><br></pre></td></tr></table></figure>
 <p>如php-fpm的抓包可参考 <a href="https://forum.ivorde.com/freebsd-how-to-sniff-a-unix-socket-using-socat-utility-t15931.html" target="_blank" rel="noopener">https://forum.ivorde.com/freebsd-how-to-sniff-a-unix-socket-using-socat-utility-t15931.html</a></p>
 
       

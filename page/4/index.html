@@ -476,17 +476,7 @@
           
             <p>新建一个ifcfg－br0文件：</p>
 <p>DEVICE=br0<br>TYPE=Bridge<br>BOOTPROTO=static<br>BROADCAST=10.1.255.255<br>IPADDR=10.1.29.3<br>NETMASK=255.255.0.0<br>NETWORK=10.1.0.0<br>ONBOOT=yes</p>
-<p>然后修改相应网卡的配置文件，我的是eth1：</p>
-<p># Realtek Semiconductor Co., Ltd. RTL-8169 Gigabit Ethernet<br>DEVICE=eth1  </p>
-<p>#BOOTPROTO=none  </p>
-<p>#BROADCAST=10.1.255.255<br>HWADDR=D8:5D:4C:74:EE:E8  </p>
-<p>#IPADDR=10.1.29.3  </p>
-<p>#NETMASK=255.255.0.0  </p>
-<p>#NETWORK=10.1.0.0<br>ONBOOT=yes  </p>
-<p>#TYPE=Ethernet  </p>
-<p>#USERCTL=no  </p>
-<p>#IPV6INIT=no  </p>
-<p>#PEERDNS=yes<br>BRIDGE=br0</p>
+<p>然后修改相应网卡的配置文件，我的是eth1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">\# Realtek Semiconductor Co., Ltd. RTL-8169 Gigabit Ethernet  </span><br><span class="line">DEVICE=eth1  </span><br><span class="line">#BOOTPROTO=none  </span><br><span class="line">#BROADCAST=10.1.255.255  </span><br><span class="line">HWADDR=D8:5D:4C:74:EE:E8  </span><br><span class="line">#IPADDR=10.1.29.3  </span><br><span class="line">#NETMASK=255.255.0.0  </span><br><span class="line">#NETWORK=10.1.0.0  </span><br><span class="line">ONBOOT=yes  </span><br><span class="line">#TYPE=Ethernet  </span><br><span class="line">#USERCTL=no  </span><br><span class="line">#IPV6INIT=no  </span><br><span class="line">#PEERDNS=yes  </span><br><span class="line">BRIDGE=br0</span><br></pre></td></tr></table></figure></p>
 <p>可以看出，原来网卡的配置只保留device名称，硬件地址，onboot选项，以及新添加的BRIDGE=br0。</p>
 <p>然后重启网络：</p>
 <p>/etc/init.d/network restart 或service network restart</p>

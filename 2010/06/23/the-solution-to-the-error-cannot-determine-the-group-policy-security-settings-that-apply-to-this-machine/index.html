@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：1">
+<meta name="description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对于错误“不能确定应用到此机器的组策略安全性设置”的解决办法">
 <meta property="og:url" content="http://yoursite.com/2010/06/23/the-solution-to-the-error-cannot-determine-the-group-policy-security-settings-that-apply-to-this-machine/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：1">
+<meta property="og:description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.023Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对于错误“不能确定应用到此机器的组策略安全性设置”的解决办法">
-<meta name="twitter:description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：1">
+<meta name="twitter:description" content="访问本地安全策略分支时，提示如下信息：不能确定应用到此机器的组策略安全性设置。在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。按照网上的办法如下：解决方案：">
 
 
 
@@ -321,7 +321,8 @@
       
 
       
-        <p>访问本地安全策略分支时，提示如下信息：<br>不能确定应用到此机器的组策略安全性设置。<br>在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。<br>所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。<br>所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。<br>按照网上的办法如下：<br>解决方案：<br>1.切换到命令提示符状态。<br>2.执行“esentutl /k %windir%\Security\Database\Secedit.sdb”和“esentutl /g %windir%\Security\Database\Secedit.sdb”对secedit.sdb进行检查。<br>3.手工备份要修复的数据库文件。<br>4.执行“esentutl /p %windir%\Security\Database\Secedit.sdb”进行修复，系统会弹出Warning提示框：<br>“You should only run Repair on damaged or corrupted databases.Repair will not apply information in the transaction log files to the database,and may cause information to be lost.Do you wish to proceed?”<br>单击OK，开始修复。<br>if ($ != jQuery) { $ = jQuery.noConflict(); }</p>
+        <p>访问本地安全策略分支时，提示如下信息：<br>不能确定应用到此机器的组策略安全性设置。<br>在尝试从本地安全性数据库（%windir%\security\database\secedit.sdb）中检索这些设置时返回的错误为：参数不正确。<br>所有本地安全性设置都将被显示，但是不会指出一个给定的安全性设置是否由组策略定义。<br>所有由此用户界面改动的本地安全性设置都可能随后被域级的策略覆盖。<br>按照网上的办法如下：<br>解决方案：  </p>
+<p>1.切换到命令提示符状态。<br>2.执行“esentutl /k %windir%\Security\Database\Secedit.sdb”和“esentutl /g %windir%\Security\Database\Secedit.sdb”对secedit.sdb进行检查。<br>3.手工备份要修复的数据库文件。<br>4.执行“esentutl /p %windir%\Security\Database\Secedit.sdb”进行修复，系统会弹出Warning提示框：<br>“You should only run Repair on damaged or corrupted databases.Repair will not apply information in the transaction log files to the database,and may cause information to be lost.Do you wish to proceed?”<br>单击OK，开始修复。<br>if (\$ != jQuery) { $ = jQuery.noConflict(); }</p>
 
       
     </div>

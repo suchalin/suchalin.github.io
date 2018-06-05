@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="先安装awstats,安装过程在http://blog.chinaunix.net/u2/71666/showart.php?id=1988397 完成向导，接下来修改 www.test.cn 的统计配置 [root@test awstats]# pwd /etc/awstats [root@test awstats]# vi awstats.www.test.com.conf 找到统计的日志文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.018Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用awstats 分析 Nginx 的访问日志">
 <meta name="twitter:description" content="先安装awstats,安装过程在http://blog.chinaunix.net/u2/71666/showart.php?id=1988397 完成向导，接下来修改 www.test.cn 的统计配置 [root@test awstats]# pwd /etc/awstats [root@test awstats]# vi awstats.www.test.com.conf 找到统计的日志文件">
@@ -588,13 +588,13 @@ keepalive_timeout 65;
 
 include      gzip.conf;
 
-log\_format test    &apos;$remote\_addr - $remote\_user \[$time\_local\] &quot;$request&quot; &apos;
+log\_format test    &apos;$remote\_addr - $remote\_user [$time\_local] &quot;$request&quot; &apos;
 
                   &apos;$status $body\_bytes\_sent &quot;$http_referer&quot; &apos;
 
                   &apos;&quot;$http\_user\_agent&quot; &quot;$http\_x\_forwarded_for&quot;&apos;;
 
-log\_format good    &apos;$remote\_addr - $remote\_user \[$time\_local\] &quot;$request&quot; &apos;
+log\_format good    &apos;$remote\_addr - $remote\_user [$time\_local] &quot;$request&quot; &apos;
 
                   &apos;$status $body\_bytes\_sent &quot;$http_referer&quot; &apos;
 

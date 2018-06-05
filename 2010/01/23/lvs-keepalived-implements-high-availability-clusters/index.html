@@ -87,7 +87,7 @@
 <meta property="og:description" content="操作系统平台：CentOS5.2 软件：LVS+keepalived LVS+Keepalived 介绍 LVS LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）； 十种调度算法（rrr|wr">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/blogimg_chinaunix_090403211022.jpg">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.019Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVS+Keepalived实现高可用集群">
 <meta name="twitter:description" content="操作系统平台：CentOS5.2 软件：LVS+keepalived LVS+Keepalived 介绍 LVS LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。本项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）； 十种调度算法（rrr|wr">
@@ -430,7 +430,7 @@
 
 ;;
 </code></pre><p>status)</p>
-<pre><code>  if \[ ! -e /var/lock/subsys/ipvsadm \];then
+<pre><code>  if [ ! -e /var/lock/subsys/ipvsadm ];then
 
           echo &quot;ipvsadm is stoped&quot;
 
@@ -499,7 +499,7 @@ islothere=`/sbin/ifconfig lo:0 | grep $WEB_VIP`
 
 isrothere=\`netstat -rn | grep &quot;lo:0&quot; | grep $web_VIP\`
 
-if \[ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; \];then
+if [ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; ];then
 
     # Either the route or the lo:0 device
 

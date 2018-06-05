@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="我们用script来记录屏幕的输出，这个是在Linux的平台下使用的，Solaris和AIX中script命令没有-f选项。 -f选项的意思就是只有当缓冲区满后才能在另外一个终端显示前一次缓冲区满的内容。即使是异常退出也没有问题，仍然可以正常记录log，用命令script -f screen.log就可以了。  如果在第一个终端上使用mkfifo screen.log(一般不用这个命令)和命令sc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.028Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux中通过script命令那个记录屏幕的输出">
 <meta name="twitter:description" content="我们用script来记录屏幕的输出，这个是在Linux的平台下使用的，Solaris和AIX中script命令没有-f选项。 -f选项的意思就是只有当缓冲区满后才能在另外一个终端显示前一次缓冲区满的内容。即使是异常退出也没有问题，仍然可以正常记录log，用命令script -f screen.log就可以了。  如果在第一个终端上使用mkfifo screen.log(一般不用这个命令)和命令sc">
@@ -330,9 +330,9 @@
 
 第一个窗口：
 
-\[root@localhost ~\]# script -f screen.log  
+[root@localhost ~]# script -f screen.log  
 Script started, file is screen.log  
-\[root@localhost ~\]# ls -ltr  
+[root@localhost ~]# ls -ltr  
 total 33548  
 -rw-r--r-- 1 root root 15981 Jan 10 2008 server.met0  
 -rw-r--r-- 1 root root 9347 Mar 17 2008 install.log.syslog  
@@ -351,27 +351,27 @@ drwxr-xr-x 5 root root 4096 Jun 30 12:43 Final
 -rw-r--r-- 1 root root 822 Jul 29 15:35 queue.cap  
 -rw-r--r-- 1 root root 3112 Oct 13 20:44 manscript  
 -rw-r--r-- 1 root root 79 Oct 13 20:47 screen.log  
-\[root@localhost ~\]# sdf  
+[root@localhost ~]# sdf  
 bash: sdf: command not found  
-\[root@localhost ~\]#  
-\[root@localhost ~\]# w  
+[root@localhost ~]#  
+[root@localhost ~]# w  
 20:48:14 up 5 days, 4:29, 3 users, load average: 6.15, 2.60, 1.49  
 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT  
 root pts/1 172.16.15.111 19:36 54:33 0.05s 0.05s -bash  
 root pts/3 172.16.13.134 20:44 35.00s 0.03s 0.00s tail -f screen.  
 root pts/5 172.16.13.134 20:28 0.00s 0.02s 0.00s script -f scree  
-\[root@localhost ~\]# exit  
+[root@localhost ~]# exit  
 exit
 
 Script done on Mon 13 Oct 2008 08:48:23 PM CST
 
-\[root@localhost ~\]#
+[root@localhost ~]#
 
 第二个窗口：
 
-\[root@localhost ~\]# tail -f screen.log  
+[root@localhost ~]# tail -f screen.log  
 Script started on Mon 13 Oct 2008 08:47:29 PM CST  
-\[root@localhost ~\]# ls -ltr  
+[root@localhost ~]# ls -ltr  
 total 33548  
 -rw-r--r-- 1 root root 15981 Jan 10 2008 server.met0  
 -rw-r--r-- 1 root root 9347 Mar 17 2008 install.log.syslog  
@@ -390,21 +390,21 @@ drwxr-xr-x 5 root root 4096 Jun 30 12:43 Final
 -rw-r--r-- 1 root root 822 Jul 29 15:35 queue.cap  
 -rw-r--r-- 1 root root 3112 Oct 13 20:44 manscript  
 -rw-r--r-- 1 root root 79 Oct 13 20:47 screen.log  
-\[root@localhost ~\]# sdf  
+[root@localhost ~]# sdf  
 bash: sdf: command not found  
-\[root@localhost ~\]#  
-\[root@localhost ~\]# w  
+[root@localhost ~]#  
+[root@localhost ~]# w  
 20:48:14 up 5 days, 4:29, 3 users, load average: 6.15, 2.60, 1.49  
 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT  
 root pts/1 172.16.15.111 19:36 54:33 0.05s 0.05s -bash  
 root pts/3 172.16.13.134 20:44 35.00s 0.03s 0.00s tail -f screen.  
 root pts/5 172.16.13.134 20:28 0.00s 0.02s 0.00s script -f scree  
-\[root@localhost ~\]# exit  
+[root@localhost ~]# exit  
 exit
 
 Script done on Mon 13 Oct 2008 08:48:23 PM CST
 
-\[root@localhost ~\]#
+[root@localhost ~]#
 
 通过这个方式，也可以用于教学当中，老师通过script命令记录操作日志，学员通过tail -f命令实时查看老师讲解情况。
 </code></pre>

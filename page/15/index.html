@@ -482,16 +482,15 @@
 <p>example:</p>
 <p>6.6 x 10 &gt;5.5x10   66&gt;55</p>
 <p>6.6666 x 10000 &gt; 5.5 x10000    66666&gt;55000</p>
-<p>提示：使用 num=6.6666;echo $num | awk ‘BEGIN{FS=”.”}{print length($2)}’判断小数点后的位数</p>
+<p>提示：使用 num=6.6666;echo \$num | awk ‘BEGIN{FS=”.”}{print length($2)}’判断小数点后的位数</p>
 <p>当然，如果你确定小数点后最多肯定不会超过4位你可直接去掉10000，类推。。</p>
 <p>2. 直接用awk</p>
 <p>awk -v num1=6.6 -v num2=5.5 ‘BEGIN{print(num1&gt;num2)?”0”:”1”}’</p>
 <p>如果num1&gt;num2打印输出0，否则输出1</p>
 <p>3.expr</p>
-<p>比较妙的方法 expr $a \&gt; $b</p>
-<p>返回1表示$a&gt;$b, 0表示$a&lt;$b</p>
-<p># a=6.6 b=5.5;expr $a \&gt; $b</p>
-<p>1</p>
+<p>比较妙的方法 expr \$a \&gt; $b</p>
+<p>返回1表示\$a&gt;\$b, 0表示\$a&lt;$b</p>
+<p># a=6.6 b=5.5;expr \</p>
 <p>4. br</p>
 <p>用br其实也是可以实现</p>
 <p>echo “6.6&gt;5.5” |br</p>

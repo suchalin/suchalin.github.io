@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="在安装redhat as5.4系统上默认的Broadcom NetXtreme II BCM 5709驱动为1.9.3，经常出现网卡会down的情况。经和dell沟通后，将网卡的驱动降为1.9.20d，降级后很久没有再出现过问题， 后来在一台服务器上再次出现了网卡down的情况，经分析发现down的服务器上多了一个bnx2id的服务。是否是因为bnx2id的启动而引起的网卡down。谢谢！以下是一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.043Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="是否是因为bnx2id的启动而引起的网卡down">
 <meta name="twitter:description" content="在安装redhat as5.4系统上默认的Broadcom NetXtreme II BCM 5709驱动为1.9.3，经常出现网卡会down的情况。经和dell沟通后，将网卡的驱动降为1.9.20d，降级后很久没有再出现过问题， 后来在一台服务器上再次出现了网卡down的情况，经分析发现down的服务器上多了一个bnx2id的服务。是否是因为bnx2id的启动而引起的网卡down。谢谢！以下是一">
@@ -381,7 +381,7 @@ success
 
 echo
 
-\[ $RETVAL -eq 0 \] || return
+[ $RETVAL -eq 0 ] || return
 </code></pre><p>}</p>
 <p>stop()</p>
 <p>{</p>

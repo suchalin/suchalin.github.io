@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="haitian的博客">
 <meta property="og:description" content="首先进入到phpmyadmin首页后下方有三个错误提示，解决：   1）链接表的附加功能尚未激活的解决方法1):libraries/config.default.php,将$cfg[‘PmaNoRelation_DisableWarning’]的值改为ture。2):打开phpmyadmin文件夹下的libraries文件夹，找到名为config.default.php的文件，windows下使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.029Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="phpmyadmin几个错误的解决">
 <meta name="twitter:description" content="首先进入到phpmyadmin首页后下方有三个错误提示，解决：   1）链接表的附加功能尚未激活的解决方法1):libraries/config.default.php,将$cfg[‘PmaNoRelation_DisableWarning’]的值改为ture。2):打开phpmyadmin文件夹下的libraries文件夹，找到名为config.default.php的文件，windows下使用">
@@ -351,7 +351,7 @@
 <p><strong>在linux下</strong>，在编译安装PHP的时候加上参数就可以了。<br>–enable-mbstring=all  </p>
 <p><strong>3）配置文件现在需要一个短语密码</strong></p>
 <p>解决方法：<br>    1、将 <strong>phpMyAdmin/libraries/config.default.php</strong>中的<br>    $cfg[‘blowfish_secret’] = ‘’; 改成 $cfg[‘blowfish_secret’] = ‘123456’; (注：其中的’123456′为随意的字符)<br>    2、在<strong>phpMyAdmin/config.sample.inc.php</strong>，18行</p>
-<pre><code>$cfg\[&apos;blowfish\_secret&apos;\] = &apos;&apos;; 改成 $cfg\[&apos;blowfish\_secret&apos;\] = &apos;123456&apos;; (注：其中的’123456′为随意的字符)
+<pre><code>$cfg[&apos;blowfish\_secret&apos;] = &apos;&apos;; 改成 $cfg[&apos;blowfish\_secret&apos;] = &apos;123456&apos;; (注：其中的’123456′为随意的字符)
 
 这个密码用于Cookies的加密，以免多个PhpMyAdmin或者和其他程序共用Cookies时搞混。
 

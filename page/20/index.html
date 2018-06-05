@@ -1314,7 +1314,7 @@ stop)
 
 ;;
 </code></pre><p>status)</p>
-<pre><code>  if \[ ! -e /var/lock/subsys/ipvsadm \];then
+<pre><code>  if [ ! -e /var/lock/subsys/ipvsadm ];then
 
           echo &quot;ipvsadm is stoped&quot;
 
@@ -1383,7 +1383,7 @@ islothere=`/sbin/ifconfig lo:0 | grep $WEB_VIP`
 
 isrothere=\`netstat -rn | grep &quot;lo:0&quot; | grep $web_VIP\`
 
-if \[ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; \];then
+if [ ! &quot;$islothere&quot; -o ! &quot;isrothere&quot; ];then
 
     # Either the route or the lo:0 device
 

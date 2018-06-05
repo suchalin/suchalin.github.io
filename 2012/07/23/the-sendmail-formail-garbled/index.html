@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：cat /home/striven/tmp/applist.log |formail -I “From:applist@sky-mobi.com“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” |/usr/sbin/se">
+<meta name="description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：1cat /home/striven/tmp/applist.log |formail -I &amp;quot;From:applist@sky-mobi.com&amp;quot; -I &amp;quot;MIME-Version:1.0&amp;quot; -I &amp;quot;Content-type:text;charset=utf-8&amp;quot; -I">
 <meta name="keywords" content="sendmail主题乱码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sendmail+formail乱码">
 <meta property="og:url" content="http://yoursite.com/2012/07/23/the-sendmail-formail-garbled/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：cat /home/striven/tmp/applist.log |formail -I “From:applist@sky-mobi.com“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” |/usr/sbin/se">
+<meta property="og:description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：1cat /home/striven/tmp/applist.log |formail -I &amp;quot;From:applist@sky-mobi.com&amp;quot; -I &amp;quot;MIME-Version:1.0&amp;quot; -I &amp;quot;Content-type:text;charset=utf-8&amp;quot; -I">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.047Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sendmail+formail乱码">
-<meta name="twitter:description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：cat /home/striven/tmp/applist.log |formail -I “From:applist@sky-mobi.com“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” |/usr/sbin/se">
+<meta name="twitter:description" content="之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：1cat /home/striven/tmp/applist.log |formail -I &amp;quot;From:applist@sky-mobi.com&amp;quot; -I &amp;quot;MIME-Version:1.0&amp;quot; -I &amp;quot;Content-type:text;charset=utf-8&amp;quot; -I">
 
 
 
@@ -322,8 +322,11 @@
       
 
       
-        <p>之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：<br>cat /home/striven/tmp/applist.log |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” |/usr/sbin/sendmail -toi $mailuser<br>这样邮件的正文就正常了，但主题如果有中文会乱码，而且看不到收件人有哪些，这是因为formail里没有定义To:给sendmail,改进如下：<br>cat /home/striven/tmp/applist.log |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8” -I “Subject:applist” -I “To:$mailuser” |/usr/sbin/sendmail -toi<br>这样收件人就看得到了，而不会再是  </p>
-<p>Undisclosed recipients。<br>对于主题或者收发邮件人中文乱码的问题，通过计算中文以后的base64，再给sendmail，<br>echo “中国人我是” |formail -I “From:<a href="mailto:applist@sky-mobi.com" target="_blank" rel="noopener">applist@sky-mobi.com</a>“ -I “MIME-Version:1.0” -I “Content-type:text;charset=utf-8”<br>-I “Subject:=?UTF-8?B?`echo ‘sendmail发邮件为什么主题会中文乱码?’|base64`?=” -I “To:<a href="mailto:Talen.Hao@sky-mobi.com" target="_blank" rel="noopener">Talen.Hao@sky-mobi.com</a>“|<br>/usr/sbin/sendmail -toi<br>这样就可以。<br>听说也可以使用mutt来解决</p>
+        <p>之前使用sendmail发邮件一直有乱码的问题，后来使用如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /home/striven/tmp/applist.log |formail -I &quot;From:applist@sky-mobi.com&quot; -I &quot;MIME-Version:1.0&quot; -I &quot;Content-type:text;charset=utf-8&quot; -I &quot;Subject:applist&quot; |/usr/sbin/sendmail -toi $mailuser</span><br></pre></td></tr></table></figure></p>
+<p>这样邮件的正文就正常了，但主题如果有中文会乱码，而且看不到收件人有哪些，这是因为formail里没有定义To:给sendmail,改进如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /home/striven/tmp/applist.log |formail -I &quot;From:applist@sky-mobi.com&quot; -I &quot;MIME-Version:1.0&quot; -I &quot;Content-type:text;charset=utf-8&quot; -I &quot;Subject:applist&quot; -I &quot;To:$mailuser&quot; |/usr/sbin/sendmail -toi</span><br></pre></td></tr></table></figure></p>
+<p>这样收件人就看得到了，而不会再是  </p>
+<p>Undisclosed recipients。<br>对于主题或者收发邮件人中文乱码的问题，通过计算中文以后的base64，再给sendmail，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo “中国人我是” |formail -I &quot;From:applist@sky-mobi.com&quot; -I &quot;MIME-Version:1.0&quot; -I &quot;Content-type:text;charset=utf-8&quot;   </span><br><span class="line">-I &quot;Subject:=?UTF-8?B?\`echo &apos;sendmail发邮件为什么主题会中文乱码?&apos;|base64\`?=&quot; -I &quot;To:Talen.Hao@sky-mobi.com&quot;|  </span><br><span class="line">/usr/sbin/sendmail -toi</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以。<br>听说也可以使用mutt来解决</p>
 
       
     </div>

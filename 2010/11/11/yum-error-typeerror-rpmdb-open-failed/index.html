@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
+<meta name="description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：\$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
 <meta name="keywords" content="重建rpmdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yum 错误 TypeError: rpmdb open failed">
 <meta property="og:url" content="http://yoursite.com/2010/11/11/yum-error-typeerror-rpmdb-open-failed/index.html">
 <meta property="og:site_name" content="haitian的博客">
-<meta property="og:description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
+<meta property="og:description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：\$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T09:12:52.029Z">
+<meta property="og:updated_time" content="2018-06-05T03:44:58.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yum 错误 TypeError: rpmdb open failed">
-<meta name="twitter:description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
+<meta name="twitter:description" content="无法用yum安装，错误如下TypeError: rpmdb open failed解决办法是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：\$ su            切换到root权限# cd /var/lib/rpm/# for i in `ls | grep">
 
 
 
@@ -322,7 +322,7 @@
       
 
       
-        <p>无法用yum安装，错误如下<br>TypeError: rpmdb open failed<br>解决办法<br>是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：<br>$ su            切换到root权限<br># cd /var/lib/rpm/<br># for i in `ls | grep ‘db.’`;do mv $i $i.bak;done<br># rpm –rebuilddb     重建该数据库<br># yum clean all</p>
+        <p>无法用yum安装，错误如下<br>TypeError: rpmdb open failed<br>解决办法<br>是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：<br>\$ su            切换到root权限<br># cd /var/lib/rpm/<br># for i in `ls | grep ‘db.’`;do mv $i $i.bak;done<br># rpm –rebuilddb     重建该数据库<br># yum clean all</p>
 
       
     </div>

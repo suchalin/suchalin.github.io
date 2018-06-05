@@ -1235,7 +1235,7 @@ dnl DAEMON_OPTIONS(</code>Port=smtp,Addr=0.0.0.0, Name=MTA’)dnl<br>dnl DAEMON_
 <p>NETUNIX NEWDB NIS PIPELINING SASL SCANF STARTTLS TCPWRAPPERS </p>
 <p>保证你看到SASL就是正确的。</p>
 <p>2、检测25端口：</p>
-<p># telnet localhost 25<br> Trying 127.0.0.1… Connected to localhost. Escape character is ‘^]‘. 220 fyhtest.163.net ESMTP Sendmail 8.12.5/8.12.5; Thu, 10 Apr 2003 16:35:42 -0400 ehlo test 250-fyhtest.163.net Hello localhost [127.0.0.1], pleased to meet you 250-ENHANCEDSTATUSCODES 250-PIPELINING 250-8BITMIME 250-SIZE 250-DSN 250-ETRN 250-AUTH LOGIN PLAIN 250-DELIVERBY 250 HELP<br> quit —退出   </p>
+<p># telnet localhost 25<br> Trying 127.0.0.1… Connected to localhost. Escape character is ‘^]’. 220 fyhtest.163.net ESMTP Sendmail 8.12.5/8.12.5; Thu, 10 Apr 2003 16:35:42 -0400 ehlo test 250-fyhtest.163.net Hello localhost [127.0.0.1], pleased to meet you 250-ENHANCEDSTATUSCODES 250-PIPELINING 250-8BITMIME 250-SIZE 250-DSN 250-ETRN 250-AUTH LOGIN PLAIN 250-DELIVERBY 250 HELP<br> quit —退出   </p>
 <p>只要输出有LOGIN PLAIN就可以了。</p>
 <p>到这里，sendmail就配置完了，你可以添加一个用户进行测试：</p>
 <p>#useradd test #passwd test 设置密码 </p>

@@ -1110,7 +1110,7 @@
       
         
           
-            <p>无法用yum安装，错误如下<br>TypeError: rpmdb open failed<br>解决办法<br>是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：<br>$ su            切换到root权限<br># cd /var/lib/rpm/<br># for i in `ls | grep ‘db.’`;do mv $i $i.bak;done<br># rpm –rebuilddb     重建该数据库<br># yum clean all</p>
+            <p>无法用yum安装，错误如下<br>TypeError: rpmdb open failed<br>解决办法<br>是因为RPM数据库出现损坏导致的，它导致所有的软件的升级、安装甚至是删除都会出现问题，终端出现乱码，YUMEX也用不成，RPM命令也用不成。原因是RPM数据库被破坏，解决方法如下：<br>\$ su            切换到root权限<br># cd /var/lib/rpm/<br># for i in `ls | grep ‘db.’`;do mv $i $i.bak;done<br># rpm –rebuilddb     重建该数据库<br># yum clean all</p>
 
           
         
@@ -1558,9 +1558,9 @@
 
 第一个窗口：
 
-\[root@localhost ~\]# script -f screen.log  
+[root@localhost ~]# script -f screen.log  
 Script started, file is screen.log  
-\[root@localhost ~\]# ls -ltr  
+[root@localhost ~]# ls -ltr  
 total 33548  
 -rw-r--r-- 1 root root 15981 Jan 10 2008 server.met0  
 -rw-r--r-- 1 root root 9347 Mar 17 2008 install.log.syslog  
@@ -1579,27 +1579,27 @@ drwxr-xr-x 5 root root 4096 Jun 30 12:43 Final
 -rw-r--r-- 1 root root 822 Jul 29 15:35 queue.cap  
 -rw-r--r-- 1 root root 3112 Oct 13 20:44 manscript  
 -rw-r--r-- 1 root root 79 Oct 13 20:47 screen.log  
-\[root@localhost ~\]# sdf  
+[root@localhost ~]# sdf  
 bash: sdf: command not found  
-\[root@localhost ~\]#  
-\[root@localhost ~\]# w  
+[root@localhost ~]#  
+[root@localhost ~]# w  
 20:48:14 up 5 days, 4:29, 3 users, load average: 6.15, 2.60, 1.49  
 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT  
 root pts/1 172.16.15.111 19:36 54:33 0.05s 0.05s -bash  
 root pts/3 172.16.13.134 20:44 35.00s 0.03s 0.00s tail -f screen.  
 root pts/5 172.16.13.134 20:28 0.00s 0.02s 0.00s script -f scree  
-\[root@localhost ~\]# exit  
+[root@localhost ~]# exit  
 exit
 
 Script done on Mon 13 Oct 2008 08:48:23 PM CST
 
-\[root@localhost ~\]#
+[root@localhost ~]#
 
 第二个窗口：
 
-\[root@localhost ~\]# tail -f screen.log  
+[root@localhost ~]# tail -f screen.log  
 Script started on Mon 13 Oct 2008 08:47:29 PM CST  
-\[root@localhost ~\]# ls -ltr  
+[root@localhost ~]# ls -ltr  
 total 33548  
 -rw-r--r-- 1 root root 15981 Jan 10 2008 server.met0  
 -rw-r--r-- 1 root root 9347 Mar 17 2008 install.log.syslog  
@@ -1618,21 +1618,21 @@ drwxr-xr-x 5 root root 4096 Jun 30 12:43 Final
 -rw-r--r-- 1 root root 822 Jul 29 15:35 queue.cap  
 -rw-r--r-- 1 root root 3112 Oct 13 20:44 manscript  
 -rw-r--r-- 1 root root 79 Oct 13 20:47 screen.log  
-\[root@localhost ~\]# sdf  
+[root@localhost ~]# sdf  
 bash: sdf: command not found  
-\[root@localhost ~\]#  
-\[root@localhost ~\]# w  
+[root@localhost ~]#  
+[root@localhost ~]# w  
 20:48:14 up 5 days, 4:29, 3 users, load average: 6.15, 2.60, 1.49  
 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT  
 root pts/1 172.16.15.111 19:36 54:33 0.05s 0.05s -bash  
 root pts/3 172.16.13.134 20:44 35.00s 0.03s 0.00s tail -f screen.  
 root pts/5 172.16.13.134 20:28 0.00s 0.02s 0.00s script -f scree  
-\[root@localhost ~\]# exit  
+[root@localhost ~]# exit  
 exit
 
 Script done on Mon 13 Oct 2008 08:48:23 PM CST
 
-\[root@localhost ~\]#
+[root@localhost ~]#
 
 通过这个方式，也可以用于教学当中，老师通过script命令记录操作日志，学员通过tail -f命令实时查看老师讲解情况。
 </code></pre>
