@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://img.blog.163.com/photo/sKMI40PlO7t27_CM0STucw==/5761792773267886366.jpg">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img229_ph_2141180147839541743.jpg">
 <meta property="og:image" content="http://blog.atop.fun/wp-content/uploads/netease/other_site/img687_ph_2824882866269436195.png">
-<meta property="og:updated_time" content="2018-06-05T03:44:58.635Z">
+<meta property="og:updated_time" content="2018-06-05T03:55:10.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(转)ext3&#x2F;ext4文件系统大分区支持">
 <meta name="twitter:description" content="很长一段时间以来，ext3是很多linux发行版默认的文件系统，目前ext4已经正式发布，已经有发行版开始使用ext4作为默认的文件系统了，其实最初的时候ext4是作为ext3的扩展，但是为了保证ext3的稳定性等原因，很多人反对直接对ext3进行扩展，所以单独作为了ext4项目。 ext3还是使用15个inode来查找数据块，前12个为直接数据块，直接指向存储数据的数据块，接下来分别为一级间接块">
@@ -365,47 +365,7 @@
 <p>6、ReiserFS</p>
 <p>ReiserFS 的第一次公开亮相是在 1997 年 7 月 23 日,Hans Reiser 把他的基于平衡树结构的 ReiserFS 文件系统在网上公布。ReiserFS 3.6.x 是由 Hans Reiser 和他的在 Namesys的开发组共同开发设计的。Reiserfs 被看作是一个更加激进和现代的文件系统。传统的UNIX 文件系统是按盘块来进行空间分配的,对于目录和文件等的查找使用了简单的线性查找。这些设计在当时是合适的,但随着磁盘容量的增大和应用需求的增加,传统文件系统在存储效率,速度和功能上已显落后。 ReiserFS 一个最受人批评的缺点是每升级一个版本,都将要将磁盘重新格式化一次。</p>
 <p>7、xfs</p>
-<p>xfs 是一种非常优秀的日志文件系统,它是 SGI 公司设计的。xfs 被称为业界最先进的、最具可升级性的文件系统技术。SGI 的 xfs 可为 linux 和开放资源社区带来的新特性有:可升级性:xfs 被设计成可升级,以面对大多数的存储容量和 i/o 存储需求,可处理大型文件和包含巨大数量文件的大型目录,满足二十一世纪快速增长的磁盘需求。xfs 有能力动态地为文件分配索引空间,使系统形成高效支持大数量文件的能力。优秀的 i/o 性能:典型的现代服务器使用大型的条带式磁盘阵列,以提供达数 gb/秒的总带宽。xfs 可以很好地满足 I/O 请求的大小和并发 I/O 请求的数量。xfs 可作为 root 文件系统,并被 lilo 支持.在 NFS 服务器上使用也没问题.支持软件磁盘阵列(RAID)和虚拟集群(LVM)。由于 xfs 比较复杂,实施起来有一些难度,所以目前 xfs 主要应用于 </p>
-<p>特性</p>
-<p>ext2</p>
-<p>ext3</p>
-<p>ReiserFS3.6（不受 Oracle 支持）</p>
-<p>最大分区大小</p>
-<p>4TB</p>
-<p>4TB</p>
-<p>16TB</p>
-<p>最大文件大小</p>
-<p>2GB-4GB</p>
-<p>2GB-4GB</p>
-<p>8TB</p>
-<p>块大小</p>
-<p>1KB-4KB</p>
-<p>1KB-4KB</p>
-<p>只有 4KB</p>
-<p>日志功能</p>
-<p>无</p>
-<p>是</p>
-<p>有</p>
-<p>崩溃后重新启动</p>
-<p>慢</p>
-<p>快</p>
-<p>非常快</p>
-<p>用于恢复清除文件的工具</p>
-<p>有</p>
-<p>有</p>
-<p>无</p>
-<p>崩溃后数据的状态</p>
-<p>良好</p>
-<p>非常好</p>
-<p>一般</p>
-<p>ACL 支持</p>
-<p>有</p>
-<p>有</p>
-<p>无</p>
-<p>稳定性</p>
-<p>优秀</p>
-<p>良好</p>
-<p>良好</p>
+<p>xfs 是一种非常优秀的日志文件系统,它是 SGI 公司设计的。xfs 被称为业界最先进的、最具可升级性的文件系统技术。SGI 的 xfs 可为 linux 和开放资源社区带来的新特性有:可升级性:xfs 被设计成可升级,以面对大多数的存储容量和 i/o 存储需求,可处理大型文件和包含巨大数量文件的大型目录,满足二十一世纪快速增长的磁盘需求。xfs 有能力动态地为文件分配索引空间,使系统形成高效支持大数量文件的能力。优秀的 i/o 性能:典型的现代服务器使用大型的条带式磁盘阵列,以提供达数 gb/秒的总带宽。xfs 可以很好地满足 I/O 请求的大小和并发 I/O 请求的数量。xfs 可作为 root 文件系统,并被 lilo 支持.在 NFS 服务器上使用也没问题.支持软件磁盘阵列(RAID)和虚拟集群(LVM)。由于 xfs 比较复杂,实施起来有一些难度</p>
 
       
     </div>
